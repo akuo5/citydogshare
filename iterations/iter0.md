@@ -1,6 +1,6 @@
 #ENTRY VIDEO
 
-[youtube link here]
+https://youtu.be/dvVGKEqg11A 
 
 #SCREENCASTS
 
@@ -10,6 +10,6 @@ Jacen Sherman -> https://youtu.be/aNgbATVH2Ec
 
 Jennifer Tang -> https://youtu.be/W2dauhnPWlY
 
-Jessica Zhuge ->
+Jessica Zhuge -> https://youtu.be/0HMjZcySQd8
 
 Judy Lai -> https://youtu.be/bySvlxfuqE0
