@@ -8,7 +8,7 @@ Angela Kuo -> https://youtu.be/8Cro2dETJUM
 
 Jacen Sherman -> https://youtu.be/aNgbATVH2Ec
 
-Jennifer Tang ->
+Jennifer Tang -> https://youtu.be/W2dauhnPWlY
 
 Jessica Zhuge ->
 
