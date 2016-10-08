@@ -12,4 +12,4 @@ Jennifer Tang -> https://youtu.be/W2dauhnPWlY
 
 Jessica Zhuge ->
 
-Judy Lai ->
+Judy Lai -> https://youtu.be/bySvlxfuqE0
