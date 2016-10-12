@@ -37,10 +37,10 @@ group :test do
 
 end
 
-group :production do
+*group :production, :staging do
   gem 'pg'
-end
-
+  gem 'rails_12factor'
+end*
 
 # Gems used only for assets and not required
 # in production environments by default.
