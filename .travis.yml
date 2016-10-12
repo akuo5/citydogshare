@@ -1,7 +1,10 @@
 language: ruby
 rvm:
   - 2.2.2
+addons:
+  - code_climate:
+    - f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
-  - CODECLIMATE_REPO_TOKEN=f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43 bundle exec rake rspec spec
+  - bundle exec rake rspec spec
