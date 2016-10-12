@@ -7,9 +7,7 @@
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/1883161)
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=ZqZ9f89Xgcg" target="_blank"><img src="http://img.youtube.com/vi/ZqZ9f89Xgcg/0.jpg" alt="Dogz" width="240" height="180" border="10" /></a>
-
-
+<a href="https://youtu.be/dvVGKEqg11A" target="_blank"><img src="http://img.youtube.com/vi/dvVGKEqg11A/0.jpg" alt="Dogz" width="240" height="180" border="10" /></a>
 
 
 [![Build Status](https://travis-ci.org/angelakuo/citydogshare.svg?branch=master)](https://travis-ci.org/angelakuo/citydogshare)
