@@ -2,10 +2,9 @@ language: ruby
 rvm:
   - 2.2.2
 notifications:
-  - slack: citydogshare-profile:lPnqzOmkW0T9sv0ceZAVhxv3
+  slack: citydogshare-profile:lPnqzOmkW0T9sv0ceZAVhxv3
 addons:
-  - code_climate:
-    - f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43
+  code_climate: f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
