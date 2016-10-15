@@ -9,6 +9,7 @@
 
 [Meeting 1](https://youtu.be/dvVGKEqg11A)
 
+[Meeting Minutes] (http://bit.ly/2efP6Sv) 
 
 [![Build Status](https://travis-ci.org/angelakuo/citydogshare.svg?branch=master)](https://travis-ci.org/angelakuo/citydogshare)
 [![Code Climate](https://codeclimate.com/github/sfstanley/citydogshare/badges/gpa.svg)](https://codeclimate.com/github/sfstanley/citydogshare)

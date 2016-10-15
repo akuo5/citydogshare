@@ -67,3 +67,7 @@ end
 When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   select(value, :from => field, match: :first)
 end
+
+Given /^PENDING/ do
+  pending
+end
