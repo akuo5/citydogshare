@@ -16,5 +16,5 @@ Background: User and other users are in database
 Scenario: Users deletes profile
   When I press "Delete User"
   Then I should be on the home page
-  When I follow "Log In"
+  When I follow "Login with Facebook"
   And I should see "User does not exist"

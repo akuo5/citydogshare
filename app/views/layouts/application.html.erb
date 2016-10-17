@@ -29,8 +29,8 @@
           <a href="#">
             <ul class="right hide-on-small-only">
               <a style="height: 64px;">
-                <li class="right"><img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAaDAAAAJGY1M2E5M2Q1LTZhMDItNGViYi05YTA2LTc2ZjBjMmY4NjIwOA.jpg" class="circle responsive-img menu-user-img"></li>
-                <li class="right white-text menu-username">Jacen Sherman</li>
+                <li class="right"><img src="<%= current_user.image %>" class="circle responsive-img menu-user-img"></li>
+                <li class="right white-text menu-username">current_user.full_name</li>
               </a>
             </ul>
           </a>
@@ -64,9 +64,9 @@
           </ul>
           <ul id="nav-mobile" class="side-nav">
             <div class="menu-header mobile light-blue darken-4">
-              <img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAaDAAAAJGY1M2E5M2Q1LTZhMDItNGViYi05YTA2LTc2ZjBjMmY4NjIwOA.jpg" class="menu-user-img mobile circle responsive-img"/>
-              <div class="menu-username mobile text-white">Jacen Sherman</div>
-              <div class="menu-email mobile text-white">jacen@berkeley.edu</div>
+              <img src="<%= current_user.image %>"/>
+              <div class="menu-username mobile text-white">current_user.full_name</div>
+              <div class="menu-email mobile text-white">current_user.email</div>
             </div>
             <li class="menu-item"><%= link_to("/dogs") do %> 
               <i class="fa fa-th-list fa-lg menu-item-icon"></i>Browse Dogs
@@ -93,7 +93,7 @@
     <div class="navbar-fixed">
       <nav class="white" role="navigation">
         <div class="nav-wrapper container">
-          <a id="logo-container" href="#" class="brand-logo">
+          <a id="logo-container" href="/" class="brand-logo">
             <img src="<%= asset_path( 'logo.jpg' ) %>" class="logo-img">City Dog Share
           </a>
           
@@ -120,6 +120,19 @@
   <%= yield %>
 
   </div>
+  
+  <% if flash[:notice] %>
+    <div class="application-notice z-depth-3 error">
+      <div class="ui warning message application-notice-content"><i class="warning icon"></i><%= flash[:notice] %></div>
+      <i class="material-icons application-notice-close tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+    </div>
+  <% end %>
+  <% if flash[:error] %>
+    <div class="application-notice error z-depth-3">
+      <div class="ui warning message application-notice-content"><i class="warning icon"></i><%= flash[:error] %></div>
+      <i class="material-icons application-notice-close tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+    </div>
+  <% end %>
   
   <%= javascript_include_tag "init" %>
 
