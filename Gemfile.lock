@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/doabit/semantic-ui-sass.git
-  revision: ba3acee5bb44f2532436f83e3d7d0cd3152b5fe9
-  branch: v1.0beta
-  specs:
-    semantic-ui-sass (1.8.1.0)
-      sass (~> 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -191,6 +183,8 @@ GEM
       fattr (~> 2.2, >= 2.2.0)
       map (~> 6.1, >= 6.1.0)
     map (6.6.0)
+    materialize-sass (0.97.7)
+      sass (~> 3.3)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     metric_fu (4.12.0)
@@ -387,6 +381,7 @@ DEPENDENCIES
   jasmine-rails
   jbuilder
   jquery-rails
+  materialize-sass
   metric_fu
   minitest
   momentjs-rails
@@ -401,7 +396,6 @@ DEPENDENCIES
   rspec-rails
   sass
   sass-rails
-  semantic-ui-sass!
   simplecov
   sqlite3
   uglifier (>= 1.0.3)

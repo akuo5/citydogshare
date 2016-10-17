@@ -15,8 +15,7 @@
 //= require moment
 //= require fullcalendar.min
 //= require_tree .
-//= require semantic-ui
-//= require semantic-ui/modal
+//= require materialize-sprockets
 //= require foundation
 //= require checkboxes
 //= require tag-it
