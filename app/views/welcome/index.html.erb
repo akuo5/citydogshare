@@ -1,9 +1,21 @@
-  <div class="row">
+  <div class="row" style="margin-bottom: 0px;">
     <div class="large-12 columns">
       <% if flash[:notice] %>
           <div class="ui warning message"><i class="warning icon"></i><%= flash[:notice] %></div>
         <% end %>
     </div>
+  </div>
+  
+  <div id="index-banner" class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot valign">
+      <div class="container">
+          <h1 class="header center white-text">City Dog Share</h1>
+          <div class="row center">
+            <h5 class="header col s12 light">I will watch your dog and you can watch mine!</h5>
+          </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="<%= asset_path( 'welcome-1.jpg' ) %>" alt="Unsplashed background img 1"></div>
   </div>
 
   <div class="container">
@@ -52,7 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+    <div class="parallax"><img src="<%= asset_path( 'welcome-2.jpg' ) %>" alt="Unsplashed background img 2"></div>
   </div>
 
   <footer class="page-footer light-blue darken-3">

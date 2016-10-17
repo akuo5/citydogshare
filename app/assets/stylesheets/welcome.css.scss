@@ -2,6 +2,282 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "semantic-ui";
+@import "materialize";
 
-@import "foundation";
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+.footer-copyright-text {
+  padding: 10px;
+  text-align: center;
+}
+
+.card .card-content {
+    padding: 10px 10px 10px 20px;
+}
+
+.card-more-icon {
+  margin-top: 12px;
+  margin-right: 3px;
+}
+
+.faded {
+  opacity: 0.6;
+}
+
+label.active {
+  font-size: 15px !important;
+}
+label {
+  font-size: 15px !important;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;  
+}
+
+:-ms-input-placeholder {  
+   color: black;  
+}
+
+
+/* HELPERS */
+/* These are just a ton of helper classes to make html and css cleaner */
+
+.br-5.m {
+  margin-top: 5px;
+}
+.br-10.m {
+  margin-top: 10px;
+}
+.br-15.m {
+  margin-top: 15px;
+}
+.br-20.m {
+  margin-top: 20px;
+}
+.br-25.m {
+  margin-top: 25px;
+}
+.br-30.m {
+  margin-top: 30px;
+}
+.br-35.m {
+  margin-top: 35px;
+}
+.br-40.m {
+  margin-top: 40px;
+}
+.br-45.m {
+  margin-top: 45px;
+}
+.br-50.m {
+  margin-top: 50px;
+}
+.br-55.m {
+  margin-top: 55px;
+}
+.br-60.m {
+  margin-top: 60px;
+}
+.br-65.m {
+  margin-top: 65px;
+}
+.br-70.m {
+  margin-top: 70px;
+}
+.br-75.m {
+  margin-top: 75px;
+}
+.br-80.m {
+  margin-top: 80px;
+}
+.br-85.m {
+  margin-top: 85px;
+}
+.br-90.m {
+  margin-top: 90px;
+}
+.br-95.m {
+  margin-top: 95px;
+}
+.br-100.m {
+  margin-top: 100px;
+}
+
+@media only screen and (max-width : 600px) {
+  .br-5.s {
+    margin-top: 5px;
+  }
+  .br-10.s {
+    margin-top: 10px;
+  }
+  .br-15.s {
+    margin-top: 15px;
+  }
+  .br-20.s {
+    margin-top: 20px;
+  }
+  .br-25.s {
+    margin-top: 25px;
+  }
+  .br-30.s {
+    margin-top: 30px;
+  }
+  .br-35.s {
+    margin-top: 35px;
+  }
+  .br-40.s {
+    margin-top: 40px;
+  }
+  .br-45.s {
+    margin-top: 45px;
+  }
+  .br-50.s {
+    margin-top: 50px;
+  }
+  .br-55.s {
+    margin-top: 55px;
+  }
+  .br-60.s {
+    margin-top: 60px;
+  }
+  .br-65.s {
+    margin-top: 65px;
+  }
+  .br-70.s {
+    margin-top: 70px;
+  }
+  .br-75.s {
+    margin-top: 75px;
+  }
+  .br-80.s {
+    margin-top: 80px;
+  }
+  .br-85.s {
+    margin-top: 85px;
+  }
+  .br-90.s {
+    margin-top: 90px;
+  }
+  .br-95.s {
+    margin-top: 95px;
+  }
+  .br-100.s {
+    margin-top: 100px;
+  }
+}
+
+@media only screen and (min-width : 996px) {
+  .br-5.l {
+    margin-top: 5px;
+  }
+  .br-10.l {
+    margin-top: 10px;
+  }
+  .br-15.l {
+    margin-top: 15px;
+  }
+  .br-20.l {
+    margin-top: 20px;
+  }
+  .br-25.l {
+    margin-top: 25px;
+  }
+  .br-30.l {
+    margin-top: 30px;
+  }
+  .br-35.l {
+    margin-top: 35px;
+  }
+  .br-40.l {
+    margin-top: 40px;
+  }
+  .br-45.l {
+    margin-top: 45px;
+  }
+  .br-50.l {
+    margin-top: 50px;
+  }
+  .br-55.l {
+    margin-top: 55px;
+  }
+  .br-60.l {
+    margin-top: 60px;
+  }
+  .br-65.l {
+    margin-top: 65px;
+  }
+  .br-70.l {
+    margin-top: 70px;
+  }
+  .br-75.l {
+    margin-top: 75px;
+  }
+  .br-80.l {
+    margin-top: 80px;
+  }
+  .br-85.l {
+    margin-top: 85px;
+  }
+  .br-90.l {
+    margin-top: 90px;
+  }
+  .br-95.l {
+    margin-top: 95px;
+  }
+  .br-100.l {
+    margin-top: 100px;
+  }
+}
