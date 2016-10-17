@@ -30,7 +30,7 @@
             <ul class="right hide-on-small-only">
               <a style="height: 64px;">
                 <li class="right"><img src="<%= current_user.image %>" class="circle responsive-img menu-user-img"></li>
-                <li class="right white-text menu-username">current_user.full_name</li>
+                <li class="right white-text menu-username"><%= current_user.full_name %></li>
               </a>
             </ul>
           </a>
@@ -65,8 +65,8 @@
           <ul id="nav-mobile" class="side-nav">
             <div class="menu-header mobile light-blue darken-4">
               <img src="<%= current_user.image %>"/>
-              <div class="menu-username mobile text-white">current_user.full_name</div>
-              <div class="menu-email mobile text-white">current_user.email</div>
+              <div class="menu-username mobile text-white"><%= current_user.full_name %></div>
+              <div class="menu-email mobile text-white"><%= current_user.email %></div>
             </div>
             <li class="menu-item"><%= link_to("/dogs") do %> 
               <i class="fa fa-th-list fa-lg menu-item-icon"></i>Browse Dogs
