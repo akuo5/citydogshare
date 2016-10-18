@@ -1,5 +1,6 @@
 (function($){
   $(function(){
+    
     $(".button-collapse").sideNav();
     $("#show-menu-btn").sideNav();
     $("#hide-menu-btn").click(function() {

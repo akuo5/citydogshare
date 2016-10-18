@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     end
     self.first_name = auth[:info][:first_name]
     self.last_name = auth[:info][:last_name]
-    self.image = auth[:info][:image][0..-7] + "large"
+    self.image = auth[:info][:image] + "?width=200&height=200"
     self.location = auth[:info][:location]
     self.email = auth[:info][:email]
     self.save

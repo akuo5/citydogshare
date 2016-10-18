@@ -19,7 +19,7 @@ describe User do
     assert_equal @user.gender, "male"
     assert_equal @user.first_name, "Bruce"
     assert_equal @user.last_name, "Wayne"
-    assert_equal @user.image, "http://tinyurl.com/olarge"
+    assert_equal @user.image, "http://tinyurl.com/opnc38n?width=200&height=200"
     assert_equal @user.location, "Bat Cave, Gotham"
     assert_equal @user.email, "not_batman@wayneenterprises.com"
   end

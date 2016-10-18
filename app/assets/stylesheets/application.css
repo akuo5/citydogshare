@@ -75,7 +75,6 @@
 .menu-user-img {
   width: 35px;
   height: 35px;
-  margin-top: 15px;
 }
 
 .menu-username {
@@ -189,7 +188,7 @@
 .menu-email.mobile {
   position: absolute;
   margin: 21px 0px 0px 69px;
-  font-size: 12px;
+  font-size: 14px;
   opacity: 0.5;
 }
 .add-dog-card {

@@ -1,7 +1,6 @@
+<% content_for :page_title, @dog.name + " Info" %>
+
 <script src="<%= javascript_path('galleria-1.4.2.js') %>"></script>
-<% if flash[:notice] %>
-         <div class="notice"><%= flash[:notice] %></div>
-<% end %>
 
 <div class="large-12 columns">
   <br />

@@ -1,3 +1,5 @@
+<% content_for :page_title, "Edit Profile" %>
+
 <% if current_user.errors.any? %>
   <div class="ui warning message"><i class="warning icon"></i>
     <% current_user.errors.messages.each do |msg| %>
@@ -6,9 +8,7 @@
     <% end %>
   </div>
 <% end %>
-<% if flash[:notice] %>
-  <div class="ui warning message"><i class="warning icon"></i><%= flash[:notice] %></div>
-<% end %>
+
 <h2>Edit Your Profile</h2>
 <div class="float right"><%= button_to "Delete User", user_path(@current_user.id), :id => "delete_user_button", :class => "ui button red transparent input", :method => :delete %></div>
     <div class="field">

@@ -4,7 +4,6 @@
   <title>City Dog Share</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "init", "data-turbolinks-track" => true %>
   
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
   <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" %>
@@ -24,7 +23,7 @@
           <!-- navigation bar for tablet and desktop -->
           <ul class="left hide-on-small-only">
             <li><div data-activates="slide-out" class="waves-effect waves-circle waves-dark" id="show-menu-btn"><i class="material-icons white-text" id="show-menu-icon">menu</i></div></li>
-            <li class="page-title"><strong>Page Name</strong></li>
+            <li class="page-title"><strong><%= yield(:page_title) %></strong></li>
           </ul>
           <a href="#">
             <ul class="right hide-on-small-only">
@@ -60,11 +59,11 @@
           <!-- navigation bar for mobile -->
           <ul class="left hide-on-med-and-up">
             <li><div data-activates="nav-mobile" class="button-collapse waves-effect waves-circle waves-dark mobile show-menu-btn"><i class="material-icons white-text mobile show-menu-icon">menu</i></div></li>
-            <li class="page-title"><strong>Page Name</strong></li>
+            <li class="page-title"><strong><%= yield(:page_title) %></strong></li>
           </ul>
           <ul id="nav-mobile" class="side-nav">
             <div class="menu-header mobile light-blue darken-4">
-              <img src="<%= current_user.image %>"/>
+              <img class="menu-user-img mobile circle" src="<%= current_user.image %>"/>
               <div class="menu-username mobile text-white"><%= current_user.full_name %></div>
               <div class="menu-email mobile text-white"><%= current_user.email %></div>
             </div>
@@ -101,7 +100,7 @@
           <ul class="right hide-on-med-and-down">
             <li><a href="/dogs">Browse Dogs</a></li>
             <li><a href="/auth/facebook/?type=login" class="waves-effect waves-light light-blue darken-3 btn" id="log_in">Login with Facebook</a></li>
-            <!--<li><a href="/auth/facebook/?type=signup" class="waves-effect waves-light light-blue darken-4 btn" id="sign_up">Sign Up with Facebook</a></li>-->
+            <li><a href="/auth/facebook/?type=signup" class="waves-effect waves-light light-blue darken-4 btn" id="sign_up">Sign Up</a></li>
           </ul>
           
           <!-- Menu items for mobile navigation -->
@@ -134,7 +133,6 @@
     </div>
   <% end %>
   
-  <%= javascript_include_tag "init" %>
 
 </body>
 </html>
