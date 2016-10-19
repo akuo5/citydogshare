@@ -1,14 +1,45 @@
 // Place all the styles related to the Users controller here.
-// They will automatically be included in user.css
+// They will automatically be included in application.css.scss
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.no-dogs-message-container {
-    height: 85%;
+/* BEGIN DOGS.HTML */
+
+.main-content {
+  margin-top: 15px;
 }
-.no-dogs-message {
-    font-size: 30px;
+
+.container {
+  width: 90%;
 }
-.no-dogs-message .btn-large {
-    font-size: 16px;
-    margin-top: 15px;
+
+.add-dog-card {
+  height: 381.5px;
+  margin-top: 7.5px;
+  border-radius: 12px;
+  position: relative;
+  border: dashed 5px #DFDFDF;
+  cursor: hand;
+  cursor: pointer;
+  display: block;
 }
+
+.add-dog-card-icon {
+  width: 100%;
+  font-size: 120px;
+  margin-top: 95px;
+  text-align: center;
+  color: #C4C4C4;
+}
+
+.add-dog-card-text {
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+  color: #C4C4C4;
+}
+
+strong {
+  font-weight: 900;
+}
+
+/* END DOGS.HTML */

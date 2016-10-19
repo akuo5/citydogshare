@@ -15,37 +15,46 @@
       <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator card-img" src="<% dog.image %>">
+            <img class="activator card-img" src="<%= dog.image %>">
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Skippy<i class="material-icons card-more-icon right">more_vert</i></span>
+            <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
           </div>
           <div class="card-action">
-            <a href="<% edit_dog_path(dog.id) %>" class="light-blue-text text-darken-3 coming-soon-modal-trigger">Details</a>
-            <a href="<% dog_path(dog.id) %>" class="green-text text-accent-4 coming-soon-modal-trigger">Edit</a>
+            <a href="<%= edit_dog_path(dog.id) %>" class="light-blue-text text-darken-3 coming-soon-modal-trigger">Details</a>
+            <a href="<%= dog_path(dog.id) %>" class="green-text text-accent-4 coming-soon-modal-trigger">Edit</a>
           </div>
           <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">About Skippy
+            <span class="card-title grey-text text-darken-4">About <%= dog.name %>
               <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
-              <a href="<% edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
+              <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
             </span>
             <ul class="dog-info-list">
-              <li class="dog-info-list-item"><strong>Status</strong><% dog.motto %></li>
-              <li class="dog-info-list-item"><strong>Age</strong><% dog.age_caption %></li>
-              <li class="dog-info-list-item"><strong>Gender</strong> <% dog.gender %></li>
-              <li class="dog-info-list-item"><strong>Mix</strong><% dog.readable_mixes.join(", ") %></li>
-              <li class="dog-info-list-item"><strong>Size</strong><% dog.size %></li>
-              <li class="dog-info-list-item"><strong>Personality</strong><% dog.tags %></li>
-              <li class="dog-info-list-item"><strong>Energy</strong><% dog.energy_level %></li>
-              <li class="dog-info-list-item"><strong>Likes</strong><% dog.readable_likes.join(", ") %></li>
+              <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
+              <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
+              <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
+              <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
+              <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
+              <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
+              <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
+              <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
               <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
-              <li class="dog-info-list-item"><strong>Health Notes</strong><% dog.health %></li>
-              <li class="dog-info-list-item"><strong>Description</strong><% dog.comments %></li>
-              <li class="dog-info-list-item"><strong>Availability</strong><% dog.availability %></li>
+              <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
+              <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
+              <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
             </ul>
           </div>
         </div>
       </div>
     <% end %>
+    <div class="col s12 m6 l4 hide-on-small-only">
+      <a href="<%= new_dog_path %>" class="add-dog-card">
+        <i class="material-icons add-dog-card-icon" style="font-size: 100px">add</i>
+        <div class="add-dog-card-text">Add Dog</div>
+      </a>
+    </div> 
+  </div>
+  <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
+    <a href="<%= new_dog_path %>" class="btn-floating btn-large waves-effect waves-light green accent-4 hide-on-large-only"><i class="material-icons">add</i></a>
   </div>
 <% end %>
