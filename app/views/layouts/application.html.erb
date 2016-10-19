@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>City Dog Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   
@@ -45,7 +48,7 @@
             <li class="menu-item"><%= link_to user_path(current_user) do %> 
               <i class="fa fa-user fa-lg menu-item-icon"></i>My Profile
             <% end %></li>
-            <li class="menu-item"><%= link_to new_dog_path(:no_dog => 'true') do %> 
+            <li class="menu-item"><%= link_to dogs_user_path(current_user) do %> 
               <i class="fa fa-paw fa-lg menu-item-icon"></i>My Dogs
             <% end %></li>
             <li class="menu-item"><%= link_to stars_user_path(current_user) do %> 
@@ -73,7 +76,7 @@
             <li class="menu-item"><%= link_to user_path(current_user) do %> 
               <i class="fa fa-user fa-lg menu-item-icon"></i>My Profile
             <% end %></li>
-            <li class="menu-item"><%= link_to new_dog_path(:no_dog => 'true') do %> 
+            <li class="menu-item"><%= link_to dogs_user_path(current_user) do %> 
               <i class="fa fa-paw fa-lg menu-item-icon"></i>My Dogs
             <% end %></li>
             <li class="menu-item"><%= link_to stars_user_path(current_user) do %> 

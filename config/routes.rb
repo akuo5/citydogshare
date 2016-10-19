@@ -29,6 +29,7 @@ Citydogshare::Application.routes.draw do
   resources :users do
     member do
       get 'stars'
+      get 'dogs'
     end
   end
   #dog multiple pictures

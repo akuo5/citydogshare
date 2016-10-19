@@ -45,6 +45,13 @@ class UsersController < ApplicationController
     end
     @dogs = User.find_by_id(params[:id]).starred_dogs
   end
+  
+  def dogs
+    if !current_user.nil? and current_user.id != params[:id].to_i
+      redirect_to(stars_user_path(current_user)) and return
+    end
+    @dogs = User.find_by_id(params[:id]).dogs
+  end
 
   private
   def user_params

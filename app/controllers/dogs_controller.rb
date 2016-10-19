@@ -98,12 +98,27 @@ class DogsController < ApplicationController
     wf
   end
 
+  #TODO(angelakuo): Write more tests for this and fix rspec
   def dog_params
+    params.require(:dog).keys.each do |key|
+      if params[:dog][key].kind_of?(Array)
+        params[:dog][key] = purge_param(params[:dog][key])
+      end
+    end
+    
     params.require(:dog).permit(:name, :image, :dob, :gender, :description, 
-    :motto, :fixed, :health, :comments, :contact, :availability, :mixes, 
-    {:likes =>["dogs (all)", :cats, :men, :women, :children]}, :energy_level,
-    :size, :photo, :latitude, :longitude, :video, "dob(1i)", "dob(2i)", "dob(3i)", 
-    {:personalities =>[:anxious, :curious, :timid, :whatever, :friendly, :fetcher, :lover, "still a puppy"]})
+    :motto, :fixed, :health, :comments, :contact, :availability, {:mixes => []}, 
+    {:likes =>[]}, :energy_level, :size, :photo, :latitude, :longitude, :video, 
+    :dob, {:personalities =>[]})
+  end
+  
+  #TODO(angelakuo): Write tests for this
+  def purge_param(param)
+    param.each do |val|
+      unless Mix.all_values.include?(val) or Personality.all_values.include?(val) or Like.all_values.include?(val) then
+        param.delete(val)
+      end
+    end
   end
 
   def add_multiple_pictures(myDog)

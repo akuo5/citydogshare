@@ -1,117 +1,100 @@
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-<% javascript_include_tag 'tags.js' %>
-
-<%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
-<div class="ui form">  
-
-  <div class="field"><label>Name</label>
-    <%= text_field(:dog, :name) %>
-  </div>
-
-  <div class="field"><label>Avatar</label>
-    <%= image_tag "default_dog.jpg" %>
-  </div>
-
-    <div class="field">
-    <%= file_field(:dog, :photo) %>
-  </div>
-
-  <div class="field"><label>Pictures</label>
-    <%= file_field_tag "images[]", type: :file, multiple: true %>
-  </div>
-
-    <div class="field"><label>Video</label>
-   Please enter a Youtube link.
-    <%= text_field(:dog, :video, :placeholder => "https://www.youtube.com/watch?v=NONlkKMGFeA") %>
-
-
-  <div class="field"><label>Birthdate</label>
-    <%= date_select :dog, :dob, {:start_year => Date.today.year - 30, :end_year => Date.today.year, :default => DateTime.new(Date.today.year, 1, 1)} %>
-  </div>
-
-  <div class="field"><label>Gender</label>
-    <%= select :dog, :gender, ["Male", "Female"] %>
-  </div>
-
-  <div class="field"><label>Mix</label>
-    <%= text_field :dog, :mixes, :value => @form_filler.values[:mix].join(", ") %>
-  </div>
-
-  <div class="field"><label>Size</label>
-    <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @form_filler.values[:size]) %>
-    <%= select :dog, :size, size_options %> 
-  </div>
-
-  <div class="field"><label>Personality</label>
-    <div class="ui buttons">
-    <% Personality.all_values.each do |p| %> 
-        <% @form_filler.values[:personality].include?(p) ? bool = true : bool = false %>
-        <div class="ui button">
-        <%= check_box_tag "dog[personalities[#{p}]]", 1, bool, :class => "check" %>
-        <%= label(:personalities, p.tr(" ", "_"), p) %>
+<div class="container">
+  <br><h4>Add a dog to your family!</h4><br>
+  <%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
+    <div class="row">
+      <div class="input-field col s12 m12 l6 left-col">
+        <%= text_field(:dog, :name, class: "validate white", placeholder: "Insert name") %>
+        <label for="name">What is your dog's name?</label>
+      </div>
+      <div class="input-field col s12 m12 l6  right-col">
+        <%= select :dog, :dob, ((Date.today.year - 30)...(Date.today.year)), {:include_blank => "Select one"}, {:class => "validate white"} %>
+        <label for="dob">What year was your dog born in?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 left-col">
+        <% size_options = options_from_collection_for_select(Size.all, 'id', 'value') %>
+        <%= select :dog, :size, size_options, {:include_blank => "Select one", :selected => "Select one"}, :class => "validate white" %> 
+        <label for="size">What size (in pounds) is your dog?</label>
+      </div>
+      <div class="input-field col s12 m12 l6  right-col">
+        <%= select :dog, :gender, ["Male", "Female"], {:include_blank => "Select one"}, :class => "validate white" %>
+        <label for="gender">What is your dog's gender?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 left-col">
+        <%= select :dog, :mixes, Mix.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
+        <label for="mixes">What mix (or mixes) is your dog?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 right-col">
+        <%= select :dog, :personalities, Personality.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
+        <label for="personality">What is your dogs personality like?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 left-col">
+        <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value') %>
+        <%= select :dog, :energy_level, energy_level_options, {:include_blank => "Select one"}, :class => "validate white"%>
+        <label for="energy_level">What is your dog's energy level?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 right-col">
+        <%= select :dog, :likes, Like.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
+        <label for="likes">Who does your dog like?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 left-col">
+        <%= select :dog, :barks, [], {:include_blank => "Select one"}, :class => "validate white" do %>
+          <option value="1">Rarely</option>
+          <option value="1">When playing</option>
+          <option value="2">When someone's at the door</option>
+          <option value="3">When left alone</option>
+          <option value="4">All the time</option>
+        <% end %>
+        <label for="barking">When does your dog bark?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 right-col">
+        <%= select :dog, :fixed, ["Yes", "No"], {:include_blank => "Select one"}, :class => "validate white" %>
+        <label for="fixed">Is your dog spayed / neutered?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 left-col br-20 s m l">
+        <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?", :class => "materialize-textarea") %>
+        <label for="health">Health Notes</label>
+      </div>
+      <div class="input-field col s12 m12 l6 right-col br-20 s m l">
+        <%= text_area(:dog, :motto, :placeholder => "Is there anything your dog wants the world to know?", :class => "materialize-textarea") %>
+        <label for="motto">Status</label>
+      </div>
+      <div class="input-field col s12 m12 l6 left-col br-20 s m l">
+        <%= text_area(:dog, :description, :placeholder => "Do you have any other descriptive details about your dog?", :class => "materialize-textarea") %>
+        <label for="description">Description</label>
+      </div>
+      <div class="input-field col s12 m12 l6 right-col br-20 s m l">
+        <%= text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter", :class => "materialize-textarea") %>
+        <label for="availability">General Availability</label>
+      </div>
+      <div class="col l6 m12 s12 left-col">
+        <label>Give your dog a profile picture!</label>
+        <div class="file-field input-field">
+          <div class="btn light-blue darken-3">
+            <i class="fa fa-cloud-upload white-text"></i>&nbsp; Upload
+            <%= file_field(:dog, :photo) %>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
         </div>
-    <% end %>
-    </div>
-  </div>
-
-    <div class="field"><label>Energy Level</label>
-    <% energy_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @form_filler.values[:energy_level]) %>
-    <%= select :dog, :energy_level, energy_options %>
-  </div>
-  
-  <div class="field"><label>Likes</label>
-    <div class="ui buttons">
-    <% Like.all_values.each do |like| %> 
-        <div class="ui button">
-        <% @form_filler.values[:like].include?(like) ? bool = true : bool = false %>
-        <%= check_box_tag "dog[likes[#{like}]]", 1, bool, :class => "check" %>
-        <%= label(:likes, like.tr(" ", "_"), like) %>
+      </div>
+      <div class="col l6 m12 s12 right-col">
+        <label>Add more pictures or videos!</label>
+        <div class="file-field input-field">
+          <div class="btn light-blue darken-3">
+            <i class="fa fa-cloud-upload white-text"></i>&nbsp; Upload
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
         </div>
-    <% end %>
+      </div>
     </div>
-  </div>
-
-  <div class="field"><label>Motto</label>
-    <%= text_field(:dog, :motto) %>
-  </div>
-
-
-  <div class="field"><label>Description</label>
-    <%= text_area(:dog, :description) %>
-  </div>
-
-
-
-  <div class="field"><label>Health Notes</label>
-    <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?") %>
-  </div>
-
-  <div class="field"><label>Is Your Dog Spayed/Neutered?</label>
-    <%= label :fixed, "Yes", :value => "true"  %>
-    <%= radio_button :dog, :fixed, true, :checked => true %>
-    <%= label :fixed, "No", :value => "false" %>
-    <%= radio_button :dog, :fixed, false  %>
-  </div>
-
-  <div class="field"><label>General Availability</label>
-    <%=text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter") %>
-  </div>
-
-
-
-<!-- IMAGE UPLOADING -->
-
-
+    
+    <div class="form-button-box row">
+      <input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn-large right green accent-4 col l4 m5 s12' />
+      <%= link_to "Cancel", dogs_user_path(current_user), :id => "cancel_dog_button", :class => "btn-large left red col l2 m3 s12 br-15 s", :method => :get %>
+    </div>
   <% end %>
-
-<div class="field"><label>
-
-
-  <div class="ui primary button transparent input"><input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn info' style="text-align:center" /></div>
-
-
-  <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
-
-  </div>
-
 </div>

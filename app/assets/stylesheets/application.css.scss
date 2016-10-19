@@ -1,23 +1,14 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
+ /*
  *= require_self
- *= require jquery.tagit
  *= require_tree .
- *= require checkbox
- *= require jquery.datetimepicker
- *= require fullcalendar
- *= require fullcalendar.print
- *= require galleria.classic
  */
- .gmnoprint img {
+
+@import "materialize/components/color";
+$primary-color: color("light-blue", "darken-3") !default;
+$secondary-color: color("light-blue", "darken-3") !default;
+@import "materialize";
+
+.gmnoprint img {
     max-width: none; 
 }
 
@@ -52,14 +43,6 @@
   background-color: #ce3c37;
   border: none;
   color: white;
-}
-
-@media only screen and (max-width : 992px) {
-  
-}
-
-@media only screen and (max-width : 600px) {
-  
 }
 
 /* BEGIN NAVIGATION BAR */

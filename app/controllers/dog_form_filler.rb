@@ -43,6 +43,7 @@ class DogViewHelper
   def attributes_list(dog_attributes)
     # Set form fields with new dog's information
     @values[:personality] = dog_attributes['personalities'] ? get_attribute_array(dog_attributes, 'personalities')  : []
+    
     @values[:like] = dog_attributes['likes'] ? get_attribute_array(dog_attributes, 'likes') : []
     @values[:size] = dog_attributes['size']
     @values[:energy_level] = dog_attributes['energy_level']
@@ -71,11 +72,8 @@ class DogViewHelper
   end
 
   def get_birthday(dog_attributes)
-    year = dog_attributes['dob(1i)'].to_i
-    month = dog_attributes['dob(2i)'].to_i
-    day = dog_attributes['dob(3i)'].to_i
-
-    DateTime.new(year, month, day)
+    year = dog_attributes['dob'].to_i
+    DateTime.new(year, 1, 1)
   end
 
   def get_mix_array(mix_string)
@@ -83,11 +81,10 @@ class DogViewHelper
     tags.map{ |tag| Mix.find_by_value(tag) }
   end
 
-
   def get_attribute_array(attributes, trait)
     if attributes[trait] != nil
       model_class = trait.classify.constantize
-      attributes[trait].keys.map { |thing| model_class.find_by_value(thing) }
+      attributes[trait].each.map { |thing| model_class.find_by_value(thing) }
     else
       return []
     end

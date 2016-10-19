@@ -1,20 +1,5 @@
 <% content_for :page_title, "New Dog" %>
 
-<% if flash[:notice] %>
-  <div class="ui warning message"><i class="warning icon"></i>
-  	<% if @first_dog %>
-    	<%= flash[:notice] %>
-    <% else %>
-   		<% flash[:notice].each do |msg| %>
-    		<%= msg[1][0] %>
-    		<br />
-    	<% end %>
-    <% end %>
-  </div>
-<% end %>
-
-<h2>Create Your Dog's Profile</h2>
-
 <%= render 'dog_form' %>
 
 
