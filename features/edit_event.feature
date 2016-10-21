@@ -49,3 +49,4 @@ Scenario: I should not be able to edit another users event
   And I follow  "Browse Dogs"
   And I should see "Spock"
   Then I should not see "Edit"
+

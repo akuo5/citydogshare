@@ -28,6 +28,7 @@ Scenario: I create a dog event
   And I should see "Princess"
   And I should see "Location: My House"
   And I should see "Time: Morning"
+<<<<<<< 336668bfb7cfb018aa5614fcc296d18a6a598342
 
 Scenario: Not selecting a dog should throw an error
   Given I press "Schedule"
@@ -45,19 +46,22 @@ Scenario: Not selecting a time of day should throw an error
   Given I press Schedule
   Then I should see "Please enter a time of day"
 
-<<<<<<< 656a154d292adc2c156ece8e2703f3b8b3ab7885
-Scenario: Event should show up on dog profile
+
+Scenario: Not selecting a dog should throw an error
+  Given I press "Schedule"
+  Then I should see "Please select a dog to share"
+
+Scenario: Not selecting a date should throw an error
   Given I check "dogs_Princess"
   And I check "times_Morning"
-  And I choose "my_location_My_House"
-  When I press Schedule
-  Then I should not see "Create Event"
-  When I follow the first "My Dogs"
-  When I follow the dog named "Princess"
-  Then I should see today's date
-  #And I should see "Location: My House"
-  And I should see "Time: Morning"
+  And I press "Schedule"
+  Then I should see "Please enter a valid start date"
+  And I should see "Please enter a valid end date"
 
+Scenario: Not selecting a time of day should throw an error
+  Given I check "dogs_Princess"
+  Given I press Schedule
+  Then I should see "Please enter a time of day"
 
 Scenario: Event should show up on dog profile
   Given I check "dogs_Princess"
@@ -77,3 +81,4 @@ Scenario: Event should not display past events
   When I follow the first "My Dogs"
   When I follow the dog named "Princess"
   Then I should not see "Time: Morning"
+
