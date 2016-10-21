@@ -29,6 +29,7 @@
 #   Then I should be on the home page
 #   And I should see "Login with Facebook"
 
+<<<<<<< bea1a3762a44124efbc9550f9adae2903da54143
 Scenario: Log in authentication fails
   Given I am on the homepage
   And I follow "Login with Facebook"
@@ -50,3 +51,11 @@ Scenario: Log in authentication fails
   And I should see "Something went wrong with the authentication. Please try again."
   
   
+=======
+# Scenario: Log in authentication fails
+#   Given I am on the homepage
+#   And I follow "Login with Facebook"
+#   And my authentication fails
+#   Then I should be on the home page
+#   And I should see "Something went wrong with the authentication. Please try again."
+>>>>>>> checking tests
