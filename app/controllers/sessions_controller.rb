@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
 
   def login
     if params[:user]
-      puts "YASSSSSSSSDFSDFSDFSDFSDFDFSDF"
       @user = User.find(params[:user])
       @user.update_credentials(params[:credentials])
       redirect_to create_session_path(:user => @user)
