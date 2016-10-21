@@ -45,6 +45,20 @@ Scenario: Not selecting a time of day should throw an error
   Given I press Schedule
   Then I should see "Please enter a time of day"
 
+<<<<<<< 656a154d292adc2c156ece8e2703f3b8b3ab7885
+Scenario: Event should show up on dog profile
+  Given I check "dogs_Princess"
+  And I check "times_Morning"
+  And I choose "my_location_My_House"
+  When I press Schedule
+  Then I should not see "Create Event"
+  When I follow the first "My Dogs"
+  When I follow the dog named "Princess"
+  Then I should see today's date
+  #And I should see "Location: My House"
+  And I should see "Time: Morning"
+
+
 Scenario: Event should show up on dog profile
   Given I check "dogs_Princess"
   And I check "times_Morning"
@@ -63,4 +77,3 @@ Scenario: Event should not display past events
   When I follow the first "My Dogs"
   When I follow the dog named "Princess"
   Then I should not see "Time: Morning"
-
