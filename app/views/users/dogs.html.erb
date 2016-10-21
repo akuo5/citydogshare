@@ -21,11 +21,11 @@
             <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
           </div>
           <div class="card-action">
-            <a href="<%= edit_dog_path(dog.id) %>" class="light-blue-text text-darken-3 coming-soon-modal-trigger">Details</a>
-            <a href="<%= dog_path(dog.id) %>" class="green-text text-accent-4 coming-soon-modal-trigger">Edit</a>
+            <a href="<%= edit_dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
+            <a href="<%= dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
           </div>
           <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">About <%= dog.name %>
+            <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
               <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
               <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
             </span>

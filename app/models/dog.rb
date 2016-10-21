@@ -72,11 +72,11 @@ class Dog < ActiveRecord::Base
 
 
   def energy_level
-    EnergyLevel.find(self.energy_level_id).value
+    self.energy_level_id != nil ? EnergyLevel.find(self.energy_level_id).value : "Not specified"
   end
 
   def size
-    Size.find(self.size_id).value
+    self.size_id != nil ? Size.find(self.size_id).value : "Not specified"
   end
 
   def owner

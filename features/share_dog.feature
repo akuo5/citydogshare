@@ -45,6 +45,7 @@
 #   Given I press Schedule
 #   Then I should see "Please enter a time of day"
 
+<<<<<<< ecae9680e772c2aab372b3c863fa3a5a7275c9d9
 # Scenario: Event should show up on dog profile
 #   Given I check "dogs_Princess"
 #   And I check "times_Morning"
@@ -62,4 +63,24 @@
 #   And I am on my profile page
 #   When I follow "Princess"
 #   Then I should not see "Time: Morning"
+=======
+Scenario: Event should show up on dog profile
+  Given I check "dogs_Princess"
+  And I check "times_Morning"
+  And I choose "my_location_My_House"
+  When I press Schedule
+  Then I should not see "Create Event"
+  When I follow the first "My Dogs"
+  When I follow the dog named "Princess"
+  Then I should see today's date
+  #And I should see "Location: My House"
+  And I should see "Time: Morning"
+
+Scenario: Event should not display past events
+  Given I have created an event for "Princess" 3 days ago
+  And I am on my profile page
+  When I follow the first "My Dogs"
+  When I follow the dog named "Princess"
+  Then I should not see "Time: Morning"
+>>>>>>> iter 1 done by angela
 
