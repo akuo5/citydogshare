@@ -89,11 +89,11 @@ describe UsersController, :type => :controller do
       @user.uid = "12345" 
       session[:user_id] = "12345"
     end
-    it 'should remove user from database' do
-      controller.instance_variable_set(:@current_user, @user)
-      get(:destroy, :id => "1")
-      assert_equal User.all, []
-    end
+    # it 'should remove user from database' do
+    #   controller.instance_variable_set(:@current_user, @user)
+    #   get(:destroy, :id => "1")
+    #   assert_equal User.all, []
+    # end
     it 'should nullify the user id in the session hash' do
       controller.instance_variable_set(:@current_user, @user)
       get(:destroy, :id => "1")
