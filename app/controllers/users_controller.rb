@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @current_user.destroy
+    # @current_user.destroy
     # Don't like this... I wanted to redirect to sessions#destroy, but redirect_to doesn't do DELETE methods
     session[:user_id] = nil
     redirect_to root_path()
