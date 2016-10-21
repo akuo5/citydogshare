@@ -70,29 +70,29 @@ describe SessionsController, :type => :controller do
 
   describe 'logging in as a new user' do
     it 'should redirect to the home page with error message' do
-       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-       get(:login, :user => nil, :credentials => request.env["omniauth.auth"][:credentials])
-       expect(response).to redirect_to root_path() 
-       assert_equal "User does not exist. Please sign up.", flash[:notice]
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
+      get(:login, :user => nil, :credentials => request.env["omniauth.auth"][:credentials])
+      expect(response).to redirect_to root_path() 
+      assert_equal "User does not exist. Please sign up.", flash[:notice]
     end
   end
 
   describe 'authentication fails' do 
     it 'should redirect to the home page with error message' do
-       get(:handle_failure)
-       assert_equal "Something went wrong with the authentication. Please try again.", flash[:notice]
-       expect(response).to redirect_to root_path()
+      get(:handle_failure)
+      assert_equal "Something went wrong with the authentication. Please try again.", flash[:notice]
+      expect(response).to redirect_to root_path()
     end
   end
   
 
   describe 'signing up as an existing user' do
     it 'should redirect to the home page with error message' do
-       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-       User.create()
-       get(:signup, :user => "1" , :auth => request.env["omniauth.auth"])
-       assert_equal "A user already exists with this facebook account.", flash[:notice]
-       expect(response).to redirect_to root_path() 
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
+      User.create()
+      get(:signup, :user => "1" , :auth => request.env["omniauth.auth"])
+      assert_equal "A user already exists with this facebook account.", flash[:notice]
+      expect(response).to redirect_to root_path() 
     end 
   end
 
@@ -117,6 +117,40 @@ describe SessionsController, :type => :controller do
       expect(response).to redirect_to create_session_path(:user => "1")
     end
   end
+  
+  
+  
+  
+  
+#   #Tests 10/19/16
+# #   RSpec.configure do |config|
+# #   config.include FacebookMacros
+# # end
 
+
+# #:first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description, :address, :zipcode, :city, :country
+    
+#   describe 'login to facebook' do
+#     before :each do
+#     # Capybara.default_wait_time = 10
+#     # Capybara.app_host = 'http://' + Settings.host
+#     @user = User.create(:first_name => "Ruth", :last_name => "Shepardsky", :email => "ruth_nejcocw_shepardsky@tfbnw.net")
+#     @user.uid = "122233108246861" 
+#     @user.save
+    
+#     end
+    
+#     it 'should create a new user' do
+#       get(:signup, :user => nil , :auth => request.env["omniauth.auth"])
+#       expect(assigns(:new_user)).to be_an_instance_of(User)
+#     end
+    
+#     it 'should authenticate with facebook login' do
+#       get(:login, :user => @user , :auth => request.env["omniauth.auth"])
+#       # complete_facebook_dialogues_on_click('#log_in', @user)
+#       expect(response).to redirect_to create_session_path(:user => "1")
+#   end
+# end
+    
 end
     
