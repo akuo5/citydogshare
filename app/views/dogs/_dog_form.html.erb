@@ -6,8 +6,8 @@
         <%= text_field(:dog, :name, class: "validate white", placeholder: "Insert name") %>
         <label for="name">What is your dog's name?</label>
       </div>
-      <div class="input-field col s12 m12 l6  right-col">
-        <%= select :dog, :dob, ((Date.today.year - 30)...(Date.today.year)), {:include_blank => "Select one"}, {:class => "validate white"} %>
+      <div class="input-field col s12 m12 l6  right-col" id="dob">
+        <%= select :dog, :dob, ((Date.today.year - 30)...(Date.today.year)), {:include_blank => "Select one"}, {:class => "validate white", :id=> 'dobdob'} %>
         <label for="dob">What year was your dog born in?</label>
       </div>
       <div class="input-field col s12 m12 l6 left-col">
@@ -37,13 +37,13 @@
         <label for="likes">Who does your dog like?</label>
       </div>
       <div class="input-field col s12 m12 l6 left-col">
-        <%= select :dog, :barks, [], {:include_blank => "Select one"}, :class => "validate white" do %>
+        <select class="validate white">
           <option value="1">Rarely</option>
           <option value="1">When playing</option>
           <option value="2">When someone's at the door</option>
           <option value="3">When left alone</option>
           <option value="4">All the time</option>
-        <% end %>
+        </select>
         <label for="barking">When does your dog bark?</label>
       </div>
       <div class="input-field col s12 m12 l6 right-col">

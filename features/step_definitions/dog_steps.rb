@@ -53,7 +53,6 @@ When /^I create a new dog "([^"]*)"$/ do |name|
 end
 
 And /^I push "([^"]*)"$/ do |button|
-  DogViewHelper.any_instance.should_receive(:get_mix_array).and_return([Mix.find(1)])
   click_button(button)
 end
 
@@ -88,9 +87,7 @@ And /^I should not see a star$/ do
 end
 
 When /^(?:|I )follow the dog named "([^"]*)"$/ do |link|
-  within "#dog-name-link" do
-    click_link(link)
-  end
+  click_link("About " + link)
 end
 
 Then /^I should see (today|yesterday)'s date$/ do |time|
@@ -107,6 +104,10 @@ Then /^I should not see (today|yesterday)'s date$/ do |time|
   else
     page.should_not have_content(DateTime.yesterday.strftime('%v').upcase)
   end
+end
+
+When(/^I select "([^"]*)"$/) do |value|
+  page.find("option[value='#{value}']").click
 end
 
 
