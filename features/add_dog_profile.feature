@@ -52,26 +52,3 @@ Scenario: create dog profile
   And I fill in "dog_availability" with "Mondays and Weekends!"
   And I push "Save Changes"
   Then I should be on the dogs page for "Batman"
-
-Scenario: make sure new dog shows up in user profile
-  When I create a new dog "Spock"
-  And I am on the users page for "Batman"
-  And I should see "Spock"
-
-Scenario: view dog profile
-  When I create a new dog "Spock"
-  And I am on the users page for "Batman"
-  And I follow "Spock"
-  Then I should see "Spock"
-  And I should see "Mix: Affenpinscher"
-  And I should see "5 years old"
-  And I should see "small (0-15)"
-  And I should see "My parent is Bruce"
-
-Scenario: get back to user profile
-  When I create a new dog "Spock"
-  And I am on the users page for "Batman"
-  And I follow "Spock"
-  And I follow "Bruce"
-  Then I should be on the users page for "Batman"
-
