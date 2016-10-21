@@ -34,6 +34,7 @@ class SessionsController < ApplicationController
       redirect_to root_path()
     else
       @new_user = User.create()
+      byebug if @new_user == nil
       @new_user.update_credentials(params[:auth][:credentials])
       @new_user.facebook_info_update(params[:auth])
       redirect_to create_session_path(:user => @new_user)
