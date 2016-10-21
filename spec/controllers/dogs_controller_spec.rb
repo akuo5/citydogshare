@@ -83,6 +83,7 @@ describe DogsController, :type => :controller do
       expect(assigns(:dogs)).to match_array(dogs)
     end
    
+
     it 'should filter by energy level' do
       dog1 = FactoryGirl.create(:dog, :energy_level_id => 2)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
