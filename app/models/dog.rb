@@ -26,7 +26,6 @@ class Dog < ActiveRecord::Base
 
   geocoded_by :address
 
-
   validates :name, :presence => {:message => "Name can't be blank"}
   validates :mixes, :presence => {:message => "Mix can't be blank"}
   validate :validate_dob
