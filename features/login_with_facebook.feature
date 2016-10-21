@@ -35,3 +35,18 @@ Scenario: Log in authentication fails
   And my authentication fails
   Then I should be on the home page
   And I should see "Something went wrong with the authentication. Please try again."
+  
+  
+  
+  
+  # 10/18/2016 Tests
+  
+  
+  Scenario: Log in to Facebook
+  Given I am on the homepage
+  And I follow "Login with Facebook"
+  And my authentication fails
+  Then I should be on the home page
+  And I should see "Something went wrong with the authentication. Please try again."
+  
+  
