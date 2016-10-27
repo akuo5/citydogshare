@@ -20,10 +20,9 @@ describe StarredDogsController, :type => :controller do
   describe "Create a new star" do
     it "should create a new star and redirect back" do
       @dog = FactoryGirl.create(:dog)
-      expect(Star).to receive(:create)
+      expect(Star).to receive(:create).and_return(true)
       post :create, @params
-      # TODO(angelakuo): Figure out why this doesn't work
-      # response.should redirect_to "back"
+      response.should redirect_to "back"
     end
   end
   
@@ -32,8 +31,7 @@ describe StarredDogsController, :type => :controller do
       Star.stub_chain(:where, :first, :destroy).and_return(true)
       allow_any_instance_of(Dog).to receive(:id).and_return(0)
       get :destroy, @params
-      # TODO(angelakuo): Figure out why this doesn't work
-      # response.should redirect_to "back"
+      response.should redirect_to "back"
     end
   end
   
