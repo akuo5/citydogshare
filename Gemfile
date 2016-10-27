@@ -15,7 +15,7 @@ gem 'geocoder'
 
 gem 'paperclip'
 gem 'aws-sdk'
-gem 'dotenv-rails'
+gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3'
