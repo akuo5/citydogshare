@@ -57,4 +57,26 @@ describe Dog do
     @dog.save
     expect(@dog.youtube_id).to eq("to0JYZJxXOc")
   end
+  
+  it 'should give a correct age caption' do
+    @dog.dob = DateTime.parse('3/2013')
+    expect(@dog.age_caption).to eq("< 1 year old")
+    @dog.dob = DateTime.parse('3/2012')
+    expect(@dog.age_caption).to eq("1 year old")
+    @dog.dob = DateTime.parse('3/2011')
+    expect(@dog.age_caption).to eq("2 years old")
+  end
+  
+  it 'should correctly output the dogs tags' do
+    expect(@dog).to receive(:readable_personalities).and_return(["1", "2"])
+    expect(@dog.tags).to eq("1, 2")
+  end
+  
+  it 'shuld return a list of genders' do 
+    expect(Dog.genders).to be_a_kind_of(Array)
+  end
+  
+  it 'shuld return a list of age ranges' do 
+    expect(Dog.age_ranges).to be_a_kind_of(Array)
+  end
 end

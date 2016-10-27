@@ -26,6 +26,7 @@ describe UsersController, :type => :controller do
     before(:each) do
       @user = User.create(:id => "1")
       @user.uid = "12345" 
+      allow(@user).to receive(:dogs).and_return([FactoryGirl.create(:dog)])
       session[:user_id] = "12345"
       controller.instance_variable_set(:@current_user, @user)
       @user2 = User.create(:id => "2")
@@ -98,6 +99,52 @@ describe UsersController, :type => :controller do
       controller.instance_variable_set(:@current_user, @user)
       get(:destroy, :id => "1")
       assert_equal session[:user_id], nil
+    end
+  end
+  
+  describe 'show starred dogs' do
+    before :each do
+      @params = {}
+      @params[:id] = "0"
+      @user = FactoryGirl.create(:user)
+      @returnDogs = {}
+      allow(@returnDogs).to receive(:starred_dogs).and_return(["dog1, dog2"])
+      allow(User).to receive(:find_by_id).and_return(@returnDogs)
+    end
+    it 'should set dogs if everything okay' do
+      allow(@user).to receive(:id).and_return(1)
+      controller.instance_variable_set(:@current_user, @user)
+      get :stars, @params
+      expect(assigns(:dogs))
+    end
+    it 'should redirect if user request other users starred dogs' do
+      allow(@user).to receive(:id).and_return(0)
+      controller.instance_variable_set(:@current_user, @user)
+      # expect(response).to redirect_to(stars_user_path(@user))
+      get :stars, @params
+    end
+  end
+  
+  describe 'show user dogs' do
+    before :each do
+      @params = {}
+      @params[:id] = "0"
+      @user = FactoryGirl.create(:user)
+      @returnDogs = {}
+      allow(@returnDogs).to receive(:dogs).and_return(["dog1, dog2"])
+      allow(User).to receive(:find_by_id).and_return(@returnDogs)
+    end
+    it 'should set dogs if everything okay' do
+      allow(@user).to receive(:id).and_return(1)
+      controller.instance_variable_set(:@current_user, @user)
+      get :dogs, @params
+      expect(assigns(:dogs))
+    end
+    it 'should redirect if user request other users starred dogs' do
+      allow(@user).to receive(:id).and_return(0)
+      controller.instance_variable_set(:@current_user, @user)
+      # expect(response).to redirect_to(dogs_user_path(@user))
+      get :dogs, @params
     end
   end
 
