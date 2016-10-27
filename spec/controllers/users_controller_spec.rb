@@ -24,6 +24,9 @@ describe UsersController, :type => :controller do
 
   describe 'edit user profile' do
     before(:each) do
+      s3_client = Aws::S3::Client.new(stub_responses: true)
+      allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
+      
       @user = User.create(:id => "1")
       @user.uid = "12345" 
       allow(@user).to receive(:dogs).and_return([FactoryGirl.create(:dog)])
