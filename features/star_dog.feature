@@ -22,48 +22,49 @@
 #   And I am on the search dogs page
 #   Then I should not see a star 
 
-# Scenario: User can star dog from search results
-#   And I am logged in
-#   And I am on the search dogs page
-#   And I click a star for dog with dog id "3"
-#   And I follow "My Favorites"
-#   Then I should see "Bubba"
+Scenario: User can star dog from search results
+  And I am logged in
+  And I am on the search dogs page
+  And I click a star for dog with dog id "3"
+  And I follow the first "My Favorites"
+  Then I should see "Bubba"
 
-# Scenario: User can star dog from dog profile
-#   And I am logged in
-#   And I am on the search dogs page
-#   And I follow "Bubba"
-#   And I click a star for dog with dog id "3"
-#   And I follow "My Favorites"
-#   Then I should see "Bubba"
+Scenario: User can star dog from dog profile
+  And I am logged in
+  And I am on the search dogs page
+  And I follow "Bubba"
+  And I click a star for dog with dog id "3"
+  And I follow the first "My Favorites"
+  Then I should see "Bubba"
 
-# Scenario: User should be able to star their own dog
-#   And I am logged in
-#   And I am on the users page for "Batman"
-#   And I follow the dog named "Princess"
-#   And I click a star for dog with dog id "1"
-#   Then I should see "1"
-#   And I follow "My Favorites"
-#   Then I should see "Princess"
+Scenario: User should be able to star their own dog
+  And I am logged in
+  And I am on the users page for "Batman"
+  When I follow the first "My Dogs"
+  And I follow the dog named "Princess"
+  And I click a star for dog with dog id "1"
+  Then I should see "1"
+  And I follow the first "My Favorites"
+  Then I should see "Princess"
 
-# Scenario: User should be able to unstar a dog from search results
-#   And I am logged in
-#   And I am on the search dogs page
-#   And I click a star for dog with dog id "3"
-#   And I click a star for dog with dog id "2"
-#   And I click a star for dog with dog id "3"
-#   And I follow "My Favorites"
-#   Then I should not see "Bubba"
-#   And I should see "Spock"
+Scenario: User should be able to unstar a dog from search results
+  And I am logged in
+  And I am on the search dogs page
+  And I click a star for dog with dog id "3"
+  And I click a star for dog with dog id "2"
+  And I click a star for dog with dog id "3"
+  And I follow the first "My Favorites"
+  Then I should not see "Bubba"
+  And I should see "Spock"
 
-# Scenario: User should be able to unstar a dog from dog profile
-#   And I am logged in
-#   And I am on the search dogs page
-#   And I follow "Bubba"
-#   And I click a star for dog with dog id "3"
-#   Then I should see "1"
-#   And I click a star for dog with dog id "3"
-#   Then I should see "0"
-#   And I follow "My Favorites"
-#   Then I should not see "Bubba"
+Scenario: User should be able to unstar a dog from dog profile
+  And I am logged in
+  And I am on the search dogs page
+  And I follow "Bubba"
+  And I click a star for dog with dog id "3"
+  Then I should see "1"
+  And I click a star for dog with dog id "3"
+  Then I should see "0"
+  And I follow the first "My Favorites"
+  Then I should not see "Bubba"
 
