@@ -18,3 +18,5 @@
 /config/aws.yml
 /coverage
 .DS_Store
+
+.byebug_history
