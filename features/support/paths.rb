@@ -18,6 +18,8 @@ module NavigationHelpers
       '/'
     when /^the users page for "Batman"$/
       '/users/1'
+    when /^the dogs page for "Batman"$/
+      '/dogs'
     when /^the search dogs page$/
       '/dogs'
     when /^the share dogs page$/

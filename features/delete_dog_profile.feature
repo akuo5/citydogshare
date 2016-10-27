@@ -20,6 +20,7 @@ Background: User and dog is in database
 
 Scenario: Users deletes his dog's profile
   And I am on the users page for "Batman"
+  When I follow the first "My Dogs"
   And I follow the dog named "Princess"
   When I press "Delete"
   Then I should be on the users page for "Batman"

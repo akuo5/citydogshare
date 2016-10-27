@@ -48,12 +48,13 @@ class DogViewHelper
     @values[:size] = dog_attributes['size']
     @values[:energy_level] = dog_attributes['energy_level']
     @values[:mix] = dog_attributes['mixes'].split(',')
+    # byebug
 
     ## Return hash with new dog values to create new dog/update existing dog
     new_attrs = {
       :mixes => get_mix_array(dog_attributes['mixes']),
-      :size => Size.find(dog_attributes['size']), 
-      :energy_level => EnergyLevel.find(dog_attributes['energy_level']), 
+      :size => dog_attributes['size'].length == 0 ? nil : Size.find(dog_attributes['size']), 
+      :energy_level => dog_attributes['energy_level'].length == 0 ? nil : EnergyLevel.find(dog_attributes['energy_level']), 
       :likes => get_attribute_array(dog_attributes, 'likes'),
       :personalities => get_attribute_array(dog_attributes, 'personalities'),
       :dob => get_birthday(dog_attributes) }
@@ -76,9 +77,8 @@ class DogViewHelper
     DateTime.new(year, 1, 1)
   end
 
-  def get_mix_array(mix_string)
-    tags = mix_string.split(",")
-    tags.map{ |tag| Mix.find_by_value(tag) }
+  def get_mix_array(mix_arr)
+    mix_arr.blank? ? [] : mix_arr.map{ |m| Mix.find_by_value(m) }
   end
 
   def get_attribute_array(attributes, trait)
