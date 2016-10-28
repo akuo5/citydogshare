@@ -39,6 +39,7 @@ Citydogshare::Application.configure do
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_region => ENV.fetch('AWS_REGION'),
+    :bucket => ENV.fetch('AWS_BUCKET_NAME'),
     :s3_host_name => ENV.fetch('AWS_HOST_NAME'),
     :s3_credentials => {
       :bucket => ENV.fetch('AWS_BUCKET_NAME'),
