@@ -25,13 +25,6 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(nil, nil, false)
     @action = :create
     @method = :post
-    
-    # if params[:no_dogs] == "true"
-    if @current_user.dogs.count == 0
-      @first_dog = true
-      flash[:notice] = "Add your first dog"
-      render 'new'
-    end
 
     unless current_user.zipcode != nil and current_user.zipcode != "" 
       flash[:notice] = "Please update your zipcode to add a dog."
