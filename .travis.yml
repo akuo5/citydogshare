@@ -9,6 +9,7 @@ addons:
       exec rake
 env:
   - AWS_REGION=us-west-1
+  - AWS_BUCKET_NAME=citydogshare-angela
 script:
 - RAILS_ENV=test bundle exec rake db:migrate
 - bundle exec rake db:test:prepare
