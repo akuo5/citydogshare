@@ -56,7 +56,6 @@ module Citydogshare
     # Enable the asset pipeline
     config.assets.enabled = true
 
-
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
@@ -64,16 +63,5 @@ module Citydogshare
     config.assets.precompile << %w( galleria.classic.js )
     config.assets.precompile << %w( *.js ) 
     config.assets.initialize_on_precompile = false
-    #paperclip S3 
-    # config.paperclip_defaults = {
-    #   storage: :s3,
-    #   s3_region: ENV["AWS_REGION"],
-    #   s3_credentials: {
-    #     s3_host_name: ENV["AWS_S3_HOST_NAME"],
-    #     bucket: ENV["AWS_S3_BUCKET"],
-    #     access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-    #     secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
-    #   }
-    # } 
   end
 end

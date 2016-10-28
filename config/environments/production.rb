@@ -69,14 +69,6 @@ Citydogshare::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  # Paperclip.options[:command_path] = "/usr/local/bin/"
-  #   config.paperclip_defaults = {
-  #   :storage => :s3,
-  #   :s3_region => 'us-west-1',
-  #   :s3_host_name => 's3-us-west-1.amazonaws.com',
-  #   :bucket => 'citydogshare-profile'
-  # }
-
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_region => ENV.fetch('AWS_REGION'),

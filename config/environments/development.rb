@@ -36,14 +36,6 @@ Citydogshare::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  # Paperclip.options[:command_path] = "/usr/local/bin/"
-  # config.paperclip_defaults = {
-  #   :storage => :s3,
-  #   :s3_region => 'us-west-1',
-  #   :s3_host_name => 's3-us-west-1.amazonaws.com',
-  #   :bucket => 'citydogshare-profile'
-  # }
-
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_region => ENV.fetch('AWS_REGION'),
