@@ -36,7 +36,7 @@ class Dog < ActiveRecord::Base
                                  :medium   => '300x' },
                     :default_url => "",
                     :storage => :s3,
-                    :bucket => 'citydogshare-profile',
+                    :bucket => ENV["AWS_BUCKET_NAME"],
                     :path => "/:class/:images/:id/:style/:basename.:extension"
 
   validates_attachment_size :photo, :less_than => 5.megabytes
