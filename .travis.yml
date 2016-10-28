@@ -7,12 +7,8 @@ addons:
   code_climate:
     repo_token: f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43 bundle
       exec rake
-deploy:
-  provider: s3
-  access_key_id: AKIAJKQ7C6IHCOBUIASA
-  secret_access_key:
-    secure: nd2/7CnEE5BYMr9u99k4sLmXCCdrqiK+RjrWcx2ozrDcBR/iLLXAzRpfjw3pY/LhDyDSTuXEKJCpa0wWkZJz1QE6BhrfguizJ3Qv05hipCUMM9JMWBxFO/IrYFfHPNV5xC7LpMbUcQo9xew4gzAl6CebGacyg9V3cpq/yx1nMBoBFJINrQZvrKe6CAQasW0k0dgZpwF9nM0DnQuI4YI/kdE6R6wZrdvodDlKO6sLteuIOy8tdM5rFXK6ckH7MctUY48xvMhPPh8fUgJaFatHcxaSzrWX78Vow0OYEeiDmwE9KfkzLSkvBYyKhqEQWAaGzo1AwT64FcugSbPJ9hDfJUSLU5cNKKqqpcNBLRGve5R/8ZBSxpDw6sPVVgUVNpkjhmwSRagw3r5epm7XVR/8M/VuunACjKKqxS6NbqMAY+tplEsSV4HE079IxfgFH6zqr9oZvbBmIzGTs8UOSASL3cWf8hw+rX98A1bicwOXLB5FqByWnN1DBDIx9fFoSAwiCVOqvn1SDppJSHjq62bOEGK+lGLA4qDiYsx1q9eeyRAiFdTDSTibx3WEMMCpMu4a0bX/sAn/tUP68IWs43aueXURzJxFzINje8jn3UFo1hazOFf0vCOJb0eF4yvvNrt4K/jWv9Kg9Ri890RwbVRHfGcKO19TnbUGVKBdsMaIV20=
-  bucket: citydogshare-angela
+env:
+  - AWS_REGION=us-west-1
 script:
 - RAILS_ENV=test bundle exec rake db:migrate
 - bundle exec rake db:test:prepare
