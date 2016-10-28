@@ -8,12 +8,28 @@ describe Dog do
       allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
       @user = FactoryGirl.create(:user)
       @dog = FactoryGirl.create(:dog)
-
   end
 
 
   it 'should correctly show name' do
     assert_equal @dog.name, "Spock"
+  end
+  
+  it 'should correctly show energy level' do
+    assert_equal @dog.energy_level, "high"
+  end
+  
+  it 'should correctly show size' do
+    assert_equal @dog.size, "small (0-15)"
+  end
+  
+  it 'should correctly show mixes' do
+    assert_equal @dog.readable_mixes, ["Affenpinscher"]
+  end
+  
+  it 'should correctly show that there are no future events' do
+    expect(@dog.future_events?).to be_falsey
+    assert_equal @dog.future_events.count, 0
   end
 
   it 'should not save an invalid date of birth' do
