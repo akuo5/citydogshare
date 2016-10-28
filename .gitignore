@@ -15,9 +15,8 @@
 /tmp
 
 /config/environments/env.rb
-/config/aws.yml
+/config/application.yml
 /coverage
 .DS_Store
 
 .byebug_history
-.env
