@@ -8,7 +8,6 @@ addons:
     repo_token: f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43 bundle
       exec rake
 env:
-  - AWS_REGION=us-west-1
   - AWS_BUCKET_NAME=citydogshare-angela
 script:
 - RAILS_ENV=test bundle exec rake db:migrate
