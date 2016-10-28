@@ -9,7 +9,7 @@ class Picture < ActiveRecord::Base
                                  :medium   => '300x' },
                     :default_url => "",
                     :storage => :s3,
-                    :bucket => 'citydogshare-profile',
+                    :bucket => ENV["AWS_BUCKET_NAME"],
                     :path => "/:class/:pictures/:id/:style/:basename.:extension"
 
   validates_attachment_presence :image, :message => "Photo can't be blank"
