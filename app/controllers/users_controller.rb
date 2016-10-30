@@ -40,15 +40,15 @@ class UsersController < ApplicationController
   end
 
   def stars
-    if !current_user.nil? and current_user.id != params[:id].to_i
-      redirect_to(stars_user_path(current_user)) and return
+    if !@current_user.nil? and @current_user.id != params[:id].to_i
+      redirect_to(stars_user_path(@current_user))
     end
     @dogs = User.find_by_id(params[:id]).starred_dogs
   end
   
   def dogs
-    if !current_user.nil? and current_user.id != params[:id].to_i
-      redirect_to(stars_user_path(current_user)) and return
+    if !@current_user.nil? and @current_user.id != params[:id].to_i
+      redirect_to(dogs_user_path(@current_user))
     end
     @dogs = User.find_by_id(params[:id]).dogs
   end

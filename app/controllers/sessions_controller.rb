@@ -39,7 +39,6 @@ class SessionsController < ApplicationController
       flash[:notice] = "A user already exists with this facebook account."
       redirect_to root_path()
     else
-      @new_user = User.create()
       # byebug if @new_user == nil
       @new_user.update_credentials(params[:auth][:credentials])
       @new_user.facebook_info_update(params[:auth])

@@ -8,12 +8,28 @@ describe Dog do
       allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
       @user = FactoryGirl.create(:user)
       @dog = FactoryGirl.create(:dog)
-
   end
 
 
   it 'should correctly show name' do
     assert_equal @dog.name, "Spock"
+  end
+  
+  it 'should correctly show energy level' do
+    assert_equal @dog.energy_level, "high"
+  end
+  
+  it 'should correctly show size' do
+    assert_equal @dog.size, "small (0-15)"
+  end
+  
+  it 'should correctly show mixes' do
+    assert_equal @dog.readable_mixes, ["Affenpinscher"]
+  end
+  
+  it 'should correctly show that there are no future events' do
+    expect(@dog.future_events?).to be_falsey
+    assert_equal @dog.future_events.count, 0
   end
 
   it 'should not save an invalid date of birth' do
@@ -56,5 +72,27 @@ describe Dog do
     @dog.video = "https://www.youtube.com/watch?v=to0JYZJxXOc&something"
     @dog.save
     expect(@dog.youtube_id).to eq("to0JYZJxXOc")
+  end
+  
+  it 'should give a correct age caption' do
+    @dog.dob = DateTime.parse('3/2013')
+    expect(@dog.age_caption).to eq("< 1 year old")
+    @dog.dob = DateTime.parse('3/2012')
+    expect(@dog.age_caption).to eq("1 year old")
+    @dog.dob = DateTime.parse('3/2011')
+    expect(@dog.age_caption).to eq("2 years old")
+  end
+  
+  it 'should correctly output the dogs tags' do
+    expect(@dog).to receive(:readable_personalities).and_return(["1", "2"])
+    expect(@dog.tags).to eq("1, 2")
+  end
+  
+  it 'shuld return a list of genders' do 
+    expect(Dog.genders).to be_a_kind_of(Array)
+  end
+  
+  it 'shuld return a list of age ranges' do 
+    expect(Dog.age_ranges).to be_a_kind_of(Array)
   end
 end

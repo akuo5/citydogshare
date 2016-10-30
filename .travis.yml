@@ -1,12 +1,16 @@
 language: ruby
 rvm:
-  - 2.2.2
+- 2.2.2
 notifications:
   slack: citydogshare-profile:lPnqzOmkW0T9sv0ceZAVhxv3
 addons:
   code_climate:
-    repo_token: f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43 bundle exec rake
+    repo_token: f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43 bundle
+      exec rake
+env:
+  - AWS_BUCKET_NAME=citydogshare-angela
 script:
-  - RAILS_ENV=test bundle exec rake db:migrate
-  - bundle exec rake db:test:prepare
-  - bundle exec rspec spec/
+- RAILS_ENV=test bundle exec rake db:migrate
+- bundle exec rake db:test:prepare
+- bundle exec rspec spec/
+- bundle exec cucumber features/

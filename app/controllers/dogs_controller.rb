@@ -5,7 +5,7 @@ class DogsController < ApplicationController
   before_filter :current_user
 
   def index
-    ip_zipcode = '94704'
+    ip_zipcode = get_ip_address_zipcode
     @form_filler = DogViewHelper.new(current_user, ip_zipcode, true)
     @form_filler.update_values(params, ip_zipcode, current_user)
 
@@ -17,19 +17,14 @@ class DogsController < ApplicationController
   end
 
   def get_ip_address_zipcode
-    request.safe_location.postal_code
+    # request.safe_location.postal_code
+    '94704'
   end
 
   def new
     @form_filler = DogViewHelper.new(nil, nil, false)
     @action = :create
     @method = :post
-
-    if params[:no_dog] == "true"
-      @first_dog = true
-      flash[:notice] = "Add your first dog"
-      render 'new'
-    end
 
     unless current_user.zipcode != nil and current_user.zipcode != "" 
       flash[:notice] = "Please update your zipcode to add a dog."
@@ -68,7 +63,6 @@ class DogsController < ApplicationController
   end
 
   def update
-    # byebug
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures

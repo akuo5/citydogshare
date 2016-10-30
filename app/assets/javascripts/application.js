@@ -12,16 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require moment
 //= require fullcalendar.min
 //= require_tree .
 //= require materialize-sprockets
-//= require foundation
-//= require checkboxes
 //= require tag-it
-//= require jquery-ui
-//= require jquery.datetimepicker
 //= require cal
-//= require nav-dropdown
-//= require galleria-1.4.2
 //= require galleria.classic
