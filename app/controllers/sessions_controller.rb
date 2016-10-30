@@ -9,6 +9,12 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to root_path()
+  end
+  
+  
+  def delete
+    session[:user_id] = nil
+    redirect_to root_path()
   end 
 
   def handle_failure
@@ -33,6 +39,8 @@ class SessionsController < ApplicationController
       redirect_to root_path()
     else
       @new_user = User.create()
+      # byebug if @new_user == nil
+
       @new_user.update_credentials(params[:auth][:credentials])
       @new_user.facebook_info_update(params[:auth])
       redirect_to create_session_path(:user => @new_user)
