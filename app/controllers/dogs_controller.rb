@@ -104,7 +104,7 @@ class DogsController < ApplicationController
     params.require(:dog).permit(:name, :image, :dob, :gender, :description, 
     :motto, :fixed, :health, :comments, :contact, :availability, {:mixes => []}, 
     {:likes =>[]}, :energy_level, :size, :photo, :latitude, :longitude, :video, 
-    :dob, {:personalities =>[]})
+    :dob, {:personalities =>[]}, :chipped, :shots_to_date, {:barks => []})
   end
   
   #TODO(angelakuo): Write tests for this

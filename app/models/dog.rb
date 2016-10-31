@@ -16,9 +16,11 @@ class Dog < ActiveRecord::Base
   has_many :dog_mix_linkers
   has_many :dog_like_linkers
   has_many :dog_personality_linkers
+  has_many :dog_bark_linkers
   has_many :mixes, :through => :dog_mix_linkers
   has_many :likes, :through => :dog_like_linkers
   has_many :personalities, :through => :dog_personality_linkers
+  has_many :barks, :through => :dog_bark_linkers
   belongs_to :energy_level
   belongs_to :size
 
