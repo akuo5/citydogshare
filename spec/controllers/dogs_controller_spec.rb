@@ -1,87 +1,87 @@
-# require 'rails_helper'
+require 'rails_helper'
 
-# describe DogsController, :type => :controller do
-#   include Capybara::DSL
-#   before(:each) do
+describe DogsController, :type => :controller do
+  include Capybara::DSL
+  before(:each) do
     
-#     s3_client = Aws::S3::Client.new(stub_responses: true)
-#     allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
-#     @user = FactoryGirl.create(:user)
-#     Dog.any_instance.stub(:geocode)
-#     allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
-#   end
+    s3_client = Aws::S3::Client.new(stub_responses: true)
+    allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
+    @user = FactoryGirl.create(:user)
+    Dog.any_instance.stub(:geocode)
+    allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
+  end
 
-#   describe 'searching/viewing dogs' do
-#     it 'should display all dogs given big radius' do
-#       dog1 = FactoryGirl.create(:dog)
-#       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
-#       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
-#       dogs = [dog1, dog2]
-#       params = {}
-#       get :index, params
-#       expect(assigns(:dogs)).to match_array(dogs)
-#     end
-#     it 'should filter by gender' do
-#       dog1 = FactoryGirl.create(:dog)
-#       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :gender => "Female")
-#       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
-#       dogs = [dog2]
-#       params = {}
-#       params[:gender] = {"Female" => 1}
+  describe 'searching/viewing dogs' do
+    it 'should display all dogs given big radius' do
+      dog1 = FactoryGirl.create(:dog)
+      dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
+      Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
+      dogs = [dog1, dog2]
+      params = {}
+      get :index, params
+      expect(assigns(:dogs)).to match_array(dogs)
+    end
+    it 'should filter by gender' do
+      dog1 = FactoryGirl.create(:dog)
+      dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :gender => "Female")
+      Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
+      dogs = [dog2]
+      params = {}
+      params[:gender] = {"Female" => 1}
 
-#       get :index, params
-#       expect(assigns(:dogs)).to match_array(dogs)
-#     end
-#     it 'should filter by age' do
-#       Time.stub(:now).and_return(Time.mktime(2014,1))
-#       dog1 = FactoryGirl.create(:dog)
-#       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :dob => Time.new(2013, 2))
-#       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
-#       dogs = [dog2]
-#       params = {}
-#       params[:age] = {"0" => 1}
-#       get :index, params
-#       expect(assigns(:dogs)).to match_array(dogs)
-#     end
+      get :index, params
+      expect(assigns(:dogs)).to match_array(dogs)
+    end
+    it 'should filter by age' do
+      Time.stub(:now).and_return(Time.mktime(2014,1))
+      dog1 = FactoryGirl.create(:dog)
+      dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :dob => Time.new(2013, 2))
+      Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
+      dogs = [dog2]
+      params = {}
+      params[:age] = {"0" => 1}
+      get :index, params
+      expect(assigns(:dogs)).to match_array(dogs)
+    end
 
-#     it 'should filter by mix' do
-#       dog1 = FactoryGirl.create(:dog)
-#       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
-#       dog2.mixes << Mix.find_by_value("Labrador")
-#       dog2.save!
-#       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
-#       dogs = [dog2]
-#       params = {}
-#       params[:mix] = "Labrador"
-#       get :index, params
-#       expect(assigns(:dogs)).to match_array(dogs)
-#     end
+    it 'should filter by mix' do
+      dog1 = FactoryGirl.create(:dog)
+      dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
+      dog2.mixes << Mix.find_by_value("Labrador")
+      dog2.save!
+      Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
+      dogs = [dog2]
+      params = {}
+      params[:mix] = "Labrador"
+      get :index, params
+      expect(assigns(:dogs)).to match_array(dogs)
+    end
     
-#     it 'should filter by personality' do
-#       dog1 = FactoryGirl.create(:dog)
-#       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
-#       dog2.personalities << Personality.find_by_value("friendly")
-#       dog2.save
-#       dogs = [dog2]
-#       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
-#       params = {}
-#       params[:personality] = {"friendly" => 1}
-#       get :index, params
-#       expect(assigns(:dogs)).to match_array(dogs)
-#     end
+    it 'should filter by personality' do
+      dog1 = FactoryGirl.create(:dog)
+      dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
+      dog2.personalities << Personality.find_by_value("friendly")
+      dog2.save
+      dogs = [dog2]
+      Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
+      params = {}
+      params[:personality] = {"friendly" => 1}
+      get :index, params
+      expect(assigns(:dogs)).to match_array(dogs)
+    end
 
-#     it 'should filter by likes' do
-#       dog1 = FactoryGirl.create(:dog)
-#       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
-#       dog2.likes << Like.find_by_value("cats")
-#       dog2.save
-#       dogs = [dog2]
-#       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
-#       params = {}
-#       params[:like] = {"cats" => 1}
-#       get :index, params
-#       expect(assigns(:dogs)).to match_array(dogs)
-#     end
+    it 'should filter by likes' do
+      dog1 = FactoryGirl.create(:dog)
+      dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
+      dog2.likes << Like.find_by_value("cats")
+      dog2.save
+      dogs = [dog2]
+      Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
+      params = {}
+      params[:like] = {"cats" => 1}
+      get :index, params
+      expect(assigns(:dogs)).to match_array(dogs)
+    end
    
     it 'should filter by energy level' do
       dog1 = FactoryGirl.create(:dog, :energy_level_id => 2)
