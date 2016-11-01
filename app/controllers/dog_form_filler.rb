@@ -15,6 +15,7 @@ class DogViewHelper
     @values[:radius] = DEFAULT_RADIUS
     @values[:zipcode] = current_user ? current_user.zipcode : ip_zipcode
     @values[:personality] = []
+    @values[:bark] = []
     @values[:like] = []
   end
 
@@ -43,12 +44,12 @@ class DogViewHelper
   def attributes_list(dog_attributes)
     # Set form fields with new dog's information
     @values[:personality] = dog_attributes['personalities'] ? get_attribute_array(dog_attributes, 'personalities')  : []
+    @values[:bark] = dog_attributes['barks'] ? get_attribute_array(dog_attributes, 'barks')  : []
     
     @values[:like] = dog_attributes['likes'] ? get_attribute_array(dog_attributes, 'likes') : []
     @values[:size] = dog_attributes['size']
     @values[:energy_level] = dog_attributes['energy_level']
     @values[:mix] = dog_attributes['mixes'].split(',')
-    # byebug
 
     ## Return hash with new dog values to create new dog/update existing dog
     new_attrs = {
@@ -57,6 +58,7 @@ class DogViewHelper
       :energy_level => dog_attributes['energy_level'].length == 0 ? nil : EnergyLevel.find(dog_attributes['energy_level']), 
       :likes => get_attribute_array(dog_attributes, 'likes'),
       :personalities => get_attribute_array(dog_attributes, 'personalities'),
+      :barks => get_attribute_array(dog_attributes, 'barks'),
       :dob => get_birthday(dog_attributes) }
     dog_attributes.merge(new_attrs)
   end

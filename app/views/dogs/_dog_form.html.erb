@@ -37,19 +37,22 @@
         <label for="likes">Who does your dog like?</label>
       </div>
       <div class="input-field col s12 m12 l6 left-col">
-        <select class="validate white">
-          <option value="1">Rarely</option>
-          <option value="1">When playing</option>
-          <option value="2">When someone's at the door</option>
-          <option value="3">When left alone</option>
-          <option value="4">All the time</option>
-        </select>
-        <label for="barking">When does your dog bark?</label>
+        <%= select :dog, :barks, Bark.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
+        <label for="barks">When does your dog bark?</label>
       </div>
       <div class="input-field col s12 m12 l6 right-col">
         <%= select :dog, :fixed, ["Yes", "No"], {:include_blank => "Select one"}, :class => "validate white" %>
         <label for="fixed">Is your dog spayed / neutered?</label>
       </div>
+      <div class="input-field col s12 m12 l6 left-col">
+        <%= select :dog, :chipped, ["Yes", "No"], {:include_blank => "Select one"}, :class => "validate white" %>
+        <label for="fixed">Is your dog chipped?</label>
+      </div>
+      <div class="input-field col s12 m12 l6 right-col">
+        <%= select :dog, :shots_to_date, ["Yes", "No"], {:include_blank => "Select one"}, :class => "validate white" %>
+        <label for="fixed">Are all your dog's shots up to date?</label>
+      </div>
+
       <div class="input-field col s12 m12 l6 left-col br-20 s m l">
         <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?", :class => "materialize-textarea") %>
         <label for="health">Health Notes</label>

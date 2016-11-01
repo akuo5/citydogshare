@@ -7,6 +7,7 @@ class Dog < ActiveRecord::Base
   scope :has_personalities, lambda {|personalities| filter_personality(personalities)}
   scope :has_likes, lambda {|likes| filter_like(likes)}
   scope :has_mix, lambda {|mix| filter_mix(mix)}
+  scope :has_bark, lambda {|bark| filter_bark(bark)}
   scope :has_energy_level, lambda {|energy_levels| filter_energy_level(energy_levels)}
   scope :has_size, lambda {|sizes| filter_size(sizes)}
   scope :in_age_range, lambda {|age_query| filter_age(age_query)}
@@ -28,8 +29,12 @@ class Dog < ActiveRecord::Base
 
   geocoded_by :address
 
-  validates :name, :presence => {:message => "Name can't be blank"}
-  validates :mixes, :presence => {:message => "Mix can't be blank"}
+  validates :name, :presence => {:message => "Please enter a name"}
+  validates :gender, :presence => {:message => "Please select a gender"}
+  validates :size, :presence => {:message => "Please select a size"}
+  validates :mixes, :presence => {:message => "Please select the mix"}
+  validates :personalities, :presence => {:message => "Please select at least one personality"}
+  validates :fixed, :presence => {:message => "Please select a response for fix"}
   validate :validate_dob
 
   #paperclip avatar
@@ -72,13 +77,13 @@ class Dog < ActiveRecord::Base
   end
 
 
-  def energy_level
-    self.energy_level_id != nil ? EnergyLevel.find(self.energy_level_id).value : "Not specified"
-  end
+  # def energy_level
+  #   self.energy_level_id != nil ? EnergyLevel.find(self.energy_level_id).value : "Not specified"
+  # end
 
-  def size
-    self.size_id != nil ? Size.find(self.size_id).value : "Not specified"
-  end
+  # def size
+  #   self.size_id != nil ? Size.find(self.size_id).value : "Not specified"
+  # end
 
   def owner
     User.find(self.user_id)
@@ -133,6 +138,10 @@ class Dog < ActiveRecord::Base
   def self.filter_mix(mix)
     joins(:mixes).where("mixes.value" => mix) unless mix == "All Mixes"
   end
+  
+  def self.filter_bark(barks)
+    joins(:barks).where("barks.value" => bark) unless barks.empty?
+  end
 
   def self.filter_energy_level(energy_levels)
     joins(:energy_level).where("energy_levels.value" => energy_levels) unless energy_levels.empty?
@@ -172,6 +181,7 @@ class Dog < ActiveRecord::Base
               .has_size(criteria[:size])
               .has_likes(criteria[:like])
               .has_personalities(criteria[:personality])
+              .has_bark(criteria[:bark])
               .has_gender(criteria[:gender])
               .has_energy_level(criteria[:energy_level])
               .in_age_range(convert_age_ranges_to_dob_query(criteria[:age]))

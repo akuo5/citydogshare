@@ -100,7 +100,6 @@ class DogsController < ApplicationController
         params[:dog][key] = purge_param(params[:dog][key])
       end
     end
-    
     params.require(:dog).permit(:name, :image, :dob, :gender, :description, 
     :motto, :fixed, :health, :comments, :contact, :availability, {:mixes => []}, 
     {:likes =>[]}, :energy_level, :size, :photo, :latitude, :longitude, :video, 
