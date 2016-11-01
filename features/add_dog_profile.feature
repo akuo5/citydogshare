@@ -32,6 +32,7 @@ Scenario: page shows error when some required fields are not filled
   And I press "Save Changes"
   And I should see "Mix can't be blank"
 
+
 Scenario: create dog profile
   When I am on the users page for "Batman"
   And I follow the first "My Dogs"

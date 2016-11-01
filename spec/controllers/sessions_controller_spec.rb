@@ -82,6 +82,7 @@ describe SessionsController, :type => :controller do
       get(:handle_failure)
       assert_equal "Something went wrong with the authentication. Please try again.", flash[:notice]
       expect(response).to redirect_to root_path()
+<<<<<<< HEAD
     end
   end
   
@@ -102,6 +103,8 @@ describe SessionsController, :type => :controller do
       get(:handle_failure)
       assert_equal "Something went wrong with the authentication. Please try again.", flash[:notice]
       expect(response).to redirect_to root_path()
+=======
+>>>>>>> 41aeb24b731ac53c6f224858db16f4cc00b35587
     end
   end
   
@@ -148,6 +151,7 @@ describe SessionsController, :type => :controller do
 # #   config.include FacebookMacros
 # # end
 
+<<<<<<< HEAD
 
 # #:first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description, :address, :zipcode, :city, :country
     
@@ -182,6 +186,8 @@ describe SessionsController, :type => :controller do
 # #   config.include FacebookMacros
 # # end
 
+=======
+>>>>>>> 41aeb24b731ac53c6f224858db16f4cc00b35587
 
 # #:first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description, :address, :zipcode, :city, :country
     
@@ -206,7 +212,10 @@ describe SessionsController, :type => :controller do
 #       expect(response).to redirect_to create_session_path(:user => "1")
 #   end
 # end
+<<<<<<< HEAD
 end
+=======
+>>>>>>> 41aeb24b731ac53c6f224858db16f4cc00b35587
     
 end
     
