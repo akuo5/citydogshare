@@ -19,17 +19,6 @@ Scenario: log in when account does not exist
   And I should see "User does not exist"
 
 
-<<<<<<< HEAD
-# Scenario: Log out when logged in to the site
-#   Given the following users exist:
-#   | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability |
-#   | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   | 
-#   And I am logged in
-#   And I am on the users page for "Batman"
-#   When I follow "Sign Out"
-#   Then I should be on the home page
-#   And I should see "Login with Facebook"
-=======
 Scenario: Log out when logged in to the site
   Given PENDING
   Given the following users exist:
@@ -40,7 +29,6 @@ Scenario: Log out when logged in to the site
   When I follow "Sign Out"
   Then I should be on the home page
   And I should see "Login with Facebook"
->>>>>>> c503f040fb5228fc5809da69e01cbe3aa324ba90
 
 Scenario: Log in authentication fails
   Given I am on the homepage
@@ -48,16 +36,6 @@ Scenario: Log in authentication fails
   And my authentication fails
   Then I should be on the home page
   And I should see "Something went wrong with the authentication. Please try again."
-<<<<<<< HEAD
-  
-  
-  
-  
-  # 10/18/2016 Tests
-  
-  
-  Scenario: Log in to Facebook using Facebook auth
-=======
 
 # 10/18/2016 Tests
 
@@ -71,14 +49,10 @@ And I should see "Something went wrong with the authentication. Please try again
 
 
 Scenario: Log in authentication fails
->>>>>>> c503f040fb5228fc5809da69e01cbe3aa324ba90
+
   Given I am on the homepage
   And I follow "Login with Facebook"
   And my authentication fails
   Then I should be on the home page
   And I should see "Something went wrong with the authentication. Please try again."
-<<<<<<< HEAD
-  
-  
-=======
->>>>>>> c503f040fb5228fc5809da69e01cbe3aa324ba90
+

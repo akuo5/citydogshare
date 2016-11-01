@@ -1,10 +1,10 @@
-# @facebook_test
+@facebook_test
 
-# Feature: User should be able to edit their dog's event
+Feature: User should be able to edit their dog's event
 
-# As a dog parent
-# In order to change the day I want a sitter
-# I want to edit my dog's event
+As a dog parent
+In order to change the day I want a sitter
+I want to edit my dog's event
 
 Background: user has been added to the database and logged in
   Given the following users exist:
@@ -46,7 +46,7 @@ Scenario: User should not be able to save an incomplete event
 
 Scenario: I should not be able to edit another users event
   When I do not care about dog location
-  And I follow the first "Browse Dogs"
+  And I follow  "Browse Dogs"
   And I should see "Spock"
   Then I should not see "Edit"
 

@@ -1,22 +1,22 @@
-# @facebook_test
-# Feature: Users should be able to edit their dog's profile
+@facebook_test
+Feature: Users should be able to edit their dog's profile
 
-# As a user
-# In order to update my dog's information
-# I want to edit my dog's profile
+As a user
+In order to update my dog's information
+I want to edit my dog's profile
 
-# Background: User and dog is in database
-#   Given the following users exist:
-#     | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   | address       | zipcode | city     | country | id |
-#     | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     | 387 Soda Hall | 94720   | Berkeley | US      | 1  |
-#     | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student2@berkeley.edu           | I love dogs  | not mornings   | 387 Cory Hall | 94720   | Berkeley | US      | 2  |
+Background: User and dog is in database
+  Given the following users exist:
+    | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   | address       | zipcode | city     | country | id |
+    | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     | 387 Soda Hall | 94720   | Berkeley | US      | 1  |
+    | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student2@berkeley.edu           | I love dogs  | not mornings   | 387 Cory Hall | 94720   | Berkeley | US      | 2  |
   
-#   And the following dogs exist:
-#     | name     | mix              | age | size            | gender   | likes      | energy  | personality | user_id | latitude   | longitude    |
-#     | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 |
-#     | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       | 37.8611110 | -122.3079169 |
-#     | Bubba    | Aidi             | 3   | medium (16-40)  | Female   | dogs (all) | some    | lover       | 2       | 37.8611110 | -122.3079169 |
-#   And I am logged in
+  And the following dogs exist:
+    | name     | mix              | age | size            | gender   | likes      | energy  | personality | user_id | latitude   | longitude    |
+    | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       | 37.8611110 | -122.3079169 |
+    | Bubba    | Aidi             | 3   | medium (16-40)  | Female   | dogs (all) | some    | lover       | 2       | 37.8611110 | -122.3079169 |
+  And I am logged in
 
 Scenario: User edits his dog's information
   Given PENDING
@@ -48,9 +48,9 @@ Scenario: User edits his dog's information
   And I should see "None"
   And I should see "Never"
 
-# Scenario: User should not be able to edit another user's dog
-#   Given I do not care about dog location
-#   And I am on the search dogs page
-#   And I should see "Bubba"
-#   And I follow "Bubba"
-#   Then I should not see "Edit"
+Scenario: User should not be able to edit another user's dog
+  Given I do not care about dog location
+  And I am on the search dogs page
+  And I should see "Bubba"
+  And I follow "Bubba"
+  Then I should not see "Edit"
