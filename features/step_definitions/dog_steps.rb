@@ -41,6 +41,9 @@ When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field, match: :first)
 end
 
+When(/^I select the first "([^"]*)"$/) do |field|
+  select(field, match: :first)
+end
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
   check(field, match: :first)

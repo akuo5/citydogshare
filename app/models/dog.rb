@@ -34,7 +34,7 @@ class Dog < ActiveRecord::Base
   validates :size, :presence => {:message => "Please select a size"}
   validates :mixes, :presence => {:message => "Please select the mix"}
   validates :personalities, :presence => {:message => "Please select at least one personality"}
-  validates :fixed, :presence => {:message => "Please select a response for fix"}
+  # validates_inclusion_of :fixed, in: [true, false], :message => "Please select a response for fix"
   validate :validate_dob
 
   #paperclip avatar
