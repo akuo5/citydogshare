@@ -46,7 +46,7 @@ Scenario: create dog profile
   And I select "good" from "dog_energy_level"
   And I select "cats"
   And I fill in "dog_health" with "none"
-  And I select the first "Yes"
+  And I select "Yes" for "fixed"
   And I attach the file "spec/factories/images/dog.jpg" to "dog_photo"
   And I fill in "dog_availability" with "Mondays and Weekends!"
   And I push "Save Changes"
