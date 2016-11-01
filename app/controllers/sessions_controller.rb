@@ -6,13 +6,14 @@ class SessionsController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  #put old code back 
   def destroy
     session[:user_id] = nil
     redirect_to root_path()
   end
   
   
-  def delete
+  def signout
     session[:user_id] = nil
     redirect_to root_path()
   end 
@@ -24,7 +25,6 @@ class SessionsController < ApplicationController
 
   def login
     if params[:user]
-      puts "YASSSSSSSSDFSDFSDFSDFSDFDFSDF"
       @user = User.find(params[:user])
       @user.update_credentials(params[:credentials])
       redirect_to create_session_path(:user => @user)
