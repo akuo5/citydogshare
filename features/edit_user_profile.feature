@@ -65,7 +65,7 @@ Scenario: No changes made when changes canceled
   And I fill in "user_phone_number" with "(510)123-1234"
   And I fill in "user_description" with "I think I should make City Bat Share."
   And I fill in "user_availability" with "Never"
-  And I press "Cancel Changes"
+  And I follow "Cancel"
   Then I should be on the users page for "Batman"
   And I should see "387 Soda Hall, Berkeley, 94720, US"
   And I should see "looking"
