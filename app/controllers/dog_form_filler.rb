@@ -24,7 +24,6 @@ class DogViewHelper
     @values[:mix] = selected[:mix] if selected[:mix]
     @values[:zipcode] = update_zipcode(selected, ip_zipcode, current_user)
     @values[:radius] = selected[:radius].nil? ? DEFAULT_RADIUS : selected[:radius].to_i
-
   end
 
   def get_checkbox_selections(selected, criteria)
@@ -45,7 +44,6 @@ class DogViewHelper
     # Set form fields with new dog's information
     @values[:personality] = dog_attributes['personalities'] ? get_attribute_array(dog_attributes, 'personalities')  : []
     @values[:bark] = dog_attributes['barks'] ? get_attribute_array(dog_attributes, 'barks')  : []
-    
     @values[:like] = dog_attributes['likes'] ? get_attribute_array(dog_attributes, 'likes') : []
     @values[:size] = dog_attributes['size']
     @values[:energy_level] = dog_attributes['energy_level']

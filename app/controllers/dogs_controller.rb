@@ -52,7 +52,7 @@ class DogsController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures

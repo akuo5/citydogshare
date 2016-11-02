@@ -52,9 +52,9 @@
       </div>
       <div id="fixed" class="input-field col s12 m12 l6 right-col">
         <% if @dog.fixed %>
-          <%= select :dog, :fixed, [ @dog.fixed.to_s, "Yes", "No"], {:selected => "Yes"}, :class => "validate white" %>
+          <%= select :dog, :fixed, { @dog.fixed.to_s => nil, "Yes"=>true, "No"=>false}, {:selected => "Yes"}, :class => "validate white" %>
         <% else %>
-          <%= select :dog, :fixed, [ @dog.fixed.to_s, "Yes", "No"], {:selected => "No"}, :class => "validate white" %>
+          <%= select :dog, :fixed, { @dog.fixed.to_s => nil, "Yes"=>true, "No"=>false}, {:selected => "No"}, :class => "validate white" %>
         <% end %>
         <label for="fixed">Is your dog spayed / neutered?</label>
       </div>
