@@ -44,7 +44,7 @@
           <% if current_user.status != nil %>
             <%= select(:user, :status, ["Looking", "Sharing"], :selected => current_user.status) %>
           <% else %>
-            <%= select(:user, :status, ["Looking", "Sharing"])%>
+            <%= select(:user, :status, ["Looking", "Sharing"]) %>
           <%end%>
         </div>
       </div>

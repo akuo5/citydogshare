@@ -45,6 +45,10 @@ $secondary-color: color("light-blue", "darken-3") !default;
   color: white;
 }
 
+.input-field label {
+  top: -14px;
+}
+
 /* BEGIN NAVIGATION BAR */
 
 .logo-img {
