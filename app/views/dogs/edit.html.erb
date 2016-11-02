@@ -1,13 +1,4 @@
 <% content_for :page_title, "Edit Dog" %>
 
-<% if flash[:notice] %> 
-  <div class="ui warning message"><i class="warning icon"></i>
-    <% flash[:notice].each do |msg| %>
-      <%= msg[1][0] %>
-      <br>
-    <% end %>
-  </div>
-<% end %>
-
 <%= render "edit_dog" %>
 

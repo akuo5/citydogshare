@@ -123,19 +123,35 @@
 
   </div>
   
-  <% if flash[:notice] %>
+  <% notice = flash[:notice] %>
+  <% if notice %>
+    <% if notice.class == Hash %>
+      <div class="application-notice z-depth-3">
+        <div class="ui warning message application-notice-content"><i class="warning icon"></i>
+          <% notice.keys.each do |key| %>
+            <% if notice[key] != [] %>
+              - <%= notice[key].class == Array ? notice[key][0] : notice[key] %><br>
+            <% end %>
+          <% end %>
+        </div>
+        <i class="material-icons application-notice-close tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+      </div>
+    <% elsif notice.class == Array %>
+      <div class="application-notice z-depth-3">
+        <div class="ui warning message application-notice-content"><i class="warning icon"></i>
+          <% notice.each do |value| %>
+            - <%= value %><\br>
+          <% end %>
+        </div>
+        <i class="material-icons application-notice-close tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+      </div>
+    <% else %>
     <div class="application-notice z-depth-3">
-      <div class="ui warning message application-notice-content"><i class="warning icon"></i><%= flash[:notice] %></div>
+      <div class="ui warning message application-notice-content"><i class="warning icon"></i><%= notice %></div>
       <i class="material-icons application-notice-close tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
     </div>
+    <% end %>
   <% end %>
-  <% if flash[:error] %>
-    <div class="application-notice error z-depth-3">
-      <div class="ui warning message application-notice-content"><i class="warning icon"></i><%= flash[:error] %></div>
-      <i class="material-icons application-notice-close tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
-    </div>
-  <% end %>
-  
 
 </body>
 </html>
