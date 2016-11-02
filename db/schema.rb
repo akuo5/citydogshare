@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425100332) do
+ActiveRecord::Schema.define(version: 20161031085453) do
+
+  create_table "barks", force: :cascade do |t|
+    t.string "value"
+  end
+
+  create_table "dog_bark_linkers", force: :cascade do |t|
+    t.integer "dog_id"
+    t.integer "bark_id"
+  end
 
   create_table "dog_like_linkers", force: :cascade do |t|
     t.integer "dog_id"
@@ -49,6 +58,8 @@ ActiveRecord::Schema.define(version: 20150425100332) do
     t.float    "longitude"
     t.string   "token"
     t.string   "video"
+    t.boolean  "chipped"
+    t.boolean  "shots_to_date"
   end
 
   create_table "energy_levels", force: :cascade do |t|

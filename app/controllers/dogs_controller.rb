@@ -8,7 +8,6 @@ class DogsController < ApplicationController
     ip_zipcode = get_ip_address_zipcode
     @form_filler = DogViewHelper.new(current_user, ip_zipcode, true)
     @form_filler.update_values(params, ip_zipcode, current_user)
-
     @dogs = Dog.filter_by @form_filler.values
     @no_dogs = @dogs.empty?
 
@@ -53,7 +52,7 @@ class DogsController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures
@@ -93,21 +92,18 @@ class DogsController < ApplicationController
     wf
   end
 
-  #TODO(angelakuo): Write more tests for this and fix rspec
   def dog_params
     params.require(:dog).keys.each do |key|
       if params[:dog][key].kind_of?(Array)
         params[:dog][key] = purge_param(params[:dog][key])
       end
     end
-    
     params.require(:dog).permit(:name, :image, :dob, :gender, :description, 
     :motto, :fixed, :health, :comments, :contact, :availability, {:mixes => []}, 
     {:likes =>[]}, :energy_level, :size, :photo, :latitude, :longitude, :video, 
-    :dob, {:personalities =>[]})
+    :dob, {:personalities =>[]}, :chipped, :shots_to_date, {:barks => []})
   end
   
-  #TODO(angelakuo): Write tests for this
   def purge_param(param)
     param.each do |val|
       unless Mix.all_values.include?(val) or Personality.all_values.include?(val) or Like.all_values.include?(val) then

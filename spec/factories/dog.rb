@@ -8,6 +8,7 @@ FactoryGirl.define do
     description ""
     motto "Live long and play fetch."
     fixed false
+    chipped false
     health ""
     availability ""
     size { Size.find(1) }

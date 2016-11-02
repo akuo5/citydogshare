@@ -21,7 +21,6 @@ $secondary-color: color("light-blue", "darken-3") !default;
   background-color: red;
   z-index: 999;
   border-radius: 3px;
-  background-color: #ffd400;
   color: white;
 }
 .application-notice-content {
@@ -43,6 +42,17 @@ $secondary-color: color("light-blue", "darken-3") !default;
   background-color: #ce3c37;
   border: none;
   color: white;
+}
+
+.fix-textarea-alignment {
+  margin-top: 5px !important
+}
+
+.input-field label {
+  top: -14px;
+}
+.invalid {
+  color: red !important;
 }
 
 /* BEGIN NAVIGATION BAR */

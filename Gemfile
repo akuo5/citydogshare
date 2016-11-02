@@ -49,10 +49,10 @@ group :assets do
   gem 'sass-rails'
   gem 'sass'
   gem 'coffee-rails'
-  gem 'materialize-sass'
   # gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
   gem 'fullcalendar-rails'
   gem 'momentjs-rails'
+  gem 'materialize-sass'
 
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
