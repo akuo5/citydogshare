@@ -16,11 +16,11 @@ describe Dog do
   end
   
   it 'should correctly show energy level' do
-    assert_equal @dog.energy_level, "high"
+    assert_equal @dog.energy_level, EnergyLevel.find(1)
   end
   
   it 'should correctly show size' do
-    assert_equal @dog.size, "small (0-15)"
+    assert_equal @dog.size, Size.find(1)
   end
   
   it 'should correctly show mixes' do

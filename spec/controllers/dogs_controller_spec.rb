@@ -83,10 +83,7 @@ describe DogsController, :type => :controller do
       expect(assigns(:dogs)).to match_array(dogs)
     end
    
-<<<<<<< 656a154d292adc2c156ece8e2703f3b8b3ab7885
 
-=======
->>>>>>> iter 1 done by angela
     it 'should filter by energy level' do
       dog1 = FactoryGirl.create(:dog, :energy_level_id => 2)
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy")
@@ -214,15 +211,18 @@ describe DogsController, :type => :controller do
       @current_user = User.create()
       @params = {  "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
-                  "availability"=>"", "mixes" =>["Australian Shepherd"], "personalities"=>{"curious"=>"1"},
+                  "availability"=>"", "mixes" =>["Australian Shepherd"], "personalities"=>["curious"],
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}}, "update_dog_button"=>"Save Changes"}
     end
+    
+    # EDIT PAGE NEEDS WORK
+
     it 'redirect to dog profile if noerrors' do 
-      # byebug
       get :update, @params
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
       response.should redirect_to dog_path("1")
     end
+    
     it 'should redirect to edit if errors' do
       @params["dog"]["name"] = ""
       get :update, @params
@@ -237,9 +237,11 @@ describe DogsController, :type => :controller do
       @current_user = User.create()
       @params = {  "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
-                  "availability"=>"", "mixes" =>["Australian Shepherd", "Tabby"], "personalities"=>{"curious"=>"1", "yellow"=>"1"},
+                  "availability"=>"", "mixes" =>["Australian Shepherd", "Tabby"], "personalities"=> ["curious", "yellow"],
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1", "you!"=>"1"}}, "update_dog_button"=>"Save Changes"}
     end
+    # EDIT PAGE NEEDS WORK
+    
     it 'should not update a dog to include params that do not exist' do 
       get :update, @params
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
