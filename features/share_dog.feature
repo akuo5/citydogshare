@@ -28,6 +28,7 @@ Scenario: I create a dog event
   And I should see "Princess"
   And I should see "Location: My House"
   And I should see "Time: Morning"
+<<<<<<< HEAD
 <<<<<<< 336668bfb7cfb018aa5614fcc296d18a6a598342
 
 Scenario: Not selecting a dog should throw an error
@@ -58,6 +59,20 @@ Scenario: Not selecting a date should throw an error
   Then I should see "Please enter a valid start date"
   And I should see "Please enter a valid end date"
 
+=======
+
+Scenario: Not selecting a dog should throw an error
+  Given I press "Schedule"
+  Then I should see "Please select a dog to share"
+
+Scenario: Not selecting a date should throw an error
+  Given I check "dogs_Princess"
+  And I check "times_Morning"
+  And I press "Schedule"
+  Then I should see "Please enter a valid start date"
+  And I should see "Please enter a valid end date"
+
+>>>>>>> 89d50ea64318b4b0cb865cdee1b38ef16d87016a
 Scenario: Not selecting a time of day should throw an error
   Given I check "dogs_Princess"
   Given I press Schedule

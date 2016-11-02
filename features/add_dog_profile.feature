@@ -24,13 +24,23 @@ Scenario: Page redirects to edit user profile if user does not have zipcode
 
 Scenario: page shows error when all required fields are not filled
   When I press "Save Changes"
+<<<<<<< HEAD
   Then I should see "Please enter a name"
   And I should see "Please select the mix"
+=======
+  Then I should see "Name can't be blank"
+  And I should see "Mix can't be blank"
+>>>>>>> 89d50ea64318b4b0cb865cdee1b38ef16d87016a
 
 Scenario: page shows error when some required fields are not filled
   When I fill in "dog_name" with "Spock"
   And I press "Save Changes"
+<<<<<<< HEAD
   And I should see "Please select the mix"
+=======
+  And I should see "Mix can't be blank"
+
+>>>>>>> 89d50ea64318b4b0cb865cdee1b38ef16d87016a
 
 Scenario: create dog profile
   When I am on the users page for "Batman"
