@@ -1,5 +1,0 @@
-AWS_REGION: "us-west-1"
-AWS_HOST_NAME: "s3-us-west-1.amazonaws.com"
-AWS_BUCKET_NAME: "citydogshare-jessica"
-AWS_ACCESS_KEY_ID: "AKIAIHNNG2E3OZJH7RPQ"
-AWS_SECRET_ACCESS_KEY: "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"

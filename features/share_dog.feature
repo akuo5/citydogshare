@@ -28,7 +28,6 @@ Scenario: I create a dog event
   And I should see "Princess"
   And I should see "Location: My House"
   And I should see "Time: Morning"
-<<<<<<< HEAD
 
 Scenario: Not selecting a dog should throw an error
   Given I press "Schedule"
