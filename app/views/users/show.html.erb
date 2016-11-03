@@ -11,6 +11,8 @@
     </div>
 
 <div class="ui bottom attached segment">
+  
+  <%= button_to "Delete User", user_path(@current_user.id), :id => "delete_user_button", :class => "ui button red transparent input", :method => :delete %>
 
 
 
