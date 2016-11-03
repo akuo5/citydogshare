@@ -32,9 +32,9 @@ class UsersController < ApplicationController
     end
   end
 
+  # This destroys the user and signs them out, taking them to the home page
   def destroy
-    # @current_user.destroy
-    # Don't like this... I wanted to redirect to sessions#destroy, but redirect_to doesn't do DELETE methods
+    @current_user.destroy
     session[:user_id] = nil
     redirect_to root_path()
   end

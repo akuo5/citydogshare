@@ -1,11 +1,36 @@
 <% content_for :page_title, "My Profile" %>
 
+<<<<<<< ee654a27de2ea3cac425bfbe8e37e21bd34059c4
 <div class="row container main-content">  
   <div id="profile-page-header" class="card col s12">
     <br />
     <div id="name" class="center-align">
       <div><%= image_tag @user.image, :class => "circle", :id => "ui-segment" %></div> 
       <div id = user_profile_name ><%= @user.full_name %></div>
+=======
+
+<div class="large-12 columns">
+  <br />
+  <div class="large-7 columns" id ="user_info">
+    <div class="ui blue inverted top attached segment" style="overflow:hidden">
+      <div id="name">
+        <h1><%= image_tag @user.image, :class => "ui middle aligned small image", :id => "ui-segment" %>&nbsp; <%= @user.full_name %></h1>
+      </div>
+    </div>
+
+<div class="ui bottom attached segment">
+  
+  <%= button_to "Delete User", user_path(@current_user.id), :id => "delete_user_button", :class => "ui button red transparent input", :method => :delete %>
+
+
+
+  <% if not @user.description.nil? and not @user.description == ""  %>
+  <div id="user_description">
+    <div id="description">
+      <p>
+        <em><%= @user.description %></em>
+      </p>
+>>>>>>> Added changes to the facebook login process
     </div>
     </br>
   </div>
