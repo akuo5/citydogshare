@@ -40,4 +40,32 @@
 	}
 }
 
+#dog_profile_parent_pic {
+	height: 90px;
+	width: 90px;
+	z-index: 10;
+	position: absolute;
+	bottom: 0px;
+	left: 65%;
+}
+
+#dog_profile_pic {
+	width: 200px;
+	height: 200px;
+	margin-top: 25px;
+}
+
+#profile_pics {
+	width: 200px;
+	position: relative;
+	margin: 0 auto;
+}
+#dog_profile_name {
+	font-size: 50px;
+	line-height: 60px;
+}
+
+#favorite_star {
+	color: gold;
+}
 /* END NEW.HTML */
