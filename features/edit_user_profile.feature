@@ -12,7 +12,7 @@ Background: User and other users are in database
 
   And I am logged in
   And I am on the users page for "Batman"
-  And I press "Edit Profile"
+  And I follow "Edit Profile"
 
 Scenario: Page shows flash notice when user tries to edit another profile
   When I am on the edit page for non-existent user

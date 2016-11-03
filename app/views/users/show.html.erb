@@ -1,142 +1,319 @@
 <% content_for :page_title, "My Profile" %>
 
-
-<div class="large-12 columns">
-  <br />
-  <div class="large-7 columns" id ="user_info">
-    <div class="ui blue inverted top attached segment" style="overflow:hidden">
-      <div id="name">
-        <h1><%= image_tag @user.image, :class => "ui middle aligned small image", :id => "ui-segment" %>&nbsp; <%= @user.full_name %></h1>
+<div class="row container main-content">  
+  <div id="profile-page-header" class="card col s12">
+    <br />
+    <div id="name" class="center-align">
+      <div><%= image_tag @user.image, :class => "circle", :id => "ui-segment" %></div> 
+      <div id = user_profile_name ><%= @user.full_name %></div>
+    </div>
+    </br>
+  </div>
+  
+  <div id="profile-page-sidebar" class="col s12 m4 row">
+    <!-- Profile About  -->
+    <div class="card light-blue center-align">
+      <div class="card-content white-text">
+        <span class="card-title">About Me </span>
+        <% if @own_profile %>
+          <%= link_to edit_user_path(@user.id), id:"edit_dog_pencil", title:"Edit Profile" do %>
+            <i class="fa fa-pencil" aria-hidden="true" id="edit_dog_pencil"></i>
+          <% end %>
+        <% end %>
+        <% if not @user.description.nil? and not @user.description == ""  %>
+          <div id="user_description">
+            <div id="description">
+              <p>
+                <em><%= @user.description %></em>
+              </p>
+            </div>
+          </div>
+        <%end%>
+      </div>                  
+    </div>
+    
+    <ul id="profile-page-about-details" class="collection z-depth-1">
+      <li class="collection-item">
+        <div class="row">
+          <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-mars-stroke" aria-hidden="true"></i> Gender</div>
+          <div class="col s7 grey-text text-darken-4 right-align"><%= @user.gender %></div>
+        </div>
+      </li>
+      <% if not @user.zipcode.nil? and not @user.zipcode == ""  %>
+        <li class="collection-item">
+          <div class="row">
+            <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-location-arrow" aria-hidden="true"></i> Zipcode</div>
+            <div class="col s7 grey-text text-darken-4 right-align"><%= @user.zipcode %></div>
+          </div>
+        </li>
+      <%end%>
+      <li class="collection-item">
+        <div class="row">
+          <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-commenting-o" aria-hidden="true"></i> Status</div>
+          <div class="col s7 grey-text text-darken-4 right-align"><%= @user.status %></div>
+        </div>
+      </li>
+      <% if not @user.availability.nil? and not @user.availability == ""  %>
+        <p id="availability">
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Available</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= @user.availability %></div>
+            </div>
+          </li>
+        </p>
+      <% end %>
+      <% if current_user %>
+        <% if @user.address != nil && @user.address != ""%>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
+            </div>
+          </li>
+        <%end%>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= @user.email %></div>
+            </div>
+          </li>
+        <!-- <div id="email"><strong>Email:</strong>&nbsp;&nbsp;<%= @user.email %></div> -->
+    
+        <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
+          <div id="phone_number">
+            <li class="collection-item">
+              <div class="row">
+                <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-phone" aria-hidden="true"></i> Phone</div>
+                <div class="col s7 grey-text text-darken-4 right-align"><%= @user.phone_number %></div>
+              </div>
+            </li>
+          </div>
+        <!-- <div id="phone_number"><strong>Phone Number:</strong>&nbsp;&nbsp;<%= @user.phone_number %></div> -->
+        <%end%>
+      <%else%>
+        <% if @user.address != nil && @user.address != ""%>
+        <div id="location">
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-map-marker"></i> Location</div>
+              <div class="col s7 grey-text text-darken-4 right-align"> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
+            </div>
+          </li>
+        </div>
+        <%end%>
+        <p id="email">
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="mail icon"></i> Email</div>
+              <div class="col s7 grey-text text-darken-4 right-align"> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
+            </div>
+          </li>
+        </p>
+        <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
+          <p id="phone_number">
+            <li class="collection-item">
+              <div class="row">
+                <div class="col s5 grey-text darken-1 left-align"><i class="call icon"></i> Phone</div>
+                <div class="col s7 grey-text text-darken-4 right-align"> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
+              </div>
+            </li>
+          </p>
+        <%end%>
+      <%end%>
+    </ul>
+        
+  <!--  <div class="card">-->
+  <!--    <div class="container">-->
+  <!--      </br>-->
+        <!--Gender-->
+  <!--      <i class="fa fa-mars-stroke" aria-hidden="true"></i><span id="gender"><strong> Gender:</strong>&nbsp;&nbsp;<%= @user.gender %></span>-->
+    
+        <!--Location-->
+        <!--<% if current_user %>-->
+        <!--  <% if @user.address != nil && @user.address != ""%>-->
+        <!--  <div id="location"><strong>Location:</strong>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>-->
+        <!--  <%end%>-->
+        <!--<%else%>-->
+        <!--  <% if @user.address != nil && @user.address != ""%>-->
+        <!--  <div id="location"><strong>Location:</strong>&nbsp;&nbsp;You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>-->
+        <!--  <%end%>-->
+        <!--<%end%>-->
+  
+        <!--Zipcode-->
+  <!--      <% if not @user.zipcode.nil? and not @user.zipcode == ""  %>-->
+  <!--      <div id="zipcode"><strong>Zipcode:</strong>&nbsp;&nbsp;<%= @user.zipcode %></div>-->
+  <!--      <%end%>-->
+  
+        <!--Status-->
+  <!--      <div id="status"><strong>Status:</strong>&nbsp;&nbsp;<%= @user.status %></div>-->
+  
+  <!--      </br>-->
+        <!--If logged in...-->
+  <!--      <% if current_user %>-->
+  <!--        <div id="email">-->
+  <!--          <i class="fa fa-envelope-o" aria-hidden="true"></i> <%= @user.email %>-->
+  <!--        </div>-->
+          <!-- <div id="email"><strong>Email:</strong>&nbsp;&nbsp;<%= @user.email %></div> -->
+      
+  <!--        <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>-->
+  <!--          <div id="phone_number">-->
+  <!--            <i class="fa fa-phone" aria-hidden="true"></i> <%= @user.phone_number %>-->
+  <!--          </div>-->
+          <!-- <div id="phone_number"><strong>Phone Number:</strong>&nbsp;&nbsp;<%= @user.phone_number %></div> -->
+  <!--        <%end%>-->
+      
+        <!--If not logged in...-->
+  <!--      <%else%>-->
+      
+  <!--        <p id="email"><i class="mail icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</p>-->
+        
+  <!--        <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>-->
+  <!--        <p id="phone_number"><i class="call icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</p>-->
+  <!--        <%end%>-->
+      
+  <!--      <%end%>-->
+  <!--      </br>-->
+  <!--    </div>-->
+      
+    <!--<% if not @user.availability.nil? and not @user.availability == ""  %>-->
+    <!--  <p id="availability">-->
+    <!--    <i class="wait icon"></i> <%= @user.availability %>-->
+    <!--  </p>-->
+    <!--<%end%>-->
+      
+  <!--  </div>-->
+  </div>
+  <div class="col s12 m8 l8">
+    
+    <div class="card teal center-align">
+      <div class="card-content white-text">
+        <span class="card-title">
+           My Dogs
+        </span>
+        <% if @own_profile %>
+          <%= link_to new_dog_path(), id:"add_dog_plus", title:"Add Dog" do %>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          <% end %>
+        <% end %>
       </div>
     </div>
-
-<div class="ui bottom attached segment">
-
-
-
-  <% if not @user.description.nil? and not @user.description == ""  %>
-  <div id="user_description">
-    <div id="description">
-      <p>
-        <em><%= @user.description %></em>
-      </p>
-    </div>
-  </div>
-  <%end%>
-
-
-<br />
-
-  <div id="gender"><strong>Gender:</strong>&nbsp;&nbsp;<%= @user.gender %></div>
-
-<% if current_user %>
-  <% if @user.address != nil && @user.address != ""%>
-  <div id="location"><strong>Location:</strong>&nbsp;&nbsp;<%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
-  <%end%>
-<%else%>
-  <% if @user.address != nil && @user.address != ""%>
-  <div id="location"><strong>Location:</strong>&nbsp;&nbsp;You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</div>
-  <%end%>
-<%end%>
-
-  <% if not @user.zipcode.nil? and not @user.zipcode == ""  %>
-  <div id="zipcode"><strong>Zipcode:</strong>&nbsp;&nbsp;<%= @user.zipcode %></div>
-  <%end%>
-
-  <div id="status"><strong>Status:</strong>&nbsp;&nbsp;<%= @user.status %></div>
-
-<br />
-
-  <% if current_user %>
-    <p id="email">
-      <i class="mail icon"></i> <%= @user.email %>
-    </p>
-  <!-- <div id="email"><strong>Email:</strong>&nbsp;&nbsp;<%= @user.email %></div> -->
-
-  <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
-    <p id="phone_number">
-      <i class="call icon"></i> <%= @user.phone_number %>
-    </p>
-  <!-- <div id="phone_number"><strong>Phone Number:</strong>&nbsp;&nbsp;<%= @user.phone_number %></div> -->
-  <%end%>
-
-  <%else%>
-
-  <p id="email"><i class="mail icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</p>
-
-  <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
-  <p id="phone_number"><i class="call icon"></i> You must <%= link_to "log in", "/auth/facebook/?type=login", id: 'log_in' %> to view!</p>
-  <%end%>
-
-  <%end%>
-
-  <% if not @user.availability.nil? and not @user.availability == ""  %>
-    <p id="availability">
-      <i class="wait icon"></i> <%= @user.availability %>
-    </p>
-  <%end%>
-
-</div></div>
-
-<div class="large-5 columns">    
-   <div class="ui blue inverted top attached segment" style="overflow:hidden">
-    <strong><%= @user.first_name %>'s Dogs:
-   </strong>
-  </div>
-
-  <div class="ui bottom attached segment" id="dog-name-link">
-  <!--<% if @no_dogs %>
-    <h1> No Dogs Found </h1>
-  <% end %>-->
-  <% @user.dogs.each do |dog| %>
-  <div class="ui vertical segment">
-
-    <div class="large-4 columns">
-      <span class="image">
-          <%= image_tag "default_dog.jpg" %>
-      </span>
-    </div>
-
-    <div class="large-8 columns">
-      <div class="content">
-        <div class="ui medium header">
-          <%= link_to dog.name, dog_path(dog.id), :method => :get %>
-        </div>
-        <div class="description">
-          <%= dog.motto %>
-        </div>
+    
+    <div class="card">
+      <div class="container">
+        <% if @user.dogs.count == 0 then %>
+          <div class="row center-align valign-wrapper no-dogs-message-container">
+            <div class="col l12 m12 s12 valign no-dogs-message">
+              No dogs yet! <br>
+            </div>
+          </div>
+        <% else %>
+          <div class="row container main-content">
+          <% @user.dogs.each do |dog| %>
+            <div class="col s12 m12s l6">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator card-img" src="<%= dog.image %>">
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
+                </div>
+                <div class="card-action">
+                  <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
+                   <% if @own_profile %>
+                    <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+                  <% end %>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
+                    <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+                    <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
+                  </span>
+                  <ul class="dog-info-list">
+                    <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
+                    <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
+                    <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
+                    <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
+                    <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
+                    <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
+                    <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
+                    <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
+                    <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
+                    <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
+                    <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
+                    <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+          <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
+            <a href="<%= new_dog_path %>" class="btn-floating btn-large waves-effect waves-light green accent-4 hide-on-large-only"><i class="material-icons">add</i></a>
+          </div>
+        <% end %>
       </div>
-
     </div>
-
-    <div>
-                  <br /> <br />
-    </div>
+  </div>
 </div>
-  <% end %>
+
+<!--<div class="large-5 columns">    -->
+<!--   <div class="ui blue inverted top attached segment" style="overflow:hidden">-->
+<!--    <strong><%= @user.first_name %>'s Dogs:-->
+<!--   </strong>-->
+<!--  </div>-->
+
+<!--  <div class="ui bottom attached segment" id="dog-name-link">-->
+<!--  <% if @no_dogs %>-->
+<!--    <h1> No Dogs Found </h1>-->
+<!--  <% end %>-->
+<!--  <% @user.dogs.each do |dog| %>-->
+<!--  <div class="ui vertical segment">-->
+
+<!--    <div class="large-4 columns">-->
+<!--      <span class="image">-->
+<!--          <%= image_tag "default_dog.jpg" %>-->
+<!--      </span>-->
+<!--    </div>-->
+
+<!--    <div class="large-8 columns">-->
+<!--      <div class="content">-->
+<!--        <div class="ui medium header">-->
+<!--          <%= link_to dog.name, dog_path(dog.id), :method => :get %>-->
+<!--        </div>-->
+<!--        <div class="description">-->
+<!--          <%= dog.motto %>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <div>-->
+<!--                  <br /> <br />-->
+<!--    </div>-->
+<!--</div>-->
+<!--  <% end %>-->
 
 
-  </div>
-  <% if @own_profile %>
-        <div class="float right">
-        <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>
+<!--  </div>-->
+<!--  <% if @own_profile %>-->
+<!--        <div class="float right">-->
+<!--        <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>-->
  
 
-  </div>
-  <% end %>
-  <% if @own_profile %>
-        <div class="float right">
+<!--  </div>-->
+<!--  <% end %>-->
+<!--  <% if @own_profile %>-->
+<!--        <div class="float right">-->
         
-        <%= button_to "Edit Profile", edit_user_path(@user.id), :id => "edit_user_button", :class => "ui primary button", :method => :get %>
-      </div>
-      <% end %>
-<br />
+<!--        <%= button_to "Edit Profile", edit_user_path(@user.id), :id => "edit_user_button", :class => "ui primary button", :method => :get %>-->
+<!--      </div>-->
+<!--      <% end %>-->
+<!--<br />-->
 
+<!--</div>-->
+
+<!--</div>-->
+
+<!--</div>-->
 </div>
-
-</div>
-
-</div>
-
-
-

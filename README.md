@@ -12,5 +12,5 @@
 [Meeting Minutes] (http://bit.ly/2efP6Sv) 
 
 [![Build Status](https://travis-ci.org/angelakuo/citydogshare.svg?branch=master)](https://travis-ci.org/angelakuo/citydogshare)
-[![Code Climate](https://codeclimate.com/github/sfstanley/citydogshare/badges/gpa.svg)](https://codeclimate.com/github/sfstanley/citydogshare)
-[![Test Coverage](https://codeclimate.com/github/sfstanley/citydogshare/badges/coverage.svg)](https://codeclimate.com/github/sfstanley/citydogshare)
+[![Code Climate](https://codeclimate.com/github/angelakuo/citydogshare/badges/gpa.svg)](https://codeclimate.com/github/angelakuo/citydogshare)
+[![Test Coverage](https://codeclimate.com/github/angelakuo/citydogshare/badges/coverage.svg)](https://codeclimate.com/github/angelakuo/citydogshare)

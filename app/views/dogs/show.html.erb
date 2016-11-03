@@ -1,151 +1,426 @@
 <% content_for :page_title, @dog.name + " Info" %>
 
 <script src="<%= javascript_path('galleria-1.4.2.js') %>"></script>
+<script type="text/javascript" src="dog_profile.js"></script>
+
 
 <div class="large-12 columns">
   <br />
   <!-- THIS IS DOG INFO -->
-  <div class="large-6 columns" id ="dog_info_stats">
-    <div class="ui blue inverted top attached segment" style="overflow:hidden">
-      <div class="ui blue top right attached label">
+  
+    <div class="center-align" style="overflow:hidden">
+      <!--<div class="ui blue top right attached label">-->
         
+  
+  
+        <!--<% if not current_user.nil? %>-->
+        <!--  <div class="stars">-->
+        <!--  <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>-->
+        <!--  <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>-->
+        <!--  <i class="empty icon white large"><%= @dog.stars.count %></i><i class="fa fa-star" aria-hidden="true"></i>-->
+        <!--  <%end%>-->
+        <!--  <% else %>-->
+        <!--  <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>-->
+        <!--  <i class="icon white large"><%= @dog.stars.count %></i><i class="star"></i>-->
+        <!--  <%end%>-->
+        <!--  <% end %>-->
+        <!--  </div>-->
+        <!--<%end%>-->
 
-        <% if not current_user.nil? %>
-          <div class="stars">
-          <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>
-          <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>
-          <i class="empty icon white large"><%= @dog.stars.count %></i><i class="empty star icon white large"></i>
+
+      <!--</div>-->
+    <!--  <div id="name">-->
+    <!--    <% if @dog.photo.file? %> -->
+    <!--    <div id = "profile_pics">-->
+    <!--      <div> <%= image_tag @dog.photo.url(:small), :class => "circle", id: "dog_profile_pic" %>  </div>-->
+    <!--      <%= image_tag @parent.image, :class => "circle", id: "dog_profile_parent_pic" %>-->
+    <!--    </div>-->
+    <!--    <span id = "profile_title_text"> -->
+    <!--      <div id = "dog_profile_name"><%= @dog.name %></div>-->
+    <!--    </span>-->
+    <!--    <% else %>-->
+    <!--    <h1><%= image_tag "default_dog.jpg", :class => "circle", id: "dog_profile_parent_pic" %> <%= @dog.name %></h1>-->
+    <!--    <% end %>-->
+    <!--  </div>-->
+    <!--</div>-->
+
+  <div class="container row main-content">
+    <!-- profile-page-header -->
+    <div id="profile-page-header" class="card col s12">
+      <div id = "profile_pics">
+        <div> <%= image_tag @dog.photo.url(:small), :class => "circle", id: "dog_profile_pic" %>  </div>
+        <%= image_tag @parent.image, :class => "circle", id: "dog_profile_parent_pic" %>
+      </div>
+      <div class="card-content">
+        <span id = "profile_title_text">
+          <div id = "dog_profile_name">
+            <%= @dog.name %>
+            <% if not current_user.nil? %>
+            <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>
+                <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>
+                <i class="fa fa-star-o" aria-hidden="true" id="dog_profile_star"></i>
+              <%end%>
+              <% else %>
+                <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
+                <i class="fa fa-star" aria-hidden="true" id="dog_profile_star"></i>
+              <%end%>
+            <% end %>
           <%end%>
-          <% else %>
-          <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
-          <i class="icon white large"><%= @dog.stars.count %></i><i class="star icon white large"></i>
-          <%end%>
-          <% end %>
           </div>
-        <%end%>
-
-
+        </span>
       </div>
-      <div id="name">
-        <% if @dog.photo.file? %> 
-        <h1><%= image_tag @dog.photo.url(:small), :class => "ui avatar image" %> <%= @dog.name %></h1>
-        <% else %>
-        <h1><%= image_tag "default_dog.jpg", :class => "ui avatar image" %> <%= @dog.name %></h1>
+      <% if not @current_user.nil? and @current_user.id == @dog.user_id %>
+        <div class ="float right">
+          <%= link_to dog_path(@dog.id), title: "Delete", method: :delete, id: "delete_dog_button" do%>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          <% end %>
+        </div>
+        <div class = "float right">
+            <%= link_to edit_dog_path(@dog.id), id:"edit_pencil" do %>
+              <i class="fa fa-pencil" aria-hidden="true" id="edit_pencil"></i>
+            <% end %>
+        </div>
+      <% end %> 
+      
+      <!--<div class="card-reveal">-->
+      <!--  <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>-->
+      <!--  <p>Here is some more information about this product that is only revealed once clicked on.</p>-->
+      <!--</div>-->
+      
+    </div>
+    
+    <!-- profile-page-content -->
+    <div id="profile-page-content">
+      <!-- profile-page-sidebar-->
+      <div id="profile-page-sidebar" class="col s12 m4 row">
+        <!-- Profile About  -->
+        <div class="card light-blue">
+          <div class="card-content white-text">
+            <span class="card-title">About Me</span>
+            <p><%= @dog.description %></p>
+          </div>                  
+         
+ 
+        </div>
+        
+        <!-- Profile About Details  -->
+        <ul id="profile-page-about-details" class="collection z-depth-1">
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-user" aria-hidden="true"></i> Parent</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= link_to @parent.first_name, user_path(@parent.id) %></div>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-star" aria-hidden="true"></i> Favorited</div>
+              <% if @dog.stars.count == 1 %>
+                <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.stars.count %> time</div>
+              <% else %>
+                <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.stars.count %> times</div>
+              <% end %> 
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-mars-stroke" aria-hidden="true"></i> Gender</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.gender %></div>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-arrows" aria-hidden="true"></i> Size</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.size %></div>
+            </div>
+          </li>
+          <% if @dog.age %>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-birthday-cake" aria-hidden="true"></i> Age</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.age %> years old</div>
+            </div>
+          </li>
+          <% end %> 
+          <% if @dog.energy_level %>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-bolt" aria-hidden="true"></i> Energy</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.energy_level %></div>
+            </div>
+          </li>
+          <% end %>
+          
+          
+          <% if @dog.likes %>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Likes</div>
+              <!--<div class="col s7 grey-text text-darken-4 right-align"><%= @dog.readable_likes.join(', ') %></div>-->
+              <div class="col s7 grey-text text-darken-4 right-align">
+                <% @dog.readable_likes.each do |like| %>
+                  <div><%= like =%> </div>
+                <% end %>
+              </div>
+
+            </div>
+          </li>
+          <% end %>
+          
+          
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-adjust" aria-hidden="true"></i> Mix</div>
+              <div class="col s7 grey-text text-darken-4 right-align">
+                <% @dog.readable_mixes.each do |like| %>
+                  <div><%= like =%> </div>
+                <% end %>
+              </div>
+            </div>
+          </li>
+
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s7 grey-text darken-1 left-align"><i class="fa fa-paw"></i> Personality</div>
+              </div>
+              <div class="col s10 grey-text text-darken-4 center-align"></br><%= @dog.readable_personalities.join(', ') %>
+            </div>
+          </li>
+          
+          <!--<li class="collection-item">-->
+          <!--  <div class="row">-->
+              <!--<div class="col s5 grey-text darken-1 left-align"></i> </div>-->
+          <!--    <div class="col s7 grey-text text-darken-4 right-align">More</div>-->
+          <!--  </div>-->
+          <!--</li>-->
+        </ul>
+      </div>
+    
+      <!-- Profile Status  -->
+      <div class="col s12 m8">
+        <% if not @dog.motto.nil? and not @dog.motto == "" %>
+          <div class="card teal">
+            <div class="card-content white-text">
+              <span class="card-title">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                <%= @dog.motto %>
+              </span>
+            </div>
+          </div>
         <% end %>
+        
+        <!--<div class="card grey lighten-1">-->
+        <!--    <div class="card-content white-text">-->
+        <!--      <span class="card-content">-->
+        <!--        <div class="row">-->
+        <!--          <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-paw"></i> Mix</div>-->
+        <!--          <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.readable_mixes.join(', ') %></div>-->
+        <!--        </div>-->
+        <!--      </span>-->
+        <!--    </div>-->
+        <!--</div>-->
+        
+        <div class="slider">
+          <ul class="slides">
+          <% unless @pictures.empty? %>
+          <% @pictures.each do |pic| %>
+            <li>
+               <%= image_tag pic.image.url %>
+            </li>
+          <% end %>
+          <% end %>
+          </ul>
+        </div>
+        
+        <% if not @dog.video.nil? and not @dog.video == "" %>
+          <div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div>
+        <% end %>
+        
+               
+      </div> 
+        
+       
+      <!--<div class="carousel carousel-slider">-->
+      <!--    <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/800/400/food/1"></a>-->
+      <!--    <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/800/400/food/2"></a>-->
+      <!--    <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/800/400/food/3"></a>-->
+      <!--    <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/800/400/food/4"></a>-->
+      <!--</div>-->
+        <!--<div class="col s6">-->
+        <!--  <div class="card">-->
+        <!--    <div class="card-content black-text">-->
+        <!--      <span class="card-title">Card Title</span>-->
+        <!--      <p>I am a very simple card. I am good at containing small bits of information.-->
+        <!--      I am convenient because I require little markup to use effectively.</p>-->
+        <!--    </div>-->
+        <!--    <div class="card-action">-->
+        <!--      <a href="#">This is a link</a>-->
+        <!--      <a href="#">This is a link</a>-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--</div>-->
       </div>
-    </div>
-    <div class="ui bottom attached segment">
-      <% if not @dog.motto.nil? and not @dog.motto == "" %>
-        <h3 class = "ui ribbon label"> <%= @dog.motto %> </h3>
-        <br /><br />
-      <% end %>
-      <p>
-        <em><%= @dog.description %></em> 
-      </p>
-      <p>
-        <strong>Mix:</strong> <%= @dog.readable_mixes.join(', ') %> <br />
-        <strong>Stats:</strong> <%= @dog.gender %>, <%= @dog.age %> years old, <%= @dog.size %>,
-        <% if @dog.fixed %> fixed<% else %> not fixed<% end %> <br />
-        <strong>Energy Level:</strong> <%= @dog.energy_level %>
-        <% if not @dog.personalities.empty? %><br /><strong>Personality:</strong> <%= @dog.readable_personalities.join(', ') %><% end %>
-      </p>
-      <% if not @dog.likes.empty? %>
-      <p>
-        <i class="thumbs outline up icon"></i> <%= @dog.readable_likes.join(', ') %>
-      </p>
-      <% end %>
-      <% if not @dog.health.nil? and not @dog.health == ""  %>
-      <p>
-        <i class="first aid icon"></i> <%= @dog.health %>
-      </p>
-      <% end %>
-      <% if not @dog.availability.nil? and not @dog.availability == ""  %>
-      <p>
-        <i class="wait icon"></i> <%= @dog.availability %>
-      </p>
-      <% end %>
-      <br />
-      <div class="ui bottom right attached label">My parent is <span style="color:#3b83c0"><%= link_to @parent.first_name, user_path(@parent.id) %></span> <%= image_tag @parent.image, :class => "ui avatar image" %></div>
-    </div>
+  </div>
+    
+    
+    
+    
+<!--    <div id ="dog_info_stats">-->
+<!--    <div class="ui bottom attached segment">-->
+      
+          
+      
+<!--      <div class="row">-->
+<!--        <div class="col s12 m6">-->
+<!--          <div class="card">-->
+<!--            <div class="card-content black-text">-->
+<!--              <span class="card-title">Card Title</span>-->
+<!--              <p>I am a very simple card. I am good at containing small bits of information.-->
+<!--              I am convenient because I require little markup to use effectively.</p>-->
+<!--            </div>-->
+<!--            <div class="card-action">-->
+<!--              <a href="#">This is a link</a>-->
+<!--              <a href="#">This is a link</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col s12 m6">-->
+<!--          <div class="card">-->
+<!--            <div class="card-content black-text">-->
+<!--              <span class="card-title">Card Title</span>-->
+<!--              <p>I am a very simple card. I am good at containing small bits of information.-->
+<!--              I am convenient because I require little markup to use effectively.</p>-->
+<!--            </div>-->
+<!--            <div class="card-action">-->
+<!--              <a href="#">This is a link</a>-->
+<!--              <a href="#">This is a link</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+      
+<!--    <div class="row">-->
+<!--      <div class="col s12 m12">-->
+<!--        <div class="card-panel teal">-->
+<!--          <span class="white-text">I am a very simple card. I am good at containing small bits of information.-->
+<!--          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.-->
+<!--          </span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    
+    
+      
+      
+<!--      <% if not @dog.motto.nil? and not @dog.motto == "" %>-->
+<!--        <h3 class = "ui ribbon label"> <%= @dog.motto %> </h3>-->
+<!--        <br /><br />-->
+<!--      <% end %>-->
+<!--      <p>-->
+<!--        <em><%= @dog.description %></em> -->
+<!--      </p>-->
+<!--      <p>-->
+<!--        <strong>Mix:</strong> <%= @dog.readable_mixes.join(', ') %> <br />-->
+<!--        <strong>Stats:</strong> <%= @dog.gender %>, <%= @dog.age %> years old, <%= @dog.size %>,-->
+<!--        <% if @dog.fixed %> fixed<% else %> not fixed<% end %> <br />-->
+<!--        <strong>Energy Level:</strong> <%= @dog.energy_level %>-->
+<!--        <% if not @dog.personalities.empty? %><br /><strong>Personality:</strong> <%= @dog.readable_personalities.join(', ') %><% end %>-->
+<!--      </p>-->
+<!--      <% if not @dog.likes.empty? %>-->
+<!--      <p>-->
+<!--        <i class="thumbs outline up icon"></i> <%= @dog.readable_likes.join(', ') %>-->
+<!--      </p>-->
+<!--      <% end %>-->
+<!--      <% if not @dog.health.nil? and not @dog.health == ""  %>-->
+<!--      <p>-->
+<!--        <i class="first aid icon"></i> <%= @dog.health %>-->
+<!--      </p>-->
+<!--      <% end %>-->
+<!--      <% if not @dog.availability.nil? and not @dog.availability == ""  %>-->
+<!--      <p>-->
+<!--        <i class="wait icon"></i> <%= @dog.availability %>-->
+<!--      </p>-->
+<!--      <% end %>-->
+<!--      <br />-->
+<!--      <div class="ui bottom right attached label">My parent is <span style="color:#3b83c0"><%= link_to @parent.first_name, user_path(@parent.id) %></span> <%= image_tag @parent.image, :class => "ui avatar image" %></div>-->
+<!--    </div>-->
 
 <!-- THIS IS THE EVENTS LISTING -->
-      <div class="ui blue inverted top attached segment">
-        <strong><%= @dog.name %>'s Events:</strong>
-      </div>
-      <div class="ui bottom attached segment">
-        <% if @dog.future_events? == false || @dog.events.count == 0 %>
-          <h1> No Upcoming Events </h1>
-        <% end %>
-        <% @dog.future_events.each do |event| %>
-        <div class="ui vertical segment">
-          <div class="large-9 columns">
-            <strong>  
-              <% if event.start_date == event.end_date %>
-                <%= event.start_date.strftime('%v') %>
-              <% else %>
-                <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
-              <% end %>
-            </strong>
-          </div>
-          <div class="large-3 columns">
-            <% if not @current_user.nil? and @current_user.id == @dog.user_id %>
-              <%= link_to "Edit", edit_event_path(event.id) %></p>
-            <% end %>
-          </div>
-            <div class="large-12 columns content">
-              <strong>Time:</strong> <%= event.time_of_day.join(", ") %></br>
-              <strong>Where:</strong> <%= event.my_location %></br>
-              <% if event.description != "" %>
-                <strong>Description:</strong> <%= event.description %>
-              <% end %>
-            </div>
-        </div>
-        <% end %>
-      </div>
-    <br />
-  </div>
+<!--      <div class="ui blue inverted top attached segment">-->
+<!--        <strong><%= @dog.name %>'s Events:</strong>-->
+<!--      </div>-->
+<!--      <div class="ui bottom attached segment">-->
+<!--        <% if @dog.future_events? == false || @dog.events.count == 0 %>-->
+<!--          <h1> No Upcoming Events </h1>-->
+<!--        <% end %>-->
+<!--        <% @dog.future_events.each do |event| %>-->
+<!--        <div class="ui vertical segment">-->
+<!--          <div class="large-9 columns">-->
+<!--            <strong>  -->
+<!--              <% if event.start_date == event.end_date %>-->
+<!--                <%= event.start_date.strftime('%v') %>-->
+<!--              <% else %>-->
+<!--                <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>-->
+<!--              <% end %>-->
+<!--            </strong>-->
+<!--          </div>-->
+<!--          <div class="large-3 columns">-->
+<!--            <% if not @current_user.nil? and @current_user.id == @dog.user_id %>-->
+<!--              <%= link_to "Edit", edit_event_path(event.id) %></p>-->
+<!--            <% end %>-->
+<!--          </div>-->
+<!--            <div class="large-12 columns content">-->
+<!--              <strong>Time:</strong> <%= event.time_of_day.join(", ") %></br>-->
+<!--              <strong>Where:</strong> <%= event.my_location %></br>-->
+<!--              <% if event.description != "" %>-->
+<!--                <strong>Description:</strong> <%= event.description %>-->
+<!--              <% end %>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <% end %>-->
+<!--      </div>-->
+<!--    <br />-->
+<!--  </div>-->
 
 <!-- THIS IS DOG PHOTOS AND VIDEO -->
   <!-- <div class="ui rail"> -->
     
-    <div class="large-6 columns">
-      <div class="ui sticky">
-        <div class="galleria">
-          <% unless @pictures.empty? %>
-            <% @pictures.each do |pic| %>
-              <%= image_tag pic.image.url %>               
-            <% end %>
-          <% end %>
-        </div>
-        <script>
-          Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
-          Galleria.run('.galleria' , { height: 0.6,  } );
-        </script>
-        <p> </p>
+<!--    <div class="large-6 columns">-->
+<!--      <div class="ui sticky">-->
+<!--        <div class="galleria">-->
+<!--          <% unless @pictures.empty? %>-->
+<!--            <% @pictures.each do |pic| %>-->
+<!--              <%= image_tag pic.image.url %>               -->
+<!--            <% end %>-->
+<!--          <% end %>-->
+<!--        </div>-->
+<!--        <script>-->
+<!--          Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");-->
+<!--          Galleria.run('.galleria' , { height: 0.6,  } );-->
+<!--        </script>-->
+<!--        <p> </p>-->
 
-        <% if not @dog.video.nil? and not @dog.video == "" %>
-        <div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div>
-        <% end %>
-      </div>
-    </div>
-    <p>
-  <% if not @current_user.nil? and @dog.user_id == @current_user.id %>
-    <div class ="float right">
-     <%= button_to "Delete", dog_path(@dog.id), :id => "delete_dog_button", :class => "ui button red transparent input", :method => :delete %>
-  </div>
-  <div class = "float right">
-      <%= button_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "ui primary button", :method => :get %>
+<!--        <% if not @dog.video.nil? and not @dog.video == "" %>-->
+<!--        <div class="ui video" data-source="youtube" data-id="<%= @dog.youtube_id %>" ></div>-->
+<!--        <% end %>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <p>-->
+  <!--<% if not @current_user.nil? and @dog.user_id == @current_user.id %>-->
+  <!--  <div class ="float right">-->
+  <!--   <%= button_to "Delete", dog_path(@dog.id), :id => "delete_dog_button", :class => "ui button red transparent input", :method => :delete %>-->
+  <!--</div>-->
+  <!--<div class = "float right">-->
+  <!--    <%= link_to edit_user_path(@dog.id), id:"edit_pencil" do %>-->
+  <!--          <i class="fa fa-pencil" aria-hidden="true" id="edit_pencil"></i>-->
+  <!--        <% end %>-->
 
-  </div>
+  <!--</div>-->
 
-  <% end %>
+<!--  <% end %>-->
 
-</p>
+<!--</p>-->
   <!-- </div> -->
 </div>
-
-
-
 
 
 
@@ -160,3 +435,4 @@ $(document).ready(function(){
   });
 });
 </script>
+

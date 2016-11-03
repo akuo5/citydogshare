@@ -10,14 +10,14 @@ Background: user has been added to the database and logged in
     | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     | 387 Soda Hall | 94720   | Berkeley | US      | 1  |
   And I am logged in
   And I am on the users page for "Batman"
-  When I press "Add Dog"
+  When I follow "Add Dog"
 
 Scenario: Page redirects to edit user profile if user does not have zipcode
   And I am on the users page for "Batman"
-  And I press "Edit"
+  And I follow "Edit"
   And I fill in "user_zipcode" with ""
   And I press "Save Changes"
-  And I press "Add Dog"
+  And I follow "Add Dog"
   Then I should see "Edit Your Profile"
   And I should see "Please update your zipcode to add a dog."
   And I should not see "Edit Your Dog's Profile"
