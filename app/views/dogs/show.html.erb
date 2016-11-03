@@ -58,13 +58,13 @@
             <% if not current_user.nil? %>
             <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>
                 <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>
-                <i class="fa fa-star-o" aria-hidden="true" id="favorite_star"></i>
+                <i class="fa fa-star-o" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
               <% else %>
                 <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
-                <i class="fa fa-star" aria-hidden="true" id="favorite_star"></i>
+                <i class="fa fa-star" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
-              <% end %>
+            <% end %>
           <%end%>
           </div>
         </span>
@@ -107,8 +107,18 @@
         <ul id="profile-page-about-details" class="collection z-depth-1">
           <li class="collection-item">
             <div class="row">
-              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-heart" aria-hidden="true"></i> Parent</div>
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-user" aria-hidden="true"></i> Parent</div>
               <div class="col s7 grey-text text-darken-4 right-align"><%= link_to @parent.first_name, user_path(@parent.id) %></div>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-star" aria-hidden="true"></i> Favorited</div>
+              <% if @dog.stars.count == 1 %>
+                <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.stars.count %> time</div>
+              <% else %>
+                <div class="col s7 grey-text text-darken-4 right-align"><%= @dog.stars.count %> times</div>
+              <% end %> 
             </div>
           </li>
           <li class="collection-item">
