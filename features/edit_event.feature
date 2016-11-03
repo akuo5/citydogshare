@@ -15,7 +15,7 @@ Background: user has been added to the database and logged in
   And the following dogs exist:
     | name     | mix              | age | size            | gender   | likes      | energy  | personality | user_id | fixed | chipped |
     | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | true  | true    |
-    | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       | true  | true    |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 2       | true  | true    |
 
   And I have created an event for "Princess" today
   And I am logged in
@@ -47,6 +47,8 @@ Scenario: User should not be able to save an incomplete event
 Scenario: I should not be able to edit another users event
   When I do not care about dog location
   And I follow the first "Browse Dogs"
+  And I check "Male"
+  And I press "Search Dogs"
   And I should see "Spock"
   Then I should not see "Edit"
 

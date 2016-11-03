@@ -15,8 +15,10 @@
     <div class="card light-blue center-align">
       <div class="card-content white-text">
         <span class="card-title">About Me </span>
-        <%= link_to edit_user_path(@user.id), id:"edit_dog_pencil" do %>
-          <i class="fa fa-pencil" aria-hidden="true" id="edit_dog_pencil"></i>
+        <% if @own_profile %>-->
+          <%= link_to edit_user_path(@user.id), id:"edit_dog_pencil", title:"Edit Profile" do %>
+            <i class="fa fa-pencil" aria-hidden="true" id="edit_dog_pencil"></i>
+          <% end %>
         <% end %>
         <% if not @user.description.nil? and not @user.description == ""  %>
           <div id="user_description">
@@ -51,12 +53,22 @@
           <div class="col s7 grey-text text-darken-4 right-align"><%= @user.status %></div>
         </div>
       </li>
+      <% if not @user.availability.nil? and not @user.availability == ""  %>
+        <p id="availability">
+          <li class="collection-item">
+            <div class="row">
+              <div class="col s5 grey-text darken-1 left-align"><i class="wait icon"></i> Availability</div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= @user.availability %></div>
+            </div>
+          </li>
+        </p>
+      <% end %>
       <% if current_user %>
         <% if @user.address != nil && @user.address != ""%>
           <li class="collection-item">
             <div class="row">
               <div class="col s5 grey-text darken-1 left-align"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</div>
-              <div class="col s7 grey-text text-darken-4 right-align"><%= "#{@user.address}, #{@user.city}, #{@user.country}" %></div>
+              <div class="col s7 grey-text text-darken-4 right-align"><%= "#{@user.address}, #{@user.city}, #{@user.zipcode}, #{@user.country}" %></div>
             </div>
           </li>
         <%end%>
@@ -179,8 +191,10 @@
         <span class="card-title">
            My Dogs
         </span>
-        <%= link_to new_dog_path(), id:"add_dog_plus" do %>
-          <i class="fa fa-plus" aria-hidden="true"></i>
+        <% if @own_profile %>
+          <%= link_to new_dog_path(), id:"add_dog_plus", title:"Add Dog" do %>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -190,10 +204,7 @@
         <% if @user.dogs.count == 0 then %>
           <div class="row center-align valign-wrapper no-dogs-message-container">
             <div class="col l12 m12 s12 valign no-dogs-message">
-              You don't have any dogs yet! <br>
-              <a href="/dogs/new" class="btn-large green accent-4">
-                Add your first dog!
-              </a>
+              No dogs yet! <br>
             </div>
           </div>
         <% else %>
@@ -208,8 +219,10 @@
                   <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
                 </div>
                 <div class="card-action">
-                  <a href="<%= edit_dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
-                  <a href="<%= dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+                  <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
+                   <% if @own_profile %>
+                    <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+                  <% end %>
                 </div>
                 <div class="card-reveal">
                   <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
