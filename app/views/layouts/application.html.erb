@@ -28,14 +28,12 @@
             <li><div data-activates="slide-out" class="waves-effect waves-circle waves-dark" id="show-menu-btn"><i class="material-icons white-text" id="show-menu-icon">menu</i></div></li>
             <li class="page-title"><strong><%= yield(:page_title) %></strong></li>
           </ul>
-          <a href="#">
-            <ul class="right hide-on-small-only">
-              <a style="height: 64px;">
-                <li class="right"><img src="<%= current_user.image %>" class="circle responsive-img menu-user-img"></li>
-                <li class="right white-text menu-username"><%= current_user.full_name %></li>
-              </a>
-            </ul>
-          </a>
+          <ul class="right hide-on-small-only">
+            <a href="<%= user_path(current_user) %>" style="height: 64px;">
+              <li class="right"><img src="<%= current_user.image %>" class="circle responsive-img menu-user-img"></li>
+              <li class="right white-text menu-username"><%= current_user.full_name %></li>
+            </a>
+          </ul>
           <ul id="slide-out" class="side-nav">
             <li id="slide-out-header" class="light-blue darken-4">
               <div class="waves-effect waves-circle waves-dark" id="hide-menu-btn"><i class="material-icons white-text" id="hide-menu-icon">menu</i></div>

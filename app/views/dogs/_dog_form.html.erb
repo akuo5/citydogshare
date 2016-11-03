@@ -4,7 +4,7 @@
     <div class="row">
       <div id="name" class="input-field col s12 m12 l6 left-col">
         <%= text_field(:dog, :name, class: "validate white fix-textarea-alignment", placeholder: "Insert name") %>
-        <label for="name" class="<%= notice and notice[:name] ? "invalid" : "valid" %>">
+        <label for="name" class="<%= notice and notice[:name] ? "invalid" : "valid" %> input-label-correction">
           What is your dog's name? <strong class ="red-text">*</strong>
         </label>
       </div>
