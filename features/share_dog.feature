@@ -46,6 +46,7 @@ Scenario: Not selecting a time of day should throw an error
   Then I should see "Please enter a time of day"
 
 Scenario: Event should show up on dog profile
+    Given PENDING 
   Given I check "dogs_Princess"
   And I check "times_Morning"
   And I choose "my_location_My_House"
