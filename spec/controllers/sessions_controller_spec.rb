@@ -36,22 +36,22 @@ describe SessionsController, :type => :controller do
   describe 'handle_auth' do
     it 'should find the user' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-      expect(User).to receive(:find_by_uid).with(request.env["omniauth.auth"][:uid])
+      expect(User).to receive(:find_by_uid).with(request.env["omniauth.auth"][:uid]).at_least(:once)
       visit "auth/facebook?type=login"
     end 
-    it 'should redirect to signup if signing up' do 
+    it 'should redirect to login if signing up' do 
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       request.env["omniauth.params"] = {"type" => "signup"}
       User.stub(:find_by_uid).and_return(User.create(:id => "1", :first_name => "M", :last_name => "J"))
       get(:handle_auth, :provider => "facebook")
-      expect(response).to redirect_to signup_path(:user => "1", :auth => request.env["omniauth.auth"])
+      expect(response).to redirect_to login_path(:user => "1", :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
     end
     it 'should redirect to login if logging in' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       request.env["omniauth.params"] = {"type" => "login"}
       User.stub(:find_by_uid).and_return(User.create(:id => "1", :first_name => "M", :last_name => "J"))
       get(:handle_auth, :provider => "facebook")
-      expect(response).to redirect_to login_path(:user => "1", :credentials => request.env["omniauth.auth"][:credentials])
+      expect(response).to redirect_to login_path(:user => "1", :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
     end
   end
 
@@ -68,15 +68,6 @@ describe SessionsController, :type => :controller do
 
   end
 
-  describe 'logging in as a new user' do
-    it 'should redirect to the home page with error message' do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-      get(:login, :user => nil, :credentials => request.env["omniauth.auth"][:credentials])
-      expect(response).to redirect_to root_path() 
-      assert_equal "User does not exist. Please sign up.", flash[:notice]
-    end
-  end
-
   describe 'authentication fails' do 
     it 'should redirect to the home page with error message' do
       get(:handle_failure)
@@ -84,36 +75,25 @@ describe SessionsController, :type => :controller do
       expect(response).to redirect_to root_path()
     end
   end
-  
 
-  describe 'signing up as an existing user' do
-    it 'should redirect to the home page with error message' do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
-      User.create()
-      get(:signup, :user => "1" , :auth => request.env["omniauth.auth"])
-      assert_equal "A user already exists with this facebook account.", flash[:notice]
-      expect(response).to redirect_to root_path() 
-    end 
-  end
-
-  describe 'signing up a new user' do
+  describe 'logging in as a new user' do
     before(:each) do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
     end
     it 'should create a new user' do
-      get(:signup, :user => nil , :auth => request.env["omniauth.auth"])
+      get(:login, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
       expect(assigns(:new_user)).to be_an_instance_of(User)
     end
     it 'should update their credentials' do
       expect_any_instance_of(User).to receive(:update_credentials)
-      get(:signup, :user => nil , :auth => request.env["omniauth.auth"])
+      get(:login, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
     end
     it 'should set their facebook info' do
       expect_any_instance_of(User).to receive(:facebook_info_update)
-      get(:signup, :user => nil , :auth => request.env["omniauth.auth"])
+      get(:login, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
     end
     it 'should redirect to create a new session' do
-      get(:signup, :user => nil , :auth => request.env["omniauth.auth"])
+      get(:login, :user => nil , :auth => request.env["omniauth.auth"])
       expect(response).to redirect_to create_session_path(:user => "1")
     end
   end
