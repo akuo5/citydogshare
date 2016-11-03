@@ -110,87 +110,151 @@
 <span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>
   <span id="counts" data-counts="<%= @counts %>"/>
   
-  <div class="large-7 columns" >
+  <div class="large-12 columns" >
     <br>
     <div class="ui segment" id="dog_search_results" style="padding: 0em">
-
-    <% if @no_dogs %>
-      <h1> No Dogs Found </h1>
-    <% end %>
-    <% @dogs.each do |dog| %>
-    <% if dog.future_events? %>
-    <div class="ui vertical segment" style="padding: 1em; border-style: solid; border-width: 1px; border-color: #5bbd72; border-radius: 3px" id = <%= dog.owner.zipcode %> >
-    <div class="ui green bottom right attached right label" style="border-radius:0">Looking for a sitter!</div>
-
-    <% else %>
-    <div class="ui vertical segment" style="padding: 1em" id = <%= dog.owner.zipcode %> >
-    <% end %>
-
-      <div class="large-3 columns" style="padding: 0">
-        <!-- <span class="image"> -->
-          <div id="photo"><% if dog.photo.file? %>
-          <%= image_tag dog.photo.url(:medium) %>
-        <% else %>
-          <%= image_tag "default_dog.jpg" %>
-        <% end %></div>
-        <!-- </span> -->
-      </div>
-
-      <div class="large-9 columns" style="padding-right: 0">
-        <div class="content">
-          <div class="ui medium header" style="margin-bottom: 0">
-            <%= link_to dog.name, dog_path(dog) %>  
-          <% if not current_user.nil? %>
-          <span class="right floated stars">
-            <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
-              <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>
-              <i class="empty icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="empty star icon yellow large"></i>
-              <%end%>
-            <%- else -%>
-              <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}" do%>
-              <i class="icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="star icon yellow large"></i>
-              <%end%>
-            <%- end -%>
-          </span>
-          <%end%>
-          </div>
-          <div class="age">
-            <b><%= dog.age_caption %></b>
-          </div>
-          <span class="right floated" style="margin-right: 5%">
-            <%= dog.owner.zipcode %>
-          </span>
-          <div class="attributes">
-            <b><%= dog.tags %></b>
-          </div>
-          <div class="description">
-            <%= dog.motto %>
+      
+      <% if @no_dogs then %>
+        <div class="row center-align valign-wrapper no-dogs-message-container">
+          <div class="col l12 m12 s12 valign no-dogs-message">
+            No dogs found! <br>
           </div>
         </div>
-        <div class="extra content">
-          <% unless dog.availability == "" %>
-          <i class="wait icon"></i>
-          <%= dog.availability %>
+      <% else %>
+        <div class="row container main-content">
+          <% @dogs.each do |dog| %>
+            <div class="col s12 m6 l4">
+              <div class="card">
+                <% if not current_user.nil? %>
+                  <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
+                      <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>
+                      <i class="fa fa-star-o" aria-hidden="true" id="favorite_star"></i>
+                    <%end%>
+                    <% else %>
+                      <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}"  do%>
+                      <i class="fa fa-star" aria-hidden="true" id="favorite_star"></i>
+                    <%end%>
+                  <% end %>
+                <%end%>
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator card-img" src="<%= dog.image %>">
+                  
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
+                </div>
+                <div class="card-action">
+                  <a href="<%= edit_dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
+                  <a href="<%= dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
+                    <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+                    <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
+                  </span>
+                  <ul class="dog-info-list">
+                    <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
+                    <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
+                    <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
+                    <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
+                    <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
+                    <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
+                    <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
+                    <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
+                    <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
+                    <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
+                    <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
+                    <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           <% end %>
         </div>
-        <% if dog.future_events? %>
-        <b>Next event:</b> <%= dog.future_events.first.start_date.strftime("%m/%d/%Y") %>
-        <% end %>
-      </div>
-
-    </div>
-    <% end %>
+        <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
+          <a href="<%= new_dog_path %>" class="btn-floating btn-large waves-effect waves-light green accent-4 hide-on-large-only"><i class="material-icons">add</i></a>
+        </div>
+      <% end %>
     </div>
   </div>
+  
+    <!--<% if @no_dogs %>-->
+    <!--  <h1> No Dogs Found </h1>-->
+    <!--<% end %>-->
+    <!--<% @dogs.each do |dog| %>-->
+    <!--<% if dog.future_events? %>-->
+    <!--<div class="ui vertical segment" style="padding: 1em; border-style: solid; border-width: 1px; border-color: #5bbd72; border-radius: 3px" id = <%= dog.owner.zipcode %> >-->
+    <!--<div class="ui green bottom right attached right label" style="border-radius:0">Looking for a sitter!</div>-->
 
-  <div class="large-5 columns" id="map">
-        <br>
-    <div class ="ui sticky">
-    <div id="map-canvas">
+    <!--<% else %>-->
+    <!--<div class="ui vertical segment" style="padding: 1em" id = <%= dog.owner.zipcode %> >-->
+    <!--<% end %>-->
+
+    <!--  <div class="large-3 columns" style="padding: 0">-->
+        <!-- <span class="image"> -->
+    <!--      <div id="photo"><% if dog.photo.file? %>-->
+    <!--      <%= image_tag dog.photo.url(:medium) %>-->
+    <!--    <% else %>-->
+    <!--      <%= image_tag "default_dog.jpg" %>-->
+    <!--    <% end %></div>-->
+        <!-- </span> -->
+    <!--  </div>-->
+
+      <!--<div class="large-9 columns" style="padding-right: 0">-->
+  <!--      <div class="content">-->
+  <!--        <div class="ui medium header" style="margin-bottom: 0">-->
+  <!--          <%= link_to dog.name, dog_path(dog) %>  -->
+  <!--        <% if not current_user.nil? %>-->
+  <!--        <span class="right floated stars">-->
+  <!--          <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>-->
+  <!--            <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>-->
+  <!--            <i class="empty icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="empty star icon yellow large"></i>-->
+  <!--            <%end%>-->
+  <!--          <%- else -%>-->
+  <!--            <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}" do%>-->
+  <!--            <i class="icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="star icon yellow large"></i>-->
+  <!--            <%end%>-->
+  <!--          <%- end -%>-->
+  <!--        </span>-->
+  <!--        <%end%>-->
+  <!--        </div>-->
+  <!--        <div class="age">-->
+  <!--          <b><%= dog.age_caption %></b>-->
+  <!--        </div>-->
+  <!--        <span class="right floated" style="margin-right: 5%">-->
+  <!--          <%= dog.owner.zipcode %>-->
+  <!--        </span>-->
+  <!--        <div class="attributes">-->
+  <!--          <b><%= dog.tags %></b>-->
+  <!--        </div>-->
+  <!--        <div class="description">-->
+  <!--          <%= dog.motto %>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <div class="extra content">-->
+  <!--        <% unless dog.availability == "" %>-->
+  <!--        <i class="wait icon"></i>-->
+  <!--        <%= dog.availability %>-->
+  <!--        <% end %>-->
+  <!--      </div>-->
+  <!--      <% if dog.future_events? %>-->
+  <!--      <b>Next event:</b> <%= dog.future_events.first.start_date.strftime("%m/%d/%Y") %>-->
+  <!--      <% end %>-->
+  <!--    </div>-->
+
+  <!--  </div>-->
+  <!--  <% end %>-->
+  <!--  </div>-->
+  <!--</div>-->
+
+<!--  <div class="large-5 columns" id="map">-->
+<!--        <br>-->
+<!--    <div class ="ui sticky">-->
+<!--    <div id="map-canvas">-->
       <!-- <img src="http://www.digicution.com/wp-content/uploads/2012/06/HTML5-Repsonsive-Google-Maps-Tutorial-1.png" style="height:100%; width:100%"> -->
-    </div></div>
-  </div>
-</div>
+<!--    </div></div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvpxxyVWimCzY6WLJTY8iYGUUkVy6q7bA">
@@ -209,7 +273,7 @@ $(document).ready(function(){
   var map;
   var query = $('#zipcodes').data('zipcodes');
   var counts = $('#counts').data('counts');
-  //var query = ['2523 Ridge Road, Berkeley, CA', 'Berkeley'];
+  var query = ['2523 Ridge Road, Berkeley, CA', 'Berkeley'];
   function initialize() {
     geocoder = new google.maps.Geocoder();
     var mapOptions = {
@@ -223,7 +287,7 @@ $(document).ready(function(){
     
   }
 
-//  Fit these bounds to the map
+  Fit these bounds to the map
 
   function codeAddress(counts, bounds) {
     var address = query;
@@ -237,7 +301,7 @@ $(document).ready(function(){
 
         geocoder.geocode( { 'address': address[i]}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          //map.setCenter(results[0].geometry.location);
+          map.setCenter(results[0].geometry.location);
           var current = results[0].address_components[0].long_name;
           
           var marker = new google.maps.Marker({
