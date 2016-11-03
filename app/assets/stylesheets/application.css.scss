@@ -48,9 +48,14 @@ $secondary-color: color("light-blue", "darken-3") !default;
   margin-top: 5px !important
 }
 
-.input-field label {
-  top: -14px;
+.input-label-correction {
+  top: 16px !important;
 }
+
+.reset-label {
+  top: 0 !important;  
+}
+
 .invalid {
   color: red !important;
 }
