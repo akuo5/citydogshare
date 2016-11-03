@@ -13,9 +13,9 @@ Background: user has been added to the database and logged in
     | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student2@berkeley.edu           | I love dogs  | not mornings   | 387 Cory Hall | 94720   | Berkeley | US      | 2  |
 
   And the following dogs exist:
-    | name     | mix              | age | size            | gender | likes      | energy  | personality | user_id |
-    | Princess | Labrador         | 1   | small (0-15)    | Female | cats       | high    | whatever    | 1       |
-    | Spock    | Aidi             | 3   | medium (16-40)  | Male   | dogs (all) | some    | lover       | 2       |
+    | name     | mix              | age | size            | gender   | likes      | energy  | personality | user_id | fixed | chipped |
+    | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | true  | true    |
+    | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       | true  | true    |
 
   And I have created an event for "Princess" today
   And I am logged in

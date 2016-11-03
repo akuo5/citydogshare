@@ -28,6 +28,8 @@ Given /the following dogs exist/ do |dogs_table|\
     new_dog.energy_level_id = EnergyLevel.find_by_value(dog[:energy]).id
     new_dog.latitude = dog[:latitude]
     new_dog.longitude = dog[:longitude]
+    new_dog.fixed = dog[:fixed]
+    new_dog.chipped = dog[:chipped]
     new_dog.photo = File.new(Rails.root + 'spec/factories/images/dog.jpg')
     new_dog.save!
   end
@@ -41,6 +43,11 @@ When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field, match: :first)
 end
 
+When(/^I select "([^"]*)" for "([^"]*)"$/) do |value, id|
+  within "##{id}" do
+    select(value, match: :first)
+  end
+end
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
   check(field, match: :first)

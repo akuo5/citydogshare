@@ -2,67 +2,69 @@
   <br><h4>Add a dog to your family!</h4><br>
   <%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
     <div class="row">
-      <div class="input-field col s12 m12 l6 left-col">
+      <div id="name" class="input-field col s12 m12 l6 left-col">
         <%= text_field(:dog, :name, class: "validate white", placeholder: "Insert name") %>
         <label for="name">What is your dog's name?</label>
       </div>
-      <div class="input-field col s12 m12 l6  right-col" id="dob">
+      <div id="dob" class="input-field col s12 m12 l6  right-col" id="dob">
         <%= select :dog, :dob, ((Date.today.year - 30)...(Date.today.year)), {:include_blank => "Select one"}, {:class => "validate white", :id=> 'dobdob'} %>
         <label for="dob">What year was your dog born in?</label>
       </div>
-      <div class="input-field col s12 m12 l6 left-col">
+      <div id="size" class="input-field col s12 m12 l6 left-col">
         <% size_options = options_from_collection_for_select(Size.all, 'id', 'value') %>
         <%= select :dog, :size, size_options, {:include_blank => "Select one", :selected => "Select one"}, :class => "validate white" %> 
         <label for="size">What size (in pounds) is your dog?</label>
       </div>
-      <div class="input-field col s12 m12 l6  right-col">
+      <div id="gender" class="input-field col s12 m12 l6  right-col">
         <%= select :dog, :gender, ["Male", "Female"], {:include_blank => "Select one"}, :class => "validate white" %>
         <label for="gender">What is your dog's gender?</label>
       </div>
-      <div class="input-field col s12 m12 l6 left-col">
+      <div id="mixes" class="input-field col s12 m12 l6 left-col">
         <%= select :dog, :mixes, Mix.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
         <label for="mixes">What mix (or mixes) is your dog?</label>
       </div>
-      <div class="input-field col s12 m12 l6 right-col">
+      <div id="personalities" class="input-field col s12 m12 l6 right-col">
         <%= select :dog, :personalities, Personality.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
         <label for="personality">What is your dogs personality like?</label>
       </div>
-      <div class="input-field col s12 m12 l6 left-col">
+      <div id="energy_level" class="input-field col s12 m12 l6 left-col">
         <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value') %>
         <%= select :dog, :energy_level, energy_level_options, {:include_blank => "Select one"}, :class => "validate white"%>
         <label for="energy_level">What is your dog's energy level?</label>
       </div>
-      <div class="input-field col s12 m12 l6 right-col">
+      <div id="likes" class="input-field col s12 m12 l6 right-col">
         <%= select :dog, :likes, Like.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
         <label for="likes">Who does your dog like?</label>
       </div>
-      <div class="input-field col s12 m12 l6 left-col">
-        <select class="validate white">
-          <option value="1">Rarely</option>
-          <option value="1">When playing</option>
-          <option value="2">When someone's at the door</option>
-          <option value="3">When left alone</option>
-          <option value="4">All the time</option>
-        </select>
-        <label for="barking">When does your dog bark?</label>
+      <div id="barks" class="input-field col s12 m12 l6 left-col">
+        <%= select :dog, :barks, Bark.all_values, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
+        <label for="barks">When does your dog bark?</label>
       </div>
-      <div class="input-field col s12 m12 l6 right-col">
+      <div id="fixed" class="input-field col s12 m12 l6 right-col">
         <%= select :dog, :fixed, ["Yes", "No"], {:include_blank => "Select one"}, :class => "validate white" %>
         <label for="fixed">Is your dog spayed / neutered?</label>
       </div>
-      <div class="input-field col s12 m12 l6 left-col br-20 s m l">
+      <div id="chipped" class="input-field col s12 m12 l6 left-col">
+        <%= select :dog, :chipped, ["Yes", "No"], {:include_blank => "Select one"}, :class => "validate white" %>
+        <label for="chipped">Is your dog chipped?</label>
+      </div>
+      <div id="shots_to_date" class="input-field col s12 m12 l6 right-col">
+        <%= select :dog, :shots_to_date, ["Yes", "No"], {:include_blank => "Select one"}, :class => "validate white" %>
+        <label for="shots_to_date">Are all your dog's shots up to date?</label>
+      </div>
+      <div id="health" class="input-field col s12 m12 l6 left-col br-20 s m l">
         <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?", :class => "materialize-textarea") %>
         <label for="health">Health Notes</label>
       </div>
-      <div class="input-field col s12 m12 l6 right-col br-20 s m l">
+      <div id="motto" class="input-field col s12 m12 l6 right-col br-20 s m l">
         <%= text_area(:dog, :motto, :placeholder => "Is there anything your dog wants the world to know?", :class => "materialize-textarea") %>
         <label for="motto">Status</label>
       </div>
-      <div class="input-field col s12 m12 l6 left-col br-20 s m l">
+      <div id="description" class="input-field col s12 m12 l6 left-col br-20 s m l">
         <%= text_area(:dog, :description, :placeholder => "Do you have any other descriptive details about your dog?", :class => "materialize-textarea") %>
         <label for="description">Description</label>
       </div>
-      <div class="input-field col s12 m12 l6 right-col br-20 s m l">
+      <div id="availability" class="input-field col s12 m12 l6 right-col br-20 s m l">
         <%= text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter", :class => "materialize-textarea") %>
         <label for="availability">General Availability</label>
       </div>

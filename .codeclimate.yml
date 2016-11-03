@@ -17,5 +17,6 @@ ratings:
  - app/**
  - "**.rb"
 exclude_paths:
+- app/assets/**/*
 - spec/**/*
 - features/**/*

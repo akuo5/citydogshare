@@ -581,6 +581,18 @@ sizes_list.each do |size|
   Size.find_or_create_by(value: size)
 end
 
+barks_list = [
+  "Rarely",
+  "When playing",
+  "When someone's at the door",
+  "When left alone",
+  "All the time"
+]
+
+barks_list.each do |bark|
+  Bark.find_or_create_by(value: bark)
+end
+
 #dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1}, {:name => "Fido", :gender => "Male", :size_id => 3}, {:name => "Batman", :gender => "Female", :size_id => 2}]
 #
 #dogs_list.each do |dog|
