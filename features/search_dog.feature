@@ -26,7 +26,6 @@ Scenario: Only see dogs within 100 miles by default
   And I should not see "Bubba"
 
 Scenario: Should see dogs within specified range 
-  Given PENDING
   When I fill in "radius" with "100000000000"
   When I press "Search Dogs"
   And I should see "Princess"
@@ -34,7 +33,6 @@ Scenario: Should see dogs within specified range
   And I should see "Bubba"
 
 Scenario: Should give dogs in order of closest distance
-  Given PENDING
   When I fill in "radius" with "100000000000"
   And I fill in "zipcode" with "12345"
   When I press "Search Dogs"
