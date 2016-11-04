@@ -55,6 +55,9 @@
             <li class="menu-item"><%= link_to events_path do %> 
               <i class="fa fa-calendar fa-lg menu-item-icon"></i>Events
             <% end %></li>
+            <li class="menu-item"><%= link_to signout_path, :method => :delete do %>
+              <i class="fa fa-sign-out fa-lg menu-item-icon"></i>Sign out
+            <% end %></li>
           </ul>
 
           <!-- navigation bar for mobile -->
@@ -83,6 +86,9 @@
             <li class="menu-item"><%= link_to events_path do %> 
               <i class="fa fa-calendar fa-lg menu-item-icon"></i>Events
             <% end %></li>
+            <li class="menu-item"><%= link_to signout_path, :method => :delete do %> 
+              <i class="fa fa-sign-out fa-lg menu-item-icon"></i>Sign out
+            <% end %></li>
           </ul>
         </div>
       </nav>
@@ -100,12 +106,12 @@
           <!-- Menu items for tablet and desktop navigation -->
           <ul class="right hide-on-med-and-down">
             <li><a href="/dogs">Browse Dogs</a></li>
-            <li><a href="/auth/facebook/?type=login" class="waves-effect waves-light light-blue darken-3 btn" id="log_in">Login with Facebook</a></li>
+            <li><a href="/auth/facebook/?type=login" class="waves-effect waves-light light-blue darken-3 btn" id="log_in">Sign in with Facebook</a></li>
           </ul>
           
           <!-- Menu items for mobile navigation -->
           <ul id="nav-mobile" class="side-nav">
-            <li><a href="/auth/facebook/?type=login" class="waves-effect waves-light light-blue darken-3 btn" id="log_in">Login with Facebook</a></li>
+            <li><a href="/auth/facebook/?type=login" class="waves-effect waves-light light-blue darken-3 btn" id="log_in">Sign in with Facebook</a></li>
             <li><a href="/dogs">Browse Dogs</a></li>
           </ul>
           <a href="#" data-activates="nav-mobile" class="button-collapse black-text"><i class="material-icons">menu</i></a>
