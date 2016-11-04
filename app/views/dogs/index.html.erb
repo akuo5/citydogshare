@@ -138,7 +138,7 @@
                 <%end%>
                 <div class="card-image waves-effect waves-block waves-light">
                   <% if dog.photo.file? %>
-                    <%= image_tag dog.photo.url(:small), :class => "activator card-img" %>
+                    <%= image_tag dog.photo.url(:large), :class => "activator card-img" %>
                   <% else %>
                     <%= image_tag "default_dog.jpg", :class => "activator card-img" %>
                   <% end %>

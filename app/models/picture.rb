@@ -6,7 +6,8 @@ class Picture < ActiveRecord::Base
   #paperclip multiple pictures
   has_attached_file :image, 
                     :styles => { :small    => '150x',
-                                 :medium   => '300x' },
+                                 :medium   => '300x',
+                                 :large    => '600x'},
                     :default_url => "",
                     :storage => :s3,
                     :bucket => ENV["AWS_BUCKET_NAME"],

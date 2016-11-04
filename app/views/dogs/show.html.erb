@@ -9,7 +9,7 @@
   <div class="row" style="margin-top: 20px">
     <div class="col l3 m4 s12" style="text-align: center;">
       <div id = "profile_pics">
-        <div> <%= image_tag @dog.photo.url(:small), :class => "circle", id: "dog_profile_pic" %>  </div>
+        <div> <%= image_tag @dog.photo.url(:large), :class => "circle", id: "dog_profile_pic" %>  </div>
         <%= image_tag @parent.image, :class => "circle z-depth-1", id: "dog_profile_parent_pic" %>
         <div class="star-container">
           <% if not current_user.nil? %>
@@ -85,7 +85,7 @@
             </div>
           </li>
         <% end %>
-        <% if @dog.energy_level.value && @dog.energy_level.value != "" %>
+        <% if @dog.energy_level && (@dog.energy_level.value && @dog.energy_level.value != "") %>
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-flash" aria-hidden="true"></i> &nbsp; Energy Level</span>
@@ -163,7 +163,7 @@
   <div class="container row main-content">
     <div id="profile-page-header" class="card col s12">
       <div id = "profile_pics">
-        <div> <%= image_tag @dog.photo.url(:small), :class => "circle", id: "dog_profile_pic" %>  </div>
+        <div> <%= image_tag @dog.photo.url(:large), :class => "circle", id: "dog_profile_pic" %>  </div>
         <%= image_tag @parent.image, :class => "circle", id: "dog_profile_parent_pic" %>
       </div>
       <div class="card-content">

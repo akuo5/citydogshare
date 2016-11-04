@@ -158,7 +158,7 @@
 
   <div class="field"><label>Change Avatar</label>
     <% if @dog.photo.file? %>
-      <%= image_tag @dog.photo.url(:small) %>
+      <%= image_tag @dog.photo.url(:large) %>
     <% else %>
       <%= image_tag "default_dog.jpg" %>
     <% end %>
@@ -169,7 +169,7 @@
   <% unless @pictures.empty? %>
     <% @pictures.each do |pic| %>
       <div class="delete-pics">
-       <%= image_tag pic.image.url(:small) %>
+       <%= image_tag pic.image.url(:large) %>
       
         <%= hidden_field_tag('seen[]', pic.id) -%>
         <%= check_box_tag 'activated[]', pic.id -%>        
