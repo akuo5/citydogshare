@@ -8,7 +8,6 @@ Citydogshare::Application.routes.draw do
   delete 'signout', to: 'sessions#destroy', as: 'signout'
   get 'create', to: 'sessions#create', as: 'create_session'
   get 'login', to: 'sessions#login', as: 'login'
-  get 'signup', to: 'sessions#signup', as: 'signup'
   
   ## User Routes ##
   resources :users, only: [:show, :edit, :update, :destroy, :index]
