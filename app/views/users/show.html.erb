@@ -1,5 +1,183 @@
 <% content_for :page_title, "My Profile" %>
 
+<!-- User infomation and events -->
+<div class="row container main-content">
+
+  <div class="row"><h4 class="br-5 s ctr"><%= @user.full_name %></h4><br></div>
+  <div class="row">
+    <div class="col l3 m4 s12" style="text-align: center;">
+      <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
+      <% if current_user %>
+        <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
+        <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
+      <% end %>
+    </div>
+    <div class="col l9 m8 s12 s br-35">
+      <div class="speech-bubble light-blue darken-3">
+        <div class="speech-bubble-content white-text">
+          <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
+          <div class="status-text"><%= @user.status %></div>
+        </div>
+        <div class="speech-carrot blue"></div>
+      </div>
+      <ul class="collection user-info-collection">
+        <% if @user.email && @user.email != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Email</span>
+              &nbsp;&nbsp;<%= @user.email %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.gender && @user.gender != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-mars-stroke" aria-hidden="true"></i> &nbsp;Gender</span>
+              &nbsp;&nbsp;<%= @user.gender.capitalize %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.address && @user.address != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;Address</span>
+              &nbsp;&nbsp;<%= @user.address %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.country && @user.country != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;Country</span>
+              &nbsp;&nbsp;<%= @user.country %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.city && @user.city != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;City</span>
+              &nbsp;&nbsp;<%= @user.city %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.zipcode && @user.zipcode != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;Zipcode</span>
+              &nbsp;&nbsp;<%= @user.zipcode %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.phone_number && @user.phone_number != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;Phone</span>
+              &nbsp;&nbsp;<%= @user.phone_number %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.description && @user.description != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Description</span>
+              &nbsp;&nbsp;<%= @user.description %>
+            </div>
+          </li>
+        <% end %>
+        <% if @user.availability && @user.availability != "" %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Availability</span>
+              &nbsp;&nbsp;<%= @user.availability %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- User's dogs if not current_user -->
+<% if current_user %>
+  <div class="row container">
+    <div class="col l8 m6 s12">
+      <div class="row ctr s"><h4>Dogs</h4></div>
+      <div class="row">
+        <% if @user.dogs.count != 0 then %>
+          <div class="row center-align valign-wrapper no-dogs-message-container">
+            <div class="col l12 m12 s12 valign no-dogs-message">
+              <div> No dogs yet! </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="row container main-content">
+          <% @user.dogs.each do |dog| %>
+            <div class="col s12 m12 l6">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <% if dog.photo.file? %>
+                    <%= image_tag dog.photo.url(:small), :class => "activator card-img" %>
+                  <% else %>
+                    <%= image_tag "default_dog.jpg", :class => "activator card-img" %>
+                  <% end %>
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
+                </div>
+                <div class="card-action">
+                  <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
+                   <% if @own_profile %>
+                    <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+                  <% end %>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
+                    <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+                    <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
+                  </span>
+                  <ul class="dog-info-list">
+                    <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
+                    <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
+                    <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
+                    <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
+                    <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
+                    <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
+                    <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
+                    <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
+                    <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
+                    <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
+                    <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
+                    <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+          <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
+            <a href="<%= new_dog_path %>" class="btn-floating btn-large waves-effect waves-light green accent-4 hide-on-large-only"><i class="material-icons">add</i></a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col l4 m6 s12">
+      <div class="row ctr s"><h4>Events</h4></div>
+        <% if @user.events.count == 0 then %>
+          <div class="row center-align valign-wrapper no-dogs-message-container">
+            <div class="col l12 m12 s12 valign no-events-message">
+              <div>No events yet!</div>
+            </div>
+          </div>
+        <% else %>
+          <!-- TODO(jacensherman): Add in events -->
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!--
 <div class="row container main-content">  
   <div id="profile-page-header" class="card col s12">
     <br />
@@ -11,7 +189,6 @@
   </div>
   
   <div id="profile-page-sidebar" class="col s12 m4 row">
-    <!-- Profile About  -->
     <div class="card light-blue center-align">
       <div class="card-content white-text">
         <span class="card-title">About Me </span>
@@ -78,7 +255,6 @@
               <div class="col s7 grey-text text-darken-4 right-align"><%= @user.email %></div>
             </div>
           </li>
-        <!-- <div id="email"><strong>Email:</strong>&nbsp;&nbsp;<%= @user.email %></div> -->
     
         <% if not @user.phone_number.nil? and not @user.phone_number == ""  %>
           <div id="phone_number">
@@ -89,7 +265,6 @@
               </div>
             </li>
           </div>
-        <!-- <div id="phone_number"><strong>Phone Number:</strong>&nbsp;&nbsp;<%= @user.phone_number %></div> -->
         <%end%>
       <%else%>
         <% if @user.address != nil && @user.address != ""%>
@@ -195,67 +370,4 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-=======
-
-<!--<div class="large-5 columns">    -->
-<!--   <div class="ui blue inverted top attached segment" style="overflow:hidden">-->
-<!--    <strong><%= @user.first_name %>'s Dogs:-->
-<!--   </strong>-->
-<!--  </div>-->
-
-<!--  <div class="ui bottom attached segment" id="dog-name-link">-->
-<!--  <% if @no_dogs %>-->
-<!--    <h1> No Dogs Found </h1>-->
-<!--  <% end %>-->
-<!--  <% @user.dogs.each do |dog| %>-->
-<!--  <div class="ui vertical segment">-->
-
-<!--    <div class="large-4 columns">-->
-<!--      <span class="image">-->
-<!--          <%= image_tag "default_dog.jpg" %>-->
-<!--      </span>-->
-<!--    </div>-->
-
-<!--    <div class="large-8 columns">-->
-<!--      <div class="content">-->
-<!--        <div class="ui medium header">-->
-<!--          <%= link_to dog.name, dog_path(dog.id), :method => :get %>-->
-<!--        </div>-->
-<!--        <div class="description">-->
-<!--          <%= dog.motto %>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--    </div>-->
-
-<!--    <div>-->
-<!--                  <br /> <br />-->
-<!--    </div>-->
-<!--</div>-->
-<!--  <% end %>-->
-
-
-<!--  </div>-->
-<!--  <% if @own_profile %>-->
-<!--        <div class="float right">-->
-<!--        <%= button_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "ui primary button", :method => :get %>-->
- 
-
-<!--  </div>-->
-<!--  <% end %>-->
-<!--  <% if @own_profile %>-->
-<!--        <div class="float right">-->
-        
-<!--        <%= button_to "Edit Profile", edit_user_path(@user.id), :id => "edit_user_button", :class => "ui primary button", :method => :get %>-->
-<!--      </div>-->
-<!--      <% end %>-->
-<!--<br />-->
-
-<!--</div>-->
-
-<!--</div>-->
-
-<!--</div>-->
-</div>
->>>>>>> c6d44403dace893740dc2d815e902e08ea7a59f2
+-->

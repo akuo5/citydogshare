@@ -45,7 +45,7 @@ class DogsController < ApplicationController
     @dog.user_id = current_user.id
     if @dog.save      
       add_multiple_pictures(@dog)
-      redirect_to user_path(current_user)
+      redirect_to dogs_user_path(current_user)
     else
       flash[:notice] = @dog.errors.messages
       render 'new'
@@ -68,7 +68,7 @@ class DogsController < ApplicationController
     if @dog.update_attributes(@form_filler.attributes_list(dog_params))
       delete_checked_pictures        
       add_multiple_pictures(@dog)
-      redirect_to dog_path(@dog.id)
+      redirect_to dogs_user_path(@dog.id)
     else
       flash[:notice] = @dog.errors.messages
       redirect_to edit_dog_path(@dog.id) 
