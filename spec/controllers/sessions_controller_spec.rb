@@ -65,7 +65,6 @@ describe SessionsController, :type => :controller do
       get(:login, :user => @user1, :credentials => request.env["omniauth.auth"][:credentials])
       expect(response).to redirect_to create_session_path(:user => "1")
     end
-
   end
 
   describe 'authentication fails' do 
@@ -99,13 +98,13 @@ describe SessionsController, :type => :controller do
   end
   
   
+
   
   
-  
-#   #Tests 10/19/16
-# #   RSpec.configure do |config|
-# #   config.include FacebookMacros
-# # end
+# Tests 10/19/16
+#   RSpec.configure do |config|
+#   config.include FacebookMacros
+# end
 
 
 # #:first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description, :address, :zipcode, :city, :country
