@@ -9,15 +9,16 @@ Background: user has been added to the database and logged in
     | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability   | address       | zipcode | city     | country | id |
     | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights     | 387 Soda Hall | 94720   | Berkeley | US      | 1  |
   And I am logged in
-  And I am on the users page for "Batman"
-  When I follow "Add Dog"
+  And I am on the dogs page for "Batman"
+  When I follow "Add your first dog!"
 
 Scenario: Page redirects to edit user profile if user does not have zipcode
   And I am on the users page for "Batman"
   And I follow "Edit"
   And I fill in "user_zipcode" with ""
   And I press "Save Changes"
-  And I follow "Add Dog"
+  And I follow the first "My Dogs"
+  And I follow "Add your first dog!"
   Then I should see "Edit Your Profile"
   And I should see "Please update your zipcode to add a dog."
   And I should not see "Edit Your Dog's Profile"
@@ -50,5 +51,5 @@ Scenario: create dog profile
   And I attach the file "spec/factories/images/dog.jpg" to "dog_photo"
   And I fill in "dog_availability" with "Mondays and Weekends!"
   And I push "Save Changes"
-  Then I should be on the dogs page for "Batman"
+  Then I should see "My Dogs"
 

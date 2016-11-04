@@ -51,22 +51,25 @@
 }
 
 #dog_profile_parent_pic {
-	height: 90px;
-	width: 90px;
+	height: 40%;
 	z-index: 10;
 	position: absolute;
 	bottom: 0px;
-	left: 65%;
+	left: 0px;
+}
+
+.star-container {
+	position: absolute;
+	right: 0;
+	bottom: 0;
 }
 
 #dog_profile_pic {
-	width: 200px;
 	height: 200px;
-	margin-top: 25px;
+  	object-fit: cover;
 }
 
 #profile_pics {
-	width: 200px;
 	position: relative;
 	margin: 0 auto;
 }
@@ -79,3 +82,13 @@
 	color: gold;
 }
 /* END NEW.HTML */
+
+/* BEGIN SHOW.HTML */
+.dog-info-collection .collection-item {
+  min-height: 60px;
+}
+
+.dog-info-collection .collection-item .collection-item-content {
+  margin-top: 7px;
+}
+/* END SHOW.HTML */
