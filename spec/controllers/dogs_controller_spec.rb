@@ -165,7 +165,7 @@ describe DogsController, :type => :controller do
       Dog.any_instance.stub(:valid?).and_return(true) 
       controller.stub(:current_user).and_return(@current_user)
       post :create, @params
-      response.should redirect_to user_path(@current_user)
+      response.should redirect_to dogs_user_path(@current_user)
     end
 
     it 'should redirect with bad params' do
@@ -219,7 +219,7 @@ describe DogsController, :type => :controller do
     it 'redirect to dog profile if noerrors' do 
       get :update, @params
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
-      response.should redirect_to dog_path("1")
+      response.should redirect_to "/users/1/dogs"
     end
     
     it 'should redirect to edit if errors' do
@@ -244,7 +244,7 @@ describe DogsController, :type => :controller do
     it 'should not update a dog to include params that do not exist' do 
       get :update, @params
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
-      response.should redirect_to dog_path("1")
+      response.should redirect_to "/users/1/dogs"
     end
   end
 

@@ -8,105 +8,55 @@
         <div class="card">
           <% if not current_user.nil? %>
             <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
-                <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>
-                <i class="fa fa-star-o" aria-hidden="true" id="favorite_star"></i>
-              <%end%>
-              <% else %>
-                <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}"  do%>
-                <i class="fa fa-star" aria-hidden="true" id="favorite_star"></i>
-              <%end%>
-            <% end %>
-          <%end%>
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator card-img" src="<%= dog.image %>">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
-          </div>
-          <div class="card-action">
-            <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
-            <% if not @current_user.nil? and @current_user.id == dog.user_id %>
-              <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
-            <% end %>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
-              <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
-              <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
-            </span>
-            <ul class="dog-info-list">
-              <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
-              <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
-              <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
-              <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
-              <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
-              <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
-              <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
-              <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
-              <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
-              <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
-              <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
-              <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
-            </ul>
-          </div>
+              <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>
+              <i class="fa fa-star-o" aria-hidden="true" id="favorite_star"></i>
+            <%end%>
+            <% else %>
+              <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}"  do%>
+              <i class="fa fa-star" aria-hidden="true" id="favorite_star"></i>
+            <%end%>
+          <% end %>
+        <%end%>
+        <div class="card-image waves-effect waves-block waves-light">
+          <% if dog.photo.file? %>
+            <%= image_tag dog.photo.url(:small), :class => "activator card-img" %>
+          <% else %>
+            <%= image_tag "default_dog.jpg", :class => "activator card-img" %>
+          <% end %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
+        </div>
+        <div class="card-action">
+          <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
+          <% if not @current_user.nil? and @current_user.id == dog.user_id %>
+            <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+          <% end %>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
+            <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
+            <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
+          </span>
+          <ul class="dog-info-list">
+            <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
+            <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
+            <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
+            <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
+            <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
+            <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
+            <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
+            <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
+            <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
+            <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
+            <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
+            <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
+          </ul>
         </div>
       </div>
-    <% end %>
-
-    <!--  <div class="large-3 columns" style="padding: 0">-->
-        <!-- <span class="image"> -->
-    <!--                <div id="photo"><% if dog.photo.file? %>-->
-    <!--      <%= image_tag dog.photo.url(:medium) %>-->
-    <!--    <% else %>-->
-    <!--      <%= image_tag "default_dog.jpg" %>-->
-    <!--    <% end %></div>-->
-        <!-- </span> -->
-    <!--  </div>-->
-
-    <!--  <div class="large-9 columns" style="padding-right: 0">-->
-    <!--    <div class="content">-->
-    <!--      <div class="ui medium header" style="margin-bottom: 0">-->
-    <!--        <%= link_to dog.name, dog_path(dog) %>  -->
-    <!--      <% if not current_user.nil? %>-->
-    <!--      <span class="right floated stars">-->
-    <!--        <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>-->
-    <!--          <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>-->
-    <!--          <i class="empty icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="empty star icon yellow large"></i>-->
-    <!--          <%end%>-->
-    <!--        <%- else -%>-->
-    <!--          <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}" do%>-->
-    <!--          <i class="icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="star icon yellow large"></i>-->
-    <!--          <%end%>-->
-    <!--        <%- end -%>-->
-    <!--      </span>-->
-    <!--      <%end%>-->
-    <!--      </div>-->
-    <!--      <div class="age">-->
-    <!--        <b><%= dog.age_caption %></b>-->
-    <!--      </div>-->
-    <!--      <span class="right floated" style="margin-right: 5%">-->
-    <!--        <%= dog.owner.zipcode %>-->
-    <!--      </span>-->
-    <!--      <div class="attributes">-->
-    <!--        <b><%= dog.tags %></b>-->
-    <!--      </div>-->
-    <!--      <div class="description">-->
-    <!--        <%= dog.motto %>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="extra content">-->
-    <!--      <% unless dog.availability == "" %>-->
-    <!--      <i class="wait icon"></i>-->
-    <!--      <%= dog.availability %>-->
-    <!--      <% end %>-->
-    <!--    </div>-->
-    <!--    <% if dog.future_events? %>-->
-    <!--    <b>Next event:</b> <%= dog.future_events.first.start_date.strftime("%m/%d/%Y") %>-->
-    <!--    <% end %>-->
-    <!--  </div>-->
-
-    <!--</div>-->
-    <% end %>
+    </div>
+  <% end %>
+  <% end %>
 <% else %>
   No starred dogs.
 <%end%>

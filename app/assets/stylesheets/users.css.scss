@@ -16,6 +16,65 @@
   width: 90%;
 }
 
+.user-action-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.speech-bubble {
+  border-radius: 2px;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 16px;
+  min-height: 60px;
+}
+.speech-bubble-content {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.speech-bubble-content .status-icon  {
+  float: left;
+  height: 32px;
+  display: table-cell;
+}
+.speech-bubble-content .status-text {
+  vertical-align: bottom;
+  display: table-cell;
+  padding-top: 5px;
+}
+.user-info-collection .collection-item {
+  min-height: 60px;
+}
+
+.user-info-collection .collection-item .collection-item-content {
+  margin-top: 7px;
+}
+
+@media only screen and (max-width : 600px) {
+  .ctr.s {
+    text-align: center;
+  }
+}
+
+.no-dogs-message {
+  width: 100%;
+  background-color: #EEEEEE;
+  height: 60px;
+  vertical-align: middle;
+}
+.no-dogs-message div {
+  margin-top: 16px;
+}
+.no-events-message {
+  width: 100%;
+  background-color: #EEEEEE;
+  height: 60px;
+  vertical-align: middle;
+}
+.no-events-message div {
+  margin-top: 16px;
+}
+
 .add-dog-card {
   height: 381.5px;
   margin-top: 7.5px;
@@ -44,23 +103,6 @@
 
 strong {
   font-weight: 900;
-}
-
-#dog_profile_pic {
-	width: 200px;
-	height: 200px;
-	margin-top: 25px;
-}
-
-#user_profile_name {
-	font-size: 50px;
-	line-height: 60px;
-}
-
-#edit_dog_pencil {
-  position:absolute;
-  right: 10px;
-  color: white;
 }
 
 #add_dog_plus {
