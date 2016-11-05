@@ -7,6 +7,7 @@
  *
  */
 
+
 (function($) {
 
 /*global window, jQuery, Galleria */
