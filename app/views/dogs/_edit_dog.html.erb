@@ -1,7 +1,7 @@
 <% notice = flash[:notice] %>
 
 <div class="container">
-  <div class="row"><br><h4>Edit Your Dogs Progile</h4><br></div>
+  <div class="row"><br><h4>Edit Your Dog's Profile</h4><br></div>
   <%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
     <div class="row">
       <div id="name" class="input-field col s12 m12 l6 left-col">
@@ -64,9 +64,9 @@
       </div>
       <div id="fixed" class="input-field col s12 m12 l6 right-col">
         <% if @dog.fixed %>
-          <%= select :dog, :fixed, { "Yes"=>true, "No"=>false}, {:selected => "Yes"}, :class => "validate white" %>
+          <%= select :dog, :fixed, { "Yes"=>true, "No"=>false}, {:selected => true}, :class => "validate white" %>
         <% else %>
-          <%= select :dog, :fixed, { "Yes"=>true, "No"=>false}, {:selected => "No"}, :class => "validate white" %>
+          <%= select :dog, :fixed, { "Yes"=>true, "No"=>false}, {:selected => false}, :class => "validate white" %>
         <% end %>
         <label for="fixed" class="<%= notice and notice[:fixed] ? "invalid" : "valid" %>">
           Is your dog spayed / neutered? <strong class ="red-text">*</strong>
@@ -74,9 +74,9 @@
       </div>
       <div id="chipped" class="input-field col s12 m12 l6 left-col">
         <% if @dog.chipped %>
-          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:selected => "Yes"}, :class => "validate white" %>
+          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:selected => true}, :class => "validate white" %>
         <% else %>
-          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:selected => "No"}, :class => "validate white" %>
+          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:selected => false}, :class => "validate white" %>
         <% end %>
         <label for="chipped" class="<%= notice and notice[:chipped] ? "invalid" : "valid" %>">
           Is your dog chipped?  <strong class ="red-text">*</strong>
@@ -86,9 +86,9 @@
         <% if @dog.shots_to_date == nil %>
           <%= select :dog, :shots_to_date, { "Yes"=>true, "No"=>false}, {:include_blank => "Select one", :selected => "Select one"}, :class => "validate white" %>
         <% elsif @dog.shots_to_date == true %>
-          <%= select :dog, :shots_to_date, { "Yes"=>true, "No"=>false}, {:include_blank => "Select one", :selected => "Yes"}, :class => "validate white" %>
+          <%= select :dog, :shots_to_date, { "Yes"=>true, "No"=>false}, {:selected => true}, :class => "validate white" %>
         <% else %>
-          <%= select :dog, :shots_to_date, { "Yes"=>true, "No"=>false}, {:include_blank => "Select one", :selected => "No"}, :class => "validate white" %>
+          <%= select :dog, :shots_to_date, { "Yes"=>true, "No"=>false}, {:selected => false}, :class => "validate white" %>
         <% end %>
         <label for="shots_to_date">Are all your dog's shots up to date?</label>
       </div>
