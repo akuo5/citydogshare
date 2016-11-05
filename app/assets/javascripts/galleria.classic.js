@@ -11,6 +11,7 @@
 
 /*global window, jQuery, Galleria */
 
+/*
 Galleria.addTheme({
     name: 'classic',
     author: 'Galleria',
@@ -98,3 +99,4 @@ Galleria.addTheme({
 });
 
 }(jQuery));
+*/
