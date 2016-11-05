@@ -73,12 +73,10 @@
         </label>
       </div>
       <div id="chipped" class="input-field col s12 m12 l6 left-col">
-        <% if @dog.chipped == nil %>
-          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:include_blank => "Select one", :selected => "Select one"}, :class => "validate white" %>
-        <% elsif @dog.chipped == true %>
-          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:include_blank => "Select one", :selected => "Yes"}, :class => "validate white" %>
+        <% if @dog.chipped %>
+          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:selected => "Yes"}, :class => "validate white" %>
         <% else %>
-          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:include_blank => "Select one", :selected => "No"}, :class => "validate white" %>
+          <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, {:selected => "No"}, :class => "validate white" %>
         <% end %>
         <label for="chipped" class="<%= notice and notice[:chipped] ? "invalid" : "valid" %>">
           Is your dog chipped?  <strong class ="red-text">*</strong>
