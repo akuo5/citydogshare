@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col l3 m4 s12" style="text-align: center;">
       <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
-      <% if current_user %>
+      <% if @own_profile %>
         <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
         <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
       <% end %>
@@ -99,7 +99,7 @@
 </div>
 
 <!-- User's dogs if not current_user -->
-<% if !current_user %>
+<% if !@own_profile %>
   <div class="row container">
     <div class="col l8 m6 s12">
       <div class="row ctr s"><h4>Dogs</h4></div>
