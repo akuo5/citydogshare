@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     if !@current_user.nil? and @current_user.id != params[:id].to_i
       redirect_to(dogs_user_path(@current_user))
     end
+    # byebug
     @dogs = User.find_by_id(params[:id]).dogs
   end
 
