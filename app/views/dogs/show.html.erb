@@ -85,7 +85,7 @@
             </div>
           </li>
         <% end %>
-        <% if @dog.energy_level.value && @dog.energy_level.value != "" %>
+        <% if @dog.energy_level && @dog.energy_level.value && @dog.energy_level.value != "" %>
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-flash" aria-hidden="true"></i> &nbsp; Energy Level</span>
