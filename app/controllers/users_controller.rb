@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   
   def dogs
     if !@current_user.nil? and @current_user.id != params[:id].to_i
-      redirect_to(dogs_user_path(@current_user))
+      redirect_to(dogs_user_path(@current_user.id))
     end
     @dogs = User.find_by_id(params[:id]).dogs
   end
