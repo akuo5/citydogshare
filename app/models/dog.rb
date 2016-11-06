@@ -88,7 +88,7 @@ class Dog < ActiveRecord::Base
   end
   
   def readable_energy_level
-    self.energy_level ? self.energy_level.value.capitalize : nil
+    self.energy_level ? self.energy_level.value.capitalize : ""
   end
 
   def readable_mixes
@@ -105,6 +105,22 @@ class Dog < ActiveRecord::Base
 
   def readable_barks
     self.barks.map {|b| b.value.capitalize}
+  end
+  
+  def readable_fixed
+    self.fixed ? "Yes" : "No"
+  end
+  
+  def readable_chipped
+    self.chipped ? "Yes" : "No"
+  end
+  
+  def readable_shots_to_date
+    if !self.shots_to_date.nil?
+      self.shots_to_date ? "Yes" : "No"
+    else
+      "Unknown"
+    end
   end
 
   def address
