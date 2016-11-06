@@ -19,7 +19,7 @@
               <%end%>
               <% else %>
                 <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
-                <i class="fa fa-star large" aria-hidden="true" id="dog_profile_star"></i>
+                <i class="fa fa-star medium" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
             <% end %>
           <%end%>
@@ -33,7 +33,7 @@
     <div class="col l9 m8 s12 s br-35">
       <div class="speech-bubble light-blue darken-3">
         <div class="speech-bubble-content white-text">
-          <div class="status-icon"><i class="fa fa-commenting-o large" aria-hidden="true">&nbsp;&nbsp;</i></div>
+          <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
           <div class="status-text"><%= @dog.motto %></div>
         </div>
         <div class="speech-carrot blue"></div>
