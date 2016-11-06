@@ -19,7 +19,7 @@
               <%end%>
               <% else %>
                 <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
-                <i class="fa fa-star small" aria-hidden="true" id="dog_profile_star"></i>
+                <i class="fa fa-star large" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
             <% end %>
           <%end%>
@@ -33,7 +33,7 @@
     <div class="col l9 m8 s12 s br-35">
       <div class="speech-bubble light-blue darken-3">
         <div class="speech-bubble-content white-text">
-          <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
+          <div class="status-icon"><i class="fa fa-commenting-o large" aria-hidden="true">&nbsp;&nbsp;</i></div>
           <div class="status-text"><%= @dog.motto %></div>
         </div>
         <div class="speech-carrot blue"></div>
@@ -85,7 +85,7 @@
             </div>
           </li>
         <% end %>
-        <% if @dog.energy_level && (@dog.energy_level.value && @dog.energy_level.value != "") %>
+        <% if @dog.energy_level.value && @dog.energy_level.value != "" %>
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-flash" aria-hidden="true"></i> &nbsp; Energy Level</span>
@@ -98,6 +98,14 @@
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-thumbs-up" aria-hidden="true"></i> &nbsp; Likes</span>
               &nbsp;&nbsp;<%= @dog.readable_likes.map(&:capitalize).join(", ") %>
+            </div>
+          </li>
+        <% end %>
+        <% if @dog.readable_barks && @dog.readable_barks != [] %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-volume-up" aria-hidden="true"></i> &nbsp; Barks</span>
+              &nbsp;&nbsp;<%= @dog.readable_barks.map(&:capitalize).join(", ") %>
             </div>
           </li>
         <% end %>

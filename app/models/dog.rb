@@ -103,6 +103,10 @@ class Dog < ActiveRecord::Base
     self.personalities.map {|p| p.value}
   end
 
+  def readable_barks
+    self.barks.map {|b| b.value}
+  end
+
   def address
     user = self.owner
     "#{user.zipcode}"
