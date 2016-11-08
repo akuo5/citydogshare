@@ -207,17 +207,16 @@ describe DogsController, :type => :controller do
     before(:each) do
       Dog.any_instance.stub(:geocode)
       @dog = FactoryGirl.create(:dog)
-      @current_user = User.create()
+      @current_user = User.new(:id => 1, :uid => "12345")
       @params = {  "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
                   "availability"=>"", "mixes" =>["Australian Shepherd"], "personalities"=>["curious"],
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}}, "update_dog_button"=>"Save Changes"}
+      @session = { "user_id" => @current_user.uid }
     end
-    
-    # EDIT PAGE NEEDS WORK
 
     it 'redirect to dog profile if noerrors' do 
-      get :update, @params
+      get :update, @params, @session
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
       response.should redirect_to "/users/1/dogs"
     end
@@ -233,16 +232,16 @@ describe DogsController, :type => :controller do
     before(:each) do
       Dog.any_instance.stub(:geocode)
       @dog = FactoryGirl.create(:dog)
-      @current_user = User.create()
-      @params = {  "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
+      @current_user = User.new(:id => 1, :uid => "12345")
+      @params = { "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
                   "availability"=>"", "mixes" =>["Australian Shepherd", "Tabby"], "personalities"=> ["curious", "yellow"],
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1", "you!"=>"1"}}, "update_dog_button"=>"Save Changes"}
+      @session = { "user_id" => @current_user.uid }
     end
-    # EDIT PAGE NEEDS WORK
-    
+
     it 'should not update a dog to include params that do not exist' do 
-      get :update, @params
+      get :update, @params, @session
       expect(controller.instance_variable_get(:@dog)).to eql(@dog)
       response.should redirect_to "/users/1/dogs"
     end
@@ -268,6 +267,5 @@ describe DogsController, :type => :controller do
       @current_user = User.create(:id => 1)
     end
   end
-
 
 end

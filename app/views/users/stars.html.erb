@@ -6,6 +6,7 @@
       <% if current_user.starred_dogs.exists?(id: dog.id) %>
         <div class="col s12 m6 l4">
         <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
           <% if not current_user.nil? %>
             <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
               <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>
@@ -17,7 +18,7 @@
             <%end%>
           <% end %>
         <%end%>
-        <div class="card-image waves-effect waves-block waves-light">
+        
           <% if dog.photo.file? %>
             <%= image_tag dog.photo.url(:large), :class => "activator card-img" %>
           <% else %>
@@ -47,7 +48,7 @@
             <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
             <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
             <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
-            <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
+              <li class="dog-info-list-item"><strong>Barks</strong> <%= dog.readable_barks.join(", ") %></li>
             <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
             <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
             <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>

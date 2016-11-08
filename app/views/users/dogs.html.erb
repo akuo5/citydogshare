@@ -32,18 +32,39 @@
               <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
             </span>
             <ul class="dog-info-list">
-              <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
-              <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
+              <% if dog.motto != "" %>
+                <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
+              <% end %>
+              <% if dog.age != Date.today.year %>
+                <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
+              <% end %>
               <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
               <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
-              <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
+              <li class="dog-info-list-item"><strong>Size</strong> <%= dog.readable_size %></li>
               <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
-              <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
-              <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
-              <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
-              <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
-              <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
-              <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
+              <% if dog.readable_energy_level != "" %>
+                <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.readable_energy_level %></li>
+              <% end %>
+              <% if !dog.readable_likes.empty? %>
+                <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
+              <% end %>
+              <% if !dog.readable_barks.empty? %>
+                <li class="dog-info-list-item"><strong>Barks</strong> <%= dog.readable_barks.join(", ") %></li>
+              <% end %>
+              <li class="dog-info-list-item"><strong>Fixed</strong> <%= dog.readable_fixed %></li>
+              <li class="dog-info-list-item"><strong>Chipped</strong> <%= dog.readable_chipped %></li>
+              <% if !dog.shots_to_date.nil? %>
+                <li class="dog-info-list-item"><strong>Shots to Date</strong> <%= dog.readable_shots_to_date %></li>
+              <% end %>
+              <% if dog.health != "" %>
+                <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
+              <% end %>
+              <% if dog.description != "" %>
+                <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
+              <% end %>
+              <% if dog.availability != "" %>
+                <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
+              <% end %>
             </ul>
           </div>
         </div>

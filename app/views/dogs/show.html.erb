@@ -19,7 +19,7 @@
               <%end%>
               <% else %>
                 <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
-                <i class="fa fa-star small" aria-hidden="true" id="dog_profile_star"></i>
+                <i class="fa fa-star medium" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
             <% end %>
           <%end%>
@@ -85,7 +85,7 @@
             </div>
           </li>
         <% end %>
-        <% if @dog.energy_level && (@dog.energy_level.value && @dog.energy_level.value != "") %>
+        <% if @dog.energy_level && @dog.energy_level.value && @dog.energy_level.value != "" %>
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-flash" aria-hidden="true"></i> &nbsp; Energy Level</span>
@@ -98,6 +98,14 @@
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-thumbs-up" aria-hidden="true"></i> &nbsp; Likes</span>
               &nbsp;&nbsp;<%= @dog.readable_likes.map(&:capitalize).join(", ") %>
+            </div>
+          </li>
+        <% end %>
+        <% if @dog.readable_barks && @dog.readable_barks != [] %>
+          <li class="collection-item">
+            <div class="collection-item-content">
+              <span class="grey-text"><i class="fa fa-volume-up" aria-hidden="true"></i> &nbsp; Barks</span>
+              &nbsp;&nbsp;<%= @dog.readable_barks.map(&:capitalize).join(", ") %>
             </div>
           </li>
         <% end %>

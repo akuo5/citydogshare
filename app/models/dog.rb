@@ -79,16 +79,16 @@ class Dog < ActiveRecord::Base
   end
 
 
-  # def energy_level
-  #   self.energy_level_id != nil ? EnergyLevel.find(self.energy_level_id).value : "Not specified"
-  # end
-
-  # def size
-  #   self.size_id != nil ? Size.find(self.size_id).value : "Not specified"
-  # end
-
   def owner
     User.find(self.user_id)
+  end
+  
+  def readable_size
+    self.size.value.capitalize
+  end
+  
+  def readable_energy_level
+    self.energy_level ? self.energy_level.value.capitalize : ""
   end
 
   def readable_mixes
@@ -96,11 +96,31 @@ class Dog < ActiveRecord::Base
   end
 
   def readable_likes
-    self.likes.map {|l| l.value}
+    self.likes.map {|l| l.value.capitalize}
   end
 
   def readable_personalities
-    self.personalities.map {|p| p.value}
+    self.personalities.map {|p| p.value.capitalize}
+  end
+
+  def readable_barks
+    self.barks.map {|b| b.value.capitalize}
+  end
+  
+  def readable_fixed
+    self.fixed ? "Yes" : "No"
+  end
+  
+  def readable_chipped
+    self.chipped ? "Yes" : "No"
+  end
+  
+  def readable_shots_to_date
+    if !self.shots_to_date.nil?
+      self.shots_to_date ? "Yes" : "No"
+    else
+      "Unknown"
+    end
   end
 
   def address
