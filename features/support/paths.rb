@@ -32,8 +32,10 @@ module NavigationHelpers
       '/events'
     when /^the edit event page$/
       '/events/1/edit'
-
-
+    when /^dog api$/
+      '/sogs/1/info'
+    when /^user api$/
+      '/users/1/info'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

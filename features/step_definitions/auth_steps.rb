@@ -51,6 +51,18 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   end
 end
 
+Given /I make a request to the user profile api with the id set to "([^"]*)"/ do |id|
+  visit path_to("user api")
+end
+
+Given /I make a request to the dog profile api with the id set to "([^"]*)"/ do |id|
+  visit path_to("dog api")
+end
+
+Then "I should be given a Json string" do
+  assert_equal page.html[0,1], "{" 
+end
+
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
   if page.respond_to? :should
     page.should_not have_content(text)
