@@ -30,9 +30,18 @@ Given /the following dogs exist/ do |dogs_table|\
     new_dog.longitude = dog[:longitude]
     new_dog.fixed = dog[:fixed]
     new_dog.chipped = dog[:chipped]
+    new_dog.availability = dog[:availability]
     new_dog.photo = File.new(Rails.root + 'spec/factories/images/dog.jpg')
     new_dog.save!
   end
+end
+
+Given /^I make a request to see all dogs$/ do
+  visit path_to("dogs api")
+end
+
+Given /^I make a request to see all available dogs$/ do
+  visit path_to("available dogs api")
 end
 
 When /^(?:|I )do not care about dog location/ do
@@ -116,7 +125,6 @@ end
 When(/^I select "([^"]*)"$/) do |value|
   page.find("option[value='#{value}']").click
 end
-
 
 And /^I have created an event for "([^"]*)" (today|3 days ago)$/ do |dog, time|
   new_event = Event.new()

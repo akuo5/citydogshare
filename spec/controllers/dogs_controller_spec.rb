@@ -267,5 +267,86 @@ describe DogsController, :type => :controller do
       @current_user = User.create(:id => 1)
     end
   end
+  
+  describe 'makes a call to the api to get a single dogs info' do
+    before(:each) do
+      @params = { :id => 1 }
+      @dog = FactoryGirl.create(:dog)
+      Dog.stub(:find).and_return(@dog)
+      @dog.stub(:to_json).and_return(0)
+    end
+    it 'should show an error when the dog does not exist' do
+      @expected = { "success" => false, "message" => "Dog not found" }.to_json
+      Dog.stub(:exists?).and_return(false)
+      get :info, @params
+      response.body.should == @expected
+    end
+    it 'should show info when the dog does exist' do
+      @expected = { 
+        "success" => true, 
+        "message" => "Dog found", 
+        "dog" => 0
+      }.to_json
+      Dog.stub(:exists?).and_return(true)
+      get :info, @params
+      response.body.should == @expected
+    end
+  end
+
+  describe 'makes a call to the api to get multiple dogs info' do
+    before(:each) do
+      @dog = FactoryGirl.create(:dog)
+      Dog.stub(:all).and_return([@dog])
+    end
+    it 'shows all dogs if no params are set' do
+      @expected = { 
+        "success" => true, 
+        "message" => "1 dog(s) found", 
+        "dogs" => [{ :name => "Spock", :id => 1 }]
+      }.to_json
+      get :all_info, {}
+      response.body.should == @expected
+    end
+    it 'shows available dog if the available param is set to true and the dog is available' do
+      @expected = { 
+        "success" => true, 
+        "message" => "1 dog(s) found", 
+        "dogs" => [{ :name => "Spock", :id => 1 }]
+      }.to_json
+      @dog.stub(:available).and_return(true)
+      get :all_info, { :available => "true" }
+      response.body.should == @expected
+    end
+    it 'doesnt show available dog if the available param is set to true and the dog isnt available' do
+      @expected = { 
+        "success" => true, 
+        "message" => "0 dog(s) found", 
+        "dogs" => []
+      }.to_json
+      @dog.stub(:available).and_return(false)
+      get :all_info, { :available => "true" }
+      response.body.should == @expected
+    end
+    it 'doesnt show available dog if the available param is set to false' do
+      @expected = { 
+        "success" => true, 
+        "message" => "0 dog(s) found", 
+        "dogs" => []
+      }.to_json
+      @dog.stub(:available).and_return(true)
+      get :all_info, { :available => "false" }
+      response.body.should == @expected
+    end
+    it 'shows unavailable dog if the available param is set to false' do
+      @expected = { 
+        "success" => true, 
+        "message" => "1 dog(s) found",
+        "dogs" => [{ :name => "Spock", :id => 1 }]
+      }.to_json
+      @dog.stub(:available).and_return(false)
+      get :all_info, { :available => "false" }
+      response.body.should == @expected
+    end
+  end
 
 end

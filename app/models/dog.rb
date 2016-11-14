@@ -131,6 +131,10 @@ class Dog < ActiveRecord::Base
     video.split(%r{v=|&})[1]
   end
   
+  def available
+    self.availability && self.availability != "" ? true : false
+  end
+  
   def to_form_hash
     return {
       :name => self.name,
@@ -153,7 +157,8 @@ class Dog < ActiveRecord::Base
   end
   
   def to_json
-    dog_hash = {
+    return {
+      :id => self.id,
       :name => self.name,
       :dob => self.dob.year,
       :size => self.readable_size,
@@ -169,8 +174,8 @@ class Dog < ActiveRecord::Base
       :health => self.health,
       :status => self.motto,
       :description => self.description,
-      :availability => self.availability,
-      :parent => User.find(self.user_id).to_json
+      :available => self.available,
+      :parent => self.user_id
     }
   end
 

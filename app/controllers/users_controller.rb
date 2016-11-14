@@ -31,6 +31,21 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  # TODO(jacensherman): Add tests for this
+  def info
+    id = params[:id]
+    if !User.exists?(id)
+      render :json => { "success" => false, "message" => "User not found"}
+    else
+      @user = User.find(id)
+      render :json => {
+        "success" => true,
+        "message" => "User found",
+        "user" => @user.to_json
+      }
+    end
+  end
 
   # This destroys the user and signs them out, taking them to the home page
   def destroy

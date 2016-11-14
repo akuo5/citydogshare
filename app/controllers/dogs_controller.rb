@@ -19,6 +19,41 @@ class DogsController < ApplicationController
     # request.safe_location.postal_code
     '94704'
   end
+  
+  # TODO(jacensherman): Add tests for this
+  def info
+    id = params[:id]
+    if !Dog.exists?(id)
+      render :json => {
+        "success" => false,
+        "message" => "Dog not found"
+      }
+    else
+      @dog = Dog.find(id)
+      render :json => { 
+        "success" => true,
+        "message" => "Dog found",
+        "dog" => @dog.to_json
+      }
+    end
+  end
+  
+  # Returns all dogs that satisfy avaiable filters, which include:
+  # available=true/false, more upon request
+  def all_info
+    filtered_dogs_hash = Dog.all.select { |dog|
+      valid_dog = true
+      if params[:available] == "true" && !dog.available then valid_dog = false end
+      if params[:available] == "false" && dog.available then valid_dog = false end
+      valid_dog
+    }.map { |dog| { :name => dog.name, :id => dog.id } }
+    
+    render :json => {
+      :success => true,
+      :message => filtered_dogs_hash.size.to_s + " dog(s) found",
+      :dogs => filtered_dogs_hash
+    }
+  end
 
   def new
     # @form_filler = DogViewHelper.new(nil, nil, false)
