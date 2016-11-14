@@ -12,8 +12,11 @@ Citydogshare::Application.routes.draw do
   ## User Routes ##
   resources :users, only: [:show, :edit, :update, :destroy, :index]
   post 'users/:id/edit', to: 'users#edit'
+  get 'users/:id/info', to: "users#info", as: "user_info"
 
   ## Dog Routes ##
+  get 'dogs/:id/info', to: "dogs#info", as: "dog_info"
+  get 'dogs/info', to: "dogs#all_info", as: "dogs_info"
   resources :dogs
 
   resources :events, :only => [:index, :new, :create, :edit, :update, :show, :destroy]

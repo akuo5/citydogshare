@@ -150,5 +150,30 @@ describe UsersController, :type => :controller do
       get :dogs, @params
     end
   end
+  
+  describe 'makes a call to the api to get a single users info' do
+    before(:each) do
+      @params = { :id => 1 }
+      @user = FactoryGirl.create(:user)
+      User.stub(:find).and_return(@user)
+      @user.stub(:to_json).and_return(0)
+    end
+    it 'should show an error when the dog does not exist' do
+      @expected = { "success" => false, "message" => "User not found" }.to_json
+      User.stub(:exists?).and_return(false)
+      get :info, @params
+      response.body.should == @expected
+    end
+    it 'should show info when the dog does exist' do
+      @expected = { 
+        "success" => true, 
+        "message" => "User found", 
+        "user" => 0
+      }.to_json
+      User.stub(:exists?).and_return(true)
+      get :info, @params
+      response.body.should == @expected
+    end
+  end
 
 end

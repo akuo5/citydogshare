@@ -16,15 +16,13 @@ Background: user has been added to the database and logged in
     | Bubba    | Aidi             | 3   | medium (16-40)  | Female   | dogs (all) | some    | lover       | 2       | 37.8611110 | -122.3079169 | true  | true    |
 
 Scenario: Get the user's profile information
-  Given PENDING
   Given I make a request to the user profile api with the id set to "1"
-  Then I should be given a Json string
-  And I should see "Bruce Wayne"
+  Then I should see "Bruce Wayne"
   And I should see "387 Soda Hall"
   And I should see "Berkeley"
   And I should see "94720"
   And I should see "US"
-  And I should see "Male"
+  And I should see "male"
   And I should see "looking"
   And I should see "(555)228-6261"
   And I should see "not_batman@wayneenterprises.com"

@@ -32,6 +32,24 @@ describe User do
     @user.valid?
     @user.errors.should have_key(:phone_number)
   end
+  
+  it 'should return a user in the correct json format' do
+    json_obj = @user.to_json
+    expect(json_obj[:id]).to eq(@user.id)
+    expect(json_obj[:full_name]).to eq(@user.full_name)
+    expect(json_obj[:first_name]).to eq(@user.first_name)
+    expect(json_obj[:last_name]).to eq(@user.last_name)
+    expect(json_obj[:email]).to eq(@user.email)
+    expect(json_obj[:status]).to eq(@user.status)
+    expect(json_obj[:address]).to eq(@user.address)
+    expect(json_obj[:zipcode]).to eq(@user.zipcode)
+    expect(json_obj[:city]).to eq(@user.city)
+    expect(json_obj[:country]).to eq(@user.country)
+    expect(json_obj[:phone_number]).to eq(@user.phone_number)
+    expect(json_obj[:availability]).to eq(@user.availability)
+    expect(json_obj[:description]).to eq(@user.description)
+    expect(json_obj[:gender]).to eq(@user.gender)
+  end
 
   it 'should save on valid phone format 1' do
     @user.phone_number = "(510)123-1234"
