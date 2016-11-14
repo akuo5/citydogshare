@@ -5,6 +5,7 @@ class DogViewHelper
   DEFAULT_RADIUS = 100
   CHECKBOX_CRITERIA = [:gender, :personality, :energy_level, :size, :age, :like]
 
+  
   def initialize(current_user, ip_zipcode, index)
     @values = {}
     @values[:mix] = index ? "All Mixes" : []
@@ -61,6 +62,7 @@ class DogViewHelper
     dog_attributes.merge(new_attrs)
   end
 
+  # REMOVE WHEN DONE
   def dog_view_update(dog)
     ## Fills edit form with dog's current values
     @dog = Dog.find(dog)

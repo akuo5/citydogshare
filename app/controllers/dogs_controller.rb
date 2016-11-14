@@ -21,16 +21,17 @@ class DogsController < ApplicationController
   end
 
   def new
-    @form_filler = DogViewHelper.new(nil, nil, false)
+    # @form_filler = DogViewHelper.new(nil, nil, false)
+    
     @action = :create
     @method = :post
-
+    @dog_form_values = {}
+    
     unless current_user.zipcode != nil and current_user.zipcode != "" 
       flash[:notice] = "Please update your zipcode to add a dog."
       redirect_to edit_user_path(current_user)
     end
   end
-
 
   def show
     id = params[:id]
@@ -48,15 +49,15 @@ class DogsController < ApplicationController
       redirect_to dogs_user_path(current_user)
     else
       flash[:notice] = @dog.errors.messages
+      @dog_form_values = dog_params
       render 'new'
     end
   end
 
   def edit
-    @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
+    @dog_form_values = @dog.to_form_hash
     @pictures = @dog.pictures
-    @form_filler.dog_view_update(@dog)
     @action = :update
     @method = :put
   end
@@ -66,7 +67,7 @@ class DogsController < ApplicationController
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures
     if @dog.update_attributes(@form_filler.attributes_list(dog_params))
-      delete_checked_pictures        
+      delete_checked_pictures
       add_multiple_pictures(@dog)
       redirect_to dogs_user_path(@current_user.id)
     else
@@ -110,6 +111,7 @@ class DogsController < ApplicationController
         param.delete(val)
       end
     end
+    return param
   end
 
   def add_multiple_pictures(myDog)

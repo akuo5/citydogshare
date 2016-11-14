@@ -78,7 +78,6 @@ class Dog < ActiveRecord::Base
     readable_personalities.join(", ") 
   end
 
-
   def owner
     User.find(self.user_id)
   end
@@ -130,7 +129,49 @@ class Dog < ActiveRecord::Base
 
   def youtube_id
     video.split(%r{v=|&})[1]
-
+  end
+  
+  def to_form_hash
+    return {
+      :name => self.name,
+      :dob => self.dob.year,
+      :size => self.size.id,
+      :gender => self.gender,
+      :mixes => self.readable_mixes,
+      :personalities => self.readable_personalities.map {|val| val.downcase},
+      :energy_level => self.energy_level ? self.energy_level.id : 0,
+      :likes => self.readable_likes.map {|val| val.downcase},
+      :barks => self.readable_barks,
+      :fixed => self.fixed,
+      :chipped => self.chipped,
+      :shots_to_date => self.shots_to_date,
+      :health => self.health,
+      :status => self.motto,
+      :description => self.description,
+      :availability => self.availability,
+    }
+  end
+  
+  def to_json
+    dog_hash = {
+      :name => self.name,
+      :dob => self.dob.year,
+      :size => self.readable_size,
+      :gender => self.gender,
+      :mixes => self.readable_mixes,
+      :personalities => self.readable_personalities,
+      :energy_level => self.readable_energy_level,
+      :likes => self.readable_likes,
+      :barks => self.readable_barks,
+      :fixed => self.fixed,
+      :chipped => self.chipped,
+      :shots_to_date => self.shots_to_date,
+      :health => self.health,
+      :status => self.motto,
+      :description => self.description,
+      :availability => self.availability,
+      :parent => User.find(self.user_id).to_json
+    }
   end
 
   ## Attribute Possible Values Functions

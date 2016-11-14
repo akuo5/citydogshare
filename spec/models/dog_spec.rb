@@ -88,11 +88,41 @@ describe Dog do
     expect(@dog.tags).to eq("1, 2")
   end
   
-  it 'shuld return a list of genders' do 
+  it 'should return a list of genders' do 
     expect(Dog.genders).to be_a_kind_of(Array)
   end
   
-  it 'shuld return a list of age ranges' do 
+  it 'should return a list of age ranges' do 
     expect(Dog.age_ranges).to be_a_kind_of(Array)
+  end
+  
+  it 'should return a dog as a form-compatible hash' do
+    # throw @dog.to_form_hash
+    form_hash = @dog.to_form_hash
+    expect(form_hash[:name]).to eq("Spock")
+    expect(form_hash[:dob]).to eq(2011)
+    expect(form_hash[:size]).to eq(1)
+    expect(form_hash[:gender]).to eq("Male")
+    expect(form_hash[:mixes]).to eq(["Affenpinscher"])
+    expect(form_hash[:personalities]).to eq(["anxious"])
+    expect(form_hash[:energy_level]).to eq(1)
+    expect(form_hash[:fixed]).to eq(false)
+    expect(form_hash[:chipped]).to eq(false)
+    expect(form_hash[:status]).to eq("Live long and play fetch.")
+  end
+  
+  it 'should return a dog in the correct json format' do
+    json_obj = @dog.to_json
+    expect(json_obj[:name]).to eq("Spock")
+    expect(json_obj[:dob]).to eq(2011)
+    expect(json_obj[:size]).to eq("Small (0-15)")
+    expect(json_obj[:gender]).to eq("Male")
+    expect(json_obj[:mixes]).to eq(["Affenpinscher"])
+    expect(json_obj[:personalities]).to eq(["Anxious"])
+    expect(json_obj[:energy_level]).to eq("High")
+    expect(json_obj[:fixed]).to eq(false)
+    expect(json_obj[:chipped]).to eq(false)
+    expect(json_obj[:status]).to eq("Live long and play fetch.")
+    expect(json_obj[:parent]).to_not eq(nil)
   end
 end
