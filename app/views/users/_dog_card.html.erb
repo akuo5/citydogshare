@@ -23,7 +23,9 @@
     </div>
     <div class="card-action">
       <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
-      <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+      <% if current_user and current_user.dogs.exists?(id: dog.id) -%>
+        <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
+      <% end %>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
