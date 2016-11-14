@@ -113,46 +113,7 @@
         <% else %>
           <div class="row container main-content">
           <% @user.dogs.each do |dog| %>
-            <div class="col s12 m12 l6">
-              <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <% if dog.photo.file? %>
-                    <%= image_tag dog.photo.url(:large), :class => "activator card-img" %>
-                  <% else %>
-                    <%= image_tag "default_dog.jpg", :class => "activator card-img" %>
-                  <% end %>
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
-                </div>
-                <div class="card-action">
-                  <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
-                   <% if @own_profile %>
-                    <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
-                  <% end %>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
-                    <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
-                    <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
-                  </span>
-                  <ul class="dog-info-list">
-                    <li class="dog-info-list-item"><strong>Status</strong> <%= dog.motto %></li>
-                    <li class="dog-info-list-item"><strong>Age</strong> <%= dog.age_caption %></li>
-                    <li class="dog-info-list-item"><strong>Gender</strong> <%= dog.gender %></li>
-                    <li class="dog-info-list-item"><strong>Mix</strong> <%= dog.readable_mixes.join(", ") %></li>
-                    <li class="dog-info-list-item"><strong>Size</strong> <%= dog.size %></li>
-                    <li class="dog-info-list-item"><strong>Personality</strong> <%= dog.tags %></li>
-                    <li class="dog-info-list-item"><strong>Energy</strong> <%= dog.energy_level %></li>
-                    <li class="dog-info-list-item"><strong>Likes</strong> <%= dog.readable_likes.join(", ") %></li>
-                    <li class="dog-info-list-item"><strong>Barks</strong> Rarely</li>
-                    <li class="dog-info-list-item"><strong>Health Notes</strong> <%= dog.health %></li>
-                    <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
-                    <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <%= render "dog_card", :dog => dog, :current_user => @current_user %>
           <% end %>
           </div>
           <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
