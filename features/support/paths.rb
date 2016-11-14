@@ -13,7 +13,6 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-
     when /^the home\s?page$/
       '/'
     when /^the users page for "Batman"$/
@@ -33,9 +32,13 @@ module NavigationHelpers
     when /^the edit event page$/
       '/events/1/edit'
     when /^dog api$/
-      '/sogs/1/info'
+      '/dogs/1/info'
     when /^user api$/
       '/users/1/info'
+    when /^dogs api$/
+      '/dogs/info'
+    when /^available dogs api$/
+      '/dogs/info?available=true'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
