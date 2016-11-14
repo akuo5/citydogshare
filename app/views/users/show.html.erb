@@ -2,17 +2,11 @@
 
 <!-- User infomation and events -->
 <div class="row container main-content">
-
-  <div class="row"><h4 class="br-5 s ctr"><%= @user.full_name %></h4><br></div>
+  </br>
   <div class="row">
-    <div class="col l3 m4 s12" style="text-align: center;">
+    <div class="col l4 m5 s12" style="text-align: center;">
       <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
-      <% if @own_profile %>
-        <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
-        <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
-      <% end %>
-    </div>
-    <div class="col l9 m8 s12 s br-35">
+      <h4 class="br-5 s ctr"><%= @user.full_name %></h4>
       <div class="speech-bubble light-blue darken-3">
         <div class="speech-bubble-content white-text">
           <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
@@ -94,17 +88,15 @@
           </li>
         <% end %>
       </ul>
+      <% if @own_profile %>
+        <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
+        <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
+      <% end %>
     </div>
-  </div>
-</div>
-
-<!-- User's dogs if not current_user -->
-<% if !@own_profile %>
-  <div class="row container">
-    <div class="col l8 m6 s12">
+    <div class="col l8 m7 s12">
       <div class="row ctr s"><h4>Dogs</h4></div>
       <div class="row">
-        <% if @user.dogs.count != 0 then %>
+        <% if @user.dogs.count == 0 then %>
           <div class="row center-align valign-wrapper no-dogs-message-container">
             <div class="col l12 m12 s12 valign no-dogs-message">
               <div> No dogs yet! </div>
@@ -113,16 +105,11 @@
         <% else %>
           <div class="row container main-content">
           <% @user.dogs.each do |dog| %>
-            <%= render "dog_card", :dog => dog, :current_user => @current_user %>
+            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m12 l6" %>
           <% end %>
-          </div>
-          <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
-            <a href="<%= new_dog_path %>" class="btn-floating btn-large waves-effect waves-light green accent-4 hide-on-large-only"><i class="material-icons">add</i></a>
           </div>
         <% end %>
       </div>
-    </div>
-    <div class="col l4 m6 s12">
       <div class="row ctr s"><h4>Events</h4></div>
         <% if @user.events.count == 0 then %>
           <div class="row center-align valign-wrapper no-dogs-message-container">
@@ -136,4 +123,4 @@
       </div>
     </div>
   </div>
-<% end %>
+</div>
