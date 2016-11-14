@@ -170,7 +170,7 @@ class Dog < ActiveRecord::Base
       :status => self.motto,
       :description => self.description,
       :availability => self.availability,
-      :parent_id => User.find(self.user_id).to_json
+      :parent => User.find(self.user_id).to_json
     }
   end
 
