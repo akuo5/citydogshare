@@ -88,11 +88,11 @@ describe Dog do
     expect(@dog.tags).to eq("1, 2")
   end
   
-  it 'shuld return a list of genders' do 
+  it 'should return a list of genders' do 
     expect(Dog.genders).to be_a_kind_of(Array)
   end
   
-  it 'shuld return a list of age ranges' do 
+  it 'should return a list of age ranges' do 
     expect(Dog.age_ranges).to be_a_kind_of(Array)
   end
 end
