@@ -10,11 +10,10 @@
     <div class="col l3 m4 s12" style="text-align: center;">
       <div id = "profile_pics">
         <div> <%= image_tag @dog.photo.url(:large), :class => "circle", id: "dog_profile_pic" %>  </div>
-        <%= image_tag @parent.image, :class => "circle z-depth-1", id: "dog_profile_parent_pic" %>
         <div class="star-container">
           <% if not current_user.nil? %>
             <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>
-                <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>
+              <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>
                 <i class="fa fa-star-o medium" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
               <% else %>
@@ -26,7 +25,7 @@
         </div>
       </div>
       <% if not @current_user.nil? and @current_user.id == @dog.user_id %>
-        <%= link_to "Edit", edit_dog_path(@dog.id), :id => "cancel_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
+        <%= link_to "Edit", edit_dog_path(@dog.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
         <%= link_to "Delete", dog_path(@dog.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
       <% end %>
     </div>

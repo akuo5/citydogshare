@@ -7,6 +7,10 @@
     <div class="col l4 m5 s12" style="text-align: center;">
       <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
       <h4 class="br-5 s ctr"><%= @user.full_name %></h4>
+      <% if @own_profile %>
+        <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
+        <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
+      <% end %>
       <div class="speech-bubble light-blue darken-3">
         <div class="speech-bubble-content white-text">
           <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
@@ -88,13 +92,14 @@
           </li>
         <% end %>
       </ul>
-      <% if @own_profile %>
-        <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
-        <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
-      <% end %>
     </div>
     <div class="col l8 m7 s12">
-      <div class="row ctr s"><h4>Dogs</h4></div>
+      <div class="row ctr s">
+          <h4 id="my_dogs">Dogs</h4>
+          <% if @own_profile %>
+            <%= link_to "Add a Dog", new_dog_path(), :id => "add_dog_button", :class => "btn green accent-4 s br-15 hide-on-small-only", :method => :get %>
+          <% end %>
+      </div>
       <div class="row">
         <% if @user.dogs.count == 0 then %>
           <div class="row center-align valign-wrapper no-dogs-message-container">
@@ -105,7 +110,7 @@
         <% else %>
           <div class="row container main-content">
           <% @user.dogs.each do |dog| %>
-            <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
+            <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m10 l6" %>
           <% end %>
           </div>
         <% end %>
