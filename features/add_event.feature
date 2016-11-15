@@ -22,48 +22,55 @@ Background: user has been added to the database and logged in
 Scenario: I create a dog event
   Given I select "Princess" from "event_dogs"
   And I select "My Place" from "event_location"
-  And I fill in "event_start_date" with "7 November, 2016"
-  And I fill in "event_end_date" with "10 November, 2016"
+  And I fill in "event_start_date" with today
+  And I fill in "event_end_date" with tomorrow
   And I press "Schedule"
   Then I should not see "Create Event"
   And I should see "Princess"
   And I should see "Location My Place"
-  And I should see "Nov 07, 2016 - Nov 10, 2016"
+  And I should see today
+  And I should see tomorrow
 
-Scenario: Not selecting a dog should throw an error
+Scenario: Empty event form should throw an error
   Given I press "Schedule"
-  And I select "My Place" from "event_location"
-  And I fill in "event_start_date" with "7 November, 2016"
-  And I fill in "event_end_date" with "10 November, 2016"
-  Then I should see "Please enter a valid start date"
-  Then I should see "Please enter a valid end date"
-  Then I should see "Please select a valid location"
   Then I should see "Please select the dogs you want to share"
+  Then I should see "Please select a location"
+  Then I should see "Please enter a start date"
+  Then I should see "Please enter an end date"
 
-Scenario: Not selecting a date should throw an error
+Scenario: Selecting a start date before an end date should throw an error
   Given I select "Princess" from "event_dogs"
   And I select "My Place" from "event_location"
+  And I fill in "event_start_date" with tomorrow
+  And I fill in "event_end_date" with today
   And I press "Schedule"
-  Then I should see "Please enter a valid start date"
-  And I should see "Please enter a valid end date"
+  Then I should see "Start date must be before end date"
+
+Scenario: Selecting start dates in the past should throw an error
+  And I select "Princess" from "event_dogs"
+  And I select "My Place" from "event_location"
+  And I fill in "event_start_date" with yesterday
+  And I fill in "event_end_date" with tomorrow
+  And I press "Schedule"
+  Then I should see "Start date has passed"
+
+Scenario: Selecting end dates in the past should throw an error
+  And I select "Princess" from "event_dogs"
+  And I select "My Place" from "event_location"
+  And I fill in "event_start_date" with yesterday
+  And I fill in "event_end_date" with yesterday
+  And I press "Schedule"
+  Then I should see "End date has passed"
 
 Scenario: Event should show up on dog profile
-    Given PENDING 
+  Given PENDING
   Given I select "Princess" from "event_dogs"
   And I select "My Place" from "event_location"
-  And I fill in "event_start_date" with "7 November, 2016"
-  And I fill in "event_end_date" with "7 November, 2016"
-  When I press Schedule
+  And I fill in "event_start_date" with today
+  And I fill in "event_end_date" with today
+  When I press "Schedule"
   Then I should not see "Create Event"
   When I follow the first "My Dogs"
   And I follow the dog named "Princess"
-  Then I should see "Nov 07, 2016"
+  Then I should see today
   And I should see "Location My Place"
-
-Scenario: Event should not display past events
-  Given I have created an event for "Princess" 3 days ago
-  And I am on my profile page
-  When I follow the first "My Dogs"
-  When I follow the dog named "Princess"
-  Then I should not see "Time: Morning"
-

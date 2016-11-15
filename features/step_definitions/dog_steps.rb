@@ -126,6 +126,37 @@ When(/^I select "([^"]*)"$/) do |value|
   page.find("option[value='#{value}']").click
 end
 
+
+Given(/^I fill in "([^"]*)" with (today|tomorrow|yesterday)$/) do |field, day|
+  case day
+  when 'today'
+    date = Date.today
+  when 'tomorrow'
+    date = Date.tomorrow
+  when 'yesterday'
+    date = Date.yesterday
+  else
+    date = Date.today
+  end
+  fill_in(field, :with => date)
+end
+
+Then(/^I should see (today|tomorrow)$/) do |day|
+  case day
+  when 'today'
+    date = Date.today.strftime('%b %d, %Y')
+  when 'tomorrow'
+    date = Date.tomorrow.strftime('%b %d, %Y')
+  else
+    date = Date.today
+  end
+  if page.respond_to? :should
+    page.should have_content(date)
+  else
+    assert page.has_content?(date)
+  end
+end
+
 And /^I have created an event for "([^"]*)" (today|3 days ago)$/ do |dog, time|
   new_event = Event.new()
   if time == "today"

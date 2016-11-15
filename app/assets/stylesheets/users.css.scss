@@ -8,6 +8,10 @@
 	height: 60px;
 }
 
+.center-profile {
+  text-align: center;
+}
+
 .main-content {
   margin-top: 15px;
 }
@@ -25,13 +29,21 @@
   margin-bottom: 12px;
 }
 
+#dogs-title, #events-title {
+  display: inline-block;
+}
+
+#add_dog_button, #add_event_button {
+  margin-top: 1.22rem;
+  float: right;
+}
+
 .speech-bubble {
   border-radius: 2px;
   width: 100%;
   padding-top: 12px;
   padding-bottom: 16px;
   min-height: 60px;
-  margin-top: 12px;
 }
 .speech-bubble-content {
   margin-left: 20px;
@@ -80,6 +92,16 @@
   margin-top: 16px;
 }
 
+.add-event-card {
+  height: 200px;
+  border-radius: 12px;
+  position: relative;
+  border: dashed 5px #DFDFDF;
+  cursor: hand;
+  cursor: pointer;
+  display: block;
+}
+
 .add-dog-card {
   height: 381.5px;
   margin-top: 7.5px;
@@ -91,7 +113,7 @@
   display: block;
 }
 
-.add-dog-card-icon {
+.add-dog-card-icon, .add-event-card-icon {
   width: 100%;
   font-size: 120px;
   margin-top: 95px;
@@ -99,7 +121,7 @@
   color: #C4C4C4;
 }
 
-.add-dog-card-text {
+.add-dog-card-text, .add-event-card-text {
   width: 100%;
   text-align: center;
   font-weight: 900;

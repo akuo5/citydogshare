@@ -22,10 +22,7 @@ Background: user has been added to the database and logged in
   And I am on my calendar page
 
 Scenario: User should be able to delete their dog's event
-  When I follow "Edit"
-  Then I should be on the edit event page
-  And I should see "Your Event"
-  When I press "Delete Event"
+  When I follow "Delete"
   Then I should be on my calendar page
   And I should see "Your event has been deleted."
 
@@ -40,7 +37,7 @@ Scenario: User should not be able to save an incomplete event
   When I follow "Edit"
   And I select "Select one or more" from "event_location"
   And I press "Schedule"
-  Then I should see "Please select a valid location"
+  Then I should see "Please select a location"
 
 Scenario: I should not be able to edit another users event
   When I do not care about dog location

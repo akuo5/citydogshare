@@ -4,10 +4,19 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :dogs
   belongs_to :location
 
-  validates :start_date, :presence => {:message => "Please enter a valid start date"}
-  validates :end_date, :presence => {:message => "Please enter a valid end date"}
-  validates :location, :presence => {:message => "Please select a valid location"}
   validates :dogs, :presence => {:message => "Please select the dogs you want to share"}
+  validates :location, :presence => {:message => "Please select a location"}
+  validates :start_date, :presence => {:message => "Please enter a start date"}
+  validates :end_date, :presence => {:message => "Please enter an end date"}
+  validate :valid_start_end_dates?
+  
+  def valid_start_end_dates?
+    errors.add(:start_date, "Start date has passed") if start_date.present? and Date.today > start_date
+    errors.add(:end_date, "End date has passed") if end_date.present? and Date.today > end_date
+    if start_date.present? and end_date.present?
+      errors.add(:start_end_date, "Start date must be before end date") if start_date > end_date
+    end
+  end
 
   def readable_location
     self.location.value

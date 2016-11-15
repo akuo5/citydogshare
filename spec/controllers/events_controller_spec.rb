@@ -28,7 +28,7 @@ describe EventsController, :type => :controller do
   describe 'create a new user event' do
     before (:each) do 
       @params = {"event" => {"dogs"=>["", "1"], "location"=>"1", 
-        "start_date"=>"15 November, 2016", "end_date"=>"19 November, 2016",
+        "start_date"=>Date.today, "end_date"=>Date.tomorrow,
         "description"=>"abcdefg"}}
       @session = { "user_id" => @current_user.uid }
     end
@@ -110,7 +110,7 @@ describe EventsController, :type => :controller do
   describe 'update event' do
     before (:each) do
       @params = {"id" => 1, "event" => {"dogs"=>["", "1"], "location"=>"2", 
-        "start_date"=>"13 November, 2016", "end_date"=>"20 November, 2016",
+        "start_date"=>Date.today, "end_date"=>Date.tomorrow,
         "description"=>"efghijk"}}
     end
 
