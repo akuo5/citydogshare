@@ -30,7 +30,9 @@
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>
         <i class="material-icons right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Close">close</i>
-        <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
+        <% if current_user and current_user.dogs.exists?(id: dog.id) -%>
+          <a href="<%= edit_dog_path(dog.id) %>"><i class="material-icons right tooltipped green-text text-accent-4" data-position="bottom" data-delay="50" data-tooltip="Edit Dog">edit</i></a>
+        <% end %>
       </span>
       <ul class="dog-info-list">
         <% if dog.motto != "" %>

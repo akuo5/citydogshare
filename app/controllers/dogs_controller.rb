@@ -91,6 +91,9 @@ class DogsController < ApplicationController
 
   def edit
     @dog = Dog.find(params[:id])
+    if @dog.user != @current_user
+      redirect_to dogs_path
+    end
     @dog_form_values = @dog.to_form_hash
     @pictures = @dog.pictures
     @action = :update
