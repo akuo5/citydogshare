@@ -4,8 +4,12 @@ class AddEvents < ActiveRecord::Migration
   		t.datetime :start_date
   		t.datetime :end_date
   		t.string :time_of_day
-  		t.boolean :my_location
+  		t.string :location_id
   		t.integer :dog_id
   	end
+  	
+    create_table :locations do |t|
+        t.string :value
+    end
   end
 end

@@ -13,6 +13,9 @@ class Dog < ActiveRecord::Base
   scope :in_age_range, lambda {|age_query| filter_age(age_query)}
 
   belongs_to :user
+  belongs_to :energy_level
+  belongs_to :size
+  
   has_many :stars, :dependent => :destroy
   has_many :dog_mix_linkers
   has_many :dog_like_linkers
@@ -22,10 +25,7 @@ class Dog < ActiveRecord::Base
   has_many :likes, :through => :dog_like_linkers
   has_many :personalities, :through => :dog_personality_linkers
   has_many :barks, :through => :dog_bark_linkers
-  belongs_to :energy_level
-  belongs_to :size
-
-  has_many :events, :dependent => :destroy
+  has_and_belongs_to_many :events
 
   geocoded_by :address
 
@@ -258,11 +258,11 @@ class Dog < ActiveRecord::Base
   # Event Methods
   def future_events?
     # for all events, if at least one comes after yesterday, return true
-    events.where("end_date > ?", 1.day.ago.midnight).pluck('end_date') != []
+    self.events.where("end_date > ?", 1.day.ago.midnight).pluck('end_date') != []
   end
 
   def future_events
-    events.where("end_date > ?", 1.day.ago.midnight).order("start_date ASC")
+    self.events.where("end_date > ?", 1.day.ago.midnight).order("start_date ASC")
   end
 
 end

@@ -24,25 +24,23 @@ Background: user has been added to the database and logged in
 Scenario: User should be able to delete their dog's event
   When I follow "Edit"
   Then I should be on the edit event page
-  And I should see "Edit Princess's Event"
+  And I should see "Your Event"
   When I press "Delete Event"
   Then I should be on my calendar page
   And I should see "Your event has been deleted."
 
 Scenario: User should be able to edit their dog's event
   When I follow "Edit"
-  And I check "times_Afternoon"
-  And I choose "my_location_Your_House"
+  And I select "Your Place" from "event_location"
   And I press "Schedule"
   Then I should be on my calendar page
-  And I should see "Time: Morning, Afternoon"
-  And I should see "Location: Your House"
+  And I should see "Location Your Place"
 
 Scenario: User should not be able to save an incomplete event
   When I follow "Edit"
-  And I uncheck "times_Morning"
+  And I select "Select one or more" from "event_location"
   And I press "Schedule"
-  Then I should see "Please enter a time of day"
+  Then I should see "Please select a valid location"
 
 Scenario: I should not be able to edit another users event
   When I do not care about dog location

@@ -20,43 +20,45 @@ Background: user has been added to the database and logged in
   And I am on the share dogs page
 
 Scenario: I create a dog event
-  Given I check "dogs_Princess"
-  And I check "times_Morning"
-  And I choose "my_location_My_House"
-  When I press Schedule
+  Given I select "Princess" from "event_dogs"
+  And I select "My Place" from "event_location"
+  And I fill in "event_start_date" with "7 November, 2016"
+  And I fill in "event_end_date" with "10 November, 2016"
+  And I press "Schedule"
   Then I should not see "Create Event"
   And I should see "Princess"
-  And I should see "Location: My House"
-  And I should see "Time: Morning"
+  And I should see "Location My Place"
+  And I should see "Nov 07, 2016 - Nov 10, 2016"
 
 Scenario: Not selecting a dog should throw an error
   Given I press "Schedule"
-  Then I should see "Please select a dog to share"
+  And I select "My Place" from "event_location"
+  And I fill in "event_start_date" with "7 November, 2016"
+  And I fill in "event_end_date" with "10 November, 2016"
+  Then I should see "Please enter a valid start date"
+  Then I should see "Please enter a valid end date"
+  Then I should see "Please select a valid location"
+  Then I should see "Please select the dogs you want to share"
 
 Scenario: Not selecting a date should throw an error
-  Given I check "dogs_Princess"
-  And I check "times_Morning"
+  Given I select "Princess" from "event_dogs"
+  And I select "My Place" from "event_location"
   And I press "Schedule"
   Then I should see "Please enter a valid start date"
   And I should see "Please enter a valid end date"
 
-Scenario: Not selecting a time of day should throw an error
-  Given I check "dogs_Princess"
-  Given I press Schedule
-  Then I should see "Please enter a time of day"
-
 Scenario: Event should show up on dog profile
     Given PENDING 
-  Given I check "dogs_Princess"
-  And I check "times_Morning"
-  And I choose "my_location_My_House"
+  Given I select "Princess" from "event_dogs"
+  And I select "My Place" from "event_location"
+  And I fill in "event_start_date" with "7 November, 2016"
+  And I fill in "event_end_date" with "7 November, 2016"
   When I press Schedule
   Then I should not see "Create Event"
   When I follow the first "My Dogs"
-  When I follow the dog named "Princess"
-  Then I should see today's date
-  #And I should see "Location: My House"
-  And I should see "Time: Morning"
+  And I follow the dog named "Princess"
+  Then I should see "Nov 07, 2016"
+  And I should see "Location My Place"
 
 Scenario: Event should not display past events
   Given I have created an event for "Princess" 3 days ago

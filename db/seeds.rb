@@ -593,6 +593,16 @@ barks_list.each do |bark|
   Bark.find_or_create_by(value: bark)
 end
 
+locations_list = [
+  "My Place",
+  "Your Place",
+  "Other"
+]
+
+locations_list.each do |location|
+  Location.find_or_create_by(value: location)
+end
+
 #dogs_list = [{:name => "Fluffy", :gender => "Female", :size_id => 1}, {:name => "Fido", :gender => "Male", :size_id => 3}, {:name => "Batman", :gender => "Female", :size_id => 2}]
 #
 #dogs_list.each do |dog|

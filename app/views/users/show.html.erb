@@ -105,7 +105,7 @@
         <% else %>
           <div class="row container main-content">
           <% @user.dogs.each do |dog| %>
-            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m12 l6" %>
+            <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
           <% end %>
           </div>
         <% end %>
