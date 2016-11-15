@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031085453) do
+ActiveRecord::Schema.define(version: 20161114053917) do
 
   create_table "barks", force: :cascade do |t|
     t.string "value"
@@ -62,20 +62,32 @@ ActiveRecord::Schema.define(version: 20161031085453) do
     t.boolean  "shots_to_date"
   end
 
+  create_table "dogs_events", id: false, force: :cascade do |t|
+    t.integer "dog_id"
+    t.integer "event_id"
+  end
+
+  add_index "dogs_events", ["dog_id"], name: "index_dogs_events_on_dog_id"
+  add_index "dogs_events", ["event_id"], name: "index_dogs_events_on_event_id"
+
   create_table "energy_levels", force: :cascade do |t|
     t.string "value"
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string   "time_of_day"
-    t.string   "my_location"
-    t.integer  "dog_id"
-    t.string   "description"
+    t.date    "start_date"
+    t.date    "end_date"
+    t.string  "time_of_day"
+    t.string  "location_id"
+    t.string  "description"
+    t.integer "user_id"
   end
 
   create_table "likes", force: :cascade do |t|
+    t.string "value"
+  end
+
+  create_table "locations", force: :cascade do |t|
     t.string "value"
   end
 

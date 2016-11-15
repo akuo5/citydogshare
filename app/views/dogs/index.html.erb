@@ -123,7 +123,7 @@
       <% else %>
         <div class="row container main-content">
           <% @dogs.each do |dog| %>
-            <%= render "dog_card", :dog => dog, :current_user => @current_user %>
+            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
           <% end %>
         </div>
         <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
