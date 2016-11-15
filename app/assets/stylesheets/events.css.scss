@@ -2,8 +2,9 @@
   padding: 10px;
   padding-left: 15px;
 }
-.event-card .card-content {
-  margin: 0; padding: 0;
+.event-card .event-card-content {
+  margin: 0;
+  padding: 0;
 }
 .event-card .card-action {
   margin-top: 10px;
@@ -12,8 +13,24 @@
   padding-top: 10px;
   padding-bottom: 0px;
 }
-.event-details span {
+
+.event-detail-content {
+  display: table-cell;
+}
+.event-detail-content span {
+  display: inline-block;
+}
+.event-detail-title {
   color: #999;
+  display: table-cell;
+  padding-right: 8px;
+}
+.event-description-title {
+  color: #999;
+  display: inline-block;
+}
+.event-description-content {
+  display: inline-block;
 }
 .event-icon {
   width: 60px;
