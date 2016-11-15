@@ -121,15 +121,15 @@ end
 And /^I have created an event for "([^"]*)" (today|3 days ago)$/ do |dog, time|
   new_event = Event.new()
   if time == "today"
-    new_event.start_date = DateTime.current.to_date
-    new_event.end_date = DateTime.current.to_date
+    new_event.start_date = Date.current.to_date
+    new_event.end_date = Date.current.to_date
   else
     new_event.start_date = 3.days.ago
     new_event.end_date = 3.days.ago
   end
-  new_event.time_of_day = ["Morning"]
-  new_event.my_location = "My House"
+  new_event.location = Location.find(1)
   new_event.description = "Princess needs a walk"
-  new_event.dog = Dog.find_by_name(dog)
+  new_event.dogs << Dog.find_by_name(dog)
+  new_event.user = User.find(1)
   new_event.save!
 end

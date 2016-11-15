@@ -8,65 +8,26 @@
 <% end %>
 
 
-<style type="text/css">
-  #calendar
-  {
-  width: 900px;
-  margin: 0 auto;
-  }
-</style>
+<!--<style type="text/css">-->
+<!--  #calendar-->
+<!--  {-->
+<!--  width: 900px;-->
+<!--  margin: 0 auto;-->
+<!--  }-->
+<!--</style>-->
 
-<div id='calendar'></div>
+<!--<div id='calendar'></div>-->
 
 <p> </p>
  <%= link_to "Add Event", new_event_path, :class => "ui primary button" %>
 <p></p>
 
-<% if current_user.future_events? %>
-  <div id = "dogevents"><h3>Upcoming Events:</h3>
- <div class = "large-12 columns">
-  <% for dog in @dogs do %>
-    <% if dog.future_events? %>
-     
-     <div class="row">
-          <h3 class = "ui ribbon label"> <%= dog.name %> </h3>
-
-  <% for event in dog.future_events %>
-<p></p>
- <div class = "large-6 columns">
-  <div class = "ui blue inverted top attached segment" style = "overflow:hidden">
-
-          <% if event.start_date == event.end_date %>
-             <%= event.start_date.strftime('%v') %>
-          <% else %>
-             <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
-          <% end %>
-         </div>
-         <div class = "ui bottom attached segment">
-          <p>
-          <strong>Time:</strong> <%= event.time_of_day.join(", ") %>
-          <br />
-          <strong>Location:</strong> <%= event.my_location %>
-          <br />
-          <strong>Description:</strong> <%= event.description %>
-          <br />
-                  <br />
-          <%= link_to "Edit", edit_event_path(event.id) %></p>
-
-        </div>
-      </div>
-
-    <%end%>
-
-
-
+<% if @current_user.events %>
+  <div id = "dogevents"><h5>Upcoming Events:</h5>
+    <% @current_user.events.each do |event| %>
+      <%= render 'event_card', :event => event %>
     <% end %>
-
-   </div>
-</br>
-  <%end%>
-
-  </div>
+</div>
 
 </br>
 </div>
