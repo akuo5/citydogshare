@@ -5,7 +5,7 @@
     <div class="row">
       <div id="name" class="input-field col s12 m12 l6 left-col">
         <%= text_field(:dog, :name, class: "white", placeholder: "Please insert name", :value => @dog_form_values[:name]) %>
-        <label for="name" class="<%= notice and notice[:name] ? "invalid" : "valid" %> input-label-correction">
+        <label for="name" class="<%= notice and notice[:name] and notice[:name] != [] ? "invalid" : "valid" %> input-label-correction">
           What is your dog's name? <strong class ="red-text">*</strong>
         </label>
       </div>
@@ -16,20 +16,20 @@
       <div id="size" class="input-field col s12 m12 l6 left-col">
         <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @dog_form_values[:size]) %>
         <%= select :dog, :size, size_options, {:include_blank => "Must select one"}, :class => "validate white" %>
-        <label for="size" class="<%= notice and notice[:size] ? "invalid" : "valid" %>">
+        <label for="size" class="<%= notice and notice[:size] and notice[:size] != [] ? "invalid" : "valid" %>">
           What size (in pounds) is your dog? <strong class ="red-text">*</strong>
         </label>
       </div>
       <div id="gender" class="input-field col s12 m12 l6  right-col">
         <%= select :dog, :gender, ["Male", "Female"], {:include_blank => "Must select one", :selected => @dog_form_values[:gender]}, :class => "validate white" %>
-        <label for="gender" class="<%= notice and notice[:gender] ? "invalid" : "valid" %>">
+        <label for="gender" class="<%= notice and notice[:gender] and notice[:gender] != [] ? "invalid" : "valid" %>">
           What is your dog's gender? <strong class ="red-text">*</strong>
         </label>
       </div>
       <div id="mixes" class="input-field col s12 m12 l6 left-col">
         <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @dog_form_values[:mixes]) %>
         <%= select :dog, :mixes, mix_options, {:include_blank => "Mutt / Other"}, :class => "validate white", :multiple => true  %>
-        <label for="mixes" class="<%= notice and notice[:mixes] ? "invalid" : "valid" %>">
+        <label for="mixes" class="<%= notice and notice[:mixes] and notice[:mixes] != [] ? "invalid" : "valid" %>">
           What mix (or mixes) is your dog? <strong class ="red-text">*</strong>
         </label>
       </div>
@@ -37,7 +37,7 @@
         <!--<% @dog_form_values[:personalities] %>-->
         <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @dog_form_values[:personalities]) %>
         <%= select :dog, :personalities, personality_options, {:include_blank => "Must select one or more"}, :class => "validate white", :multiple => true  %>
-        <label for="personality" class="<%= notice and notice[:personalities] ? "invalid" : "valid" %>">
+        <label for="personality" class="<%= notice and notice[:personalities] and notice[:personalities] != [] ? "invalid" : "valid" %>">
           What is your dogs personality like? <strong class ="red-text">*</strong>
         </label>
       </div>
@@ -58,13 +58,13 @@
       </div>
       <div id="fixed" class="input-field col s12 m12 l6 right-col">
         <%= select :dog, :fixed, { "Yes"=>true, "No"=>false}, { :include_blank => "Must choose one" }, :class => "validate white" %>
-        <label for="fixed" class="<%= notice and notice[:fixed] ? "invalid" : "valid" %>">
+        <label for="fixed" class="<%= notice and notice[:fixed] and notice[:fixed] != [] ? "invalid" : "valid" %>">
           Is your dog spayed / neutered? <strong class ="red-text">*</strong>
         </label>
       </div>
       <div id="chipped" class="input-field col s12 m12 l6 left-col">
         <%= select :dog, :chipped, { "Yes"=>true, "No"=>false}, { :include_blank => "Must choose one" }, :class => "validate white" %>
-        <label for="chipped" class="<%= notice and notice[:chipped] ? "invalid" : "valid" %>">
+        <label for="chipped" class="<%= notice and notice[:chipped] and notice[:chipped] != [] ? "invalid" : "valid" %>">
           Is your dog chipped?  <strong class ="red-text">*</strong>
         </label>
       </div>
