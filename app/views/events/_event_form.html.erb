@@ -1,100 +1,47 @@
-<!-- <link rel="stylesheet" type="text/css" href="../app/assets/stylesheet/jquery.datetimepicker.css"/ > -->
-<!-- <script src="../app/assets/javascript/jquery.datetimepicker.js"></script> -->
-<script>
-  jQuery(function(){
-   jQuery('#date_timepicker_start').datetimepicker({
-    format:'Y/m/d',
-    onShow:function( ct ){
-     this.setOptions({
-      minDate: 0,
-      maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false,
-      scrollMonth: false
-     })
-    },
-    timepicker:false, 
-    scrollInput: false
-   });
-   jQuery('#date_timepicker_end').datetimepicker({
-    format:'Y/m/d',
-    onShow:function( ct ){
-     this.setOptions({
-      minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false,
-      scrollMonth: false
-     })
-    },
-    timepicker:false,
-    scrollInput: false
-   });
-  });
-</script>
+<% notice = flash[:notice] %>
 
-<p>
-
+<div class="container">
+  <div class="row"><br><h4>Your Event</h4><br></div>
   <%= form_tag({controller: :events, action: @action}, method: @method, :multipart => true) do %>
-  <div class="ui form">
-    <% if @action == :create %>
-    <div class="field"><label>Dog to Share</label>
-      <div class="ui buttons">
-        <% @form_filler.all_dogs.each do |dog| %>
-          <div class="ui button">
-            <% @form_filler.dogs.include?(dog) ? bool = true : bool = false %>
-            <%= check_box_tag "dogs[#{dog}]", 1, bool, :class => "check" %>
-            <%= label(:dogs, dog, dog) %>
-          </div>
-        <% end %>
-      </div>
+  <div class="row">
+    <div id="dogs" class="input-field col s12 m12 l6 left-col">
+      <% dog_options = options_from_collection_for_select(@current_user.dogs, 'id', 'name', @event_form_values[:dogs]) %>
+      <%= select :event, :dogs, dog_options, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
+      <label for="dog">
+        Dogs to share? <strong class ="red-text">*</strong>
+      </label>
     </div>
-    <% end %>
-
-    <div class="field">
-      <label>Start</label>
-      <%= text_field :date_timepicker, :start, :readonly => true, :value => @form_filler.start_date_string %>
+    <div id="location" class="input-field col s12 m12 l6 right-col">
+      <% location_options = options_from_collection_for_select(Location.all, 'id', 'value', @event_form_values[:location_id]) %>
+      <%= select :event, :location, location_options, {:include_blank => "Select one or more"}, :class => "validate white" %>
+      <label for="time">
+        Where <strong class ="red-text">*</strong>
+      </label>
     </div>
 
-  <br />
-    <div class="field">
-      <label>End</label>
-      <%= text_field :date_timepicker, :end, :readonly => true, :value => @form_filler.end_date_string %>
+    <div id="start_date" class="input-field col s12 m12 l6 left-col">
+      <label>
+        Start <strong class ="red-text">*</strong>
+      </label>
+      <%= date_field("event", :start_date, value: @event_form_values[:start_date], class:"datepicker") %>
+    </div>
+    <div id="end_date" class="input-field col s12 m12 l6 right-col">
+      <label>
+        End <strong class ="red-text">*</strong>
+      </label>
+      <%= date_field("event", :end_date, value: @event_form_values[:end_date], class:"datepicker") %>
     </div>
 
-  <br />
-
-  <div class="field"><label>Time of day</label>
-    <div class="ui buttons">
-    <% @form_filler.times.each do |time| %> 
-        <div class="ui button">
-        <% @form_filler.values[:time_of_day].include?(time) ? bool = true : bool = false %>
-        <%= check_box_tag "times[#{time}]", 1, bool, :class => "check" %>
-        <%= label(:times, time, time) %>
-        </div>
-    <% end %>
+    <div id="description" class="input-field col s12 m12">
+      <%= text_area(:event, :description, :class => "materialize-textarea") %>
+      <label for="description">Description</label>
     </div>
-  </div>
-
-  <br />
-
-  <div class="field"><label>Where</label>
-    <% @form_filler.places.each do |place| %>
-      <%= radio_button_tag(:my_location, place , @form_filler.values[:my_location] == place ? checked = true : checked = false) %>
-      <%= place %>
-      <br />
-    <% end %>
-  </div>
-
-  <br />
-
-  <div class="field">
-    <label>Description</label>
-    <%= text_area_tag :description, @form_filler.values[:description] %>
-  </div>
 
   <% end %>
-
-  <div class="field">
-    <div class="ui primary button transparent input"><input id='update_event_button' type="submit" value="Schedule" name="update_dog_button" class='btn info'  style="text-align:center"/></div>
-
-
-    <%= button_to "Cancel", root_path(:notice => ""), :id => "cancel_dog_button", :class => "ui button transparent input", :method => :get %>
-    </div>
+  
+  <div class="form-button-box row">
+    <input id='update_event_button' type="submit" value="Schedule" name="update_dog_button" class='btn-large right green accent-4 col l4 m5 s12' />
+    <%= link_to "Cancel", events_path, :id => "cancel_dog_button", :class => "btn-large left red col l2 m3 s12 br-15 s", :method => :get %>
   </div>
-</p>
+  </p>
+</div>

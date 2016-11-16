@@ -1,84 +1,38 @@
 <% content_for :page_title, "My Events" %>
 
-<% if flash[:notice] %>
-  <div class="ui warning message"><i class="warning icon"></i>
-    <%= flash[:notice] %>
-      <br>
-  </div>
-<% end %>
-
-
-<style type="text/css">
-  #calendar
-  {
-  width: 900px;
-  margin: 0 auto;
-  }
-</style>
-
-<div id='calendar'></div>
-
-<p> </p>
- <%= link_to "Add Event", new_event_path, :class => "ui primary button" %>
-<p></p>
-
-<% if current_user.future_events? %>
-  <div id = "dogevents"><h3>Upcoming Events:</h3>
- <div class = "large-12 columns">
-  <% for dog in @dogs do %>
-    <% if dog.future_events? %>
-     
-     <div class="row">
-          <h3 class = "ui ribbon label"> <%= dog.name %> </h3>
-
-  <% for event in dog.future_events %>
-<p></p>
- <div class = "large-6 columns">
-  <div class = "ui blue inverted top attached segment" style = "overflow:hidden">
-
-          <% if event.start_date == event.end_date %>
-             <%= event.start_date.strftime('%v') %>
-          <% else %>
-             <%= event.start_date.strftime('%v') %> to <%= event.end_date.strftime('%v') %>
-          <% end %>
-         </div>
-         <div class = "ui bottom attached segment">
-          <p>
-          <strong>Time:</strong> <%= event.time_of_day.join(", ") %>
-          <br />
-          <strong>Location:</strong> <%= event.my_location %>
-          <br />
-          <strong>Description:</strong> <%= event.description %>
-          <br />
-                  <br />
-          <%= link_to "Edit", edit_event_path(event.id) %></p>
-
-        </div>
+<div class="row container main-content">
+  <div class="col s12 m5">
+    <% if @current_user.events %>
+      <div id = "dogevents"><h5>Upcoming Events:</h5>
+        <% @current_user.events.each do |event| %>
+          <%= render 'event_card', :event => event, :card_size => "col s12 m12 l12" %>
+        <% end %>
       </div>
-
+    <% else %>
+      <div id="dogevents"><h3>No upcoming events</h3></div>
     <%end%>
-
-
-
-    <% end %>
-
-   </div>
-</br>
-  <%end%>
-
+    <div class="col s12 m12 l12 hide-on-small-only">
+      <a href="<%= new_event_path %>" class="add-event-card" style="margin-bottom: 30px;">
+        <i class="material-icons add-event-card-icon" style="font-size: 85px;margin-top: 35px;">add</i>
+        <div class="add-event-card-text">Add Event</div>
+      </a>
+    </div>
   </div>
-
-</br>
+  
+  <div class="col s12 m7">
+    <style type="text/css">
+      #calendar {
+      width: 100%;
+      margin: 0 auto;
+      }
+    </style>
+    <div id='calendar'></div>
+  </div>
+  
+  <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
+    <a href="<%= new_event_path %>" class="btn-floating btn-large waves-effect waves-light green accent-4 hide-on-large-only"><i class="material-icons">add</i></a>
+  </div>
 </div>
-
-<% else %>
-<div id="dogevents"><h3>No upcoming events</h3></div>
-
-<%end%>
-
-
-
-
 
 
 

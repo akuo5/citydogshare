@@ -91,6 +91,9 @@ class DogsController < ApplicationController
 
   def edit
     @dog = Dog.find(params[:id])
+    if @dog.user != @current_user
+      redirect_to dogs_path
+    end
     @dog_form_values = @dog.to_form_hash
     @pictures = @dog.pictures
     @action = :update
@@ -139,15 +142,17 @@ class DogsController < ApplicationController
     {:likes =>[]}, :energy_level, :size, :photo, :latitude, :longitude, :video, 
     :dob, {:personalities =>[]}, :chipped, :shots_to_date, {:barks => []})
   end
-  
-  def purge_param(param)
-    param.each do |val|
-      unless Mix.all_values.include?(val) or Personality.all_values.include?(val) or Like.all_values.include?(val) then
-        param.delete(val)
+
+  def purge_param(check_params)
+    delete_params = []
+    check_params.each do |val|
+      if Mix.all_values.include?(val) or Personality.all_values.include?(val) or Like.all_values.include?(val) then
+        delete_params << val
       end
     end
-    return param
+    delete_params.each do |p| check_params.delete(p) end
   end
+
 
   def add_multiple_pictures(myDog)
     if params[:images]        

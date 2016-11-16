@@ -3,7 +3,7 @@
 <% if not @dogs.empty? %>
   <div class="row container main-content">
     <% @dogs.each do |dog| %>
-      <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
+      <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
     <% end %>
 <% else %>
   <div class="row center-align valign-wrapper no-dogs-message-container">
