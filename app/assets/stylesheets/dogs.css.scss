@@ -56,10 +56,33 @@
 	bottom: 0;
 }
 
+.filter {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#filter_title {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+#search_dog_submit {
+	margin-left: 10px;
+}
+
 #dog_profile_pic {
 	height: 200px;
 	width: 200px;
   	object-fit: cover;
+}
+
+.availability-dropdown {
+	margin-top: 48px;
+}
+
+.availability-comment {
+	font-size: 13px;
+	line-height: 14px !important;
 }
 
 #profile_pics {
@@ -73,6 +96,9 @@
 
 #dog_profile_star {
 	color: gold;
+	position: relative;
+	bottom: 50px;
+	right: 45px;
 }
 /* END NEW.HTML */
 

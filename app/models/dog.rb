@@ -71,6 +71,7 @@ class Dog < ActiveRecord::Base
     out = "< 1 year old" if y == 0
     out = "1 year old" if y == 1
     out = "#{y} years old" if y > 1
+    out = "" if dob.year == 0
     out
   end
 

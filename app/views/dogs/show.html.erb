@@ -7,29 +7,28 @@
 <div class="row container main-content">
 
   <div class="row" style="margin-top: 20px">
-    <div class="col l3 m4 s12" style="text-align: center;">
-      <div id = "profile_pics">
+    <div class="col l4 m5 s12">
+      <div id = "profile_pics" style="text-align:center">
         <div> <%= image_tag @dog.photo.url(:large), :class => "circle", id: "dog_profile_pic" %>  </div>
         <div class="star-container">
           <% if not current_user.nil? %>
             <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>
-              <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}" do%>
+                <%= link_to starred_dogs_path(dog_id: @dog), method: :post, id: "star_#{@dog.id}", :class => "star_dog_link" do%>
                 <i class="fa fa-star-o medium" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
               <% else %>
-                <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}"  do%>
+                <%= link_to starred_dogs_path(dog_id: @dog), method: :delete, id: "star_#{@dog.id}", :class => "star_dog_link"  do%>
                 <i class="fa fa-star medium" aria-hidden="true" id="dog_profile_star"></i>
               <%end%>
             <% end %>
           <%end%>
         </div>
+        <h4 class="br-5 s ctr"><%= @dog.name %></h4>
       </div>
       <% if not @current_user.nil? and @current_user.id == @dog.user_id %>
         <%= link_to "Edit", edit_dog_path(@dog.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
         <%= link_to "Delete", dog_path(@dog.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
       <% end %>
-    </div>
-    <div class="col l9 m8 s12 s br-35">
       <div class="speech-bubble light-blue darken-3">
         <div class="speech-bubble-content white-text">
           <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
@@ -44,11 +43,11 @@
             &nbsp;&nbsp;<%= link_to @parent.first_name, user_path(@parent.id) %>
           </div>
         </li>
-        <% if @dog.age && @dog.age != "" %>
+        <% if @dog.age && @dog.age_caption != "" %>
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i> &nbsp;Age</span>
-              &nbsp;&nbsp;<%= @dog.age %>
+              &nbsp;&nbsp;<%= @dog.age_caption %>
             </div>
           </li>
         <% end %>
