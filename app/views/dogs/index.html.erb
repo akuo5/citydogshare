@@ -6,7 +6,7 @@
       <h5 id="filter_title">Filter Dogs</h5>
       <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
         <div id="distance" class="filter">
-          <label for="distance">Distance</label>
+          <label for="distance">Distance (miles)</label>
           <%= text_field_tag(:radius, @form_filler.values[:radius], class: "white", :placeholder => "10 miles", :size => 10) %>
         </div>
         <div id="zipcode" class="filter">
