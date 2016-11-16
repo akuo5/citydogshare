@@ -15,8 +15,8 @@
       <% end %>
       <div class="speech-bubble light-blue darken-3">
         <div class="speech-bubble-content white-text">
-          <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
-          <div class="status-text"><%= @user.status %></div>
+          <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true"></i></div>
+          <div class="status-text">&nbsp;&nbsp;<%= @user.status %></div>
         </div>
         <div class="speech-carrot blue"></div>
       </div>
@@ -25,7 +25,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Email</span>
-              &nbsp;&nbsp;<%= @user.email %>
+              <%= @user.email %>
             </div>
           </li>
         <% end %>
@@ -33,7 +33,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-mars-stroke" aria-hidden="true"></i> &nbsp;Gender</span>
-              &nbsp;&nbsp;<%= @user.gender.capitalize %>
+              <%= @user.gender.capitalize %>
             </div>
           </li>
         <% end %>
@@ -41,7 +41,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;Address</span>
-              &nbsp;&nbsp;<%= @user.address %>
+              <%= @user.address %>
             </div>
           </li>
         <% end %>
@@ -49,7 +49,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;Country</span>
-              &nbsp;&nbsp;<%= @user.country %>
+              <%= @user.country %>
             </div>
           </li>
         <% end %>
@@ -57,7 +57,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;City</span>
-              &nbsp;&nbsp;<%= @user.city %>
+              <%= @user.city %>
             </div>
           </li>
         <% end %>
@@ -65,7 +65,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;Zipcode</span>
-              &nbsp;&nbsp;<%= @user.zipcode %>
+              <%= @user.zipcode %>
             </div>
           </li>
         <% end %>
@@ -73,7 +73,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;Phone</span>
-              &nbsp;&nbsp;<%= @user.phone_number %>
+              <%= @user.phone_number %>
             </div>
           </li>
         <% end %>
@@ -81,7 +81,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Description</span>
-              &nbsp;&nbsp;<%= @user.description %>
+              <%= @user.description %>
             </div>
           </li>
         <% end %>
@@ -89,7 +89,7 @@
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Availability</span>
-              &nbsp;&nbsp;<%= @user.availability %>
+              <%= @user.availability %>
             </div>
           </li>
         <% end %>
@@ -105,9 +105,7 @@
       <div class="row">
         <% if @user.dogs.count == 0 then %>
           <div class="row center-align valign-wrapper no-dogs-message-container">
-            <div class="col l12 m12 s12 valign no-dogs-message">
-              <div> No dogs yet! </div>
-            </div>
+            <div class="col l12 m12 s12 valign no-dogs-message" style="margin-top: 0">No dogs yet! </div>
           </div>
         <% else %>
           <div class="row container main-content">

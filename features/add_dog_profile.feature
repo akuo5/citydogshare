@@ -49,7 +49,7 @@ Scenario: create dog profile
   And I fill in "dog_health" with "none"
   And I select "Yes" for "fixed"
   And I attach the file "spec/factories/images/dog.jpg" to "dog_photo"
-  And I fill in "dog_availability" with "Mondays and Weekends!"
+  And I select "Available" from "dog_availability"
   And I push "Save Changes"
   Then I should see "My Dogs"
 
