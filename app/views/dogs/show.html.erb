@@ -44,11 +44,11 @@
             &nbsp;&nbsp;<%= link_to @parent.first_name, user_path(@parent.id) %>
           </div>
         </li>
-        <% if @dog.age && @dog.age != "" %>
+        <% if @dog.age && @dog.age_caption != "" %>
           <li class="collection-item">
             <div class="collection-item-content">
               <span class="grey-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i> &nbsp;Age</span>
-              &nbsp;&nbsp;<%= @dog.age %>
+              &nbsp;&nbsp;<%= @dog.age_caption %>
             </div>
           </li>
         <% end %>

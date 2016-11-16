@@ -27,7 +27,7 @@ describe DogsController, :type => :controller do
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       dogs = [dog2]
       params = {}
-      params[:gender] = {"Female" => 1}
+      params[:gender] = ["Female"]
 
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
@@ -39,7 +39,7 @@ describe DogsController, :type => :controller do
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       dogs = [dog2]
       params = {}
-      params[:age] = {"0" => 1}
+      params[:age] = ["0"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -52,7 +52,7 @@ describe DogsController, :type => :controller do
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       dogs = [dog2]
       params = {}
-      params[:mix] = "Labrador"
+      params[:mix] = ["Labrador"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -65,7 +65,7 @@ describe DogsController, :type => :controller do
       dogs = [dog2]
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       params = {}
-      params[:personality] = {"friendly" => 1}
+      params[:personality] = ["friendly"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -78,7 +78,7 @@ describe DogsController, :type => :controller do
       dogs = [dog2]
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       params = {}
-      params[:like] = {"cats" => 1}
+      params[:like] = ["cats"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -89,7 +89,7 @@ describe DogsController, :type => :controller do
       dogs = [dog2]
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       params = {}
-      params[:energy_level] = {"high" => 1}
+      params[:energy_level] = ["high"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -100,7 +100,7 @@ describe DogsController, :type => :controller do
       dogs = [dog1]
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       params = {}
-      params[:size] = {"small (0-15)" => 1}
+      params[:size] = ["small (0-15)"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -111,8 +111,8 @@ describe DogsController, :type => :controller do
       dogs = [dog1]
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       params = {}
-      params[:gender] = {"Male" => 1}
-      params[:size] = {"small (0-15)" => 1}
+      params[:gender] = ["Male"]
+      params[:size] = ["small (0-15)"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -122,7 +122,7 @@ describe DogsController, :type => :controller do
       dog2 = FactoryGirl.create(:dog, :name => "Fluffy", :size_id => 2)
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       params = {}
-      params[:size] = {"xl(101+)" => 1}
+      params[:size] = ["xl(101+)"]
       get :index, params
       expect(assigns(:no_dogs)).to eq(true)
     end
