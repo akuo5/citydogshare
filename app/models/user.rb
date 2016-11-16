@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     events.where("end_date > ?", 1.day.ago.midnight).pluck('end_date') != []
   end
   
+  def is_pro?(flag)
+    self.is_pro = flag
+    
+  
   def to_json
     return {
       :id => self.id,
