@@ -13,6 +13,9 @@
         <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
         <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
       <% end %>
+      
+      
+      
       <div class="speech-bubble light-blue darken-3">
         <div class="speech-bubble-content white-text">
           <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
@@ -20,6 +23,25 @@
         </div>
         <div class="speech-carrot blue"></div>
       </div>
+      
+      <!--Adding in the button to take to other app -->
+      <!--Action items: Add in JS to make button appear when toggle is on, and button to disappear when toggle is off-->
+      <% if @user.is_pro? %>
+        <%= link_to "Pro Scheduler", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
+      <% end %>
+      
+      <!--Add in a toggle to change pro user-->
+     <!-- Disabled Switch -->
+      <div class="switch">
+        <label>
+          Off
+        <input disabled type="checkbox">
+        <span class="lever"></span>
+        On
+      </label>
+    </div>
+      
+      
       <ul class="collection user-info-collection">
         <% if @user.email && @user.email != "" %>
           <li class="collection-item">

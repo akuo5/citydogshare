@@ -182,14 +182,15 @@ describe UsersController, :type => :controller do
       @user = User.create(:id => "1")
       @user.uid = "12345" 
       session[:user_id] = "12345"
+      @user.set_pro(false)
       controller.instance_variable_set(:@current_user, @user)
     end
     it 'should allow user to switch to pro' do
-      assert_equal @user.is_pro, false
+      assert_equal @user.is_pro?, false
       get(:show, {:id => "1"})
-      expect(controller.instance_variable_get(:@user)).to eql(@user)
-      # expect(response).to render_template("show")
-      assert_equal flash[:notice], "The user you entered does not exist."
+      @user.set_pro(true)
+      assert_equal @user.is_pro?, true
+      
     end
     it 'should show profile for existing user' do
       get(:show, {:id => "1"})

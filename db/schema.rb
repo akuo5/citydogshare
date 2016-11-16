@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114053917) do
+ActiveRecord::Schema.define(version: 20161116040105) do
 
   create_table "barks", force: :cascade do |t|
     t.string "value"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20161114053917) do
     t.string   "zipcode"
     t.string   "city"
     t.string   "country"
+    t.boolean  "is_pro"
   end
 
 end

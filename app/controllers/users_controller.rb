@@ -67,6 +67,15 @@ class UsersController < ApplicationController
     end
     @dogs = User.find_by_id(params[:id]).dogs
   end
+  
+  def toggle_pro
+    if @user.is_pro?
+      @user.set_pro(false)
+    else
+      @user.set_pro(true)
+      #Make sure it refreshes the page? 
+    end
+  end
 
   private
   def user_params

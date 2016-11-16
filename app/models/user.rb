@@ -38,9 +38,13 @@ class User < ActiveRecord::Base
     events.where("end_date > ?", 1.day.ago.midnight).pluck('end_date') != []
   end
   
-  def is_pro?(flag)
+  def set_pro(flag)
     self.is_pro = flag
-    
+  end 
+   
+   def is_pro?
+     return self.is_pro
+   end
   
   def to_json
     return {
