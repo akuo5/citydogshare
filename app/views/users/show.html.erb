@@ -145,19 +145,16 @@
             <%= link_to "Add Event", new_event_path(), :id => "add_event_button", :class => "btn green accent-4 s br-15 hide-on-small-only", :method => :get %>
           <% end %>
         </div>
-        <% if @user.events.count == 0 then %>
-          <div class="row center-align valign-wrapper no-dogs-message-container">
+          <% if @user.events.count == 0 then %>
+          <div class="row center-align valign-wrapper no-events-message-container">
             <div class="col l12 m12 s12 valign no-events-message">
               <div>No events yet!</div>
             </div>
           </div>
         <% else %>
+          <div class="row container main-content">
           <% @user.events.each do |event| %>
-            <div class="row valign-wrapper">
-              <div class="col l12 m12 s12 valign">
-                <%= render "events/event_card", :event => event, :card_size => "col s12 m12 l12" %>
-              </div>
-            </div>
+            <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12 m6" %>
           <% end %>
         <% end %>
       </div>

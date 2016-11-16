@@ -23,12 +23,12 @@
           <span class="event-detail-title">Dates</span>
           <% if event.start_date == event.end_date %>
             <span class="event-detail-content">
-              <span><%= event.start_date.strftime('%b %d, %Y') %></span>
+              <span><%= event.start_date.strftime('%-m/%d/%y') %></span>
             </span>
           <% else %>
             <span class="event-detail-content">
-              <span><%= event.start_date.strftime('%b %d, %Y') %> -&nbsp;</span>
-              <span> <%= event.end_date.strftime('%b %d, %Y') %></span>
+              <span><%= event.start_date.strftime('%-m/%d/%y') %> -</span>
+              <span> <%= event.end_date.strftime('%-m/%d/%y') %></span>
             </span>
           <% end %>
         </div>
@@ -44,9 +44,11 @@
         <% end %>
       </div>
     </div>
-    <div class="card-action">
-      <a href="<%= edit_event_path(event.id) %>" class="green-text text-accent-4">Edit</a>
-      <a href="<%= event_path(event.id) %>" class="red-text" data-method="delete">Delete</a>
-    </div>
+    <% if current_user and current_user.events.exists?(id: event.id) -%>
+      <div class="card-action">
+        <a href="<%= edit_event_path(event.id) %>" class="green-text text-accent-4">Edit</a>
+        <a href="<%= event_path(event.id) %>" class="red-text" data-method="delete">Delete</a>
+      </div>
+    <% end %>
   </div>
 </div>

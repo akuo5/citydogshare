@@ -5,7 +5,7 @@
     <% if @current_user.events %>
       <div id = "dogevents"><h5>Upcoming Events:</h5>
         <% @current_user.events.each do |event| %>
-          <%= render 'event_card', :event => event, :card_size => "col s12 m12 l12" %>
+          <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12" %>
         <% end %>
       </div>
     <% else %>
@@ -13,20 +13,14 @@
     <%end%>
     <div class="col s12 m12 l12 hide-on-small-only">
       <a href="<%= new_event_path %>" class="add-event-card" style="margin-bottom: 30px;">
-        <i class="material-icons add-event-card-icon" style="font-size: 85px;margin-top: 35px;">add</i>
-        <div class="add-event-card-text">Add Event</div>
+        <i class="material-icons add-event-card-icon" style="font-size: 80px; line-height: 65px;margin-top: 15px;">add</i>
+        <div class="add-event-card-text" style="margin-top:-5px">Add Event</div>
       </a>
     </div>
   </div>
   
   <div class="col s12 m7">
-    <style type="text/css">
-      #calendar {
-      width: 100%;
-      margin: 0 auto;
-      }
-    </style>
-    <div id='calendar'></div>
+    <div id='calendar' class='fc fc-unthemed fc-ltr'></div>
   </div>
   
   <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">
