@@ -29,8 +29,9 @@
 }
 
 #add_dog_button, #add_event_button {
-  margin-top: 1.22rem;
+  margin-top: 1.4rem;
   float: right;
+  width: 160px;
 }
 
 .speech-bubble {
@@ -63,6 +64,10 @@
   margin-top: 7px;
 }
 
+.user-info-collection .collection-item .collection-item-content span {
+  margin-right: 6px;
+}
+
 @media only screen and (max-width : 600px) {
   .ctr.s {
     text-align: center;
@@ -86,16 +91,6 @@
 }
 .no-events-message div {
   margin-top: 16px;
-}
-
-.add-event-card {
-  height: 200px;
-  border-radius: 12px;
-  position: relative;
-  border: dashed 5px #DFDFDF;
-  cursor: hand;
-  cursor: pointer;
-  display: block;
 }
 
 .add-dog-card {
@@ -142,5 +137,15 @@ strong {
 	font-size: 40px;
 	color:gold;
 }
+
+.no-dogs-message {
+  margin-top: 20px;
+  padding-top: 18px !important;
+}
+
+.no-dogs-message a {
+  margin-top: 35px;
+}
+
 
 /* END DOGS.HTML */

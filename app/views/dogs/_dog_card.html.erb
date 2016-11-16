@@ -3,11 +3,11 @@
     <div class="card-image waves-effect waves-block waves-light">
       <% if not current_user.nil? %>
         <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
-          <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>
+          <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}", :class => "star_dog_link" do%>
           <i class="fa fa-star-o" aria-hidden="true" id="favorite_star"></i>
         <%end%>
       <% else %>
-        <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}"  do%>
+        <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}", :class => "star_dog_link" do%>
         <i class="fa fa-star" aria-hidden="true" id="favorite_star"></i>
         <% end %>
       <% end %>
@@ -22,10 +22,10 @@
       <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
     </div>
     <div class="card-action">
-      <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
       <% if current_user and current_user.dogs.exists?(id: dog.id) -%>
         <a href="<%= edit_dog_path(dog.id) %>" class="green-text text-accent-4">Edit</a>
       <% end %>
+      <a href="<%= dog_path(dog.id) %>" class="light-blue-text text-darken-3">Details</a>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><a href="<%= dog_path(dog.id) %>">About <%= dog.name %></a>

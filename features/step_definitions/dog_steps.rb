@@ -144,9 +144,9 @@ end
 Then(/^I should see (today|tomorrow)$/) do |day|
   case day
   when 'today'
-    date = Date.today.strftime('%b %d, %Y')
+    date = Date.today.strftime('%-m/%d/%y')
   when 'tomorrow'
-    date = Date.tomorrow.strftime('%b %d, %Y')
+    date = Date.tomorrow.strftime('%-m/%d/%y')
   else
     date = Date.today
   end
