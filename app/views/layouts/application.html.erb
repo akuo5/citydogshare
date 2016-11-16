@@ -55,6 +55,12 @@
             <li class="menu-item"><%= link_to events_path do %> 
               <i class="fa fa-calendar fa-lg menu-item-icon"></i>Events
             <% end %></li>
+            <li class = "menu-item"><%= link_to pro_path do %>
+              <% if @user.is_pro? %>
+                <i class="fa fa-calendar fa-lg menu-item-icon"></i>My Scheduler
+              <% end %>
+            <% end %></li>
+
             <li class="menu-item"><%= link_to signout_path, :method => :delete do %>
               <i class="fa fa-sign-out fa-lg menu-item-icon"></i>Sign out
             <% end %></li>

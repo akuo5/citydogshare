@@ -18,11 +18,14 @@ class SessionsController < ApplicationController
   end
 
   def login
+    # add in case for if a certain amount of time has elapsed? 
     if params[:user]
+      #add in pop up, re-authentication factor
       @user = User.find(params[:user])
       @user.update_credentials(params[:credentials])
       redirect_to create_session_path(:user => @user)
     else
+      #I think this is where Jacen changeed the sign up 
       @new_user = User.create()
       @new_user.update_credentials(params[:auth][:credentials])
       @new_user.facebook_info_update(params[:auth])
