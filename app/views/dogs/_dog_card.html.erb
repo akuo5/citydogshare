@@ -12,11 +12,7 @@
         <% end %>
       <% end %>
     <%end%>
-      <% if dog.photo.file? %>
-        <%= image_tag dog.photo.url(:large), :class => "activator card-img" %>
-      <% else %>
-        <%= image_tag "default_dog.jpg", :class => "activator card-img" %>
-      <% end %>
+      <%= image_tag "default_dog.jpg", :class => "activator card-img" %>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><%= dog.name %><i class="material-icons card-more-icon right">more_vert</i></span>
@@ -65,9 +61,7 @@
         <% if dog.description != "" %>
           <li class="dog-info-list-item"><strong>Description</strong> <%= dog.description %></li>
         <% end %>
-        <% if dog.availability != "" %>
-          <li class="dog-info-list-item"><strong>Availability</strong> <%= dog.availability %></li>
-        <% end %>
+        <li class="dog-info-list-item"><strong>Available</strong> <%= dog.readable_availability %></li>
       </ul>
     </div>
   </div>

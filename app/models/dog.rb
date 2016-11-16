@@ -33,6 +33,7 @@ class Dog < ActiveRecord::Base
   validates :gender, :presence => {:message => "Please select a gender"}
   validates :size, :presence => {:message => "Please select a size"}
   validates :mixes, :presence => {:message => "Please select the mix"}
+  validates :availability, :presence => {:message => "Please select availability"}
   validates :personalities, :presence => {:message => "Please select at least one personality"}
   validates_inclusion_of :fixed, in: [true, false], :message => "Please select a response for fix"
   validates_inclusion_of :chipped, in: [true, false], :message => "Please select a response for chipped"
@@ -98,6 +99,10 @@ class Dog < ActiveRecord::Base
     self.likes.map {|l| l.value.capitalize}
   end
 
+  def readable_availability
+    self.availability ? "Yes" : "No"
+  end
+
   def readable_personalities
     self.personalities.map {|p| p.value.capitalize}
   end
@@ -132,7 +137,7 @@ class Dog < ActiveRecord::Base
   end
   
   def available
-    self.availability && self.availability != "" ? true : false
+    self.availability
   end
   
   def to_form_hash

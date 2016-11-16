@@ -28,7 +28,7 @@
       </div>
       <div id="mixes" class="input-field col s12 m12 l6 left-col">
         <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @dog_form_values[:mixes]) %>
-        <%= select :dog, :mixes, mix_options, {:include_blank => "Mutt / Other"}, :class => "validate white", :multiple => true  %>
+        <%= select :dog, :mixes, mix_options, {:include_blank => "Must select one or more"}, :class => "validate white", :multiple => true  %>
         <label for="mixes" class="<%= notice and notice[:mixes] ? "invalid" : "valid" %>">
           What mix (or mixes) is your dog? <strong class ="red-text">*</strong>
         </label>
@@ -84,9 +84,15 @@
         <%= text_area(:dog, :description, :placeholder => "Do you have any other descriptive details about your dog?", :class => "materialize-textarea fix-textarea-alignment") %>
         <label for="description">Description</label>
       </div>
+      <!--<div id="availability" class="input-field col s12 m12 l6 right-col br-20 s m l">-->
+      <!--  <%= text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter", :class => "materialize-textarea fix-textarea-alignment") %>-->
+      <!--  <label for="availability">General Availability</label>-->
+      <!--</div>-->
       <div id="availability" class="input-field col s12 m12 l6 right-col br-20 s m l">
-        <%= text_area(:dog, :availability, :placeholder => "Tell us when you would like a sitter", :class => "materialize-textarea fix-textarea-alignment") %>
-        <label for="availability">General Availability</label>
+        <%= select :dog, :availability, { "Yes"=>true, "No"=>false }, { :include_blank => "Is your dog available?" }, :class => "validate white" %>
+        <label for="chipped" class="<%= notice and notice[:chipped] ? "invalid" : "valid" %>">
+          General Availability  <strong class ="red-text">*</strong>
+        </label>
       </div>
       <div class="col l6 m12 s12 left-col">
         <label>Give your dog a profile picture!</label>

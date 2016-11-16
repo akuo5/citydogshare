@@ -9,7 +9,11 @@
   <div class="row" style="margin-top: 20px">
     <div class="col l3 m4 s12" style="text-align: center;">
       <div id = "profile_pics">
-        <div> <%= image_tag @dog.photo.url(:large), :class => "circle", id: "dog_profile_pic" %>  </div>
+        <% if @dog.photo.file? %>
+          <div> <%= image_tag @dog.photo.url(:large), :class => "circle", id: "dog_profile_pic" %> </div>
+        <% else %>
+          <div><%= image_tag "default_dog.jpg", :class => "circle", id: "dog_profile_pic" %> </div>
+        <% end %>
         <div class="star-container">
           <% if not current_user.nil? %>
             <%- unless current_user.starred_dogs.exists?(id: @dog.id) -%>
@@ -148,11 +152,11 @@
             </div>
           </li>
         <% end %>
-        <% if @dog.availability != nil && @dog.availability != "" %>
+        <% if @dog.availability != nil %>
           <li class="collection-item">
             <div class="collection-item-content">
-              <span class="grey-text"><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; Availability</span>
-              &nbsp;&nbsp;<%= @dog.availability %>
+              <span class="grey-text"><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; Available</span>
+              &nbsp;&nbsp;<%= @dog.readable_availability %>
             </div>
           </li>
         <% end %>

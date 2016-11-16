@@ -15,8 +15,8 @@ users.each do |user|
 end
 =end
 
-
 mix_list = [
+  "Mutt/Other",
   "Affenpinscher",
   "Afghan Hound",
   "Aidi",
@@ -499,12 +499,7 @@ mix_list = [
   "White Shepherd",
   "Wirehaired Pointing Griffon",
   "Wirehaired Vizsla",
-  "Yorkshire Terrier",
-  "Mutt",
-  "I don't know",
-  "Rescue",
-  "Miscellaneous",
-  "Unknown"
+  "Yorkshire Terrier"
 ]
 
 mix_delete_list = [
@@ -516,7 +511,12 @@ mix_delete_list = [
     "Bleu de Gascogne, Grand",
   "Bleu de Gascogne, Petit",
     "Basset Griffon Vendéen, Grand",
-  "Basset Griffon Vendéen, Petit"
+  "Basset Griffon Vendéen, Petit",
+  "Mutt",
+  "I don't know",
+  "Rescue",
+  "Miscellaneous",
+  "Unknown"
 ]
 
 mix_list.each do |name|

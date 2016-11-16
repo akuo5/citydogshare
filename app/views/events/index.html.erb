@@ -5,7 +5,7 @@
     <% if @current_user.events %>
       <div id = "dogevents"><h5>Upcoming Events:</h5>
         <% @current_user.events.each do |event| %>
-          <%= render 'event_card', :event => event, :card_size => "col s12 m12 l12" %>
+          <%= render 'event_card', :event => event, :current_user => @current_user, :card_size => "col s12 m12 l12" %>
         <% end %>
       </div>
     <% else %>

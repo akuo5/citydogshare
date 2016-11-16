@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114053917) do
+ActiveRecord::Schema.define(version: 20161115235348) do
 
   create_table "barks", force: :cascade do |t|
     t.string "value"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20161114053917) do
     t.string   "motto"
     t.boolean  "fixed"
     t.string   "health"
-    t.string   "availability"
+    t.boolean  "availability"
     t.string   "gender"
     t.integer  "size_id"
     t.integer  "energy_level_id"
