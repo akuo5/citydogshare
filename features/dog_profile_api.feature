@@ -11,8 +11,8 @@ Background: User has been added to the database and logged in
     | Pinzon     | Juan       | Berkeley, California  | male   | http://tinyurl.com/okrw3vd | looking | (555)123-1234 | student1@berkeley.edu           | I love dogs  | not mornings   | 388 Cory Hall | 94720   | Berkeley | US      |
  And the following dogs exist:
     | name     | mix              | age | size            | gender   | likes      | energy  | personality | user_id | latitude   | longitude    | fixed | chipped | availability |
-    | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 | true  | true    | blah         |
-    | Pupper   | Labrador         | 2   | small (0-15)    | Male     | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 | true  | true    |              |
+    | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 | true  | true    | Available    |
+    | Pupper   | Labrador         | 2   | small (0-15)    | Male     | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 | true  | true    | Unavailable  |
 
 Scenario: Get the dogs's profile information whose id is 1
   Given I make a request to the dog profile api with the id set to "1"
