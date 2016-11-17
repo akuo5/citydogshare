@@ -94,7 +94,7 @@ And /^I press Schedule$/ do
 end
 
 And /^I click a star for dog with dog id "(.)"/ do |id|
-    click_link("star_#{id}")
+    click_link("star_#{id}", :match => :first)
 end
 
 And /^I should not see a star$/ do

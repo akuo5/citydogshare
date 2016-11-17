@@ -20,22 +20,22 @@ Background: user has been added to the database and logged in
   And I am on the search dogs page
 
 Scenario: Only see dogs within 100 miles by default
-  When I press "Search Dogs"
+  When I press the first "Search Dogs"
   And I should see "Princess"
   And I should see "Spock"
   And I should not see "Bubba"
 
 Scenario: Should see dogs within specified range 
-  When I fill in "radius" with "100000000000"
-  When I press "Search Dogs"
+  When I fill in the first "radius" with "100000000000"
+  When I press the first "Search Dogs"
   And I should see "Princess"
   And I should see "Spock"
   And I should see "Bubba"
 
 Scenario: Should give dogs in order of closest distance
-  When I fill in "radius" with "100000000000"
-  And I fill in "zipcode" with "12345"
-  When I press "Search Dogs"
+  When I fill in the first "radius" with "100000000000"
+  And I fill in the first "zipcode" with "12345"
+  When I press the first "Search Dogs"
   And I should see "Princess"
   And I should see "Spock"
   And I should see "Bubba"
@@ -45,56 +45,56 @@ Scenario: Should give dogs in order of closest distance
 Scenario: Filter by gender
   When I do not care about dog location
   When I select "Male" from "gender"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "Spock"
   And I should not see "Princess"
 
 Scenario: Filter by Age
   When I do not care about dog location
   When I select "0-2 years" from "age"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Size
   When I do not care about dog location
   When I select "small (0-15)" from "size"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Likes
   When I do not care about dog location
   When I select "cats" from "like"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Energy
   When I do not care about dog location
   When I select "high" from "energy_level"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Energy
   When I do not care about dog location
   When I select "whatever" from "personality"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: Filter by Mix
   When I do not care about dog location
   When I select "Labrador" from "mix"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "Princess"
   And I should not see "Spock"
 
 Scenario: No dogs match criteria
   When I do not care about dog location
   When I select "large (41-100)" from "size"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   Then I should see "No Dogs Found"
 
 

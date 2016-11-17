@@ -34,7 +34,7 @@ class Dog < ActiveRecord::Base
   validates :size, :presence => {:message => "Please select a size"}
   validates :mixes, :presence => {:message => "Please select the mix"}
   validates :personalities, :presence => {:message => "Please select at least one personality"}
-  validates_inclusion_of :fixed, in: [true, false], :message => "Please select a response for fix"
+  validates_inclusion_of :fixed, in: [true, false], :message => "Please select a response for spayed/neutered"
   validates_inclusion_of :chipped, in: [true, false], :message => "Please select a response for chipped"
   validate :validate_dob
   validate :validate_availability
@@ -63,7 +63,7 @@ class Dog < ActiveRecord::Base
   end
   
   def validate_availability
-    errors.add(:availability, "AWWWW BUSTED! Please select a proper availability.") if (!availability.nil? and availability != "Available" and availability != "Unavailable")
+    errors.add(:availability, "- Please select a proper availability.") if (!availability.nil? and availability != "Available" and availability != "Unavailable")
   end
   
   def age
