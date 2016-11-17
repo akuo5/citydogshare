@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   def login
     # add in case for if a certain amount of time has elapsed? 
     if params[:user]
-      #add in pop up, re-authentication factor
+      #re-authentication factor
       @user = User.find(params[:user])
       @user.update_credentials(params[:credentials])
       redirect_to create_session_path(:user => @user)
@@ -32,7 +32,19 @@ class SessionsController < ApplicationController
       redirect_to create_session_path(:user => @new_user)
     end   
   end 
-
+  
+  def signup
+    if params[:user]
+     flash[:notice] = "User already exists. Please log in"
+      redirect_to root_path()
+    else
+      @new_user = User.create()
+      @new_user.update_credentials(params[:auth][:credentials])
+      @new_user.facebook_info_update(params[:auth])
+      redirect_to create_session_path(:user => @new_user)
+    end
+  end 
+  
   def handle_auth 
     uid = request.env["omniauth.auth"][:uid]
     @user = User.find_by_uid(uid)

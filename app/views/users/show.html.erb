@@ -34,22 +34,17 @@
         <%= link_to "Pro Scheduler", pro_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
       <% end %>
       
-      <!--Add in a toggle to change pro user-->
-     <!-- Disabled Switch -->
-    <!--  <div class="switch">-->
-    <!--    <label></label>-->
-    <!--    <label>-->
-    <!--      Off-->
-          <!--send to toggle pro in user controller -->
-    <!--    <input disabled type="checkbox">-->
-    <!--    <span class="lever"></span>-->
-    <!--    On-->
-    <!--  </label>-->
-    <!--</div>-->
-    
-    <label>I am a Pro Dog Walker</label>
-               <div class="switch"><label>Off<input type="checkbox" checked><span class="lever"></span>On</label></div> 
+
+    <form action="demo_form.asp" method="get">
+      <label>I am a Pro Dog Walker</label>
+          <% if @user.is_pro? %>
+               <div class="switch"><label>No<input type="checkbox" checked><span class="lever"></span>Yes</label></div> 
             </div>
+            <% else %>
+              <div class="switch"><label>No<input type="checkbox" unchecked><span class="lever"></span>Yes</label></div> 
+            <% end %>
+    
+    </form>
       
       
       <ul class="collection user-info-collection">

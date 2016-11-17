@@ -112,8 +112,27 @@
           <!-- Menu items for tablet and desktop navigation -->
           <ul class="right hide-on-med-and-down">
             <li><a href="/dogs">Browse Dogs</a></li>
-            <li><a href="/auth/facebook/?type=login" class="waves-effect waves-light light-blue darken-3 btn" id="log_in">Sign Up</a></li>
+            <li><a class= "waves-effect waves-light light-blue darken-3 btn">Sign Up</a></li>
           </ul>
+        
+        <!--The signup pop-up dialog box-->
+        <div class="signup-box">
+          <div class="col s12 m6">
+            <div class="card white">
+              <div class="card-content grey-text">
+                <span class="card-title">Sign Up</span>
+                <p>Welcome to City Dog Share, create an account to get started</p>
+                    <li><a href="/auth/facebook/?type=signup" class="waves-effect waves-light light-blue darken-3 btn" id="fb-signup">Sign Up With Facebook</a></li>
+                    
+                     <li> Already have an account? <a href="/auth/facebook/?type=login" id = "log-in">Login</a></li>
+                </div>
+                <div class="card-action">
+                <a href="#">Help</a>
+                <a href="#">Close</a>
+              </div>
+            </div>
+          </div>
+        </div>
           
           <!-- Menu items for mobile navigation -->
           <ul id="nav-mobile" class="side-nav">
