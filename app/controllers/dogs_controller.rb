@@ -8,7 +8,7 @@ class DogsController < ApplicationController
     ip_zipcode = get_ip_address_zipcode
     @form_filler = DogViewHelper.new(current_user, ip_zipcode, true)
     @form_filler.update_values(params, ip_zipcode, current_user)
-    @dogs = Dog.filter_by @form_filler.values
+    @dogs = Dog.filter_by(@form_filler.values).uniq
     @no_dogs = @dogs.empty?
 
     @zipcodes = get_zipcode_from_dogs

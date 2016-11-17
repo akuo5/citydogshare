@@ -233,8 +233,9 @@ class Dog < ActiveRecord::Base
     age_ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
     age_query = ""
     age_ranges_indices.each do |i|
-        base = get_base(i.to_i, age_ranges)
-        if i.to_i < age_ranges_indices.length - 1
+        index = Dog.age_ranges.index(i)
+        base = get_base(index, age_ranges)
+        if index < age_ranges_indices.length - 1
           age_query += (base + " OR ")
         else
           age_query += base
