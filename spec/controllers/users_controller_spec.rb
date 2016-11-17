@@ -192,11 +192,20 @@ describe UsersController, :type => :controller do
       assert_equal @user.is_pro?, true
       
     end
-    it 'should show profile for existing user' do
+    it 'should show toggle off and no button by default' do
       get(:show, {:id => "1"})
-      expect(controller.instance_variable_get(:@user)).to eql(@user)
-      expect(controller.instance_variable_get(:@own_profile)).to eql(true)
+      # Assert that toggle is there, and it is off, and that the pro user button is not there
+      #toggle should be off
+      response.body.should have_no_content("My Pro Scheduler")
+    end
+    
+    it 'should show button when toggle is on' do
+      get(:show, {:id => "1"})
+      # Assert that toggle is on is pro user button is there when it it on
+      #Click toggle, should refresh page? 
       expect(response).to render_template("show")
+      #toggle should be on
+      response.body.should have_content("My Pro Scheduler")
     end
   end
 

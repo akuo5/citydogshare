@@ -76,6 +76,11 @@ class UsersController < ApplicationController
       #Make sure it refreshes the page? 
     end
   end
+  
+  def pro
+    #redirect_to (the other team's app link, with API call or link to where they can find api?)
+    
+  end
 
   private
   def user_params
