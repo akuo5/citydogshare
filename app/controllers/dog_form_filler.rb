@@ -52,8 +52,8 @@ class DogViewHelper
     ## Return hash with new dog values to create new dog/update existing dog
     new_attrs = {
       :mixes => get_mix_array(dog_attributes['mixes']),
-      :size => dog_attributes['size'].length == 0 ? nil : Size.find(dog_attributes['size']), 
-      :energy_level => dog_attributes['energy_level'].length == 0 ? nil : EnergyLevel.find(dog_attributes['energy_level']), 
+      :size => dog_attributes['size'] && dog_attributes['size'].length != 0 ? Size.find(dog_attributes['size']): nil, 
+      :energy_level => dog_attributes['energy_level'] && dog_attributes['energy_level'].length != 0 ? EnergyLevel.find(dog_attributes['energy_level']) : nil, 
       :likes => get_attribute_array(dog_attributes, 'likes'),
       :personalities => get_attribute_array(dog_attributes, 'personalities'),
       :barks => get_attribute_array(dog_attributes, 'barks'),

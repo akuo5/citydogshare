@@ -37,6 +37,7 @@ class Dog < ActiveRecord::Base
   validates_inclusion_of :fixed, in: [true, false], :message => "Please select a response for fix"
   validates_inclusion_of :chipped, in: [true, false], :message => "Please select a response for chipped"
   validate :validate_dob
+  validate :validate_availability
 
   #paperclip avatar
   has_attached_file :photo, 
@@ -60,7 +61,11 @@ class Dog < ActiveRecord::Base
   def validate_dob
     errors.add(:dob, "Dog's birthday can't be in the future.") if (!dob.nil? and dob > Date.today)
   end
-
+  
+  def validate_availability
+    errors.add(:availability, "AWWWW BUSTED! Please select a proper availability.") if (!availability.nil? and availability != "Available" and availability != "Unavailable")
+  end
+  
   def age
     now = Time.now.utc.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
@@ -133,7 +138,7 @@ class Dog < ActiveRecord::Base
   end
   
   def available
-    self.availability && self.availability != "" ? true : false
+    self.availability && self.availability != "Unavailable" ? true : false
   end
   
   def to_form_hash
