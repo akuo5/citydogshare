@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   before_filter :session_expires
-  MAX_SESSION_TIME = 60 * 60
+  MAX_SESSION_TIME = 60
 
     def session_expires?
       exp_time = session[:expires_at]
@@ -34,11 +34,11 @@ class SessionsController < ApplicationController
   end
 
   def login
-    # add in case for if a certain amount of time has elapsed? 
     if params[:user]
       #re-authentication factor
       if session_expires?
-        #redirect to reautheticate
+        #redirect to reauthenticate
+        redirect_to '/users/auth/facebook?auth_type=reauthenticate'
       else
         @user = User.find(params[:user])
         @user.update_credentials(params[:credentials])
