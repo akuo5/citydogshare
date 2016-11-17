@@ -1,7 +1,7 @@
 <% content_for :page_title, "Browse Dogs" %>
 
-<div class="row container main-content">
-  <div class="col l4 m4 s12">
+<div class="row container main-content full-row">
+  <div class="col l3 m6 s12">
     <div class="card" style="padding-bottom: 10px">
       <h5 id="filter_title">Filter Dogs</h5>
       <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
@@ -56,7 +56,7 @@
   </div>
   <span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>
   <span id="counts" data-counts="<%= @counts %>"/>
-  <div class="col l8 m8 s12">
+  <div class="col l9 m6 s12">
     <% if @no_dogs then %>
         <div class="row center-align valign-wrapper no-dogs-message-container">
           <div class="col l12 m12 s12 valign no-dogs-message">
@@ -64,9 +64,14 @@
           </div>
         </div>
       <% else %>
-        <div class="row container main-content">
+        <div class="row container hide-on-large-only">
           <% @dogs.each do |dog| %>
-            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l6" %>
+            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m12 l4" %>
+          <% end %>
+        </div>
+        <div class="hide-on-med-and-down">
+          <% @dogs.each do |dog| %>
+            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "card-grid-size" %>
           <% end %>
         </div>
       <% end %>
