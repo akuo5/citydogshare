@@ -18,3 +18,4 @@
 //= require jquery-ui
 //= require galleria.classic
 //= require moment
+//= require fullcalendar

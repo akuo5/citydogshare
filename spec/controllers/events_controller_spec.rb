@@ -9,7 +9,6 @@ describe EventsController, :type => :controller do
     @current_user = FactoryGirl.create(:user)
     Dog.any_instance.stub(:geocode)
     @dog = FactoryGirl.create(:dog)
-    @event = FactoryGirl.create(:event)
   end
 
   describe 'render the events page' do
@@ -80,7 +79,10 @@ describe EventsController, :type => :controller do
   # end
 
   describe 'show dog events' do
-
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+    end
+    
     it 'should get the correct dog' do
       get :index
       assigns(:dog) == Dog.find(1)
@@ -98,6 +100,9 @@ describe EventsController, :type => :controller do
   end
 
   describe 'edit dog events' do
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+    end
     it 'should find the right event' do
       get :edit, {:id => 1}
       expect(controller.instance_variable_get(:@event_form_values)).to eql(@event.to_form_hash)
@@ -108,6 +113,9 @@ describe EventsController, :type => :controller do
 
 
   describe 'update event' do
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+    end
     before (:each) do
       @params = {"id" => 1, "event" => {"dogs"=>["", "1"], "location"=>"2", 
         "start_date"=>Date.today, "end_date"=>Date.tomorrow,
@@ -131,6 +139,9 @@ describe EventsController, :type => :controller do
   end
 
   describe 'delete event' do
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+    end
     it 'should delete the event' do
       get :destroy, :id => "1"
       expect(controller.instance_variable_get(:@event)).to eql(@event)

@@ -10,6 +10,7 @@ gem 'omniauth-facebook'
 gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'rails_secret_token_env'
 gem 'geocoder'
 
@@ -53,7 +54,6 @@ group :assets do
   gem 'fullcalendar-rails'
   gem 'momentjs-rails'
   gem 'materialize-sass'
-
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

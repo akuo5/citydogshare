@@ -66,6 +66,5 @@ module Citydogshare
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
       html_tag
     }
-    # config.assets.precompile += ['application-print.css']
   end
 end

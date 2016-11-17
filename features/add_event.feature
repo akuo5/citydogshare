@@ -36,7 +36,6 @@ Scenario: Empty event form should throw an error
   Then I should see "Please select the dogs you want to share"
   Then I should see "Please select a location"
   Then I should see "Please enter a start date"
-  Then I should see "Please enter an end date"
 
 Scenario: Selecting a start date before an end date should throw an error
   Given I select "Princess" from "event_dogs"

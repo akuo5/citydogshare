@@ -19,6 +19,9 @@ Citydogshare::Application.routes.draw do
   get 'dogs/info', to: "dogs#all_info", as: "dogs_info"
   resources :dogs
 
+  ## Event Routes ##
+  put 'events/', :to => 'events#index'
+  get "events/fc_info", to: "events#fc_info", as: "events_info"
   resources :events, :only => [:index, :new, :create, :edit, :update, :show, :destroy]
 
   resources :mixes, :only => [:index, :show] do
