@@ -15,12 +15,12 @@
         </div>
         <div id="size" class="input-field filter">
           <% size_options = options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
-          <%= select_tag(:size, size_options, {:include_blank => "All", :class => "white", :multiple => true})%>
+          <%= select_tag(:size, size_options, {:include_blank => "All", :class => "white", :multiple => true}) %>
           <label for="size">Size</label>
         </div>
         <div id="likes" class="input-field filter">
           <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
-          <%= select_tag(:like, like_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag :like, like_options, {:include_blank => "All", :class => "validate white", :multiple => true} %>
           <label for="likes">Likes</label>
         </div>
         <div id="age" class="input-field filter">
