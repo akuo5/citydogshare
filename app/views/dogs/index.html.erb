@@ -17,38 +17,38 @@
           <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], :placeholder => "94704", :size => 10  )%>
         </div>
         <div id="size" class="input-field filter">
-          <% size_options = options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
-          <%= select_tag(:size, size_options, {:include_blank => "All", :multiple => true})%>
+          <% size_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
+          <%= select_tag(:size, size_options.html_safe, {:multiple => true})%>
           <label for="size">Size</label>
         </div>
         <div id="likes" class="input-field filter">
-          <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
-          <%= select_tag(:like, like_options, {:include_blank => "All", :multiple => true}) %>
+          <% like_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
+          <%= select_tag(:like, like_options.html_safe, {:multiple => true})%>
           <label for="likes">Likes</label>
         </div>
         <div id="age" class="input-field filter">
-          <% age_options = options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
-          <%= select_tag(:age, age_options, {:include_blank => "All", :multiple => true}) %>
+          <% age_options = "<option value="" selected disabled hidden>All</option>"+options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
+          <%= select_tag(:age, age_options.html_safe, {:multiple => true}) %>
           <label for="age">Age</label>
         </div>
         <div id="gender" class="input-field filter">
-          <% gender_options = options_for_select(Dog.genders, @form_filler.values[:gender]) %>
-          <%= select_tag(:gender, gender_options, {:include_blank => "All", :multiple => true}) %>
+          <% gender_options = "<option value="" selected disabled hidden>All</option>"+options_for_select(Dog.genders, @form_filler.values[:gender]) %>
+          <%= select_tag(:gender, gender_options.html_safe, {:multiple => true}) %>
           <label for="gender">Gender</label>
         </div>
         <div id="mixes" class="input-field filter">
-          <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
-          <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :multiple => true}) %>          <label for="mixes">Mix</label>
+          <% mix_options = "<option value="" selected disabled hidden>Mutt/Other</option>"+options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
+          <%= select_tag(:mix, mix_options.html_safe, {:multiple => true}) %>          <label for="mixes">Mix</label>
         </div>
          <div id="personalities" class="input-field filter">
-          <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
-          <%= select_tag(:personality, personality_options, {:include_blank => "All", :multiple => true}) %>
+          <% personality_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
+          <%= select_tag(:personality, personality_options.html_safe, {:multiple => true}) %>
           <label for="personality">Personality</label>
           </label>
         </div>
         <div id="energy_level" class="input-field filter">
-          <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
-          <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :multiple => true}) %>
+          <% energy_level_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
+          <%= select_tag(:energy_level, energy_level_options.html_safe, {:multiple => true}) %>
           <label for="energy_level">Energy Level</label>
         </div>
       </div>
@@ -87,38 +87,38 @@
         <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], :placeholder => "94704", :size => 10  )%>
       </div>
       <div id="size" class="input-field filter">
-        <% size_options = options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
-        <%= select_tag(:size, size_options, {:include_blank => "All", :multiple => true})%>
+        <% size_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
+        <%= select_tag(:size, size_options.html_safe, {:multiple => true})%>
         <label for="size">Size</label>
       </div>
       <div id="likes" class="input-field filter">
-        <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
-        <%= select_tag(:like, like_options, {:include_blank => "All", :multiple => true}) %>
+        <% like_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
+        <%= select_tag(:like, like_options.html_safe, {:multiple => true})%>
         <label for="likes">Likes</label>
       </div>
       <div id="age" class="input-field filter">
-        <% age_options = options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
-        <%= select_tag(:age, age_options, {:include_blank => "All", :multiple => true}) %>
+        <% age_options = "<option value="" selected disabled hidden>All</option>"+options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
+        <%= select_tag(:age, age_options.html_safe, {:multiple => true}) %>
         <label for="age">Age</label>
       </div>
       <div id="gender" class="input-field filter">
-        <% gender_options = options_for_select(Dog.genders, @form_filler.values[:gender]) %>
-        <%= select_tag(:gender, gender_options, {:include_blank => "All", :multiple => true}) %>
+        <% gender_options = "<option value="" selected disabled hidden>All</option>"+options_for_select(Dog.genders, @form_filler.values[:gender]) %>
+        <%= select_tag(:gender, gender_options.html_safe, {:multiple => true}) %>
         <label for="gender">Gender</label>
       </div>
       <div id="mixes" class="input-field filter">
-        <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
-        <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :multiple => true}) %>          <label for="mixes">Mix</label>
+        <% mix_options = "<option value="" selected disabled hidden>Mutt/Other</option>"+options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
+        <%= select_tag(:mix, mix_options.html_safe, {:multiple => true}) %>          <label for="mixes">Mix</label>
       </div>
        <div id="personalities" class="input-field filter">
-        <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
-        <%= select_tag(:personality, personality_options, {:include_blank => "All", :multiple => true}) %>
+        <% personality_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
+        <%= select_tag(:personality, personality_options.html_safe, {:multiple => true}) %>
         <label for="personality">Personality</label>
         </label>
       </div>
       <div id="energy_level" class="input-field filter">
-        <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
-        <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :multiple => true}) %>
+        <% energy_level_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
+        <%= select_tag(:energy_level, energy_level_options.html_safe, {:multiple => true}) %>
         <label for="energy_level">Energy Level</label>
       </div>
     </div>
