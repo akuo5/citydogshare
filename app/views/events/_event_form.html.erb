@@ -1,7 +1,7 @@
 <% notice = flash[:notice] %>
 
 <div class="container">
-  <div class="row"><br><h4>Your Event</h4><br></div>
+  <div class="row title-margin"><br><h4>Your Event</h4><br></div>
   <%= form_tag({controller: :events, action: @action}, method: @method, :multipart => true) do %>
   <div class="row">
     <div id="dogs" class="input-field col s12 m12 l6 left-col">
