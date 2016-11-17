@@ -232,10 +232,13 @@ class Dog < ActiveRecord::Base
   def self.convert_age_ranges_to_dob_query(age_ranges_indices)
     age_ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
     age_query = ""
+    selected_counter = 0
+    num_selected = age_ranges_indices.length
     age_ranges_indices.each do |i|
         index = Dog.age_ranges.index(i)
         base = get_base(index, age_ranges)
-        if index < age_ranges_indices.length - 1
+        selected_counter += 1
+        if selected_counter < num_selected
           age_query += (base + " OR ")
         else
           age_query += base
