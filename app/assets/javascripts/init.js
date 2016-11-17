@@ -1,9 +1,11 @@
 (function($){
   $(function(){
     
-    $(".button-collapse").sideNav();
-    $("#show-menu-btn").sideNav({
+    $(".button-collapse").sideNav({
       draggable: true
+    });
+    $("#show-menu-btn").sideNav({
+      draggable: false
     });
     $("#hide-menu-btn").click(function() {
       $("#show-menu-btn").sideNav("hide");
