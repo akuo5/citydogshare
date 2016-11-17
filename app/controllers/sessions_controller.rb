@@ -1,19 +1,22 @@
 class SessionsController < ApplicationController
 
-  before_filter :session_expires
+  # before_filter :session_expires
   MAX_SESSION_TIME = 60
 
-    def session_expires?
-      exp_time = session[:expires_at]
-      now_time = Time.now
-      minutes_elapsed = (exp_time - now_time)/1.minute
-      session[:expires_at] = MAX_SESSION_TIME.minutes.from_now
-      if minutes_elapsed > MAX_SESSION_TIME
-        return true
-      else
-        return false
-      end
-    end
+  # def session_expires
+  #     now_time = Time.now
+  #     puts session[:expires_at]
+  #     exp_time = session[:expires_at]
+      
+      
+  #     minutes_elapsed = (exp_time - now_time)/1.minute
+  #     session[:expires_at] = MAX_SESSION_TIME.minutes.from_now
+  #     if minutes_elapsed > MAX_SESSION_TIME
+  #       return true
+  #     else
+  #       return false
+  #     end
+  # end
   
   
   def create 
@@ -34,18 +37,24 @@ class SessionsController < ApplicationController
   end
 
   def login
+    # session[:expires_at] = MAX_SESSION_TIME.minutes.from_now
+    # if params[:user]
+    #   #re-authentication factor
+    #   if self.session_expires
+    #     #redirect to reauthenticate
+    #     redirect_to '/users/auth/facebook?auth_type=reauthenticate'
+    #   else
+    #     @user = User.find(params[:user])
+    #     @user.update_credentials(params[:credentials])
+    #     redirect_to create_session_path(:user => @user)
+    #   end
+    
     if params[:user]
-      #re-authentication factor
-      if session_expires?
-        #redirect to reauthenticate
-        redirect_to '/users/auth/facebook?auth_type=reauthenticate'
-      else
         @user = User.find(params[:user])
         @user.update_credentials(params[:credentials])
         redirect_to create_session_path(:user => @user)
-      end
+
     else
-      #I think this is where Jacen changeed the sign up 
       @new_user = User.create()
       @new_user.update_credentials(params[:auth][:credentials])
       @new_user.facebook_info_update(params[:auth])

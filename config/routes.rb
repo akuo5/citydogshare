@@ -14,8 +14,8 @@ Citydogshare::Application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy, :index]
   post 'users/:id/edit', to: 'users#edit'
   get 'users/:id/info', to: "users#info", as: "user_info"
-  get 'users/:id/pro', to: "users#pro", as: "pro_user"
-  get 'users/:id/toggle', to: "users#toggle_pro", as: "toggle_pro"
+  get 'users/pro', to: "users#pro", as: "pro_user"
+  get 'users/toggle', to: "users#toggle_pro", as: "toggle_pro"
 
   ## Dog Routes ##
   get 'dogs/:id/info', to: "dogs#info", as: "dog_info"

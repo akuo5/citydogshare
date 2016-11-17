@@ -56,7 +56,7 @@
               <i class="fa fa-calendar fa-lg menu-item-icon"></i>Events
             <% end %></li>
             <li class = "menu-item"><%= link_to pro_user_path do %>
-              <% if @user.is_pro? %>
+              <% if current_user.is_pro? %>
                 <i class="fa fa-calendar fa-lg menu-item-icon"></i>My Scheduler
               <% end %>
             <% end %></li>
