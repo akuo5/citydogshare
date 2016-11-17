@@ -1,5 +1,21 @@
 class SessionsController < ApplicationController
 
+  before_filter :session_expires
+  MAX_SESSION_TIME = 60 * 60
+
+    def session_expires?
+      exp_time = session[:expires_at]
+      now_time = Time.now
+      minutes_elapsed = (exp_time - now_time)/1.minute
+      session[:expires_at] = MAX_SESSION_TIME.minutes.from_now
+      if minutes_elapsed > MAX_SESSION_TIME
+        return true
+      else
+        return false
+      end
+    end
+  
+  
   def create 
     @user = User.find(params[:user])
     session[:user_id] = @user.uid
@@ -21,9 +37,13 @@ class SessionsController < ApplicationController
     # add in case for if a certain amount of time has elapsed? 
     if params[:user]
       #re-authentication factor
-      @user = User.find(params[:user])
-      @user.update_credentials(params[:credentials])
-      redirect_to create_session_path(:user => @user)
+      if session_expires?
+        #redirect to reautheticate
+      else
+        @user = User.find(params[:user])
+        @user.update_credentials(params[:credentials])
+        redirect_to create_session_path(:user => @user)
+      end
     else
       #I think this is where Jacen changeed the sign up 
       @new_user = User.create()
