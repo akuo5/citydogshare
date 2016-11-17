@@ -4,7 +4,6 @@ class DogViewHelper
 
   DEFAULT_RADIUS = 100
   CHECKBOX_CRITERIA = [:gender, :personality, :energy_level, :size, :age, :like, :mix]
-
   
   def initialize(current_user, ip_zipcode, index)
     @values = {}
@@ -39,58 +38,5 @@ class DogViewHelper
       @values[:zipcode] = ip_zipcode
     end
   end
-
-  def attributes_list(dog_attributes)
-    # Set form fields with new dog's information
-    @values[:personality] = dog_attributes['personalities'] ? get_attribute_array(dog_attributes, 'personalities')  : []
-    @values[:bark] = dog_attributes['barks'] ? get_attribute_array(dog_attributes, 'barks')  : []
-    @values[:like] = dog_attributes['likes'] ? get_attribute_array(dog_attributes, 'likes') : []
-    @values[:size] = dog_attributes['size']
-    @values[:energy_level] = dog_attributes['energy_level']
-    @values[:mix] = dog_attributes['mixes'].split(',')
-
-    ## Return hash with new dog values to create new dog/update existing dog
-    new_attrs = {
-      :mixes => get_mix_array(dog_attributes['mixes']),
-      :size => dog_attributes['size'] && dog_attributes['size'].length != 0 ? Size.find(dog_attributes['size']): nil, 
-      :energy_level => dog_attributes['energy_level'] && dog_attributes['energy_level'].length != 0 ? EnergyLevel.find(dog_attributes['energy_level']) : nil, 
-      :likes => get_attribute_array(dog_attributes, 'likes'),
-      :personalities => get_attribute_array(dog_attributes, 'personalities'),
-      :barks => get_attribute_array(dog_attributes, 'barks'),
-      :dob => get_birthday(dog_attributes) }
-    dog_attributes.merge(new_attrs)
-  end
-
-  # REMOVE WHEN DONE
-  def dog_view_update(dog)
-    ## Fills edit form with dog's current values
-    @dog = Dog.find(dog)
-    @values[:like] = @dog.readable_likes
-    @values[:personality] = @dog.readable_personalities
-    @values[:size] = @dog.size_id
-    @values[:energy_level] = @dog.energy_level_id
-    @values[:mix] = @dog.mixes.pluck(:value)
-
-  end
-
-  def get_birthday(dog_attributes)
-    year = dog_attributes['dob'].to_i
-    DateTime.new(year, 1, 1)
-  end
-
-  def get_mix_array(mix_arr)
-    mix_arr.blank? ? [] : mix_arr.map{ |m| Mix.find_by_value(m) }
-  end
-
-  def get_attribute_array(attributes, trait)
-    if attributes[trait] != nil
-      model_class = trait.classify.constantize
-      attributes[trait].each.map { |thing| model_class.find_by_value(thing) }
-    else
-      return []
-    end
-  end
-
-
 
 end

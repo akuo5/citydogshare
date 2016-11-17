@@ -63,7 +63,7 @@ class Dog < ActiveRecord::Base
   end
   
   def validate_availability
-    errors.add(:availability, "- Please select a proper availability.") if (!availability.nil? and availability != "Available" and availability != "Unavailable")
+    errors.add(:availability, "- Please select a proper availability.") if (!availability.nil? and availability != "Available" and availability != "" and availability != "Unavailable")
   end
   
   def age
@@ -138,7 +138,7 @@ class Dog < ActiveRecord::Base
   end
   
   def available
-    self.availability && self.availability != "Unavailable" ? true : false
+    self.availability && self.availability != "Unavailable" && self.availability != "" ? true : false
   end
   
   def to_form_hash

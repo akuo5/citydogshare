@@ -13,7 +13,7 @@
       
       <div id="dob" class="input-field col s12 m12 l6  right-col" id="dob">
         <%= select :dog, :dob, {:class => "validate white", :id=> 'dobdob'} do %>
-          <option value="" <%= !@dog_form_values[:dob] ? "selected" : nil %> disabled>Please choose one</option>
+          <option value="" <%= !@dog_form_values[:dob] || @dog_form_values[:dob] == 0 ? "selected" : nil %> disabled>Please choose one</option>
           <% ((Date.today.year - 30)...(Date.today.year)).each do |year| %>
             <option value="<%= year %>" <%= @dog_form_values[:dob] == year ? "selected" : nil %>><%= year %></option> 
           <% end %>
@@ -94,7 +94,7 @@
       
       <div id="fixed" class="input-field col s12 m12 l6 right-col">
         <%= select :dog, :fixed, :class => "validate white" do %>
-          <option value="" disabled selected>Must select one</option>
+          <option value="" disabled <%= !@dog_form_values[:fixed] ? "selected" : nil %>>Must select one</option>
           <option value="true" <%= @dog_form_values[:fixed] == "true" ? "selected" : nil %>>Yes</option>
           <option value="false" <%= @dog_form_values[:fixed] == "false" ? "selected" : nil %>>No</option>
         <% end %>
@@ -105,7 +105,7 @@
       
       <div id="chipped" class="input-field col s12 m12 l6 left-col">
         <%= select :dog, :chipped, :class => "validate white" do %>
-          <option value="" disabled selected>Must select one</option>
+          <option value="" disabled <%= !@dog_form_values[:chipped] ? "selected" : nil %>>Must select one</option>
           <option value="true" <%= @dog_form_values[:chipped] == "true" ? "selected" : nil %>>Yes</option>
           <option value="false" <%= @dog_form_values[:chipped] == "false" ? "selected" : nil %>>No</option>
         <% end %>
@@ -116,7 +116,7 @@
       
       <div id="shots_to_date" class="input-field col s12 m12 l6 right-col">
         <%= select :dog, :shots_to_date, :class => "validate white" do %>
-          <option value="" disabled selected>Must select one</option>
+          <option value="" disabled <%= !@dog_form_values[:shots_to_date] ? "selected" : nil %>>Must select one</option>
           <option value="true" <%= @dog_form_values[:shots_to_date] == "true" ? "selected" : nil %>>Yes</option>
           <option value="false" <%= @dog_form_values[:shots_to_date] == "false" ? "selected" : nil %>>No</option>
         <% end %>

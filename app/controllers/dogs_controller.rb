@@ -9,6 +9,7 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(current_user, ip_zipcode, true)
     @form_filler.update_values(params, ip_zipcode, current_user)
     @dogs = Dog.filter_by(@form_filler.values).uniq
+    @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
     @no_dogs = @dogs.empty?
 
     @zipcodes = get_zipcode_from_dogs
@@ -103,7 +104,7 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures
-    if @dog.update_attributes(@form_filler.attributes_list(dog_params))
+    if @dog.update_attributes(attributes_list(dog_params))
       delete_checked_pictures
       add_multiple_pictures(@dog)
       redirect_to dogs_user_path(@current_user.id)

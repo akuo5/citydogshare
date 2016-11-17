@@ -1,9 +1,9 @@
 <% content_for :page_title, "My Favorites" %>
 
-<% if not @dogs.empty? %>
+<% if not @starred_dogs.empty? %>
   <div class="row container main-content">
-    <% @dogs.each do |dog| %>
-      <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
+    <% @starred_dogs.each do |dog| %>
+      <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :starred_dogs => @starred_dogs, :card_size => "col s12 m6 l4" %>
     <% end %>
 <% else %>
   <div class="row center-align valign-wrapper no-dogs-message-container">
