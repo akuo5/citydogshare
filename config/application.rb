@@ -60,8 +60,7 @@ module Citydogshare
     config.assets.version = '1.0'
     
     # config.assets.precompile << %w( galleria-1.4.2.js )
-    config.assets.precompile << %w( galleria.classic.js )
-    config.assets.precompile << %w( *.js ) 
+    config.assets.precompile =  [ '*.js', '*.css.scss', 'fullcalendar.print.css', 'fullcalendar.css', 'foundation.css' ] 
     config.assets.initialize_on_precompile = false
     
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 

@@ -15,9 +15,9 @@ Citydogshare::Application.configure do
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
-  config.assets.precompile += %w( tags.js )
-  config.assets.precompile << %w( galleria-1.4.2.js )
-  config.assets.precompile << '*.css'
+  # config.assets.precompile += %w( tags.js )
+  # config.assets.precompile << %w( galleria-1.4.2.js )
+  # config.assets.precompile << '*.css'
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
 
