@@ -23,7 +23,7 @@ class DogViewHelper
   def update_values(selected, ip_zipcode, current_user)
     CHECKBOX_CRITERIA.each {|criteria| get_checkbox_selections(selected, criteria)}
     @values[:zipcode] = update_zipcode(selected, ip_zipcode, current_user)
-    @values[:radius] = selected[:radius].nil? ? DEFAULT_RADIUS : selected[:radius].to_i
+    @values[:radius] = (selected[:radius].nil? || selected[:radius] == "") ? DEFAULT_RADIUS : selected[:radius].to_i
   end
 
   def get_checkbox_selections(selected, criteria)

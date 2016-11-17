@@ -10,11 +10,11 @@
       <div class="input-container">
         <div id="distance" class="filter">
           <label for="distance">Distance (miles)</label>
-          <%= text_field_tag(:radius, @form_filler.values[:radius], :placeholder => "10 miles", :size => 10) %>
+          <%= number_field_tag(:radius, @form_filler.values[:radius], :max  => 10000) %>
         </div>
         <div id="zipcode" class="filter">
           <label for="zipcode">Zipcode</label>
-          <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], :placeholder => "94704", :size => 10  )%>
+          <%= number_field_tag(:zipcode, @form_filler.values[:zipcode], :max => 9999999)%>
         </div>
         <div id="size" class="input-field filter">
           <% size_options = "<option value="" selected disabled hidden>All</option>"+options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
