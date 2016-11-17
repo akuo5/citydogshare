@@ -1,0 +1,124 @@
+/* BEGIN DOGS.HTML */
+.form-button-box {
+  height: 60px; }
+
+.center-profile {
+  text-align: center; }
+
+.main-content {
+  margin-top: 15px; }
+
+.container {
+  width: 90%; }
+
+.user-action-button {
+  width: 100%;
+  margin-top: 10px; }
+
+#dogs-title, #events-title {
+  display: inline-block; }
+
+#add_dog_button, #add_event_button {
+  margin-top: 1.4rem;
+  float: right;
+  width: 160px; }
+
+.speech-bubble {
+  border-radius: 2px;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 16px;
+  min-height: 60px;
+  margin-top: 12px; }
+
+.speech-bubble-content {
+  margin-left: 20px;
+  margin-right: 20px; }
+
+.speech-bubble-content .status-icon {
+  float: left;
+  height: 32px;
+  display: table-cell; }
+
+.speech-bubble-content .status-text {
+  vertical-align: bottom;
+  display: table-cell;
+  padding-top: 5px; }
+
+.user-info-collection .collection-item {
+  min-height: 60px; }
+
+.user-info-collection .collection-item .collection-item-content {
+  margin-top: 7px; }
+
+.user-info-collection .collection-item .collection-item-content span {
+  margin-right: 6px; }
+
+@media only screen and (max-width: 600px) {
+  .ctr.s {
+    text-align: center; } }
+.no-dogs-message {
+  width: 100%;
+  background-color: #EEEEEE;
+  height: 60px;
+  vertical-align: middle; }
+
+.no-dogs-message div {
+  margin-top: 16px; }
+
+.no-events-message {
+  width: 100%;
+  background-color: #EEEEEE;
+  height: 60px;
+  vertical-align: middle; }
+
+.no-events-message div {
+  margin-top: 16px; }
+
+.add-dog-card {
+  height: 381.5px;
+  margin-top: 7.5px;
+  border-radius: 12px;
+  position: relative;
+  border: dashed 5px #DFDFDF;
+  cursor: hand;
+  cursor: pointer;
+  display: block; }
+
+.add-dog-card-icon, .add-event-card-icon {
+  width: 100%;
+  font-size: 120px;
+  margin-top: 95px;
+  text-align: center;
+  color: #C4C4C4; }
+
+.add-dog-card-text, .add-event-card-text {
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+  color: #C4C4C4; }
+
+strong {
+  font-weight: 900; }
+
+#add_dog_plus {
+  float: right;
+  margin-top: 13px;
+  color: white; }
+
+#favorite_star {
+  z-index: 10;
+  position: absolute;
+  left: 85%;
+  top: 5%;
+  font-size: 40px;
+  color: gold; }
+
+.no-dogs-message {
+  margin-top: 20px;
+  padding-top: 18px !important; }
+
+.no-dogs-message a {
+  margin-top: 35px; }
+
+/* END DOGS.HTML */
