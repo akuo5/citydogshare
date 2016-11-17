@@ -104,7 +104,6 @@
         <h4 id="dogs-title">Dogs</h4>
         <% if @own_profile %>          <%= link_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "btn green accent-4 s br-15 hide-on-small-only", :method => :get %>
         <% end %>
-        <hr/>
       </div>
       <div class="row">
         <% if @user.dogs.count == 0 then %>
@@ -124,7 +123,6 @@
           <% if @own_profile %>
             <%= link_to "Add Event", new_event_path(), :id => "add_event_button", :class => "btn green accent-4 s br-15 hide-on-small-only", :method => :get %>
           <% end %>
-          <hr/>
         </div>
           <% if @user.events.count == 0 then %>
           <div class="row center-align valign-wrapper no-events-message-container">

@@ -1,0 +1,95 @@
+/* BEGIN NEW.HTML */
+.form-button-box {
+  height: 60px; }
+
+@media only screen and (max-width: 600px) {
+  .form-button-box {
+    height: 90px; } }
+.form-button-box a {
+  margin-bottom: 15px; }
+
+.input-field {
+  margin-bottom: 15px; }
+
+.select-wrapper {
+  margin-top: 5px; }
+
+@media only screen and (min-width: 600px) {
+  .left-col {
+    padding-right: 18px !important; }
+
+  .right-col {
+    padding-left: 18px !important; }
+
+  .right-col > label {
+    padding-left: 6px !important; } }
+#favorite_star {
+  z-index: 10;
+  position: absolute;
+  left: 85%;
+  top: 5%;
+  font-size: 40px;
+  color: gold; }
+
+.star-container {
+  position: absolute;
+  right: 0;
+  bottom: 0; }
+
+.filter {
+  margin-left: 10px;
+  margin-right: 10px; }
+
+#filter_title {
+  padding-top: 10px;
+  padding-left: 10px; }
+
+#search_dog_submit {
+  margin-left: 10px; }
+
+#dog_profile_pic {
+  height: 200px;
+  width: 200px;
+  object-fit: cover; }
+
+.availability-dropdown {
+  margin-top: 48px; }
+
+.availability-comment {
+  font-size: 13px;
+  line-height: 14px !important; }
+
+#profile_pics {
+  position: relative;
+  margin: 0 auto; }
+
+#dog_profile_name {
+  font-size: 50px;
+  line-height: 60px; }
+
+#dog_profile_star {
+  color: gold;
+  position: relative;
+  bottom: 50px;
+  right: 45px; }
+
+/* END NEW.HTML */
+/* BEGIN SHOW.HTML */
+.dog-info-collection .collection-item {
+  min-height: 60px; }
+
+.dog-info-collection .collection-item .collection-item-content {
+  margin-top: 7px; }
+
+/* END SHOW.HTML */
+/* BEGIN INDEX.HTML */
+.card-grid-size {
+  width: 270px; }
+
+.full-row {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: 1350px !important; }
+
+/* END INDEX.HTML */

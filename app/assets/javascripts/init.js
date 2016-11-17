@@ -2,15 +2,25 @@
   $(function(){
     
     $(".button-collapse").sideNav();
-    $("#show-menu-btn").sideNav();
+    $("#show-menu-btn").sideNav({
+      draggable: true
+    });
     $("#hide-menu-btn").click(function() {
       $("#show-menu-btn").sideNav("hide");
+    });
+    $(".filters-button-collapse").sideNav({
+      draggable: true
     });
     $('.tooltipped').tooltip({delay: 50});
     
     $('.parallax').parallax();
     
     $('select').material_select();
+    
+    $("#filters-slide-out").css("height", $(window).height() - 56 + "px");
+    $( window ).resize(function(){
+      $("#filters-slide-out").css("height", $(window).height() - 56 + "px");
+    });
     
     /* Adds functionality to the flash notice */
     var keepNotice = false;

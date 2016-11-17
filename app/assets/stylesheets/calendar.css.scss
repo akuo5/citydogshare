@@ -1,0 +1,33 @@
+// Place all the styles related to the Calendar controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.fc-event-skin {
+    background-color: #3366CC;
+    border-color: #3366CC;
+    color: #FFFFFF;
+}
+
+.fc-toolbar {
+    margin: 0 !important;
+    position: relative;
+}
+
+.fc .fc-toolbar > .fc-left > :first-child {
+    font-size: 2.28rem;
+    margin: 1.14rem 0 0.912rem 0;
+}
+
+.fc .fc-toolbar > .fc-right > :first-child {
+    font-size: 14px;
+    
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 1.14rem 0 0.912rem 0;
+}
+
+.fc-unthemed thead {
+    border-bottom-color: transparent !important;
+}

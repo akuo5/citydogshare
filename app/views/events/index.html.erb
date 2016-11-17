@@ -1,26 +1,32 @@
 <% content_for :page_title, "My Events" %>
 
 <div class="row container main-content">
+  <div class="col s12 m7">
+    <div id="calendar"></div>
+  </div>
   <div class="col s12 m5">
-    <% if @current_user.events %>
-      <div id = "dogevents"><h5>Upcoming Events:</h5>
-        <% @current_user.events.each do |event| %>
+    <% if @events %>
+      <div id="dogevents"><h4 style="padding: 0 0.75rem">Upcoming</h4></div>
+        <div class="events-scroll">
+        <% @events.each do |event| %>
           <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12" %>
         <% end %>
-      </div>
+        <div class="col s12 m12 l12 hide-on-small-only">
+          <a href="<%= new_event_path %>" class="add-event-card" style="margin-bottom: 30px;">
+            <i class="material-icons add-event-card-icon" style="font-size: 80px; line-height: 65px;margin-top: 15px;">add</i>
+            <div class="add-event-card-text" style="margin-top:-5px">Add Event</div>
+          </a>
+        </div>
+        </div>
     <% else %>
-      <div id="dogevents"><h3>No upcoming events</h3></div>
+      <div id="dogevents"><h4 style="padding: 0 0.75rem">No upcoming events</h4></div>
+      <div class="col s12 m12 l12 hide-on-small-only">
+        <a href="<%= new_event_path %>" class="add-event-card" style="margin-bottom: 30px;">
+          <i class="material-icons add-event-card-icon" style="font-size: 80px; line-height: 65px;margin-top: 15px;">add</i>
+          <div class="add-event-card-text" style="margin-top:-5px">Add Event</div>
+        </a>
+      </div>
     <%end%>
-    <div class="col s12 m12 l12 hide-on-small-only">
-      <a href="<%= new_event_path %>" class="add-event-card" style="margin-bottom: 30px;">
-        <i class="material-icons add-event-card-icon" style="font-size: 80px; line-height: 65px;margin-top: 15px;">add</i>
-        <div class="add-event-card-text" style="margin-top:-5px">Add Event</div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="col s12 m7">
-    <div id='calendar' class='fc fc-unthemed fc-ltr'></div>
   </div>
   
   <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">

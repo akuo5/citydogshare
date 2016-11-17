@@ -40,9 +40,9 @@
       <div class="col l6 m6 s12">
         <div class="field white"><label>Status</label>
           <% if current_user.status != nil %>
-            <%= select(:user, :status, ["Looking", "Sharing"], :selected => current_user.status) %>
+            <%= text_field(:user, :status, :value => current_user.status) %>
           <% else %>
-            <%= select(:user, :status, ["Looking", "Sharing"]) %>
+            <%= text_field(:user, :status, :placeholder => 'Have a good dog-related status?') %>
           <%end%>
         </div>
       </div>
