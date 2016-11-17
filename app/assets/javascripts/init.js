@@ -17,6 +17,11 @@
     
     $('select').material_select();
     
+    $("#filters-slide-out").css("height", $(window).height() - 56 + "px");
+    $( window ).resize(function(){
+      $("#filters-slide-out").css("height", $(window).height() - 56 + "px");
+    });
+    
     /* Adds functionality to the flash notice */
     var keepNotice = false;
     $(".application-notice-close").click(function() {
