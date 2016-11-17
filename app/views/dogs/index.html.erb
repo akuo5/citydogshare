@@ -1,62 +1,65 @@
 <% content_for :page_title, "Browse Dogs" %>
 
-<div class="row container main-content full-row">
-  <div class="col l3 m6 s12">
-    <div class="card" style="padding-bottom: 10px">
-      <h5 id="filter_title">Filter Dogs</h5>
-      <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
+<!-- THE BROWSE DOGS VIEW ON DESKTOP -->
+<div class="browse-dogs-container hide-on-med-and-down">
+  <div class="filters-container">
+    <div class="filter-title-container">
+      <h4 id="filter_title">Filter Dogs</h4>
+    </div>
+    <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
+      <div class="input-container">
         <div id="distance" class="filter">
           <label for="distance">Distance (miles)</label>
-          <%= text_field_tag(:radius, @form_filler.values[:radius], class: "white", :placeholder => "10 miles", :size => 10) %>
+          <%= text_field_tag(:radius, @form_filler.values[:radius], :placeholder => "10 miles", :size => 10) %>
         </div>
         <div id="zipcode" class="filter">
           <label for="zipcode">Zipcode</label>
-          <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], class: "white", :placeholder => "94704", :size => 10  )%>
+          <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], :placeholder => "94704", :size => 10  )%>
         </div>
         <div id="size" class="input-field filter">
           <% size_options = options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
-          <%= select_tag(:size, size_options, {:include_blank => "All", :class => "white", :multiple => true})%>
+          <%= select_tag(:size, size_options, {:include_blank => "All", :multiple => true})%>
           <label for="size">Size</label>
         </div>
         <div id="likes" class="input-field filter">
           <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
-          <%= select_tag(:like, like_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:like, like_options, {:include_blank => "All", :multiple => true}) %>
           <label for="likes">Likes</label>
         </div>
         <div id="age" class="input-field filter">
           <% age_options = options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
-          <%= select_tag(:age, age_options, {:include_blank => "All", :class => "white", :multiple => true}) %>
+          <%= select_tag(:age, age_options, {:include_blank => "All", :multiple => true}) %>
           <label for="age">Age</label>
         </div>
         <div id="gender" class="input-field filter">
           <% gender_options = options_for_select(Dog.genders, @form_filler.values[:gender]) %>
-          <%= select_tag(:gender, gender_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:gender, gender_options, {:include_blank => "All", :multiple => true}) %>
           <label for="gender">Gender</label>
         </div>
         <div id="mixes" class="input-field filter">
           <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
-          <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :class => "validate white", :multiple => true}) %>          <label for="mixes">Mix</label>
+          <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :multiple => true}) %>          <label for="mixes">Mix</label>
         </div>
          <div id="personalities" class="input-field filter">
           <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
-          <%= select_tag(:personality, personality_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:personality, personality_options, {:include_blank => "All", :multiple => true}) %>
           <label for="personality">Personality</label>
           </label>
         </div>
         <div id="energy_level" class="input-field filter">
           <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
-          <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :multiple => true}) %>
           <label for="energy_level">Energy Level</label>
         </div>
-        <div style="text-align: center">
-          <input id='dog_search_submit' type="submit" value="Search Dogs" name="dog_search_submit" class="btn green accent-4 s br-15" />
-        </div>
-      <% end %>
-    </div>
+      </div>
+      <div class="button-container">
+        <input id='dog_search_submit' type="submit" value="Search Dogs" name="dog_search_submit" class="btn green accent-4 s br-15" />
+      </div>
+    <% end %>
   </div>
-  <span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>
-  <span id="counts" data-counts="<%= @counts %>"/>
-  <div class="col l9 m6 s12">
+  <!--<span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>-->
+  <!--<span id="counts" data-counts="<%= @counts %>"/>-->
+  <div class="dog-cards-container">
     <% if @no_dogs then %>
         <div class="row center-align valign-wrapper no-dogs-message-container">
           <div class="col l12 m12 s12 valign no-dogs-message">
@@ -64,22 +67,84 @@
           </div>
         </div>
       <% else %>
-        <div class="row container hide-on-large-only">
-          <% @dogs.each do |dog| %>
-            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m12 l4" %>
-          <% end %>
-        </div>
-        <div class="hide-on-med-and-down">
-          <% @dogs.each do |dog| %>
-            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "card-grid-size" %>
-          <% end %>
-        </div>
+        <% @dogs.each do |dog| %>
+          <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "card-grid-size" %>
+        <% end %>
       <% end %>
   </div>
 </div>
 
-
-
+<!-- THE BROWSE DOGS VIEW ON TABLET AND MOBILE -->
+<div id="filters-slide-out" class="side-nav hide-on-large-only">
+  <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
+    <div class="input-container">
+      <div id="distance" class="filter">
+        <label for="distance">Distance (miles)</label>
+        <%= text_field_tag(:radius, @form_filler.values[:radius], :placeholder => "10 miles", :size => 10) %>
+      </div>
+      <div id="zipcode" class="filter">
+        <label for="zipcode">Zipcode</label>
+        <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], :placeholder => "94704", :size => 10  )%>
+      </div>
+      <div id="size" class="input-field filter">
+        <% size_options = options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
+        <%= select_tag(:size, size_options, {:include_blank => "All", :multiple => true})%>
+        <label for="size">Size</label>
+      </div>
+      <div id="likes" class="input-field filter">
+        <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
+        <%= select_tag(:like, like_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="likes">Likes</label>
+      </div>
+      <div id="age" class="input-field filter">
+        <% age_options = options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
+        <%= select_tag(:age, age_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="age">Age</label>
+      </div>
+      <div id="gender" class="input-field filter">
+        <% gender_options = options_for_select(Dog.genders, @form_filler.values[:gender]) %>
+        <%= select_tag(:gender, gender_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="gender">Gender</label>
+      </div>
+      <div id="mixes" class="input-field filter">
+        <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
+        <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :multiple => true}) %>          <label for="mixes">Mix</label>
+      </div>
+       <div id="personalities" class="input-field filter">
+        <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
+        <%= select_tag(:personality, personality_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="personality">Personality</label>
+        </label>
+      </div>
+      <div id="energy_level" class="input-field filter">
+        <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
+        <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="energy_level">Energy Level</label>
+      </div>
+    </div>
+    <div class="button-container">
+      <input id='dog_search_submit' type="submit" value="Search Dogs" name="dog_search_submit" class="btn green accent-4 s br-15" />
+    </div>
+  <% end %>
+</div>
+<div class="hide-on-large-only">
+  <div class="row">
+    <a href="#" data-activates="filters-slide-out" class="btn filters-button-collapse green accent-4">Add Filters</a>
+  </div>
+  <% if @no_dogs then %>
+    <div class="row center-align valign-wrapper no-dogs-message-container">
+      <div class="col l12 m12 s12 valign no-dogs-message">
+        No Dogs Found <br>
+      </div>
+    </div>
+  <% else %>
+    <div class="row container main-content">
+      <% @dogs.each do |dog| %>
+        <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 
 

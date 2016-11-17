@@ -2,13 +2,12 @@
   $(function(){
     
     $(".button-collapse").sideNav();
-    $("#show-menu-btn").sideNav({
-      draggable: true
-    });
+    $("#show-menu-btn").sideNav();
     $("#hide-menu-btn").click(function() {
       $("#show-menu-btn").sideNav("hide");
     });
-    $(".filters-button-collapse").sideNav({
+    $("#filters-slide-out").sideNav({
+      menuWidth: 300,
       draggable: true
     });
     $('.tooltipped').tooltip({delay: 50});
@@ -71,3 +70,4 @@
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
+;
