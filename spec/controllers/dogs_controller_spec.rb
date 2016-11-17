@@ -39,7 +39,7 @@ describe DogsController, :type => :controller do
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       dogs = [dog2]
       params = {}
-      params[:age] = ["0"]
+      params[:age] = ["0-2 years"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
