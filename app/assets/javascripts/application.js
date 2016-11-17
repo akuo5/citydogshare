@@ -19,3 +19,4 @@
 //= require jquery-ui
 //= require cal
 //= require galleria.classic
+//= require signin

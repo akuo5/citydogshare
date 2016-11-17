@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "signin", "data-turbolinks-track" => true %>
   
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
   <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" %>
@@ -112,26 +112,28 @@
           <!-- Menu items for tablet and desktop navigation -->
           <ul class="right hide-on-med-and-down">
             <li><a href="/dogs">Browse Dogs</a></li>
-            <li><a class= "waves-effect waves-light light-blue darken-3 btn">Sign Up</a></li>
+            <li><a class= "waves-effect waves-light light-blue darken-3 btn" id = "sign-up-btn">Sign Up</a></li>
           </ul>
         
         <!--The signup pop-up dialog box-->
-        <div class="signup-box">
-          <div class="col s12 m6">
+        <div id="signup-form" class="row">
+        <div class="valign-wrapper">
+          <div class="col s12 m8">
             <div class="card white">
-              <div class="card-content grey-text">
-                <span class="card-title">Sign Up</span>
+              <div class="card-content grey-text center-align">
+                <span class="card-title center-align">Sign Up</span>
                 <p>Welcome to City Dog Share, create an account to get started</p>
-                    <li><a href="/auth/facebook/?type=signup" class="waves-effect waves-light light-blue darken-3 btn" id="fb-signup">Sign Up With Facebook</a></li>
+                   <a href="/auth/facebook/?type=signup" class="waves-effect waves-light light-blue darken-3 btn" id="fb-signup">Sign Up With Facebook</a>
                     
-                     <li> Already have an account? <a href="/auth/facebook/?type=login" id = "log-in">Login</a></li>
+                      <li>Already have an account? <a href="/auth/facebook/?type=login" style="color: blue" id = "log-in">Login</a></li>
                 </div>
                 <div class="card-action">
                 <a href="#">Help</a>
-                <a href="#">Close</a>
+                <a href="#" id = "close-link">Close</a>
               </div>
             </div>
           </div>
+        </div>
         </div>
           
           <!-- Menu items for mobile navigation -->

@@ -6,6 +6,7 @@
     $("#hide-menu-btn").click(function() {
       $("#show-menu-btn").sideNav("hide");
     });
+
     $('.tooltipped').tooltip({delay: 50});
     
     $('.parallax').parallax();
