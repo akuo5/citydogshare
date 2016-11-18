@@ -63,11 +63,11 @@ class SessionsController < ApplicationController
         redirect_to create_session_path(:user => @user)
 
     else
-      # @new_user = User.create()
-      # @new_user.update_credentials(params[:auth][:credentials])
-      # @new_user.facebook_info_update(params[:auth])
-      # redirect_to create_session_path(:user => @new_user)
-      handle_failure()
+      @new_user = User.create()
+      @new_user.update_credentials(params[:auth][:credentials])
+      @new_user.facebook_info_update(params[:auth])
+      redirect_to create_session_path(:user => @new_user)
+      # handle_failure()
     end   
   end 
   
