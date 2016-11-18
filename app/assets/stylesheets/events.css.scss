@@ -1,3 +1,17 @@
+// Media Query Ranges
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+$small-screen: 600px !default;
+$medium-screen: 992px !default;
+$large-screen: 1200px !default;
+
+$medium-and-up: "only screen and (min-width : #{$small-screen-up})" !default;
+$large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;
+$small-and-down: "only screen and (max-width : #{$small-screen})" !default;
+$medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
+$medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+
 .add-event-card {
   height: 140px;
   border-radius: 12px;
@@ -71,15 +85,41 @@
   text-align: center;
   font-size: 30px;
 }
-.event-details {
-  display: table-cell;
-  padding-left: 10px;
+
+@mixin column-count($ct) {
+  -webkit-column-count: $ct;
+  -moz-column-count: $ct;
+  column-count: $ct;
 }
-@media only screen and (min-width : 600px) {
+
+.event-cards-container {
+  @include column-count(2);
+}
+
+@media #{$medium-and-down} {
+  .event-cards-container {
+    @include column-count(1);
+  }
+}
+
+@media #{$medium-and-up} {
   .events-scroll {
     height: 478px;
     overflow-y:auto;
     padding-top: 5px;
     margin-top: -5px;
   }
+}
+.event-cards-container {
+  column-break-inside: avoid;
+  .event-card {
+    display: inline-block;
+    overflow: visible;
+    width: 100%;
+  }
+}
+
+.event-details {
+  display: table-cell;
+  padding-left: 10px;
 }
