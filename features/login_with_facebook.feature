@@ -23,11 +23,12 @@ Scenario: Log in when I already have an account
 #   Then I follow the first "Sign Up With Facebook"
 #   Then I should be on the users page for "Batman"
   
-Scenario: Sign up with facebook should fail if I am an existing user
+# Scenario: Sign up with facebook should fail if I am an existing user
+Scenario: Sign up with facebook should log user into account
   Given I am on the homepage
   When I press the "Sign Up" button
   Then I follow the first "Sign Up With Facebook"
-  Then I should be on the homepage
+  Then I should be on the users page for "Batman"
 
 Scenario: Sign up authentication fails
   Given I am on the homepage

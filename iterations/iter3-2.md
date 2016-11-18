@@ -1,11 +1,12 @@
 Iteration 3-2 User Stories completed:
 
-Angela      Users should be able to add photos to their dog profiles
+Angela      Added cool calendar and worked on events (event card, creating events, etc.)
 
-Jacen       [Users] should be able to see the new and edit forms for both their profile and their dog's profiles
+Jacen       Implemented API for sending information, worked on AJAX star
 
-Judy        [Users] should be able to see user profiles and dog profiles 
+Judy        Worked on styling cards, user profile, and the worked on the filters
 
-Jennifer    [Users] should be able to see 'Starred Dog' page and view profiles of their favorited dogs 
+Jennifer    Worked on styling cards, creating the gallery in the user profile and dog profiles, updating UI 
 
-Jessica     
+Jessica     Created sign up dialog and changed sign up flow to add in future login providers. Added in pro user functionalities (toggle button broken).
+            ** I added in a reauthentication factor, but it broke the app on heroku, so I am trying to fix that! 

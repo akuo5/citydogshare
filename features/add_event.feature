@@ -62,7 +62,7 @@ Scenario: Selecting end dates in the past should throw an error
   Then I should see "End date has passed"
 
 Scenario: Event should show up on dog profile
-  Given PENDING
+  # Given PENDING
   Given I select "Princess" from "event_dogs"
   And I select "My Place" from "event_location"
   And I fill in "event_start_date" with today
