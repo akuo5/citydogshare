@@ -35,9 +35,16 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+
 When /^(?:|I )press the "Sign Up" button$/ do
   # puts(page.body)
   click_link('Sign Up')
+end
+
+
+When /^(?:|I )press the first "([^"]*)"$/ do |button|
+  first(:button, button).click
+
 end
 
 
@@ -47,6 +54,10 @@ end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
+end
+
+When /^(?:|I )fill in the first "([^"]*)" with "([^"]*)"$/ do |field, value|
+  fill_in(field, :with => value, :match => :first)
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|

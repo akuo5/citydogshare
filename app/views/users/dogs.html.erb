@@ -12,7 +12,7 @@
 <% else %>
   <div class="row container main-content">
     <% @dogs.each do |dog| %>
-      <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>
+      <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :starred_dogs => @starred_dogs, :card_size => "col s12 m6 l4" %>
     <% end %>
     <div class="col s12 m6 l4 hide-on-small-only">
       <a href="<%= new_dog_path %>" class="add-dog-card">

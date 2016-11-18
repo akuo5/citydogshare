@@ -33,7 +33,7 @@ Scenario: User can star dog from search results
 Scenario: User can star dog from dog profile
   And I am logged in
   And I am on the search dogs page
-  And I follow "Bubba"
+  And I follow the first "Bubba"
   And I click a star for dog with dog id "3"
   And I follow the first "My Favorites"
   Then I should see "Bubba"
@@ -61,7 +61,7 @@ Scenario: User should be able to unstar a dog from search results
 Scenario: User should be able to unstar a dog from dog profile
   And I am logged in
   And I am on the search dogs page
-  And I follow "Bubba"
+  And I follow the first "Bubba"
   And I click a star for dog with dog id "3"
   Then I should see "1"
   And I click a star for dog with dog id "3"

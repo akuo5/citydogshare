@@ -34,9 +34,10 @@ class Dog < ActiveRecord::Base
   validates :size, :presence => {:message => "Please select a size"}
   validates :mixes, :presence => {:message => "Please select the mix"}
   validates :personalities, :presence => {:message => "Please select at least one personality"}
-  validates_inclusion_of :fixed, in: [true, false], :message => "Please select a response for fix"
+  validates_inclusion_of :fixed, in: [true, false], :message => "Please select a response for spayed/neutered"
   validates_inclusion_of :chipped, in: [true, false], :message => "Please select a response for chipped"
   validate :validate_dob
+  validate :validate_availability
 
   #paperclip avatar
   has_attached_file :photo, 
@@ -60,7 +61,11 @@ class Dog < ActiveRecord::Base
   def validate_dob
     errors.add(:dob, "Dog's birthday can't be in the future.") if (!dob.nil? and dob > Date.today)
   end
-
+  
+  def validate_availability
+    errors.add(:availability, "- Please select a proper availability.") if (!availability.nil? and availability != "Available" and availability != "" and availability != "Unavailable")
+  end
+  
   def age
     now = Time.now.utc.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
@@ -133,7 +138,7 @@ class Dog < ActiveRecord::Base
   end
   
   def available
-    self.availability && self.availability != "" ? true : false
+    self.availability && self.availability != "Unavailable" && self.availability != "" ? true : false
   end
   
   def to_form_hash
@@ -227,9 +232,13 @@ class Dog < ActiveRecord::Base
   def self.convert_age_ranges_to_dob_query(age_ranges_indices)
     age_ranges = [[0, 2], [2, 4], [5, 8], [9, 30]]
     age_query = ""
+    selected_counter = 0
+    num_selected = age_ranges_indices.length
     age_ranges_indices.each do |i|
-        base = get_base(i.to_i, age_ranges)
-        if i.to_i < age_ranges_indices.length - 1
+        index = Dog.age_ranges.index(i)
+        base = get_base(index, age_ranges)
+        selected_counter += 1
+        if selected_counter < num_selected
           age_query += (base + " OR ")
         else
           age_query += base

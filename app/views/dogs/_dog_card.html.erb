@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
       <% if not current_user.nil? %>
-        <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>
+        <%- unless starred_dogs.exists?(id: dog.id) -%>
           <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}", :class => "star_dog_link" do%>
           <i class="fa fa-star-o" aria-hidden="true" id="favorite_star"></i>
         <%end%>

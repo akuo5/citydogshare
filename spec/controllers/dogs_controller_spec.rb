@@ -39,7 +39,7 @@ describe DogsController, :type => :controller do
       Dog.stub(:near).and_return(Dog.where(:gender => ["Male", "Female"]))
       dogs = [dog2]
       params = {}
-      params[:age] = ["0"]
+      params[:age] = ["0-2 years"]
       get :index, params
       expect(assigns(:dogs)).to match_array(dogs)
     end
@@ -210,7 +210,7 @@ describe DogsController, :type => :controller do
       @current_user = User.new(:id => 1, :uid => "12345")
       @params = {  "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
-                  "availability"=>"", "mixes" =>["Australian Shepherd"], "personalities"=>["curious"],
+                  "availability"=>"Available", "mixes" =>["Australian Shepherd"], "personalities"=>["curious"],
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1"}}, "update_dog_button"=>"Save Changes"}
       @session = { "user_id" => @current_user.uid }
     end
@@ -235,7 +235,7 @@ describe DogsController, :type => :controller do
       @current_user = User.new(:id => 1, :uid => "12345")
       @params = { "id" => @dog.id, "dog"=>{"name"=>"Lab", "dob(1i)"=>"2010", "dob(2i)"=>"4", "dob(3i)"=>"4", "gender"=>"Male",
                   "size"=>"1", "motto"=>"Hi", "description"=>"", "energy_level"=>"1", "health"=>"", "fixed"=>"true",
-                  "availability"=>"", "mixes" =>["Australian Shepherd", "Tabby"], "personalities"=> ["curious", "yellow"],
+                  "availability"=>"Available", "mixes" =>["Australian Shepherd", "Tabby"], "personalities"=> ["curious", "yellow"],
                   "likes"=>{"dogs (some or most)"=>"1", "men"=>"1", "you!"=>"1"}}, "update_dog_button"=>"Save Changes"}
       @session = { "user_id" => @current_user.uid }
     end

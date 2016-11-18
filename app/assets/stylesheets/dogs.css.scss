@@ -56,19 +56,6 @@
 	bottom: 0;
 }
 
-.filter {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-#filter_title {
-	padding-top: 10px;
-	padding-left: 10px;
-}
-
-#search_dog_submit {
-	margin-left: 10px;
-}
 
 #dog_profile_pic {
 	height: 200px;
@@ -111,3 +98,98 @@
   margin-top: 7px;
 }
 /* END SHOW.HTML */
+
+/* BEGIN INDEX.HTML */
+
+.browse-dogs-container {
+	position: absolute;
+	top: 64px; bottom: 0; left: 0; right: 0;
+	overflow: hidden;
+	text-align: left;
+}
+
+.filters-container {
+	position: absolute;
+	top: 0; left: 0; bottom: 0;
+	padding: 20px;
+	width: 350px;
+	background-color: #FAFAFA;
+	text-align: left;
+	overflow: hidden;
+}
+.filters-container .filter-title-container {
+	position: absolute;
+	top: 0; left: 0px; right: 0;
+	height: 90px;
+	overflow: hidden;
+	padding-left: 10px;
+	background-color: #F2F2F2;
+}
+.filters-container .input-container {
+	position: absolute;
+	top: 90px; left: 0px; right: 0px; bottom: 80px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #F2F2F2;
+}
+.filters-container .button-container {
+	position: absolute;
+	left: 0px; right: 0px; bottom: 0px;
+	height: 80px;
+	overflow: hidden;
+	padding: 22px;
+	text-align: center;
+}
+
+.dog-cards-container {
+	position: absolute;
+	left: 360px; right: 0; top: 0; bottom: 0;
+	padding: 20px;
+	padding-left: 0;
+	overflow-y: scroll;
+}
+
+#dog_search_submit {
+	width: 100%;
+}
+
+.card-grid-size {
+	width: 280px;
+	display: inline-flex;
+    margin-left: 20px;
+    margin-right: 0px;
+}
+.card-grid-size .card-img {
+	width: 280px !important;
+}
+
+.filter {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#filter_title {
+	padding-left: 10px;
+}
+
+#filters-slide-out {
+	top: 64px;
+	width: 380px;
+	padding: 20px;
+}
+@media only screen and (max-width : 600px) {
+	#filters-slide-out {
+		top: 56px;
+		width: 90%;
+		padding: 20px;
+	}
+}
+.filters-button-collapse {
+	float: right;
+	margin-right: 6.8%;
+	margin-top: 20px;
+}
+
+/* END INDEX.HTML */

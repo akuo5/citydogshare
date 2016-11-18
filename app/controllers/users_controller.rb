@@ -7,11 +7,9 @@ class UsersController < ApplicationController
       redirect_to @current_user
     else
       id = params[:id]
-      @own_profile = false
       @user = User.find(id)
-      if @user == @current_user
-        @own_profile = true
-      end
+      @own_profile = @user == @current_user
+      @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
       render 'show'
     end
   end
@@ -58,7 +56,7 @@ class UsersController < ApplicationController
     if !@current_user.nil? and @current_user.id != params[:id].to_i
       redirect_to(stars_user_path(@current_user))
     end
-    @dogs = User.find_by_id(params[:id]).starred_dogs
+    @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
   end
   
   def dogs
@@ -66,6 +64,7 @@ class UsersController < ApplicationController
       redirect_to(dogs_user_path(@current_user.id))
     end
     @dogs = User.find_by_id(params[:id]).dogs
+    @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
   end
   
   def toggle_pro

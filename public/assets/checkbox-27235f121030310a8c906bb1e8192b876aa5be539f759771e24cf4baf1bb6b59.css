@@ -1,0 +1,42 @@
+/*
+  Hide checkbox button (the round disc)
+  we will use just the label to create pushbutton effect
+*/
+
+input[type=checkbox] {
+    display:none; 
+    margin:10px;
+}
+ 
+/*
+  Change the look'n'feel of labels (which are adjacent to checkboxbuttons).
+  Add some margin, padding to label
+*/
+input[type=checkbox] + label {
+    display:inline-block;
+    cursor: pointer;
+    /*margin:-2px;*/
+    /*background-color: #e7e7e7;*/
+    /*border-color: #ddd;*/
+}
+
+#activated_ {
+  display: block;
+  margin: 0px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+ 
+}
+
+.delete-pics{
+  position: relative;
+  float: left;
+  margin-left: 10px;
+}
+
+.gmnoprint img {
+    max-width: none; 
+}
+
+#map-canvas { height: 30em; }

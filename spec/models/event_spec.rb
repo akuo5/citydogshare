@@ -13,9 +13,9 @@ describe Event do
     assert_equal @event.readable_dogs, "Spock"
   end
   it 'should return a correct form hash' do
-    hash = {:start_date=> Date.today, 
-      :end_date=>Date.tomorrow, :location_id=>"1", :dogs=>[1], 
-      :description=>"need someone to dogsit"}
+    hash = {:start_date=> Date.today.strftime("%d %B, %Y"), 
+      :end_date=>Date.tomorrow.strftime("%d %B, %Y"), :location_id=>"1", 
+      :dogs=>[1], :description=>"need someone to dogsit"}
     assert_equal @event.to_form_hash, hash
   end
 end

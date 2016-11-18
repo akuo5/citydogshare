@@ -43,7 +43,7 @@ Scenario: I should not be able to edit another users event
   When I do not care about dog location
   And I follow the first "Browse Dogs"
   And I select "Male" from "gender"
-  And I press "Search Dogs"
+  And I press the first "Search Dogs"
   And I should see "Spock"
   Then I should not see "Edit"
 

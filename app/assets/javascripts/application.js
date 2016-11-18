@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require fullcalendar.min
 //= require_tree .
 //= require materialize-sprockets
 //= require tag-it
 //= require jquery-ui
 //= require cal
-//= require galleria.classic
 //= require signin
+//= require galleria.classic
+//= require moment
+//= require fullcalendar

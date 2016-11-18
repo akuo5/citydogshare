@@ -1,3 +1,4 @@
+# TODO(angelakuo)
 class Event < ActiveRecord::Base
   # attr_accessible :start_date, :end_date, :time_of_day, :my_location, :dog, :description
   belongs_to :user
@@ -7,8 +8,11 @@ class Event < ActiveRecord::Base
   validates :dogs, :presence => {:message => "Please select the dogs you want to share"}
   validates :location, :presence => {:message => "Please select a location"}
   validates :start_date, :presence => {:message => "Please enter a start date"}
-  validates :end_date, :presence => {:message => "Please enter an end date"}
+  # validates :end_date, :presence => {:message => "Please enter an end date"}
   validate :valid_start_end_dates?
+  validate :no_overlap
+  
+  scope :upcoming, -> { where("start_date >= ?", Date.today) }
   
   def valid_start_end_dates?
     errors.add(:start_date, "Start date has passed") if start_date.present? and Date.today > start_date
@@ -16,6 +20,26 @@ class Event < ActiveRecord::Base
     if start_date.present? and end_date.present?
       errors.add(:start_end_date, "Start date must be before end date") if start_date > end_date
     end
+  end
+  
+  def no_overlap
+    names = []
+    dogs.each do |dog|
+      dog.events.each do |event|
+        if overlap?(event) and event.id != self.id
+          names << dog.name if !names.include?(dog.name)
+        end
+      end
+    end
+    if !names.empty?
+      message = names.length > 1 ? "have overlapping events" : "has an overlapping event"
+      errors.add(:event_overlap, "#{names.to_sentence} #{message}")
+    end
+  end
+  
+  def overlap? (event)
+    self.end_date = self.start_date if self.end_date.nil?
+    self.start_date <= event.end_date and self.end_date >= event.start_date
   end
 
   def readable_location
@@ -27,12 +51,16 @@ class Event < ActiveRecord::Base
   end
 
   def to_form_hash
-    return {
+    form_hash = {
       :start_date => self.start_date,
-      :end_date => self.end_date,
+      :end_date => self.end_date, 
       :location_id => self.location_id,
       :dogs => self.dogs.map{ |d| d.id },
       :description => self.description
     }
+    form_hash[:start_date] = form_hash[:start_date].strftime("%d %B, %Y") if form_hash[:start_date]
+    form_hash[:end_date] = form_hash[:end_date].strftime("%d %B, %Y") if form_hash[:end_date]
+
+    return form_hash
   end
 end

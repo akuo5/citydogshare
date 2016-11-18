@@ -1,62 +1,65 @@
 <% content_for :page_title, "Browse Dogs" %>
 
-<div class="row container main-content">
-  <div class="col l4 m4 s12">
-    <div class="card" style="padding-bottom: 10px">
-      <h5 id="filter_title">Filter Dogs</h5>
-      <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
+<!-- THE BROWSE DOGS VIEW ON DESKTOP -->
+<div class="browse-dogs-container hide-on-med-and-down">
+  <div class="filters-container">
+    <div class="filter-title-container">
+      <h4 id="filter_title">Filter Dogs</h4>
+    </div>
+    <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
+      <div class="input-container">
         <div id="distance" class="filter">
           <label for="distance">Distance (miles)</label>
-          <%= text_field_tag(:radius, @form_filler.values[:radius], class: "white", :placeholder => "10 miles", :size => 10) %>
+          <%= number_field_tag(:radius, @form_filler.values[:radius], :max  => 10000) %>
         </div>
         <div id="zipcode" class="filter">
           <label for="zipcode">Zipcode</label>
-          <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], class: "white", :placeholder => "94704", :size => 10  )%>
+          <%= number_field_tag(:zipcode, @form_filler.values[:zipcode], :max => 9999999)%>
         </div>
         <div id="size" class="input-field filter">
           <% size_options = options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
-          <%= select_tag(:size, size_options, {:include_blank => "All", :class => "white", :multiple => true})%>
+          <%= select_tag(:size, size_options, {:include_blank => "All", :multiple => true})%>
           <label for="size">Size</label>
         </div>
         <div id="likes" class="input-field filter">
           <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
-          <%= select_tag(:like, like_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:like, like_options, {:include_blank => "All", :multiple => true}) %>
           <label for="likes">Likes</label>
         </div>
         <div id="age" class="input-field filter">
           <% age_options = options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
-          <%= select_tag(:age, age_options, {:include_blank => "All", :class => "white", :multiple => true}) %>
+          <%= select_tag(:age, age_options, {:include_blank => "All", :multiple => true}) %>
           <label for="age">Age</label>
         </div>
         <div id="gender" class="input-field filter">
           <% gender_options = options_for_select(Dog.genders, @form_filler.values[:gender]) %>
-          <%= select_tag(:gender, gender_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:gender, gender_options, {:include_blank => "All", :multiple => true}) %>
           <label for="gender">Gender</label>
         </div>
         <div id="mixes" class="input-field filter">
           <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
-          <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :class => "validate white", :multiple => true}) %>          <label for="mixes">Mix</label>
+          <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :multiple => true}) %>          <label for="mixes">Mix</label>
         </div>
          <div id="personalities" class="input-field filter">
           <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
-          <%= select_tag(:personality, personality_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:personality, personality_options, {:include_blank => "All", :multiple => true}) %>
           <label for="personality">Personality</label>
           </label>
         </div>
         <div id="energy_level" class="input-field filter">
           <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
-          <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :class => "validate white", :multiple => true}) %>
+          <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :multiple => true}) %>
           <label for="energy_level">Energy Level</label>
         </div>
-        <div style="text-align: center">
-          <input id='dog_search_submit' type="submit" value="Search Dogs" name="dog_search_submit" class="btn green accent-4 s br-15" />
-        </div>
-      <% end %>
-    </div>
+      </div>
+      <div class="button-container">
+        <input id='dog_search_submit' type="submit" value="Search Dogs" name="dog_search_submit" class="btn green accent-4 s br-15" />
+      </div>
+    <% end %>
   </div>
-  <span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>
-  <span id="counts" data-counts="<%= @counts %>"/>
-  <div class="col l8 m8 s12">
+  <!--<span id="zipcodes" data-zipcodes="<%= @zipcodes %>"/>-->
+  <!--<span id="counts" data-counts="<%= @counts %>"/>-->
+  <div class="dog-cards-container">
     <% if @no_dogs then %>
         <div class="row center-align valign-wrapper no-dogs-message-container">
           <div class="col l12 m12 s12 valign no-dogs-message">
@@ -64,229 +67,84 @@
           </div>
         </div>
       <% else %>
-        <div class="row container main-content">
-          <% @dogs.each do |dog| %>
-            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l6" %>
-          <% end %>
-        </div>
+        <% @dogs.each do |dog| %>
+          <%= render "dog_card", :dog => dog, :current_user => @current_user, :starred_dogs => @starred_dogs, :card_size => "card-grid-size" %>
+        <% end %>
       <% end %>
   </div>
 </div>
 
-
-
-
-
-
-
-<!-- <div class="large-12 columns"> -->
-<!--  <%= form_tag dogs_path, :method => :get do %>-->
-<!--  <div class="large-12 columns">-->
-<!--        <div class="large-6 columns">-->
-<!--        <div class="row">-->
-<!--            <div class="large-4 columns" style="text-align:center">-->
-<!--              Age:-->
-<!--              <br />-->
-<!--              <div class="tiny ui vertical buttons">-->
-<!--              <% Dog.age_ranges.each_with_index do |a, i| %>-->
-<!--              <div class="ui button">-->
-<!--              <%= check_box_tag "age[#{i}]", 1, @form_filler.values[:age].include?(i.to_s), :class => "check" %>-->
-<!--              <%= label(:age, i, a) %>-->
-<!--              </div>-->
-<!--              <% end %>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--            <div class="large-3 columns" style="text-align:center">-->
-<!--              Gender:-->
-<!--              <br />-->
-<!--              <div class="tiny ui vertical buttons">-->
-<!--              <% Dog.genders.each do |gender| %>-->
-<!--              <div class="ui button">-->
-<!--              <%= check_box_tag "gender[#{gender}]", 1, @form_filler.values[:gender].include?(gender), :class => "check" %>-->
-<!--              <%= label(:gender, gender.tr(" ", "_"), gender) %>-->
-<!--              </div>-->
-<!--              <% end %>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--            <div class="large-5 columns" style="text-align:center">-->
-<!--              Size:-->
-<!--              <br />-->
-<!--              <div class="tiny ui vertical buttons">-->
-<!--              <% Size.all_values.each do |s| %>-->
-<!--              <div class="ui button">-->
-<!--              <%= check_box_tag "size[#{s}]", 1, @form_filler.values[:size].include?(s), :class => "check" %>-->
-<!--              <%= label(:size, s.tr(" ", "_"), s) %>-->
-<!--              </div>-->
-<!--              <% end %>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class = "row">-->
-<!--            <br>-->
-            
-
-<!--            <div style="text-align:center">-->
-            <!--<%= label(:radius, "Dogs Within") %>-->
-<!--            Dogs within <%= text_field_tag(:radius, @form_filler.values[:radius], :size => 10  )%> miles of zipcode   -->
-            <!--<%= label(:zipcode, "of") %>-->
-<!--            <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], :size => 7) %>-->
-<!--      </div>-->
-<!--                Mix:-->
-<!--                <%= select_tag 'mix', options_for_select(["All Mixes"] + Mix.all_values, @form_filler.values[:mix]) %>-->
-<!--        </div>-->
-<!--    </div>-->
-    <!-- </div> -->
-<!--    <div class="large-6 columns" style="text-align:center">-->
-<!--        <div class="large-4 columns">-->
-<!--          Personality:-->
-<!--          <br />-->
-<!--          <div class="mini ui vertical buttons">-->
-<!--          <% Personality.all_values.each do |p| %>-->
-<!--          <div class="ui button">-->
-<!--            <%= check_box_tag "personality[#{p}]", 1, @form_filler.values[:personality].include?(p), :class => "check" %>-->
-<!--            <%= label(:personality, p.tr(" ", "_"), p) %>-->
-<!--          </div>-->
-<!--          <% end %>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--            <div class="large-3 columns" style="text-align:center">-->
-<!--          Energy:-->
-<!--          <br />-->
-<!--          <div class="mini ui vertical buttons">-->
-<!--          <% EnergyLevel.all_values.each do |e| %>-->
-<!--          <div class="ui button">-->
-<!--          <%= check_box_tag "energy_level[#{e}]", 1, @form_filler.values[:energy_level].include?(e), :class => "check" %>-->
-<!--          <%= label(:energy_level, e.tr(" ", "_"), e) %>-->
-<!--          </div>-->
-<!--          <% end %>-->
-<!--        </div>-->
-<!--        </div>-->
-
-<!--        <div class="large-5 columns" style="text-align:center">-->
-<!--          Likes:-->
-<!--          <br />-->
-<!--          <div class="mini ui vertical buttons">-->
-<!--          <% Like.all_values.each do |l| %>-->
-<!--          <div class="ui button">-->
-<!--          <%= check_box_tag "like[#{l}]", 1, @form_filler.values[:like].include?(l), :class => "check" %>-->
-<!--          <%= label(:like, l.tr(" ", "_"), l) %>-->
-<!--          </div>-->
-<!--          <% end %>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <br>-->
-<!--      <div style="margin-left: -6em">-->
-<!--        <%= submit_tag 'Search Dogs', :id => 'dog_search_submit', :class => "ui primary button large transparent input" %>-->
-<!--      </div>-->
-<!--    </div>-->
-    
-<!--    </div>-->
-<!--  <% end %>-->
-
-
-  
-<!--  <div class="large-12 columns" >-->
-<!--    <br>-->
-<!--    <div class="ui segment" id="dog_search_results" style="padding: 0em">-->
-      
-<!--      <% if @no_dogs then %>-->
-<!--        <div class="row center-align valign-wrapper no-dogs-message-container">-->
-<!--          <div class="col l12 m12 s12 valign no-dogs-message">-->
-<!--            No Dogs Found <br>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      <% else %>-->
-<!--        <div class="row container main-content">-->
-<!--          <% @dogs.each do |dog| %>-->
-<!--            <%= render "dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m6 l4" %>-->
-<!--          <% end %>-->
-<!--        </div>-->
-<!--        <div class="fixed-action-btn hide-on-med-and-up" style="bottom: 45px; right: 24px;">-->
-<!--          <a href="<%= new_dog_path %>" class="btn-floating btn-large waves-effect waves-light green accent-4 hide-on-large-only"><i class="material-icons">add</i></a>-->
-<!--        </div>-->
-<!--      <% end %>-->
-<!--    </div>-->
-<!--  </div>-->
-  
-    <!--<% if @no_dogs %>-->
-    <!--  <h1> No Dogs Found </h1>-->
-    <!--<% end %>-->
-    <!--<% @dogs.each do |dog| %>-->
-    <!--<% if dog.future_events? %>-->
-    <!--<div class="ui vertical segment" style="padding: 1em; border-style: solid; border-width: 1px; border-color: #5bbd72; border-radius: 3px" id = <%= dog.owner.zipcode %> >-->
-    <!--<div class="ui green bottom right attached right label" style="border-radius:0">Looking for a sitter!</div>-->
-
-    <!--<% else %>-->
-    <!--<div class="ui vertical segment" style="padding: 1em" id = <%= dog.owner.zipcode %> >-->
-    <!--<% end %>-->
-
-    <!--  <div class="large-3 columns" style="padding: 0">-->
-        <!-- <span class="image"> -->
-    <!--      <div id="photo"><% if dog.photo.file? %>-->
-    <!--      <%= image_tag dog.photo.url(:medium) %>-->
-    <!--    <% else %>-->
-    <!--      <%= image_tag "default_dog.jpg" %>-->
-    <!--    <% end %></div>-->
-        <!-- </span> -->
-    <!--  </div>-->
-
-      <!--<div class="large-9 columns" style="padding-right: 0">-->
-  <!--      <div class="content">-->
-  <!--        <div class="ui medium header" style="margin-bottom: 0">-->
-  <!--          <%= link_to dog.name, dog_path(dog) %>  -->
-  <!--        <% if not current_user.nil? %>-->
-  <!--        <span class="right floated stars">-->
-  <!--          <%- unless current_user.starred_dogs.exists?(id: dog.id) -%>-->
-  <!--            <%= link_to starred_dogs_path(dog_id: dog), method: :post, id: "star_#{dog.id}" do%>-->
-  <!--            <i class="empty icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="empty star icon yellow large"></i>-->
-  <!--            <%end%>-->
-  <!--          <%- else -%>-->
-  <!--            <%= link_to starred_dogs_path(dog_id: dog), method: :delete, id: "star_#{dog.id}" do%>-->
-  <!--            <i class="icon yellow large" style="margin-right: -0.3em"><%= dog.stars.count %></i><i class="star icon yellow large"></i>-->
-  <!--            <%end%>-->
-  <!--          <%- end -%>-->
-  <!--        </span>-->
-  <!--        <%end%>-->
-  <!--        </div>-->
-  <!--        <div class="age">-->
-  <!--          <b><%= dog.age_caption %></b>-->
-  <!--        </div>-->
-  <!--        <span class="right floated" style="margin-right: 5%">-->
-  <!--          <%= dog.owner.zipcode %>-->
-  <!--        </span>-->
-  <!--        <div class="attributes">-->
-  <!--          <b><%= dog.tags %></b>-->
-  <!--        </div>-->
-  <!--        <div class="description">-->
-  <!--          <%= dog.motto %>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--      <div class="extra content">-->
-  <!--        <% unless dog.availability == "" %>-->
-  <!--        <i class="wait icon"></i>-->
-  <!--        <%= dog.availability %>-->
-  <!--        <% end %>-->
-  <!--      </div>-->
-  <!--      <% if dog.future_events? %>-->
-  <!--      <b>Next event:</b> <%= dog.future_events.first.start_date.strftime("%m/%d/%Y") %>-->
-  <!--      <% end %>-->
-  <!--    </div>-->
-
-  <!--  </div>-->
-  <!--  <% end %>-->
-  <!--  </div>-->
-  <!--</div>-->
-
-<!--  <div class="large-5 columns" id="map">-->
-<!--        <br>-->
-<!--    <div class ="ui sticky">-->
-<!--    <div id="map-canvas">-->
-      <!-- <img src="http://www.digicution.com/wp-content/uploads/2012/06/HTML5-Repsonsive-Google-Maps-Tutorial-1.png" style="height:100%; width:100%"> -->
-<!--    </div></div>-->
-<!--  </div>-->
-<!--</div>-->
+<!-- THE BROWSE DOGS VIEW ON TABLET AND MOBILE -->
+<div id="filters-slide-out" class="side-nav hide-on-large-only">
+  <%= form_tag({controller: :dogs, action: :index}, method: :get, :multipart => true) do %>
+    <div class="input-container">
+      <div id="distance" class="filter">
+        <label for="distance">Distance (miles)</label>
+        <%= text_field_tag(:radius, @form_filler.values[:radius], :placeholder => "10 miles", :size => 10) %>
+      </div>
+      <div id="zipcode" class="filter">
+        <label for="zipcode">Zipcode</label>
+        <%= text_field_tag(:zipcode, @form_filler.values[:zipcode], :placeholder => "94704", :size => 10  )%>
+      </div>
+      <div id="size" class="input-field filter">
+        <% size_options = options_from_collection_for_select(Size.all, 'value', 'value', @form_filler.values[:size]) %>
+        <%= select_tag(:size, size_options, {:include_blank => "All", :multiple => true})%>
+        <label for="size">Size</label>
+      </div>
+      <div id="likes" class="input-field filter">
+        <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @form_filler.values[:like]) %>
+        <%= select_tag(:like, like_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="likes">Likes</label>
+      </div>
+      <div id="age" class="input-field filter">
+        <% age_options = options_for_select(Dog.age_ranges, @form_filler.values[:age]) %>
+        <%= select_tag(:age, age_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="age">Age</label>
+      </div>
+      <div id="gender" class="input-field filter">
+        <% gender_options = options_for_select(Dog.genders, @form_filler.values[:gender]) %>
+        <%= select_tag(:gender, gender_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="gender">Gender</label>
+      </div>
+      <div id="mixes" class="input-field filter">
+        <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @form_filler.values[:mix]) %>
+        <%= select_tag(:mix, mix_options, {:include_blank => "Mutt / Other", :multiple => true}) %>          <label for="mixes">Mix</label>
+      </div>
+       <div id="personalities" class="input-field filter">
+        <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @form_filler.values[:personality]) %>
+        <%= select_tag(:personality, personality_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="personality">Personality</label>
+        </label>
+      </div>
+      <div id="energy_level" class="input-field filter">
+        <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'value', 'value', @form_filler.values[:energy_level]) %>
+        <%= select_tag(:energy_level, energy_level_options, {:include_blank => "All", :multiple => true}) %>
+        <label for="energy_level">Energy Level</label>
+      </div>
+    </div>
+    <div class="button-container">
+      <input id='dog_search_submit' type="submit" value="Search Dogs" name="dog_search_submit" class="btn green accent-4 s br-15" />
+    </div>
+  <% end %>
+</div>
+<div class="hide-on-large-only">
+  <div class="row">
+    <a href="#" data-activates="filters-slide-out" class="btn filters-button-collapse green accent-4">Add Filters</a>
+  </div>
+  <% if @no_dogs then %>
+    <div class="row center-align valign-wrapper no-dogs-message-container">
+      <div class="col l12 m12 s12 valign no-dogs-message">
+        No Dogs Found <br>
+      </div>
+    </div>
+  <% else %>
+    <div class="row container main-content">
+      <% @dogs.each do |dog| %>
+        <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :starred_dogs => @starred_dogs, :card_size => "col s12 m6 l4" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvpxxyVWimCzY6WLJTY8iYGUUkVy6q7bA">

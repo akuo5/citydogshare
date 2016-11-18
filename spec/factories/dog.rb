@@ -10,7 +10,7 @@ FactoryGirl.define do
     fixed false
     chipped false
     health ""
-    availability ""
+    availability "Available"
     size { Size.find(1) }
     energy_level { EnergyLevel.find(1) }
     personalities { [Personality.find(1)] }

@@ -29,7 +29,7 @@ Scenario: Page shows error when zipcode is wrong format
   Then I should see "Bad format for zipcode."
 
 Scenario: Sucessfully update some of profile
-  And I select "Sharing" from "user_status"
+  And I fill in "user_status" with "Sharing"
   And I fill in "user_description" with "I think I should make City Bat Share."
   And I press "Save Changes"
   Then I should be on the users page for "Batman"
@@ -47,7 +47,7 @@ Scenario: Sucessfully update all of profile
   And I fill in "user_city" with "Berkeley"
   And I fill in "user_zipcode" with "94704"
   And I fill in "user_country" with "US"
-  And I select "Sharing" from "user_status"
+  And I fill in "user_status" with "Sharing"
   And I fill in "user_phone_number" with "(510)123-1234"
   And I fill in "user_description" with "I think I should make City Bat Share."
   And I fill in "user_availability" with "Never"
@@ -66,7 +66,7 @@ Scenario: No changes made when changes canceled
   And I fill in "user_city" with "Berkeley"
   And I fill in "user_zipcode" with "94704"
   And I fill in "user_country" with "US"
-  And I select "Sharing" from "user_status"
+  And I fill in "user_status" with "Sharing"
   And I fill in "user_phone_number" with "(510)123-1234"
   And I fill in "user_description" with "I think I should make City Bat Share."
   And I fill in "user_availability" with "Never"

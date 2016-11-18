@@ -10,8 +10,10 @@ gem 'omniauth-facebook'
 gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'rails_secret_token_env'
 gem 'geocoder'
+gem 'materialize-sass'
 
 gem 'paperclip'
 gem 'aws-sdk'
@@ -52,8 +54,6 @@ group :assets do
   # gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
   gem 'fullcalendar-rails'
   gem 'momentjs-rails'
-  gem 'materialize-sass'
-
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

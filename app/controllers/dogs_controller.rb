@@ -8,7 +8,8 @@ class DogsController < ApplicationController
     ip_zipcode = get_ip_address_zipcode
     @form_filler = DogViewHelper.new(current_user, ip_zipcode, true)
     @form_filler.update_values(params, ip_zipcode, current_user)
-    @dogs = Dog.filter_by @form_filler.values
+    @dogs = Dog.filter_by(@form_filler.values).uniq
+    @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
     @no_dogs = @dogs.empty?
 
     @zipcodes = get_zipcode_from_dogs
@@ -76,8 +77,7 @@ class DogsController < ApplicationController
   end
 
   def create
-    @form_filler = DogViewHelper.new(nil, nil, false)
-    @dog = Dog.new(@form_filler.attributes_list(dog_params))
+    @dog = Dog.new(attributes_list(dog_params))
     @dog.user_id = current_user.id
     if @dog.save      
       add_multiple_pictures(@dog)
@@ -104,7 +104,7 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures
-    if @dog.update_attributes(@form_filler.attributes_list(dog_params))
+    if @dog.update_attributes(attributes_list(dog_params))
       delete_checked_pictures
       add_multiple_pictures(@dog)
       redirect_to dogs_user_path(@current_user.id)
@@ -143,17 +143,17 @@ class DogsController < ApplicationController
     :dob, {:personalities =>[]}, :chipped, :shots_to_date, {:barks => []})
   end
 
+  # Removes the default "" values and any invalid value the user my try to send through
   def purge_param(check_params)
     delete_params = []
     check_params.each do |val|
-      if Mix.all_values.include?(val) or Personality.all_values.include?(val) or Like.all_values.include?(val) then
+      if Mix.all_values.include?(val) or Personality.all_values.include?(val) or Like.all_values.include?(val) or Bark.all_values.include?(val) then
         delete_params << val
       end
     end
     delete_params.each do |p| check_params.delete(p) end
   end
-
-
+  
   def add_multiple_pictures(myDog)
     if params[:images]        
       params[:images].each { |image|
@@ -173,5 +173,37 @@ class DogsController < ApplicationController
         pic.destroy if checked
       end
     end  
+  end
+
+  # A function to get the attribures in the proper format, has helper functions used directly below
+  def attributes_list(dog_attributes)
+    ## Return hash with new dog values to create new dog/update existing dog
+    new_attrs = {
+      :mixes => get_mix_array(dog_attributes['mixes']),
+      :size => dog_attributes['size'] && dog_attributes['size'].length != 0 ? Size.find(dog_attributes['size']): nil, 
+      :energy_level => dog_attributes['energy_level'] && dog_attributes['energy_level'].length != 0 ? EnergyLevel.find(dog_attributes['energy_level']) : nil, 
+      :likes => get_attribute_array(dog_attributes, 'likes'),
+      :personalities => get_attribute_array(dog_attributes, 'personalities'),
+      :barks => get_attribute_array(dog_attributes, 'barks'),
+      :dob => get_birthday(dog_attributes) }
+    dog_attributes.merge(new_attrs)
+  end
+  
+  def get_birthday(dog_attributes)
+    year = dog_attributes['dob'].to_i
+    DateTime.new(year, 1, 1)
+  end
+  
+  def get_mix_array(mix_arr)
+    mix_arr.blank? ? [] : mix_arr.map{ |m| Mix.find_by_value(m) }
+  end
+  
+  def get_attribute_array(attributes, trait)
+    if attributes[trait] != nil
+      model_class = trait.classify.constantize
+      attributes[trait].each.map { |thing| model_class.find_by_value(thing) }
+    else
+      return []
+    end
   end
 end

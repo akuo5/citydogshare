@@ -1,6 +1,7 @@
  /*
  *= require_self
  *= require_tree .
+ *= require fullcalendar
  */
 
 @import "materialize/components/color";
@@ -310,6 +311,14 @@ label {
 :-ms-input-placeholder {  
    color: black;  
 }
+
+.title-margin {
+  margin-left: 10px;
+}
+.title-padding {
+  padding-left: 10px;
+}
+
 
 .br-5.m {
   margin-top: 5px;

@@ -124,11 +124,9 @@
     </div>
     <div class="col l8 m7 s12">
       <div class="row ctr s">
-        <h4 id="dogs-title">Dogs</h4>
-        <% if @own_profile %>
-          <%= link_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "btn green accent-4 s br-15 hide-on-small-only", :method => :get %>
+        <h4 id="dogs-title" class="title-padding">Dogs</h4>
+        <% if @own_profile %>          <%= link_to "Add Dog", new_dog_path(), :id => "add_dog_button", :class => "btn green accent-4 s br-15 hide-on-small-only", :method => :get %>
         <% end %>
-        <hr/>
       </div>
       <div class="row">
         <% if @user.dogs.count == 0 then %>
@@ -138,17 +136,16 @@
         <% else %>
           <div class="row container main-content">
           <% @user.dogs.each do |dog| %>
-            <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :card_size => "col s12 m12 l6" %>
+            <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :starred_dogs => @starred_dogs, :card_size => "col s12 m12 l6" %>
           <% end %>
           </div>
         <% end %>
       </div>
       <div class="row ctr s">
-        <h4 id="events-title">Events</h4>
+        <h4 id="events-title" class="title-padding">Events</h4>
           <% if @own_profile %>
             <%= link_to "Add Event", new_event_path(), :id => "add_event_button", :class => "btn green accent-4 s br-15 hide-on-small-only", :method => :get %>
           <% end %>
-          <hr/>
         </div>
           <% if @user.events.count == 0 then %>
           <div class="row center-align valign-wrapper no-events-message-container">
