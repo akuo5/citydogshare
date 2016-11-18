@@ -16,6 +16,6 @@
 //= require materialize-sprockets
 //= require tag-it
 //= require jquery-ui
-//= require signin
 //= require galleria.classic
-//= require fullcalendar
+//= require signin
+//= require calendar
