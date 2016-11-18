@@ -30,21 +30,21 @@
       
       <!--Adding in the button to take to other app -->
       <!--Action items: Add in JS to make button appear when toggle is on, and button to disappear when toggle is off-->
-      <% if @user.is_pro? %>
-        <%= link_to "Pro Scheduler", pro_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
-      <% end %>
+      <!--<% if @user.is_pro? %>-->
+      <!--  <%= link_to "Pro Scheduler", pro_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>-->
+      <!--<% end %>-->
       
 
-    <form action="demo_form.asp" method="get">
-      <label>I am a Pro Dog Walker</label>
-          <% if @user.is_pro? %>
-               <div class="switch"><label>No<input type="checkbox" checked><span class="lever"></span>Yes</label></div> 
-            </div>
-            <% else %>
-              <div class="switch"><label>No<input type="checkbox" unchecked><span class="lever"></span>Yes</label></div> 
-            <% end %>
+    <!--<form action="demo_form.asp" method="get">-->
+    <!--  <label>I am a Pro Dog Walker</label>-->
+    <!--      <% if @user.is_pro? %>-->
+    <!--           <div class="switch"><label>No<input type="checkbox" checked><span class="lever"></span>Yes</label></div> -->
+    <!--        </div>-->
+    <!--        <% else %>-->
+    <!--          <div class="switch"><label>No<input type="checkbox" unchecked><span class="lever"></span>Yes</label></div> -->
+    <!--        <% end %>-->
     
-    </form>
+    <!--</form>-->
       
       
       <ul class="collection user-info-collection">
