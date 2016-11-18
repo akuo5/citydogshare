@@ -1,6 +1,7 @@
 <div class= "<%= card_size %>" >
   <div class="card event-card white black-text">
     <div class="event-card-content">
+      <div class="event-header">
       <div class="event-icon">
         <div class="event-icon-month"> <%= event.start_date.strftime('%^b') %> </div>
         <div class="event-icon-day"> <%= event.start_date.day %> </div>
@@ -36,12 +37,13 @@
           <span class="event-detail-title">Location</span>
           <span class="event-detail-content"><%= event.readable_location %></span>
         </div>
-        <% if event.description and !event.description.empty? %>
-          <div class="event-detail">
-            <span class="event-description-title">Description</span>
-            <span class="event-description-content"><%= event.description %></span>
-          </div>
-        <% end %>
+      <% if event.description and !event.description.empty? %>
+        <div class="event-detail">
+          <span class="event-description-title">Description</span>
+          <span class="event-description-content"><%= event.description %></span>
+        </div>
+      <% end %>
+      </div>
       </div>
     </div>
     <% if current_user and current_user.events.exists?(id: event.id) -%>

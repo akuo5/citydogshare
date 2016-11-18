@@ -81,7 +81,7 @@ class Dog < ActiveRecord::Base
   end
 
   def tags
-    readable_personalities.join(", ") 
+    readable_personalities.to_sentence
   end
 
   def owner

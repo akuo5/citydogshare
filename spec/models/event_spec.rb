@@ -18,4 +18,8 @@ describe Event do
       :dogs=>[1], :description=>"need someone to dogsit"}
     assert_equal @event.to_form_hash, hash
   end
+
+  it 'should be able to get all attribute values' do
+    assert_equal Location.all_values, ["My Place", "Your Place", "Other"]
+  end
 end

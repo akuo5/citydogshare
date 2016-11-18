@@ -1,17 +1,215 @@
 <% notice = flash[:notice] %>
 
 <div class="container">
-  <%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
-    <div class="row">
+  
+  <!-- THIS IS THE FORM FOR DESKTOP -->
+  <!-- This split is due to browser specific layout problems with a single form -->
+  <div class="row hide-on-med-and-down">
+    
+    <%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
+      <!-- LEFT COLUMN OF FORM -->
+      <div class="col s12 m12 l6 dog-form-col">
       
-      <div id="name" class="input-field col s12 m12 l6 left-col">
+        <div id="name" class="input-field">
+          <%= text_field(:dog, :name, class: "white", placeholder: "Please insert name", :value => @dog_form_values[:name]) %>
+          <label for="name" class="<%= notice and notice[:name] and notice[:name] != [] ? "invalid" : "valid" %> input-label-correction">
+            What is your dog's name? <strong class ="red-text">*</strong>
+          </label>
+        </div>
+        
+        <div id="size" class="input-field">
+          <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @dog_form_values[:size]) %>
+          <%= select :dog, :size, :class => "validate white" do %>
+            <option value="" disabled selected>Must select one</option>
+            <%= size_options %>
+          <% end %>
+          <label for="size" class="<%= notice and notice[:size] and notice[:size] != [] ? "invalid" : "valid" %>">
+            What size (in pounds) is your dog? <strong class ="red-text">*</strong>
+          </label>
+        </div>
+        
+        <div id="mixes" class="input-field tooltipped" data-position="top" data-delay="50" data-tooltip="Start typing to find a specific mix">
+          <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @dog_form_values[:mixes]) %>
+          <%= select :dog, :mixes, mix_options, { :class => "validate white tooltipped" }, :multiple => true do %>
+            <option value="" disabled selected>Must select one or more</option>
+            <%= mix_options %>
+          <% end %>
+          <label for="mixes" class="<%= notice and notice[:mixes] and notice[:mixes] != [] ? "invalid" : "valid" %>">
+            What mix (or mixes) is your dog? <strong class ="red-text">*</strong>
+          </label>
+        </div>
+        
+        <div id="energy_level" class="input-field">
+          <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @dog_form_values[:energy_level]) %>
+          <%= select :dog, :energy_level, :class => "validate white" do %>
+            <option value="" disabled selected>Please select one</option>
+            <%= energy_level_options %>
+          <% end %>
+          <label for="energy_level">What is your dog's energy level?</label>
+        </div>
+        
+        <div id="barks" class="input-field">
+          <% bark_options = options_from_collection_for_select(Bark.all, 'value', 'value', @dog_form_values[:barks]) %>
+          <%= select :dog, :barks, bark_options, { :class => "validate white" }, :multiple => true do %>
+            <option value="" disabled selected>Please select one or more</option>
+            <%= bark_options %>
+          <% end %>
+          <label for="barks">When does your dog bark?</label>
+        </div>
+        
+        <div id="chipped" class="input-field">
+          <%= select :dog, :chipped, :class => "validate white" do %>
+            <option value="" disabled <%= !@dog_form_values[:chipped] ? "selected" : nil %>>Must select one</option>
+            <option value="true" <%= @dog_form_values[:chipped] == "true" ? "selected" : nil %>>Yes</option>
+            <option value="false" <%= @dog_form_values[:chipped] == "false" ? "selected" : nil %>>No</option>
+          <% end %>
+          <label for="chipped" class="<%= notice and notice[:chipped] and notice[:chipped] != [] ? "invalid" : "valid" %>">
+            Is your dog chipped?  <strong class ="red-text">*</strong>
+          </label>
+        </div>
+        
+        <div id="availability" class="input-field">
+          <%= select :dog, :availability, { "Available"=>"Yes", "Unavailable"=>"No"}, { }, :class => "validate white availability-dropdown" do %>
+            <option value="" disabled selected>Please choose one</option>
+            <option value="Available" <%= @dog_form_values[:availability] == "Available" ? "selected" : nil %>>Available</option>
+            <option value="Unavailable" <%= @dog_form_values[:availability] == "Unavailable" ? "selected" : nil %>>Unavailable</option>
+          <% end %>
+          <label for="availability" class="availability-label">
+            General Availability <br> 
+            <span class="availability-comment">(If you woud like your dog to be availabile for professionals to schedule walks, please select "Available".)</span>
+          </label>
+        </div>
+        
+        <div id="motto" class="input-field input-area br-20 s m l" style="margin-top: auto">
+          <%= text_area(:dog, :motto, :placeholder => "Is there anything your dog wants the world to know?", :class => "materialize-textarea fix-textarea-alignment") %>
+          <label for="motto">Status</label>
+        </div>
+        
+        <div id ="profile-pic">
+          <label>Give your dog a profile picture!</label>
+          <div class="file-field input-field">
+            <div class="btn light-blue darken-3">
+              <i class="fa fa-cloud-upload white-text"></i>&nbsp; Upload
+              <%= file_field(:dog, :photo) %>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path" type="text">
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- RIGHT COLUMN OF FORM -->
+      <div class="col s12 m12 l6 dog-form-col">
+        
+        <div id="dob" class="input-field">
+          <%= select :dog, :dob, {:class => "validate white", :id=> 'dobdob'} do %>
+            <option value="" <%= !@dog_form_values[:dob] || @dog_form_values[:dob] == 0 ? "selected" : nil %> disabled>Please choose one</option>
+            <% ((Date.today.year - 30)...(Date.today.year)).each do |year| %>
+              <option value="<%= year %>" <%= @dog_form_values[:dob] == year ? "selected" : nil %>><%= year %></option> 
+            <% end %>
+          <% end %>
+          <label for="dob">What year was your dog born in?</label>
+        </div>
+        
+        <div id="gender" class="input-field">
+          <%= select :dog, :gender, ["Male", "Female"], {:selected => @dog_form_values[:gender]}, :class => "validate white" do %>
+            <option value="" <%= !@dog_form_values[:gender] ? "selected" : nil %> disabled>Must choose one</option>
+            <option value="Male" <%= @dog_form_values[:gender] == "Male" ? "selected" : nil %>>Male</option>
+            <option value="Female" <%= @dog_form_values[:gender] == "Female" ? "selected" : nil %>>Female</option>
+          <% end %>
+          <label for="gender" class="<%= notice and notice[:gender] and notice[:gender] != [] ? "invalid" : "valid" %>">
+            What is your dog's gender? <strong class ="red-text">*</strong>
+          </label>
+        </div>
+        
+        <div id="personalities" class="input-field">
+          <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @dog_form_values[:personalities]) %>
+          <%= select :dog, :personalities, personality_options, { :class => "validate white" }, :multiple => true  do %>
+            <option value="" disabled selected>Must select one or more</option>
+            <%= personality_options %>
+          <% end %>
+          <label for="personality" class="<%= notice and notice[:personalities] and notice[:personalities] != [] ? "invalid" : "valid" %>">
+            What is your dogs personality like? <strong class ="red-text">*</strong>
+          </label>
+        </div>
+        
+        <div id="likes" class="input-field">
+          <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @dog_form_values[:likes]) %>
+          <%= select :dog, :likes, like_options, { :class => "validate white" }, :multiple => true do %>
+            <option value="" disabled selected>Please select one or more</option>
+            <%= like_options %>
+          <% end %>
+          <label for="likes">Who does your dog like?</label>
+        </div>
+        
+        <div id="fixed" class="input-field">
+          <%= select :dog, :fixed, :class => "validate white" do %>
+            <option value="" disabled <%= !@dog_form_values[:fixed] ? "selected" : nil %>>Must select one</option>
+            <option value="true" <%= @dog_form_values[:fixed] == "true" ? "selected" : nil %>>Yes</option>
+            <option value="false" <%= @dog_form_values[:fixed] == "false" ? "selected" : nil %>>No</option>
+          <% end %>
+          <label for="fixed" class="<%= notice and notice[:fixed] and notice[:fixed] != [] ? "invalid" : "valid" %>">
+            Is your dog spayed / neutered? <strong class ="red-text">*</strong>
+          </label>
+        </div>
+        
+        <div id="shots_to_date" class="input-field">
+          <%= select :dog, :shots_to_date, :class => "validate white" do %>
+            <option value="" disabled <%= !@dog_form_values[:shots_to_date] ? "selected" : nil %>>Must select one</option>
+            <option value="true" <%= @dog_form_values[:shots_to_date] == "true" ? "selected" : nil %>>Yes</option>
+            <option value="false" <%= @dog_form_values[:shots_to_date] == "false" ? "selected" : nil %>>No</option>
+          <% end %>
+          <label for="shots_to_date">Are all your dog's shots up to date?</label>
+        </div>
+        
+        <div id="health" class="input-field input-area br-20 s m l">
+          <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?", :class => "materialize-textarea fix-textarea-alignment") %>
+          <label for="health">Health Notes</label>
+        </div>
+        
+        <div id="description" class="input-field input-area br-20 s m l">
+          <%= text_area(:dog, :description, :placeholder => "Do you have any other descriptive details about your dog?", :class => "materialize-textarea fix-textarea-alignment") %>
+          <label for="description">Description</label>
+        </div>
+        
+        <div id ="more-pics">
+          <label>Add more pictures or videos!</label>
+          <div class="file-field input-field">
+            <div class="btn light-blue darken-3">
+              <i class="fa fa-cloud-upload white-text"></i>&nbsp; Upload
+              <%= file_field_tag "images[]", type: :file, multiple: true %>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="form-button-box row">
+        <input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn-large right green accent-4 col l4 m5 s12' />
+        <%= link_to "Cancel", dogs_user_path(current_user), :id => "cancel_dog_button", :class => "btn-large left red col l2 m3 s12 br-15 s", :method => :get %>
+      </div>
+      
+    <% end %>
+  </div>
+  
+  <!-- THIS IS THE FORM FOR MOBILE AND TABLET -->
+  <div class="row hide-on-large-only">
+    
+    <%= form_tag({controller: :dogs, action: @action}, method: @method, :multipart => true) do %>
+    
+      <div id="name" class="input-field col s12 m12 l6">
         <%= text_field(:dog, :name, class: "white", placeholder: "Please insert name", :value => @dog_form_values[:name]) %>
         <label for="name" class="<%= notice and notice[:name] and notice[:name] != [] ? "invalid" : "valid" %> input-label-correction">
           What is your dog's name? <strong class ="red-text">*</strong>
         </label>
       </div>
       
-      <div id="dob" class="input-field col s12 m12 l6  right-col" id="dob">
+      <div id="dob" class="input-field col s12 m12 l6" id="dob">
         <%= select :dog, :dob, {:class => "validate white", :id=> 'dobdob'} do %>
           <option value="" <%= !@dog_form_values[:dob] || @dog_form_values[:dob] == 0 ? "selected" : nil %> disabled>Please choose one</option>
           <% ((Date.today.year - 30)...(Date.today.year)).each do |year| %>
@@ -21,7 +219,7 @@
         <label for="dob">What year was your dog born in?</label>
       </div>
       
-      <div id="size" class="input-field col s12 m12 l6 left-col">
+      <div id="size" class="input-field col s12 m12 l6">
         <% size_options = options_from_collection_for_select(Size.all, 'id', 'value', @dog_form_values[:size]) %>
         <%= select :dog, :size, :class => "validate white" do %>
           <option value="" disabled selected>Must select one</option>
@@ -32,7 +230,7 @@
         </label>
       </div>
       
-      <div id="gender" class="input-field col s12 m12 l6  right-col">
+      <div id="gender" class="input-field col s12 m12 l6">
         <%= select :dog, :gender, ["Male", "Female"], {:selected => @dog_form_values[:gender]}, :class => "validate white" do %>
           <option value="" <%= !@dog_form_values[:gender] ? "selected" : nil %> disabled>Must choose one</option>
           <option value="Male" <%= @dog_form_values[:gender] == "Male" ? "selected" : nil %>>Male</option>
@@ -43,7 +241,7 @@
         </label>
       </div>
       
-      <div id="mixes" class="input-field col s12 m12 l6 left-col tooltipped" data-position="top" data-delay="50" data-tooltip="Start typing to find a specific mix">
+      <div id="mixes" class="input-field col s12 m12 l6 tooltipped" data-position="top" data-delay="50" data-tooltip="Start typing to find a specific mix">
         <% mix_options = options_from_collection_for_select(Mix.all, 'value', 'value', @dog_form_values[:mixes]) %>
         <%= select :dog, :mixes, mix_options, { :class => "validate white tooltipped" }, :multiple => true do %>
           <option value="" disabled selected>Must select one or more</option>
@@ -54,7 +252,7 @@
         </label>
       </div>
       
-      <div id="personalities" class="input-field col s12 m12 l6 right-col">
+      <div id="personalities" class="input-field col s12 m12 l6">
         <% personality_options = options_from_collection_for_select(Personality.all, 'value', 'value', @dog_form_values[:personalities]) %>
         <%= select :dog, :personalities, personality_options, { :class => "validate white" }, :multiple => true  do %>
           <option value="" disabled selected>Must select one or more</option>
@@ -65,7 +263,7 @@
         </label>
       </div>
       
-      <div id="energy_level" class="input-field col s12 m12 l6 left-col">
+      <div id="energy_level" class="input-field col s12 m12 l6">
         <% energy_level_options = options_from_collection_for_select(EnergyLevel.all, 'id', 'value', @dog_form_values[:energy_level]) %>
         <%= select :dog, :energy_level, :class => "validate white" do %>
           <option value="" disabled selected>Please select one</option>
@@ -74,7 +272,7 @@
         <label for="energy_level">What is your dog's energy level?</label>
       </div>
       
-      <div id="likes" class="input-field col s12 m12 l6 right-col">
+      <div id="likes" class="input-field col s12 m12 l6">
         <% like_options = options_from_collection_for_select(Like.all, 'value', 'value', @dog_form_values[:likes]) %>
         <%= select :dog, :likes, like_options, { :class => "validate white" }, :multiple => true do %>
           <option value="" disabled selected>Please select one or more</option>
@@ -83,7 +281,7 @@
         <label for="likes">Who does your dog like?</label>
       </div>
       
-      <div id="barks" class="input-field col s12 m12 l6 left-col">
+      <div id="barks" class="input-field col s12 m12 l6">
         <% bark_options = options_from_collection_for_select(Bark.all, 'value', 'value', @dog_form_values[:barks]) %>
         <%= select :dog, :barks, bark_options, { :class => "validate white" }, :multiple => true do %>
           <option value="" disabled selected>Please select one or more</option>
@@ -92,7 +290,7 @@
         <label for="barks">When does your dog bark?</label>
       </div>
       
-      <div id="fixed" class="input-field col s12 m12 l6 right-col">
+      <div id="fixed" class="input-field col s12 m12 l6">
         <%= select :dog, :fixed, :class => "validate white" do %>
           <option value="" disabled <%= !@dog_form_values[:fixed] ? "selected" : nil %>>Must select one</option>
           <option value="true" <%= @dog_form_values[:fixed] == "true" ? "selected" : nil %>>Yes</option>
@@ -103,7 +301,7 @@
         </label>
       </div>
       
-      <div id="chipped" class="input-field col s12 m12 l6 left-col">
+      <div id="chipped" class="input-field col s12 m12 l6">
         <%= select :dog, :chipped, :class => "validate white" do %>
           <option value="" disabled <%= !@dog_form_values[:chipped] ? "selected" : nil %>>Must select one</option>
           <option value="true" <%= @dog_form_values[:chipped] == "true" ? "selected" : nil %>>Yes</option>
@@ -114,7 +312,7 @@
         </label>
       </div>
       
-      <div id="shots_to_date" class="input-field col s12 m12 l6 right-col">
+      <div id="shots_to_date" class="input-field col s12 m12 l6">
         <%= select :dog, :shots_to_date, :class => "validate white" do %>
           <option value="" disabled <%= !@dog_form_values[:shots_to_date] ? "selected" : nil %>>Must select one</option>
           <option value="true" <%= @dog_form_values[:shots_to_date] == "true" ? "selected" : nil %>>Yes</option>
@@ -123,7 +321,7 @@
         <label for="shots_to_date">Are all your dog's shots up to date?</label>
       </div>
       
-      <div id="availability" class="input-field col s12 m12 l6 right-col">
+      <div id="availability" class="input-field col s12 m12 l6">
         <%= select :dog, :availability, { "Available"=>"Yes", "Unavailable"=>"No"}, { }, :class => "validate white availability-dropdown" do %>
           <option value="" disabled selected>Please choose one</option>
           <option value="Available" <%= @dog_form_values[:availability] == "Available" ? "selected" : nil %>>Available</option>
@@ -135,22 +333,22 @@
         </label>
       </div>
       
-      <div id="health" class="input-field col s12 m12 l6 left-col br-20 s m l">
+      <div id="health" class="input-field col s12 m12 l6 br-20 s m l">
         <%= text_area(:dog, :health, :placeholder => "Is there anything sitters should know about your dog's health (allergies, recent surgeries, etc.)?", :class => "materialize-textarea fix-textarea-alignment") %>
         <label for="health">Health Notes</label>
       </div>
       
-      <div id="motto" class="input-field col s12 m12 l6 right-col br-20 s m l">
+      <div id="motto" class="input-field col s12 m12 l6 br-20 s m l">
         <%= text_area(:dog, :motto, :placeholder => "Is there anything your dog wants the world to know?", :class => "materialize-textarea fix-textarea-alignment") %>
         <label for="motto">Status</label>
       </div>
       
-      <div id="description" class="input-field col s12 m12 l6 left-col br-20 s m l">
+      <div id="description" class="input-field col s12 m12 l6 br-20 s m l">
         <%= text_area(:dog, :description, :placeholder => "Do you have any other descriptive details about your dog?", :class => "materialize-textarea fix-textarea-alignment") %>
         <label for="description">Description</label>
       </div>
       
-      <div class="col l6 m12 s12 left-col">
+      <div class="col l6 m12 s12 ">
         <label>Give your dog a profile picture!</label>
         <div class="file-field input-field">
           <div class="btn light-blue darken-3">
@@ -163,7 +361,7 @@
         </div>
       </div>
       
-      <div class="col l6 m12 s12 right-col">
+      <div class="col l6 m12 s12">
         <label>Add more pictures or videos!</label>
         <div class="file-field input-field">
           <div class="btn light-blue darken-3">
@@ -175,11 +373,11 @@
           </div>
         </div>
       </div>
-    </div>
-    
-    <div class="form-button-box row">
-      <input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn-large right green accent-4 col l4 m5 s12' />
-      <%= link_to "Cancel", dogs_user_path(current_user), :id => "cancel_dog_button", :class => "btn-large left red col l2 m3 s12 br-15 s", :method => :get %>
-    </div>
-  <% end %>
+      
+      <div class="form-button-box row">
+        <input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn-large right green accent-4 col l4 m5 s12' />
+        <%= link_to "Cancel", dogs_user_path(current_user), :id => "cancel_dog_button", :class => "btn-large left red col l2 m3 s12 br-15 s", :method => :get %>
+      </div>
+    <% end %>
+  </div>
 </div>

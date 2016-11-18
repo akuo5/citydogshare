@@ -64,7 +64,11 @@
 }
 
 .availability-dropdown {
-	margin-top: 48px;
+	margin-top: 63px;
+}
+
+.availability-label {
+	margin-top: -50px;
 }
 
 .availability-comment {
@@ -170,6 +174,12 @@
 	margin-right: 10px;
 }
 
+.dog-form-col .input-field {
+	height: 80px;
+}
+.dog-form-col .input-area {
+	height: auto;
+}
 #filter_title {
 	padding-left: 10px;
 }

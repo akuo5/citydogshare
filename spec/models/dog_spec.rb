@@ -9,12 +9,23 @@ describe Dog do
       @user = FactoryGirl.create(:user)
       @dog = FactoryGirl.create(:dog)
   end
-
+  
+  it 'should be able to get all attribute values' do
+    assert_equal Bark.all_values, ["Rarely", "When playing", "When someone's at the door", "When left alone", "All the time"]
+    assert_equal Mix.all_values.count, 488
+    assert_equal Size.all_values, ["small (0-15)", "medium (16-40)", "large (41-100)", "xl (101+)"]
+    assert_equal Personality.all_values, ["anxious", "curious", "timid", "whatever", "friendly", "fetcher", "lover", "still a puppy"]
+    assert_equal EnergyLevel.all_values, ["high", "active", "good", "some", "low", "zzzzz"]
+  end
 
   it 'should correctly show name' do
     assert_equal @dog.name, "Spock"
   end
-  
+
+  it 'should correctly show dogs person' do
+    assert_equal @dog.owner, @user
+  end
+
   it 'should correctly show energy level' do
     assert_equal @dog.energy_level, EnergyLevel.find(1)
   end
@@ -23,10 +34,22 @@ describe Dog do
     assert_equal @dog.size, Size.find(1)
   end
   
-  it 'should correctly show mixes' do
+  it 'should correctly show readable attributes' do
     assert_equal @dog.readable_mixes, ["Affenpinscher"]
+    assert_equal @dog.readable_personalities, ["Anxious"]
+    assert_equal @dog.tags, "Anxious"
+    assert_equal @dog.readable_size, "Small (0-15)"
+    assert_equal @dog.readable_energy_level, "High"
+    assert_equal @dog.readable_likes, []
+    assert_equal @dog.readable_barks, []
+    assert_equal @dog.readable_fixed, "No"
+    assert_equal @dog.readable_chipped, "No"
+    assert_equal @dog.readable_shots_to_date, "Unknown"
+    @dog.shots_to_date = true
+    assert_equal @dog.readable_shots_to_date, "Yes"
+    assert_equal @dog.readable_fixed, "No"
   end
-  
+
   it 'should correctly show that there are no future events' do
     expect(@dog.future_events?).to be_falsey
     assert_equal @dog.future_events.count, 0
@@ -85,7 +108,7 @@ describe Dog do
   
   it 'should correctly output the dogs tags' do
     expect(@dog).to receive(:readable_personalities).and_return(["1", "2"])
-    expect(@dog.tags).to eq("1, 2")
+    expect(@dog.tags).to eq("1 and 2")
   end
   
   it 'should return a list of genders' do 

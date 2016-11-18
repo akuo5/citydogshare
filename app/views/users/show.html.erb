@@ -154,11 +154,11 @@
             </div>
           </div>
         <% else %>
-          <div class="row container main-content">
-          <% @user.events.each do |event| %>
-            <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12 m12 l6" %>
-          <% end %>
+          <div class="row s12 event-cards-container">
+            <% @user.events.each do |event| %>
+              <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12" %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    </div>
-  </div>
+      </div>
