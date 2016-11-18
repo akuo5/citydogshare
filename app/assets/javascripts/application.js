@@ -16,7 +16,6 @@
 //= require materialize-sprockets
 //= require tag-it
 //= require jquery-ui
-//= require cal
 //= require signin
 //= require galleria.classic
 //= require moment
