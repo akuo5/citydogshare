@@ -44,40 +44,6 @@ describe EventsController, :type => :controller do
     end
   end
 
-  # Pretty sure these are the form_filler tests
-  # describe 'check other methods' do
-  #   before (:each) do
-      
-  #     @params = {"dogs"=>{"Spock"=>"1"}, "date_timepicker"=>{"start"=>"2015/04/17", "end"=>"2015/04/24"}, 
-  #     "times"=>{"Morning"=>"1"}, "location"=>"My House", "description" => "", "update_dog_button"=>"Schedule", 
-  #     "method"=>"post", "action"=>"create", "controller"=>"events"}
-  #     @event = Event.new()
-  #   end
-
-  #   it 'should return the hash' do
-  #     @form_filler.event_info(@params).should == {:start_date => Date.new(2015, 4, 17), :end_date => Date.new(2015, 4, 24),
-  #       :time_of_day => ["Morning"], :location => "My House", :description => ""}
-  #   end
-
-  #   it 'should return stuff when empty' do
-  #     @params = {"date_timepicker"=>{"start"=>"", "end"=>""}, "location"=>"My House", "description" => ""}
-  #     @form_filler.event_info(@params).should == {:start_date => "", :end_date => "", :time_of_day => [], :location => "My House", :description=> ""}
-  #   end
-
-  #   it 'should set the flash if dogs is empty' do
-  #     controller.instance_variable_set(:@dogs, [])
-  #     controller.set_flash
-  #     expect(flash[:notice]).to eq({:name => ["Please select a dog to share"]})
-  #   end
-
-  #   it 'should return false if event is invalid' do
-  #     controller.instance_variable_set(:@dogs, [Dog.find_by_name("Spock")])
-  #     controller.instance_variable_set(:@event_attr, {:start_date => "", :end_date => Date.new(2015, 4, 24),
-  #       :time_of_day => ["Morning"], :location => "My House", :description => ""})
-  #     controller.create_events.should == false
-  #   end
-  # end
-
   describe 'show dog events' do
     before(:each) do
       @event = FactoryGirl.create(:event)
@@ -93,9 +59,9 @@ describe EventsController, :type => :controller do
       assigns(:current_user).should == @current_user
     end
 
-    it 'should get the right event on show' do
+    it 'should redirect to events page on show' do
       get :show, {:id => 1}
-      assigns(:event).should == @event
+      response.should redirect_to events_path
     end
   end
 
@@ -110,7 +76,6 @@ describe EventsController, :type => :controller do
       expect(controller.instance_variable_get(:@method)).to eql(:put)
     end
   end
-
 
   describe 'update event' do
     before(:each) do
@@ -146,6 +111,21 @@ describe EventsController, :type => :controller do
       get :destroy, :id => "1"
       expect(controller.instance_variable_get(:@event)).to eql(@event)
       assert_equal Event.all, []
+    end
+  end
+  
+  describe 'help with fc calendar' do
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+      @session = { "user_id" => @current_user.uid }
+      @params = { "id" => @event.id, "fc_update" => true, "event" => 
+        {"dogs"=>["", "1"], "location"=>"2", "start_date"=>Date.today, 
+        "end_date"=>Date.tomorrow, "description"=>"efghijk"}}
+    end
+
+    it 'should display the proper json form when prompted by fc cal' do
+      get :fc_info, @params, @session
+      expect(controller.response_body).to eql([JSON.generate([@event.to_fc_json])])
     end
   end
 end
