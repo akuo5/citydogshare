@@ -59,7 +59,7 @@ When(/^I select "([^"]*)" for "([^"]*)"$/) do |value, id|
 end
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
-  check(field, match: :first)
+  check(field, :match => :first)
 end
 
 When /^I create a new dog "([^"]*)"$/ do |name|
@@ -69,7 +69,7 @@ When /^I create a new dog "([^"]*)"$/ do |name|
 end
 
 And /^I push "([^"]*)"$/ do |button|
-  click_button(button)
+  click_button(button, :match => :first)
 end
 
 Given /^my zipcode is "(.*)"$/ do |zip|
@@ -85,7 +85,7 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"/ do |path, field|
   allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
 
   allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
-  attach_file(field, File.expand_path(path))
+  attach_file(field, File.expand_path(path), :match => :first)
 end
 
 And /^I press Schedule$/ do

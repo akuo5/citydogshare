@@ -28,11 +28,11 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
-  click_link(link)
+  click_link(link, :match => :first)
 end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
-  click_button(button)
+  click_button(button, :match => :first)
 end
 
 When /^(?:|I )press the first "([^"]*)"$/ do |button|
@@ -45,7 +45,7 @@ When /^(?:|I )follow the first "([^"]*)"$/ do |link|
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
-  fill_in(field, :with => value)
+  fill_in(field, :with => value, :match => :first)
 end
 
 When /^(?:|I )fill in the first "([^"]*)" with "([^"]*)"$/ do |field, value|

@@ -35,7 +35,7 @@ Scenario: User edits his dog's information
   And I fill in "dog_description" with "I am a dog."
   And I fill in "dog_health" with "None"
   And I select "Available" from "dog_availability"
-  And I press "Save Changes"
+  And I press the first "Save Changes"
   Then I should see "Prince"
   And I should see "Male"
   And I should see "Medium (16-40)"
