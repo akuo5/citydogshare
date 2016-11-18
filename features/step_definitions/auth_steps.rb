@@ -35,6 +35,11 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+When /^(?:|I )press the "Sign Up" button$/ do
+  # puts(page.body)
+  click_link('Sign Up!')
+end
+
 
 When /^(?:|I )follow the first "([^"]*)"$/ do |link|
   first(:link, link).click
@@ -49,6 +54,16 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
     page.should have_content(text)
   else
     assert page.has_content?(text)
+  end
+end
+
+Then /^(?:|I )should see the login popup$/ do
+  if page.respond_to? :should
+    page.should have_content('Login')
+    find_link('Login').visible?
+  else
+    assert page.has_content('Login')
+
   end
 end
 
