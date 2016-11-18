@@ -17,5 +17,6 @@
 //= require tag-it
 //= require jquery-ui
 //= require galleria.classic
-//= require signin
+//= require moment
 //= require fullcalendar
+//= require signin
