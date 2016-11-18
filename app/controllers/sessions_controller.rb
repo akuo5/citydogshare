@@ -55,22 +55,29 @@ class SessionsController < ApplicationController
         redirect_to create_session_path(:user => @user)
 
     else
-      @new_user = User.create()
-      @new_user.update_credentials(params[:auth][:credentials])
-      @new_user.facebook_info_update(params[:auth])
-      redirect_to create_session_path(:user => @new_user)
+      # @new_user = User.create()
+      # @new_user.update_credentials(params[:auth][:credentials])
+      # @new_user.facebook_info_update(params[:auth])
+      # redirect_to create_session_path(:user => @new_user)
+      handle_failure()
     end   
   end 
   
   def signup
     if params[:user]
-     flash[:notice] = "User already exists. Please log in"
-      redirect_to root_path()
+      if User.exists?(id: params[:user_id])
+      #change it to check if the user exists in database
+          flash[:notice] = "User already exists. Please log in"
+          redirect_to root_path()
+      else
+        @new_user = User.create()
+        @new_user.update_credentials(params[:auth][:credentials])
+        @new_user.facebook_info_update(params[:auth])
+        redirect_to create_session_path(:user => @new_user)
+      end
     else
-      @new_user = User.create()
-      @new_user.update_credentials(params[:auth][:credentials])
-      @new_user.facebook_info_update(params[:auth])
-      redirect_to create_session_path(:user => @new_user)
+      handle_failure()
+
     end
   end 
   

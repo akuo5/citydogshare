@@ -37,7 +37,7 @@ end
 
 When /^(?:|I )press the "Sign Up" button$/ do
   # puts(page.body)
-  click_link('Sign Up!')
+  click_link('Sign Up')
 end
 
 
