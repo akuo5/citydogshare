@@ -11,18 +11,14 @@ class EventsController < ApplicationController
   def fc_info
     events_info = []
     @current_user.events.each do |event|
-      events_info << { :id => event.id,
-        :title => event.readable_dogs,
-        :start => "#{event.start_date.iso8601}",
-        :end => "#{event.end_date.tomorrow.iso8601}" }
+      events_info << event.to_fc_json
     end
     render :json => events_info.to_json
   end
 
+  # redirects to event page because we don't have a specific event info page
   def show
-    id = params[:id]
-    @event = Event.find(id)
-    redirect_to user_path(@event.user_id)
+    redirect_to events_path
   end
 
   def new
