@@ -80,19 +80,19 @@ describe SessionsController, :type => :controller do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
     end
     it 'should create a new user' do
-      get(:login, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
+      get(:signup, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
       expect(assigns(:new_user)).to be_an_instance_of(User)
     end
     it 'should update their credentials' do
       expect_any_instance_of(User).to receive(:update_credentials)
-      get(:login, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
+      get(:signup, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
     end
     it 'should set their facebook info' do
       expect_any_instance_of(User).to receive(:facebook_info_update)
-      get(:login, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
+      get(:signup, :user => nil, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
     end
     it 'should redirect to create a new session' do
-      get(:login, :user => nil , :auth => request.env["omniauth.auth"])
+      get(:signup, :user => nil , :auth => request.env["omniauth.auth"])
       expect(response).to redirect_to create_session_path(:user => "1")
     end
   end

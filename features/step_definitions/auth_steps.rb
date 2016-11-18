@@ -23,6 +23,12 @@ Given /^my authentication fails$/ do
   visit "/auth/failure"
 end
 
+When /^I click the "Sign Out"$/ do
+  puts(page.body)
+  click_link('Sign out')
+  
+end
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
