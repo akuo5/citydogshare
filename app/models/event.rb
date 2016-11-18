@@ -63,4 +63,12 @@ class Event < ActiveRecord::Base
 
     return form_hash
   end
+  
+  # END_DATE IS NOT ACCURATE FOR THE CALENDAR
+  def to_fc_json
+    { :id => self.id,
+      :title => self.readable_dogs,
+      :start => "#{self.start_date.iso8601}",
+      :end => "#{self.end_date.tomorrow.iso8601}" }
+  end
 end
