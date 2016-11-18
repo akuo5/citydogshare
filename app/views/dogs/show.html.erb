@@ -161,6 +161,7 @@
     <div class="col l8 m7 s12">
       <div class="row ctr s">
         <% if not @pictures.empty? %>
+        <h4 id="pic-gallery-title" class="title-padding">Photos</h4>
           <div class="slider">
             <ul class="slides">
               <% unless @pictures.empty? %>
@@ -176,6 +177,7 @@
     
           
         <% if not @dog.video.nil? and not @dog.video == "" %>
+        <h4 id="vid-gallery" class="title-padding">Videos</h4>
           <div class="slider" style="margin-top: 50px">
             <ul class = "slides">
               <% @dog.video.split(/, ?/).each do |vid| %>
