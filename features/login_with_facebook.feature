@@ -61,11 +61,13 @@ Scenario: Log in to Facebook using Facebook auth
   And I should see "Something went wrong with the authentication. Please try again."
 
 Scenario: Log in authentication fails
+
   Given I am on the homepage
   When I press the "Sign Up" button
   And my authentication fails
   Then I should be on the home page
   And I should see "Something went wrong with the authentication. Please try again."
+
 
 
 
@@ -127,3 +129,4 @@ Scenario: Log in authentication fails
 #   And I click sign in with "another user"
 #   And I follow "Robin"
 #   Then I should be on the home page
+

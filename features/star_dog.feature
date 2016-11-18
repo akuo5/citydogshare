@@ -69,3 +69,4 @@ Scenario: User should be able to unstar a dog from dog profile
   And I follow the first "My Favorites"
   Then I should not see "Bubba"
 
+

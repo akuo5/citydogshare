@@ -5,7 +5,8 @@ Citydogshare::Application.routes.draw do
   ## Session Routes ##
   get 'auth/:provider/callback', to: 'sessions#handle_auth', as: 'auth_success'
   get 'auth/failure', to: 'sessions#handle_failure', as: 'auth_failure'
-  delete 'signout', to: 'sessions#destroy', as: 'signout'
+  delete 'destroy', to: 'sessions#destroy', as: 'destroy'
+  post'signout', to: 'sessions#signout', as: 'signout'
   get 'create', to: 'sessions#create', as: 'create_session'
   get 'login', to: 'sessions#login', as: 'login'
   get 'signup', to: 'sessions#signup', as: 'signup'

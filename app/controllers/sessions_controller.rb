@@ -24,9 +24,17 @@ class SessionsController < ApplicationController
     session[:user_id] = @user.uid
     redirect_to user_path(@user)
   end
+
   
   # This only destroys the session, equivalent to signing out
+
   def destroy
+    session[:user_id] = nil
+    redirect_to root_path()
+  end
+  
+  
+  def signout
     session[:user_id] = nil
     redirect_to root_path()
   end 
@@ -79,6 +87,7 @@ class SessionsController < ApplicationController
       handle_failure()
 
     end
+      
   end 
   
   def handle_auth 
@@ -87,5 +96,8 @@ class SessionsController < ApplicationController
 
     redirect_to login_path(:user => @user, :auth => request.env["omniauth.auth"], :credentials => request.env["omniauth.auth"][:credentials])
   end
+ 
+ 
+ 
  
 end
