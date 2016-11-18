@@ -157,18 +157,54 @@
         <% end %>
       </ul>
     </div>
+    
+    <div class="col l8 m7 s12">
+      <div class="row ctr s">
+        <% if not @pictures.empty? %>
+          <div class="slider">
+            <ul class="slides">
+              <% unless @pictures.empty? %>
+                <% @pictures.each do |pic| %>
+                  <li>
+                    <%= image_tag pic.image.url %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+    
+          
+        <% if not @dog.video.nil? and not @dog.video == "" %>
+          <div class="slider" style="margin-top: 50px">
+            <ul class = "slides">
+              <% @dog.video.split(/, ?/).each do |vid| %>
+                <li>
+                  <div class="video-container" style="height:100%;">
+                    <iframe src= <%= "//www.youtube.com/embed/#{vid.split(%r{v=|&})[1]}" %> frameborder="0" allowfullscreen></iframe>
+                  </div>
+                </li>
+              <% end %> 
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <div class="row ctr s">
+        <h4 id="events-title">Events</h4>
+      </div>
+      <% if @dog.events.count == 0 then %>
+        <div class="row center-align valign-wrapper no-events-message-container">
+          <div class="col l12 m12 s12 valign no-events-message">
+            <div>No events yet!</div>
+          </div>
+        </div>
+      <% else %>
+        <div class="row container main-content">
+        <% @dog.events.each do |event| %>
+          <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12 m12 l6" %>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
   </div>
 </div>
-
-<script>
-$(document).ready(function(){
-  $('.ui.video').video();
-
-  $('.ui.sticky')
-  .sticky({
-    offset: 50,
-    context: '#dog_info_stats'
-  });
-});
-</script>
-
