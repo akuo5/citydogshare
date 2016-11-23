@@ -85,19 +85,6 @@
           <%= text_area(:dog, :motto, :placeholder => "Is there anything your dog wants the world to know?", :class => "materialize-textarea fix-textarea-alignment") %>
         </div>
         
-        <div id ="profile-pic">
-          <label>Give your dog a profile picture!</label>
-          <div class="file-field input-field">
-            <div class="btn light-blue darken-3">
-              <i class="fa fa-cloud-upload white-text"></i>&nbsp; Upload
-              <%= file_field(:dog, :photo) %>
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path" type="text">
-            </div>
-          </div>
-        </div>
-        
       </div>
       
       <!-- RIGHT COLUMN OF FORM -->
@@ -174,6 +161,34 @@
           <%= text_area(:dog, :description, :placeholder => "Do you have any other descriptive details about your dog?", :class => "materialize-textarea fix-textarea-alignment") %>
         </div>
         
+      </div>
+      
+      <div class="col l12 m12 s12">
+        <label> 
+        Add YouTube videos! </br>
+        <span class="availability-comment">(Please separate multiple videos with a comma.)</span>
+        </label>
+        <div class="file-field input-field">
+          <%= text_field(:dog, :video, placeholder: "Add your favorite videos of your dog here! ") %>
+        </div>
+      </div>
+      
+      <div class="col s12 m12 l6 dog-form-col">
+        <div id ="profile-pic">
+          <label>Give your dog a profile picture!</label>
+          <div class="file-field input-field">
+            <div class="btn light-blue darken-3">
+              <i class="fa fa-cloud-upload white-text"></i>&nbsp; Upload
+              <%= file_field(:dog, :photo) %>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col s12 m12 l6 dog-form-col">
         <div id ="more-pics">
           <label>Add more pictures or videos!</label>
           <div class="file-field input-field">
@@ -185,14 +200,6 @@
               <input class="file-path validate" type="text">
             </div>
           </div>
-        </div>
-        
-      </div>
-      
-      <div class="col l12 m12 s12">
-        <label> Add YouTube videos!</label>
-        <div class="file-field input-field">
-          <%= text_field(:dog, :video) %>
         </div>
       </div>
       
@@ -337,6 +344,16 @@
         <label for="description">Description</label>
       </div>
       
+      <div class="col l12 m12 s12">
+        <label> 
+        Add YouTube videos! </br>
+        <span class="availability-comment">(Please separate multiple videos with a comma.)</span>
+        </label>
+        <div class="file-field input-field">
+          <%= text_field(:dog, :video, placeholder: "Add your favorite videos of your dog here! ") %>
+        </div>
+      </div>
+      
       <div class="col l6 m12 s12 ">
         <label>Give your dog a profile picture!</label>
         <div class="file-field input-field">
@@ -351,7 +368,7 @@
       </div>
       
       <div class="col l6 m12 s12">
-        <label>Add more pictures or videos!</label>
+        <label>Add more pictures!</label>
         <div class="file-field input-field">
           <div class="btn light-blue darken-3">
             <i class="fa fa-cloud-upload white-text"></i>&nbsp; Upload
@@ -361,13 +378,6 @@
             <input class="file-path validate" type="text">
           </div>
         </div>
-      </div>
-      
-      <div class="col l12 m12 s12">
-        <label> Add YouTube videos!</label>
-          <div class="file-field input-field">
-            <%= text_field(:dog, :video) %>
-          </div>
       </div>
 
       <div class="form-button-box row">

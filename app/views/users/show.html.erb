@@ -10,28 +10,27 @@
   <div class="row">
     <div class="col l4 m5 s12">
       <div class="profile-row center-profile">
-        <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
         <h4 class="br-5 s ctr"><%= @user.full_name %></h4>
+        <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
       </div>
       <% if @own_profile %>
         <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
         <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
       <% end %>
       
-      
-      
-      <div class="speech-bubble light-blue darken-3">
-        <div class="speech-bubble-content white-text">
-          <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true"></i></div>
-          <div class="status-text">&nbsp;&nbsp;<%= @user.status %></div>
+      <% if @user.status && @user.status != "" %>
+        <div class="speech-bubble light-blue darken-3">
+          <div class="speech-bubble-content white-text">
+            <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true"></i></div>
+            <div class="status-text">&nbsp;&nbsp;<%= @user.status %></div>
+          </div>
+          <div class="speech-carrot blue"></div>
         </div>
-        <div class="speech-carrot blue"></div>
-      </div>
+      <% end %>
       
       <!--Adding in the button to take to other app -->
       <!--Action items: Add in JS to make button appear when toggle is on, and button to disappear when toggle is off-->
 
-      
       
       <ul class="collection user-info-collection">
         <% if @user.email && @user.email != "" %>
