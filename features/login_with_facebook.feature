@@ -24,7 +24,7 @@ Scenario: Sign up with facebook if I am a new user
   Then I follow the first "Sign Up With Facebook"
   Then I should be on the users page for "Batman"
   
-Scenario: Sign up with facebook should fail if I am an existing user
+
 Scenario: Sign up with facebook should log user into account
   Given I am on the homepage
   When I press the "Sign Up" button
