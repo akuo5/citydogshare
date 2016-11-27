@@ -62,7 +62,7 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
   height: 85px;
   position: relative;
 }
-.event-icon-month {
+.event-icon-month-unfilled {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   top: 5px;
@@ -74,13 +74,38 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
   text-align: center;
   font-size: 16px;
 }
-.event-icon-day {
+.event-icon-day-unfilled {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   top: 31px; height: 50px;
   width: 100%;
   position: absolute;
   background-color: #0277bd;
+  color: white;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+.event-icon-month-filled {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  top: 5px;
+  height: 26px;
+  width: 100%;
+  position: absolute;
+  background-color: #008e35;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+.event-icon-day-filled {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  top: 31px; height: 50px;
+  width: 100%;
+  position: absolute;
+  background-color: #00c853;
   color: white;
   text-align: center;
   font-size: 30px;
@@ -133,4 +158,13 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 #calendar {
   -webkit-transition: margin-top 0.5s; /* Safari */
   transition: margin-top 0.5s;
+}
+
+.filled-dropdown {
+	margin-top: 43px;
+}
+
+.filled-comment {
+	font-size: 13px;
+	line-height: 14px !important;
 }

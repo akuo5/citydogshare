@@ -3,8 +3,13 @@
     <div class="event-card-content">
       <div class="event-header">
       <div class="event-icon">
-        <div class="event-icon-month"> <%= event.start_date.strftime('%^b') %> </div>
-        <div class="event-icon-day"> <%= event.start_date.day %> </div>
+        <% if event.filled %>
+          <div class="event-icon-month-filled"> <%= event.start_date.strftime('%^b') %> </div>
+          <div class="event-icon-day-filled"> <%= event.start_date.day %> </div>
+        <% else %>
+          <div class="event-icon-month-unfilled"> <%= event.start_date.strftime('%^b') %> </div>
+          <div class="event-icon-day-unfilled"> <%= event.start_date.day %> </div>
+        <% end %>
       </div>
       <div class="event-details">
         <div class="event-detail">
@@ -32,6 +37,12 @@
               <span> <%= event.end_date.strftime('%-m/%d/%y') %></span>
             </span>
           <% end %>
+        </div>
+        <div class="event-detail">
+          <span class="event-detail-title">Filled</span>
+          <span class="event-detail-content">
+            <span><%= event.readable_filled %></span>
+          </span>
         </div>
         <div class="event-detail">
           <span class="event-detail-title">Location</span>

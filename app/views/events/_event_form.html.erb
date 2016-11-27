@@ -31,12 +31,26 @@
       </label>
       <%= date_field("event", :end_date, value: @event_form_values[:end_date], class:"datepicker") %>
     </div>
-
-    <div id="description" class="input-field col s12 m12">
-      <%= text_area(:event, :description, :class => "materialize-textarea") %>
+  
+    <div id="filled" class="input-field col s12 m12 l6 left-col">
+      <%= select :event, :filled, { "Filled"=>"Yes", "Unfilled"=>"No"}, { }, :class => "validate white filled-dropdown" do %>
+        <option value="" disabled <%= !@event_form_values[:filled] ? "selected" : nil %>>Must select one</option>
+        <option value="Filled" <%= @event_form_values[:filled] == "Filled" ? "selected" : nil %>>Filled</option>
+        <option value="Unfilled" <%= @event_form_values[:filled] == "Unfilled" ? "selected" : nil %>>Unfilled</option>
+      <% end %>
+      <label for="filled">
+        Event Filled <br> 
+        <span class="filled-comment">(If you have found a person for this event, please select "Filled".)</span>
+      </label>
+    </div>
+    
+    
+    <div id="description" class="input-field col s12 m12 l6 right-col">
+      <%= text_area(:event, :description, :placeholder => "Do you have any other descriptive details about this event?", :class => "materialize-textarea fix-textarea-alignment") %>
       <label for="description">Description</label>
     </div>
-
+    
+    
   <% end %>
   
   <div class="form-button-box row">

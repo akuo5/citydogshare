@@ -8,7 +8,6 @@ class Event < ActiveRecord::Base
   validates :dogs, :presence => {:message => "Please select the dogs you want to share"}
   validates :location, :presence => {:message => "Please select a location"}
   validates :start_date, :presence => {:message => "Please enter a start date"}
-  # validates :end_date, :presence => {:message => "Please enter an end date"}
   validate :valid_start_end_dates?
   validate :no_overlap
   
@@ -49,6 +48,10 @@ class Event < ActiveRecord::Base
   def readable_dogs
     self.dogs.map{ |d| d.name }.join(', ')
   end
+  
+  def readable_filled
+    self.filled ? "Yes" : "No"
+  end
 
   def to_form_hash
     form_hash = {
@@ -56,7 +59,8 @@ class Event < ActiveRecord::Base
       :end_date => self.end_date, 
       :location_id => self.location_id,
       :dogs => self.dogs.map{ |d| d.id },
-      :description => self.description
+      :description => self.description,
+      :filled => self.filled
     }
     form_hash[:start_date] = form_hash[:start_date].strftime("%d %B, %Y") if form_hash[:start_date]
     form_hash[:end_date] = form_hash[:end_date].strftime("%d %B, %Y") if form_hash[:end_date]
@@ -69,6 +73,7 @@ class Event < ActiveRecord::Base
     { :id => self.id,
       :title => self.readable_dogs,
       :start => "#{self.start_date.iso8601}",
-      :end => "#{self.end_date.tomorrow.iso8601}" }
+      :end => "#{self.end_date.tomorrow.iso8601}",
+      :color => self.filled ? "#00C853" : "#0277bd" }
   end
 end

@@ -6,5 +6,6 @@ FactoryGirl.define do
     location_id 1
     description "need someone to dogsit"
     user_id 1
+    filled true
   end
 end

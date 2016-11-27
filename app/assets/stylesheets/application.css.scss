@@ -61,6 +61,12 @@ $secondary-color: color("light-blue", "darken-3") !default;
   color: red !important;
 }
 
+/* Date Picker */
+
+.picker__close, .picker__today {
+  font-size: 15.4px;
+}
+
 /* BEGIN NAVIGATION BAR */
 
 .logo-img {
