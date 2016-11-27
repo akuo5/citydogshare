@@ -133,3 +133,37 @@ end
 Given(/^I am signed out$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
+
+
+# Pro User step definitons 
+
+Given(/^I flip the toggle button for "([^"]*)" to "([^"]*)"$/) do |arg1, boolean|
+  if boolean == "No"
+    uncheck 'toggle'
+  elsif boolean == "Yes"
+    check 'toggle'
+  end
+end
+
+
+Then(/^I should see that I am a "([^"]*)"$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given(/^the sidebar is open$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I close the sidebar$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see the pro user option$/) do
+  if page.respond_to? :should
+    page.should have_content('I am a Pro Dog Walker')
+  else
+    assert page.has_content('I am a Pro Dog Walker')
+
+  end
+end
+
