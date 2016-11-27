@@ -146,8 +146,16 @@ Given(/^I flip the toggle button for "([^"]*)" to "([^"]*)"$/) do |arg1, boolean
 end
 
 
-Then(/^I should see that I am a "([^"]*)"$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should see that I am (.+) a "([^"]*)"$/) do |arg1, arg2|
+
+  current_user = User.find(1)
+  if arg1 == "not"
+    
+    assert_equal current_user.is_pro, false
+  else
+    assert_equal current_user.is_pro, true
+  end
+  
 end
 
 Given(/^the sidebar is open$/) do

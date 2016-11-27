@@ -25,7 +25,7 @@ Scenario: Switch to pro user from regular user
 
   Given I am on the users page for "Batman"
   Then I should see the pro user option
-      And I flip the toggle button for "Pro User" to "No"
+  And I flip the toggle button for "Pro User" to "No"
   Then I should not see I am a "Pro User"
     Then I flip the toggle button for "Pro User" to "Yes"
   Then I should see that I am a "Pro User"

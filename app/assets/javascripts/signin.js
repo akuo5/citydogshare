@@ -12,6 +12,13 @@
     $("#close-link").click(function(){
         $("#signup-form").hide();
     });
+    
+    
+    
+    $("#pro-toggle").click(function(){
+      //check if it is currently checked or unchecked. 
+        $("#signup-form").show();
+    });
 
   }); // end of document ready
  
