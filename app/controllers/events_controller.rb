@@ -32,14 +32,15 @@ class EventsController < ApplicationController
   end
 
   def create
-    params_hash = 
-    { :start_date => params["event"]["start_date"],
-      :end_date => params["event"]["end_date"] ? params["event"]["end_date"] : params["event"]["start_date"],
-      :location_id => params["event"]["location"],
-      :description => params["event"]["description"]
-    }
+    # params_hash = 
+    # { :start_date => params["event"]["start_date"],
+    #   :end_date => params["event"]["end_date"] ? params["event"]["end_date"] : params["event"]["start_date"],
+    #   :location_id => params["event"]["location"],
+    #   :filled => params["event"]["filled"] ? params["event"]["filled"] : false,
+    #   :description => params["event"]["description"]
+    # }
     @event = Event.new(params_hash)
-    @dogs = @current_user.dogs
+    # @dogs = @current_user.dogs
     @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
     @event.user_id = @current_user.id
     @event_form_values = @event.to_form_hash
@@ -61,7 +62,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(params_hash)
+    if @event.update_attributes!(params_hash)
       if params["fc_update"].nil?
         redirect_to events_path
       else
@@ -86,14 +87,18 @@ class EventsController < ApplicationController
   def params_hash
     attributes = 
     { :start_date => params["event"]["start_date"],
-      :end_date => params["event"]["end_date"]
+      :end_date => params["event"]["end_date"],
+      :filled => params["event"]["filled"] == "Filled" ? true : false,
+      :location_id => params["event"]["location"],
+      :description => params["event"]["description"]
     }
-    if params["fc_update"].nil?
+    # check for update or create
+    if @event
       @event.dogs.clear
       @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
-      attributes[:location_id] = params["event"]["location"]
-      attributes[:description] = params["event"]["description"]
-    else
+    end
+    # FullCalendar updates end_date off by 1 day
+    if params["fc_update"]
       attributes[:end_date] = Date.iso8601(params["event"]["end_date"]).yesterday
     end
     return attributes
