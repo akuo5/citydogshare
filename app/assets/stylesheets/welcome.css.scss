@@ -46,6 +46,7 @@ p {
 
 .welcome-img {
   object-fit: cover;
+  transform: translate3d(-50%, 10px, 0px);
 }
 
 footer.page-footer {
@@ -58,7 +59,7 @@ footer.page-footer {
 }
 
 .card .card-content {
-    padding: 10px 10px 10px 20px;
+    padding: 5px 10px 5px 20px;
 }
 
 .card-more-icon {

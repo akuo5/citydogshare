@@ -41,7 +41,14 @@
       selectYears: 15 // Creates a dropdown of 15 years to control year
     });
     
-    // TODO(jacensherman): Figure out how to jasmine and test this code
+    $(document).scroll(function(){
+      if ($(document).width() > 600) {
+        $('#calendar').css('margin-top', $(document).scrollTop());
+      } else {
+        $('#calendar').css('margin-top', 0);
+      }
+    });
+    
     // Uses Ajax to either star or unstar a given dog
     $('.star_dog_link').removeAttr("data-method");
     $(document).on('click', '.star_dog_link', function(event) {

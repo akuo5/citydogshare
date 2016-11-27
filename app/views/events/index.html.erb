@@ -2,22 +2,22 @@
 
 <div class="row container main-content">
   <div class="col s12 m7">
-    <div id="calendar"></div>
+  <div class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Drag or resize an event to edit it!">
+      <div id="calendar"></div>
+  </div>
   </div>
   <div class="col s12 m5">
     <% if @events %>
       <div id="dogevents"><h4 style="padding: 0 0.75rem">Upcoming</h4></div>
-        <div class="events-scroll">
-        <% @events.each do |event| %>
-          <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12" %>
-        <% end %>
-        <div class="col s12 m12 l12 hide-on-small-only">
-          <a href="<%= new_event_path %>" class="add-event-card" style="margin-bottom: 30px;">
-            <i class="material-icons add-event-card-icon" style="font-size: 80px; line-height: 65px;margin-top: 15px;">add</i>
-            <div class="add-event-card-text" style="margin-top:-5px">Add Event</div>
-          </a>
-        </div>
-        </div>
+      <% @events.each do |event| %>
+        <%= render "events/event_card", :event => event, :current_user => @current_user, :card_size => "col s12" %>
+      <% end %>
+      <div class="col s12 m12 l12 hide-on-small-only">
+        <a href="<%= new_event_path %>" class="add-event-card" style="margin-bottom: 30px;">
+          <i class="material-icons add-event-card-icon" style="font-size: 80px; line-height: 65px;margin-top: 15px;">add</i>
+          <div class="add-event-card-text" style="margin-top:-5px">Add Event</div>
+        </a>
+      </div>
     <% else %>
       <div id="dogevents"><h4 style="padding: 0 0.75rem">No upcoming events</h4></div>
       <div class="col s12 m12 l12 hide-on-small-only">
