@@ -20,6 +20,6 @@ describe Event do
   end
 
   it 'should be able to get all attribute values' do
-    assert_equal Location.all_values, ["My Place", "Your Place", "Other"]
+    assert_equal Location.all_values, ["My Place", "Your Place", "Either", "Other"]
   end
 end
