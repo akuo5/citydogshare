@@ -15,7 +15,7 @@ describe Event do
   it 'should return a correct form hash' do
     hash = {:start_date=> Date.today.strftime("%d %B, %Y"), 
       :end_date=>Date.tomorrow.strftime("%d %B, %Y"), :location_id=>"1", 
-      :dogs=>[1], :description=>"need someone to dogsit"}
+      :dogs=>[1], :description=>"need someone to dogsit", :filled=>true}
     assert_equal @event.to_form_hash, hash
   end
 

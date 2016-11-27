@@ -32,20 +32,12 @@ class EventsController < ApplicationController
   end
 
   def create
-    # params_hash = 
-    # { :start_date => params["event"]["start_date"],
-    #   :end_date => params["event"]["end_date"] ? params["event"]["end_date"] : params["event"]["start_date"],
-    #   :location_id => params["event"]["location"],
-    #   :filled => params["event"]["filled"] ? params["event"]["filled"] : false,
-    #   :description => params["event"]["description"]
-    # }
     @event = Event.new(params_hash)
-    # @dogs = @current_user.dogs
     @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
     @event.user_id = @current_user.id
     @event_form_values = @event.to_form_hash
-
-    if @event.save and not @event.dogs.empty?
+    
+    if @event.save
       redirect_to events_path
     else
       flash[:notice] = @event.errors.messages
@@ -62,8 +54,10 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes!(params_hash)
+    if @event.update_attributes!(params_hash) and not params["event"]["dogs"].empty?
       if params["fc_update"].nil?
+        @event.dogs.clear
+        @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
         redirect_to events_path
       else
         refresh
@@ -85,21 +79,20 @@ class EventsController < ApplicationController
   end
 
   def params_hash
-    attributes = 
-    { :start_date => params["event"]["start_date"],
-      :end_date => params["event"]["end_date"],
-      :filled => params["event"]["filled"] == "Filled" ? true : false,
-      :location_id => params["event"]["location"],
-      :description => params["event"]["description"]
-    }
-    # check for update or create
-    if @event
-      @event.dogs.clear
-      @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
-    end
     # FullCalendar updates end_date off by 1 day
     if params["fc_update"]
-      attributes[:end_date] = Date.iso8601(params["event"]["end_date"]).yesterday
+      attributes = 
+      { :start_date => params["event"]["start_date"],
+        :end_date => Date.iso8601(params["event"]["end_date"]).yesterday
+      }
+    else
+      attributes = 
+      { :start_date => params["event"]["start_date"],
+        :end_date => params["event"]["end_date"].empty? ? params["event"]["start_date"] : params["event"]["end_date"],
+        :filled => params["event"]["filled"] == "Filled" ? true : false,
+        :location_id => params["event"]["location"],
+        :description => params["event"]["description"]
+      }
     end
     return attributes
   end
