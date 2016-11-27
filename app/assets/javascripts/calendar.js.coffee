@@ -28,3 +28,20 @@ updateEvent = (updated_event) ->
     success: (result) ->
       $('.tab').html(result);
   });
+
+# $(document).scroll ->
+#   y = $(document).scrollTop()
+#   header = $('#calendar')
+#   if y >= 400
+#     header.css
+#       position: 'fixed'
+#     $('#fixed').width $('.calendar-container').width()
+#   else
+#     header.css 'position', 'static'
+#   return
+
+# $(document).ready ->
+#   $('#calendar').pushpin
+#     top: 50
+#     offset: 80
+#   return

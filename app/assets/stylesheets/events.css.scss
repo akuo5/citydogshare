@@ -102,14 +102,20 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
   }
 }
 
-@media #{$medium-and-up} {
-  .events-scroll {
-    height: 478px;
-    overflow-y:auto;
-    padding-top: 5px;
-    margin-top: -5px;
-  }
+// @media #{$medium-and-up} {
+//   .events-scroll {
+//     height: 478px;
+//     overflow-y:auto;
+//     padding-top: 5px;
+//     margin-top: -5px;
+//   }
+// }
+
+.pinned {
+  height: 478px;
+  width: 40%;
 }
+
 .event-cards-container {
   column-break-inside: avoid;
   .event-card {
@@ -122,4 +128,9 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 .event-details {
   display: table-cell;
   padding-left: 10px;
+}
+
+#calendar {
+  -webkit-transition: margin-top 0.5s; /* Safari */
+  transition: margin-top 0.5s;
 }

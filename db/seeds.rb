@@ -596,6 +596,7 @@ end
 locations_list = [
   "My Place",
   "Your Place",
+  "Either",
   "Other"
 ]
 
