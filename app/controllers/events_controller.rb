@@ -54,7 +54,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes!(params_hash) and not params["event"]["dogs"].empty?
+    if @event.update_attributes(params_hash) and not params["event"]["dogs"].empty?
       if params["fc_update"].nil?
         @event.dogs.clear
         @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
