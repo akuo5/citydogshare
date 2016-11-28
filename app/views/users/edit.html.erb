@@ -19,28 +19,28 @@
       <div class="col l6 m6 s12">
         <div class="field">
           <label>First Name</label>
-          <input disabled value="<%= "#{current_user.first_name}"%>" type="text" class="validate">
+          <input disabled value="<%= "#{@user.first_name}"%>" type="text" class="validate">
         </div>
       </div>
     
       <div class="col l6 m6 s12">
         <div class="field">
           <label>Last Name</label>
-          <input disabled value="<%= "#{current_user.last_name}"%>" type="text" class="validate">
+          <input disabled value="<%= "#{@user.last_name}"%>" type="text" class="validate">
         </div>
       </div>
       
       <div class="col l6 m6 s12">
         <div class="field">
           <label>Email</label>
-          <input disabled value="<%= "#{current_user.email}"%>" type="text" class="validate">
+          <input disabled value="<%= "#{@user.email}"%>" type="text" class="validate">
         </div>
       </div>
     
       <div class="col l6 m6 s12">
         <div class="field white"><label>Status</label>
-          <% if current_user.status != nil %>
-            <%= text_field(:user, :status, :value => current_user.status) %>
+          <% if @user.status != nil %>
+            <%= text_field(:user, :status, :value => @user.status) %>
           <% else %>
             <%= text_field(:user, :status, :placeholder => 'Have a good dog-related status?') %>
           <%end%>
@@ -49,8 +49,8 @@
     
       <div class="col l8 m8 s12">
         <div class="field"><label>Address</label>
-          <% if current_user.address != nil && current_user.address != ""%>
-            <%= text_field(:user, :address, :value => current_user.address) %>
+          <% if @user.address != nil && @user.address != ""%>
+            <%= text_field(:user, :address, :value => @user.address) %>
           <%else%>
             <%= text_field(:user, :address, :placeholder => 'Street number and street') %>
           <%end %>
@@ -59,8 +59,8 @@
       
       <div class="col l4 m4 s12">
         <div class="field"><label>Zipcode</label>
-          <% if current_user.zipcode != nil && current_user.zipcode != ""%>
-            <%= text_field(:user, :zipcode, :value => current_user.zipcode) %>
+          <% if @user.zipcode != nil && @user.zipcode != ""%>
+            <%= text_field(:user, :zipcode, :value => @user.zipcode) %>
           <%else%>
             <%= text_field(:user, :zipcode, :placeholder => 'xxxxx') %>
           <%end %>
@@ -69,8 +69,8 @@
     
       <div class="col l4 m4 s12">
         <div class="field"><label>City</label>
-          <% if current_user.city != nil && current_user.city != ""%>
-            <%= text_field(:user, :city, :value => current_user.city) %>
+          <% if @user.city != nil && @user.city != ""%>
+            <%= text_field(:user, :city, :value => @user.city) %>
           <%else%>
             <%= text_field(:user, :city, :placeholder => 'City') %>
           <%end %>
@@ -79,8 +79,8 @@
     
       <div class="col l4 m4 s12">
         <div class="field"><label>Country</label>
-          <% if current_user.country != nil && current_user.country != ""%>
-            <%= text_field(:user, :country, :value => current_user.country) %>
+          <% if @user.country != nil && @user.country != ""%>
+            <%= text_field(:user, :country, :value => @user.country) %>
           <%else%>
             <%= text_field(:user, :country, :placeholder => 'Country') %>
           <%end %>
@@ -89,8 +89,8 @@
     
       <div class="col l4 m4 s12">
         <div class="field"><label>Phone Number</label>
-          <% if current_user.phone_number != nil && current_user.phone_number != ""%>
-            <%= telephone_field(:user, :phone_number, :value => current_user.phone_number) %>
+          <% if @user.phone_number != nil && @user.phone_number != ""%>
+            <%= telephone_field(:user, :phone_number, :value => @user.phone_number) %>
           <%else%>
             <%= telephone_field(:user, :phone_number, :placeholder => '(xxx)xxx-xxxx') %>
           <% end %>
@@ -99,8 +99,8 @@
     
       <div class="col l6 m6 s12">
         <div class="field"><label>Description</label>
-          <% if current_user.description != nil && current_user.description != ""%>
-            <%= text_field(:user,:description, :value => current_user.description) %>
+          <% if @user.description != nil && @user.description != ""%>
+            <%= text_field(:user,:description, :value => @user.description) %>
           <% else %>
             <%= text_field(:user,:description, :placeholder => 'Tell City Dog Share more about yourself.') %>
           <%end%>
@@ -109,8 +109,8 @@
     
       <div class="col l6 m6 s12">
         <div class="field"><label>Availability</label>
-          <% if current_user.availability != nil && current_user.availability != ""%>
-            <%= text_field(:user,:availability, :value => current_user.availability)%>
+          <% if @user.availability != nil && @user.availability != ""%>
+            <%= text_field(:user,:availability, :value => @user.availability)%>
           <%else%>
             <%= text_field(:user,:availability, :placeholder => 'What is your availability for dog sitting, if applicable?')%>
           <%end%>
@@ -121,7 +121,7 @@
     
     <div class="form-button-box row">
       <input id='update_dog_button' type="submit" value="Save Changes" name="update_dog_button" class='btn-large right green accent-4 col l4 m5 s12' />
-      <%= link_to "Cancel", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn-large left red col l2 m3 s12 br-15 s", :method => :get %>
+      <%= link_to "Cancel", user_path(@user.id), :id => "cancel_user_button", :class => "btn-large left red col l2 m3 s12 br-15 s", :method => :get %>
     </div>
 
   <% end %>

@@ -91,7 +91,9 @@ class DogsController < ApplicationController
 
   def edit
     @dog = Dog.find(params[:id])
-    if @dog.user != @current_user
+    # todo(jacensherman): Add admin check here
+    if not @is_admin and @dog.user != @current_user
+      flash[:notice] = "You may not edit another person's dog!"
       redirect_to dogs_path
     end
     @dog_form_values = @dog.to_form_hash
@@ -104,7 +106,10 @@ class DogsController < ApplicationController
     @form_filler = DogViewHelper.new(nil, nil, false)
     @dog = Dog.find(params[:id])
     @pictures = @dog.pictures
-    if @dog.update_attributes(attributes_list(dog_params))
+    if not @is_admin and @dog.user != @current_user
+      flash[:notice] = "You may not delete another person's dog!"
+      redirect_to dogs_path
+    elsif @dog.update_attributes(attributes_list(dog_params))
       delete_checked_pictures
       add_multiple_pictures(@dog)
       redirect_to dogs_user_path(@current_user.id)
@@ -116,6 +121,11 @@ class DogsController < ApplicationController
 
   def destroy
     @dog = Dog.find(params[:id])
+    # todo(jacensherman): Add admin check here
+    if not @is_admin and @dog.user != @current_user
+      flash[:notice] = "You may not delete another person's dog!"
+      redirect_to dogs_path
+    end
     @dog.photo.destroy
     @dog.delete
     redirect_to user_path(@current_user)

@@ -5,7 +5,7 @@
   <%= form_tag({controller: :events, action: @action}, method: @method, :multipart => true) do %>
   <div class="row">
     <div id="dogs" class="input-field col s12 m12 l6 left-col">
-      <% dog_options = options_from_collection_for_select(@current_user.dogs, 'id', 'name', @event_form_values[:dogs]) %>
+      <% dog_options = options_from_collection_for_select(@user.dogs, 'id', 'name', @event_form_values[:dogs]) %>
       <%= select :event, :dogs, dog_options, {:include_blank => "Select one or more"}, :class => "validate white", :multiple => true  %>
       <label for="dog">
         Dogs to share? <strong class ="red-text">*</strong>

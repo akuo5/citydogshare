@@ -15,22 +15,22 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if User.exists?(params[:id]) == false || User.find(params[:id]) != @current_user
+    @user = User.exists?(params[:id]) ? User.find(params[:id]) : nil
+    if !(@is_admin or (@user and @user == @current_user))
       flash[:notice] = "You may only edit your own profile."
       redirect_to @current_user
-    elsif params[:user] != nil and @current_user.update_attributes(user_params)
-      @current_user.dogs.each do |dog|
+    elsif params[:user] != nil and @user.update_attributes(user_params)
+      @user.dogs.each do |dog|
         dog.geocode
         dog.save
       end
       flash[:notice] = "Profile successfully updated."
-      redirect_to @current_user
+      redirect_to @user
     else
       render 'edit'
     end
   end
   
-  # TODO(jacensherman): Add tests for this
   def info
     id = params[:id]
     if !User.exists?(id)

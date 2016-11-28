@@ -15,6 +15,18 @@ users.each do |user|
 end
 =end
 
+# ========= ADDING AN ADMIN ==========
+# Add the email connected to the admin's facebook account to this list.
+# Then, run $ rake db:seed to add the admin to the database
+admin_list = [
+  "erichusk@gmail.com",         # Eric Husk
+  "flarefighter526@gmail.com",  # Jacen Sherman
+  "angelakuo5@gmail.com"        # Angela Kuo
+]
+admin_list.each do |admin_email|
+  Admin.find_or_create_by(email: admin_email)
+end
+
 
 mix_list = [
   "Affenpinscher",

@@ -50,18 +50,10 @@ class User < ActiveRecord::Base
     return {
       :id => self.id,
       :full_name => self.full_name,
-      :first_name => self.first_name,
-      :last_name => self.last_name,
       :email => self.email,
       :status => self.status,
-      :address => self.address, 
-      :zipcode => self.zipcode, 
-      :city => self.city, 
-      :country => self.country,
-      :phone_number => self.phone_number,
       :availability => self.availability, 
-      :description => self.description, 
-      :gender => self.gender,
+      :description => self.description,
       :image => self.image,
     }
   end

@@ -25,6 +25,7 @@ class EventsController < ApplicationController
     @action = :create
     @method = :post
     @event_form_values = {}
+    @user = @current_user
     unless !@current_user.dogs.empty?
       flash[:notice] = "Please create a dog to share"
       redirect_to dogs_user_path(current_user.id)
@@ -46,7 +47,12 @@ class EventsController < ApplicationController
   end
 
   def edit
+    if not Event.exists?(params[:id])
+      flash[:notice] = "The event you are trying to edit does not exists"
+      redirect_to event_path
+    end
     @event = Event.find(params[:id])
+    @user = @event.user
     @event_form_values = @event.to_form_hash
     @action = :update
     @method = :put
@@ -54,6 +60,10 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+    if not @is_admin and @event.user != @current_user
+      flash[:notice] = "You may not edit another person's event."
+      redirect_to events_path
+    end
     if @event.update_attributes(params_hash) and not params["event"]["dogs"].empty?
       if params["fc_update"].nil?
         @event.dogs.clear
