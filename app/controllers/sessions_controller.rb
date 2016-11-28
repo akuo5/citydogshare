@@ -74,7 +74,7 @@ class SessionsController < ApplicationController
   def signup
     if params[:user]
       if User.exists?(id: params[:user_id])
-      #change it to check if the user exists in database
+      #check if the user already exists in database
           flash[:notice] = "User already exists. Please log in"
           redirect_to root_path()
       else
