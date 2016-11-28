@@ -27,6 +27,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Profile successfully updated."
       redirect_to @user
     else
+      flash[:notice] = @user.errors.messages unless not @user.errors.any?
       render 'edit'
     end
   end

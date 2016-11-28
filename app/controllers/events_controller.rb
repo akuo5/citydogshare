@@ -36,6 +36,7 @@ class EventsController < ApplicationController
     @event = Event.new(params_hash)
     @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
     @event.user_id = @current_user.id
+    @user = @current_user
     @event_form_values = @event.to_form_hash
     
     if @event.save
