@@ -38,7 +38,7 @@ describe SessionsController, :type => :controller do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       expect(User).to receive(:find_by_uid).with(request.env["omniauth.auth"][:uid]).at_least(:once)
       visit "auth/facebook?type=login"
-    end 
+    end
     it 'should redirect to login if signing up' do 
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook] 
       request.env["omniauth.params"] = {"type" => "signup"}
