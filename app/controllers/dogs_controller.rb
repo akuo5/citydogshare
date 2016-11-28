@@ -64,7 +64,7 @@ class DogsController < ApplicationController
     @dog_form_values = {}
     
     unless current_user.zipcode != nil and current_user.zipcode != "" 
-      flash[:notice] = "Please update your zipcode to add a dog."
+      flash[:notice] = "Please update your zipcode to add a dog. "
       redirect_to edit_user_path(current_user)
     end
   end
