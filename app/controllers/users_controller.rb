@@ -15,7 +15,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    flash[:notice] = "All information added here will be visible to other members"
+    flash[:notice] = "All information added here will be visible to other members."
+    if @current_user.dogs.empty?
+      flash[:notice] = "Please update your zipcode to add a dog. All information added here will be visible to other members."
+    end
     @user = User.exists?(params[:id]) ? User.find(params[:id]) : nil
     if !(@is_admin or (@user != nil and @user == @current_user))
       flash[:notice] = "You may only edit your own profile."
