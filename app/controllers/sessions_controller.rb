@@ -22,7 +22,6 @@ class SessionsController < ApplicationController
   def create 
     @user = User.find(params[:user])
     session[:user_id] = @user.uid
-    flash[:notice] = "Please update your zipcode to make a dog."
     redirect_to user_path(@user)
   end
 
@@ -75,7 +74,7 @@ class SessionsController < ApplicationController
   def signup
     if params[:user]
       if User.exists?(id: params[:user_id])
-      #check if the user already exists in database
+          #check if the user already exists in database
           flash[:notice] = "User already exists. Please log in"
           redirect_to root_path()
       else

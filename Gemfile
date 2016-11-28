@@ -7,6 +7,7 @@ gem 'rails', '~> 4.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'omniauth-facebook'
+gem 'devise'
 gem 'railroady'
 gem 'rake'
 gem 'jquery-rails'
