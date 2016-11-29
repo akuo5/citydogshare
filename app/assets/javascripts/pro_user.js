@@ -13,7 +13,7 @@
     if(check) {
         alert("Checkbox is checked.");
         //use ajax to change to pro user. show the button for my calendar 
-        $.("#pro-cal-button").show();
+        $("#pro-cal-button").show();
         
         $.ajax({
           type: "POST",
@@ -30,7 +30,7 @@
     } else {
         alert("Checkbox is unchecked.");
         //use ajax to change pro to non user. make button disappear
-        $.("#pro-cal-button").hide(0);
+        $("#pro-cal-button").hide(0);
         $.ajax({
           type: "POST",
           url: tog_url,
