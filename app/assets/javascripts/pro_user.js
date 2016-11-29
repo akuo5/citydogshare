@@ -1,10 +1,13 @@
 (function($){
   $(document).ready(function(){
     
-    $("#pro-cal-button").hide(0)
+    $("#pro-cal-button").hide(0);
+    
+    window.alert("Hi");
     
     $("#pro-toggle").click(function () {
       
+    tog_url = "/users/" + userId + "/toggle";
     check = $("#pro-toggle").is(":checked");
     
     if(check) {
@@ -14,7 +17,7 @@
         
         $.ajax({
           type: "POST",
-          url: '/users/toggle',
+          url: tog_url,
           data: true,
           dataType: "boolean",
           success: function (msg) {
@@ -30,7 +33,7 @@
         $.("#pro-cal-button").hide(0);
         $.ajax({
           type: "POST",
-          url: '/users/toggle',
+          url: tog_url,
           data: false,
           dataType: "boolean",
           success: function (msg) {

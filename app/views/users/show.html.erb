@@ -42,6 +42,7 @@
       <% end %>
       
       <% if @own_profile %>
+      <%= javascript_tag "var userId = #{@user.id};" %>
       <!--//change edit user path to path to other app-->
       <!--Action items: Add in JS to make button appear when toggle is on, and button to disappear when toggle is off-->
         <!-- Switch -->
