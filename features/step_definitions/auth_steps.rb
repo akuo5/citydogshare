@@ -54,6 +54,19 @@ When /^(?:|I )press the first "([^"]*)"$/ do |button|
 end
 
 
+
+When /^(?:|I )press the "Sign Up" button$/ do
+  # puts(page.body)
+  click_link('Sign Up')
+end
+
+
+When /^(?:|I )press the first "([^"]*)"$/ do |button|
+  first(:button, button).click
+
+end
+
+
 When /^(?:|I )follow the first "([^"]*)"$/ do |link|
   first(:link, link).click
 end
@@ -115,7 +128,8 @@ end
 
 Given /^PENDING/ do
   pending
-end
+
+# Auth login, steps 
 
 
 Then(/^I click sign in with "([^"]*)"$/) do |arg1|
@@ -147,15 +161,13 @@ end
 
 
 Then(/^I should see that I am (.+) a "([^"]*)"$/) do |arg1, arg2|
-
   current_user = User.find(1)
   if arg1 == "not"
-    
+
     assert_equal current_user.is_pro, false
   else
     assert_equal current_user.is_pro, true
   end
-  
 end
 
 Given(/^the sidebar is open$/) do
@@ -175,3 +187,4 @@ Then(/^I should see the pro user option$/) do
   end
 end
 
+end 
