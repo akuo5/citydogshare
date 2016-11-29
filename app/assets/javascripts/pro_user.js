@@ -5,7 +5,7 @@
     
     $("#pro-toggle").click(function () {
       
-    window.alert("Hello!");
+    alert("Hello!");
     check = $("#pro-toggle").is(":checked");
     
     if(check) {
