@@ -5,7 +5,6 @@
     
     $("#pros-toggle").click(function () {
       
-    alert("Hello!");
     check = $("#pro-toggle").is(":checked");
     
     if(check) {
@@ -24,9 +23,6 @@
                 alert('Fail');
             }
           }
-        
-        
-        
         
     } else {
         alert("Checkbox is unchecked.");

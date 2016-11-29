@@ -21,3 +21,4 @@
 //= require fullcalendar
 //= require signin
 //= require pro_user
+//= require init

@@ -1,6 +1,8 @@
 (function($){
   $(function(){
     
+    $("#pro-cal-button").hide(0)
+    
     $(".button-collapse").sideNav({
       draggable: true
     });
