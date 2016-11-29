@@ -19,9 +19,9 @@ Scenario: Page shows flash notice when user tries to edit another profile
   Then I should see "You may only edit your own profile."
 
 Scenario: Page shows error when phone number is wrong format
-  When I fill in "user_phone_number" with "1235"
+  When I fill in "user_phone_number" with "12345"
   When I press "Save Changes"
-  Then I should see "Bad format for phone number."
+  Then I should see "Please enter a valid phone number"
 
 Scenario: Page shows error when zipcode is wrong format
   When I fill in "user_zipcode" with "1235"

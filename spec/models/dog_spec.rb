@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe Dog do
   before(:each) do
-      Time.stub(:now).and_return(Time.mktime(2014,1))
-      s3_client = Aws::S3::Client.new(stub_responses: true)
-      allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
-      allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
-      @user = FactoryGirl.create(:user)
-      @dog = FactoryGirl.create(:dog)
+    Time.stub(:now).and_return(Time.mktime(2014,1))
+    s3_client = Aws::S3::Client.new(stub_responses: true)
+    allow(Aws::S3::Client).to receive(:new).and_return(s3_client)
+    allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
+    @user = FactoryGirl.create(:user)
+    @dog = FactoryGirl.create(:dog)
   end
   
   it 'should be able to get all attribute values' do

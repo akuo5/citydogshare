@@ -57,7 +57,7 @@
       </div>
       </div>
     </div>
-    <% if current_user and current_user.events.exists?(id: event.id) -%>
+    <% if @is_admin or (current_user and current_user.events.exists?(id: event.id)) -%>
       <div class="card-action">
         <a href="<%= edit_event_path(event.id) %>" class="green-text text-accent-4">Edit</a>
         <a href="<%= event_path(event.id) %>" class="red-text" data-method="delete">Delete</a>

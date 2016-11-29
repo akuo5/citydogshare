@@ -13,6 +13,7 @@
         <h4 class="br-5 s ctr"><%= @user.full_name %></h4>
         <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
       </div>
+
       <% if @own_profile %>
         <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
         <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
@@ -32,6 +33,11 @@
         </div>
         </div>
       
+
+      <% if @is_admin or @own_profile %>
+        <%= link_to "Edit Profile", edit_user_path(@user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
+        <%= link_to "Delete", user_path(@user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
+
       <% end %>
       
       <% if @user.status && @user.status != "" %>
@@ -135,7 +141,7 @@
         <% else %>
           <div class="row container main-content">
           <% @user.dogs.each do |dog| %>
-            <%= render "dogs/dog_card", :dog => dog, :current_user => @current_user, :starred_dogs => @starred_dogs, :card_size => "col s12 m12 l6" %>
+            <%= render "dogs/dog_card", :dog => dog, :card_size => "col s12 m12 l6" %>
           <% end %>
           </div>
         <% end %>

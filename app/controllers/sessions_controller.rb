@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   def create 
     @user = User.find(params[:user])
     session[:user_id] = @user.uid
+    flash[:notice] = "Please update your zipcode to make a dog."
     redirect_to user_path(@user)
   end
 

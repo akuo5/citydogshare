@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
   
   # attr_accessor :first_name, :last_name, :location, :gender, :image, :status, :phone_number, :email, :availability, :description, :address, :zipcode, :city, :country, :is_pro
-  validates :phone_number, format: { with: /\(\d{3}\)(\ ?)\d{3}-\d{4}/, message: "Bad format for phone number." }, :allow_blank => true
+  validates :phone_number, :phone_number => {:ten_digits => true, :message => "Please enter a valid phone number"}, :allow_blank => true
   validates :zipcode, format: { with: /\d{5}/, message: "Bad format for zipcode."}, :allow_blank => true
+
   has_many :dogs, :dependent => :destroy
   has_many :events, :dependent => :destroy
 
@@ -50,18 +51,10 @@ class User < ActiveRecord::Base
     return {
       :id => self.id,
       :full_name => self.full_name,
-      :first_name => self.first_name,
-      :last_name => self.last_name,
       :email => self.email,
       :status => self.status,
-      :address => self.address, 
-      :zipcode => self.zipcode, 
-      :city => self.city, 
-      :country => self.country,
-      :phone_number => self.phone_number,
       :availability => self.availability, 
-      :description => self.description, 
-      :gender => self.gender,
+      :description => self.description,
       :image => self.image,
     }
   end

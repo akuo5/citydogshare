@@ -75,3 +75,5 @@ gem 'jbuilder'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'validates_phone_number'

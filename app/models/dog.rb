@@ -38,6 +38,7 @@ class Dog < ActiveRecord::Base
   validates_inclusion_of :chipped, in: [true, false], :message => "Please select a response for chipped"
   validate :validate_dob
   validate :validate_availability
+  validate :validate_photo_size
 
   #paperclip avatar
   has_attached_file :photo, 
@@ -49,7 +50,6 @@ class Dog < ActiveRecord::Base
                     :bucket => ENV["AWS_BUCKET_NAME"],
                     :path => "/:class/:images/:id/:style/:basename.:extension"
 
-  validates_attachment_size :photo, :less_than => 5.megabytes
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 
   #paperclip dog multiple pictures
@@ -64,6 +64,16 @@ class Dog < ActiveRecord::Base
   
   def validate_availability
     errors.add(:availability, "- Please select a proper availability.") if (!availability.nil? and availability != "Available" and availability != "Unavailable")
+  end
+
+  def validate_photo_size
+    errors[:photo] << "should be less than 3MB" if photo and photo.size and photo.size > 3.megabytes
+    pictures.each do |picture|
+      if picture.size > 3.megabytes
+        errors[:pictures] << "should be less than 3MB"
+        break
+      end
+    end
   end
   
   def age

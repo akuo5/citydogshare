@@ -362,6 +362,7 @@ GEM
       equalizer (~> 0.0.9)
       parser (~> 2.3.0)
       procto (~> 0.0.2)
+    validates_phone_number (2.0.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -403,6 +404,7 @@ DEPENDENCIES
   simplecov
   sqlite3
   uglifier (>= 1.0.3)
+  validates_phone_number
 
 RUBY VERSION
    ruby 2.2.2p95
