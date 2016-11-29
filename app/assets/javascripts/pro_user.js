@@ -51,10 +51,12 @@
     //     "title" : "W3Schools jQuery Tutorial"
     // });
   
-  });   
+  };
 
 
 
   });
+  });
  
 })(jQuery); // end of jQuery name space
+
