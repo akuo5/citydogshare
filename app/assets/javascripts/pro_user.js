@@ -1,9 +1,9 @@
 (function($){
-  $(function(){
+  $(document).ready(function(){
     
     $("#pro-cal-button").hide(0)
     
-    $("#pros-toggle").click(function () {
+    $("#pro-toggle").click(function () {
       
     check = $("#pro-toggle").is(":checked");
     
