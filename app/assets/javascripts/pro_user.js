@@ -43,18 +43,14 @@
                 alert('Fail');
             }
           }
-        
-    });
+        });
+    }
     
     // $("#pro-toggle").attr({
     //     "href" : "http://www.w3schools.com/jquery",
     //     "title" : "W3Schools jQuery Tutorial"
     // });
   
-  };
-
-
-
   });
   });
  
