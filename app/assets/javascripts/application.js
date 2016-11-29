@@ -19,6 +19,7 @@
 //= require galleria.classic
 //= require moment
 //= require fullcalendar
+//= require init
 //= require signin
 //= require pro_user
-//= require init
+
