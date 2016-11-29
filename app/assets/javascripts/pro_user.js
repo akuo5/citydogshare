@@ -3,7 +3,9 @@
     
     $("#pro-cal-button").hide(0)
     
-    $("#pro-toggle").change(function () {
+    $("#pro-toggle").click(function () {
+      
+    window.alert("Hello!");
     check = $("#pro-toggle").is(":checked");
     
     if(check) {
