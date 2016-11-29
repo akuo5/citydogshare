@@ -50,6 +50,10 @@
         </div>
       <% end %>
       
+      <% if @own_profile %>
+      <!--//change edit user path to path to other app-->
+        <%= link_to "My Pro Calendar", edit_user_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15", :method => :get %>
+        
 
       
       <ul class="collection user-info-collection">
