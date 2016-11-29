@@ -6,6 +6,7 @@
        
     $("#sign-up-btn").click(function(){
         $("#signup-form").show();
+        window.alert("Hello!");
     });
         
            
