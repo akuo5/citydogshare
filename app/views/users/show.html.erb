@@ -14,10 +14,10 @@
         <%= image_tag @user.image, :class => "circle", :id => "ui-segment" %>
       </div>
 
-      <% if @own_profile %>
-        <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
-        <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
-            
+      <!--<% if @own_profile %>-->
+      <!--  <%= link_to "Edit Profile", edit_user_path(@current_user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>-->
+      <!--  <%= link_to "Delete", user_path(@current_user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>-->
+      <!--      <% end %>-->
       <!--Adding in the button to take to other app -->
       <!--Action items: Add in JS to make button appear when toggle is on, and button to disappear when toggle is off-->
         <!-- Switch -->
@@ -37,7 +37,6 @@
       <% if @is_admin or @own_profile %>
         <%= link_to "Edit Profile", edit_user_path(@user.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
         <%= link_to "Delete", user_path(@user.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
-
       <% end %>
       
       <% if @user.status && @user.status != "" %>
@@ -53,7 +52,7 @@
       <% if @own_profile %>
       <!--//change edit user path to path to other app-->
         <%= link_to "My Pro Calendar", edit_user_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15", :method => :get %>
-        <%end%>
+        <% end %>
 
       
       <ul class="collection user-info-collection">
