@@ -79,6 +79,7 @@ class UsersController < ApplicationController
       @user.set_pro(true)
       #Make sure it refreshes the page? 
     end
+    redirect_to @user
   end
   
   def pro

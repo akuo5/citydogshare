@@ -1,9 +1,11 @@
 (function($){
   $(function(){
     
+    $("#pro-cal-button").hide(0)
     
     $("#pro-toggle").change(function () {
     check = $("#pro-toggle").is(":checked");
+    
     if(check) {
         alert("Checkbox is checked.");
         //use ajax to change to pro user. show the button for my calendar 
@@ -11,7 +13,7 @@
         
         $.ajax({
           type: "POST",
-          url: '/users_controller/toggle_pro',
+          url: '/users/toggle',
           data: true,
           dataType: "boolean",
           success: function (msg) {
@@ -27,10 +29,10 @@
     } else {
         alert("Checkbox is unchecked.");
         //use ajax to change pro to non user. make button disappear
-        $.("#pro-cal-button").hide();
+        $.("#pro-cal-button").hide(0);
         $.ajax({
           type: "POST",
-          url: '/users_controller/toggle_pro',
+          url: '/users/toggle',
           data: false,
           dataType: "boolean",
           success: function (msg) {
