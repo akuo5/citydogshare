@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(version: 20161127234259) do
     t.string   "zipcode"
     t.string   "city"
     t.string   "country"
-    t.boolean  "is_pro"
+    t.boolean  "is_pro",           default: false
   end
 
 end

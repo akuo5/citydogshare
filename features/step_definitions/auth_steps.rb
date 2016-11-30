@@ -47,20 +47,6 @@ When /^(?:|I )press the "Sign Up" button$/ do
   click_link('Sign Up')
 end
 
-
-When /^(?:|I )press the first "([^"]*)"$/ do |button|
-  first(:button, button).click
-
-end
-
-
-
-When /^(?:|I )press the "Sign Up" button$/ do
-  # puts(page.body)
-  click_link('Sign Up')
-end
-
-
 When /^(?:|I )press the first "([^"]*)"$/ do |button|
   first(:button, button).click
 
@@ -126,8 +112,46 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   select(value, :from => field, match: :first)
 end
 
-Given /^PENDING/ do
-  pending
+
+
+# Pro User step definitons 
+
+
+Then(/^I should see the pro user option$/) do
+  if page.respond_to? :should
+    page.should have_content('I am a Pro Dog Walker')
+  else
+    assert page.has_content('I am a Pro Dog Walker')
+
+  end
+end
+
+Given(/^I flip the toggle button for "([^"]*)" to "([^"]*)"$/) do |arg1, boolean|
+  if boolean == "No"
+    uncheck 'toggle'
+  elsif boolean == "Yes"
+    check 'toggle'
+  end
+end
+
+Then(/^I should not see I am a "([^"]*)"$/) do |arg1|
+  assert page.should_not have_content('Pro Scheduler')
+  
+end
+
+Then(/^I should see that I am a "([^"]*)"$/) do |arg1, arg2|
+    assert page.has_content('Pro Scheduler')
+end
+
+Given(/^the sidebar is open$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I close the sidebar$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+
 
 # Auth login, steps 
 
@@ -146,45 +170,9 @@ end
 
 Given(/^I am signed out$/) do
   pending # Write code here that turns the phrase above into concrete actions
+  
 end
 
-
-# Pro User step definitons 
-
-Given(/^I flip the toggle button for "([^"]*)" to "([^"]*)"$/) do |arg1, boolean|
-  if boolean == "No"
-    uncheck 'toggle'
-  elsif boolean == "Yes"
-    check 'toggle'
-  end
+Given /^PENDING/ do
+  pending
 end
-
-
-Then(/^I should see that I am (.+) a "([^"]*)"$/) do |arg1, arg2|
-  current_user = User.find(1)
-  if arg1 == "not"
-
-    assert_equal current_user.is_pro, false
-  else
-    assert_equal current_user.is_pro, true
-  end
-end
-
-Given(/^the sidebar is open$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^I close the sidebar$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^I should see the pro user option$/) do
-  if page.respond_to? :should
-    page.should have_content('I am a Pro Dog Walker')
-  else
-    assert page.has_content('I am a Pro Dog Walker')
-
-  end
-end
-
-end 

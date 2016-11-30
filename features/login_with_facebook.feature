@@ -91,7 +91,6 @@ Scenario: Log in when I already have an account
   Then I should be on the home page
   
 Scenario: Sign up when another user is remotely logged in
-  Given PENDING
   Given the following users exist:
   | last_name  | first_name | location              | gender | image                      | status  | phone_number  | email                           | description  | availability |
   | Wayne      | Bruce      | Bat Cave, Gotham City | male   | http://tinyurl.com/opnc38n | looking | (555)228-6261 | not_batman@wayneenterprises.com | I love bats  | not nights   |
