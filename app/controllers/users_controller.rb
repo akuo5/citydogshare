@@ -84,7 +84,7 @@ class UsersController < ApplicationController
       # respond with true
       #Make sure it refreshes the page? 
     end
-    redirect_to @user
+    # redirect_to @user
   end
   
   def pro
