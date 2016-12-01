@@ -19,8 +19,8 @@
         
         $.ajax({
           type: "POST",
-          url: toggle_pro_path(userId)
-          data: {val: true},
+          url: tog_url
+          data: {val: 'true'},
           // dataType: "boolean",
           success: function (msg) {
             alert('Success');
