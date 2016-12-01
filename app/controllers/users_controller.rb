@@ -74,8 +74,8 @@ class UsersController < ApplicationController
   end
   
   def toggle_pro
-    state = params[:val] #this is the current state of the user's pro status: true or false
     puts("HERLLLOOOOOO")
+    state = params[:val] #this is the current state of the user's pro status: true or false
     if @current_user.is_pro? and state == 'true'
       @current_user.set_pro(false)
       # respond with false
