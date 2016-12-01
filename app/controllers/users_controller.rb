@@ -75,8 +75,8 @@ class UsersController < ApplicationController
   
   def toggle
     puts("HERLLLOOOOOO")
-    state = params[:val] #this is the current state of the user's pro status: true or false
-    if @current_user.is_pro? and state == 'true'
+   
+    if @current_user.is_pro?
       @current_user.set_pro(false)
       # respond with false
     else
@@ -85,6 +85,8 @@ class UsersController < ApplicationController
       #Make sure it refreshes the page? 
     end
     # redirect_to @user
+    respond_to do |format|
+        format.js
   end
   
   def pro
