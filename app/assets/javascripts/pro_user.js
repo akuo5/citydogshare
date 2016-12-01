@@ -12,14 +12,14 @@
       
     tog_url = "/users/" + userId + "/toggle";
     check = $("#pro-toggle").is(":checked");
-    
+    console.log("HIIIII");
     if(check) {
         //use ajax to change to pro user. show the button for my calendar 
         $("#pro-cal-button").show();
         
         $.ajax({
           type: "POST",
-          url: toggle_pro_path(userId),
+          url: tog_url,
           data: {val: 'true'},
           // dataType: "boolean",
           success: function (msg) {
