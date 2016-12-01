@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   
   def set_pro(flag)
     self.is_pro = flag
+    self.save
   end 
    
    def is_pro?
