@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     self.save
   end 
    
-   def is_pro?
+   def is_pro_user
      if self.is_pro
       return true
     else

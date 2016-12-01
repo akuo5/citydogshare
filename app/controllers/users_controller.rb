@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def toggle
     # puts(checked)
     @curr_user = User.find(params[:id])
-    if @curr_user.is_pro?
+    if @curr_user.is_pro_user
       @curr_user.set_pro(false)
       # respond with false
     else
