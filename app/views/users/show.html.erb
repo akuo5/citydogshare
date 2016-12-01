@@ -43,7 +43,11 @@
           <div class="switch">
           <label>
             No
-            <input type="checkbox" name="toggle" id = "pro-toggle">
+            <% if @user.is_pro? %>
+              <input type="checkbox" name="toggle" id = "pro-toggle" checked>
+              <% else %>
+              <input type="checkbox" name="toggle" id = "pro-toggle" unchecked>
+            <% end %>
           <span class="lever"></span>
             Yes
           </label>
@@ -51,8 +55,7 @@
         </div>
         
         <!--Adding in the button to take to other app -->
-        <%= link_to "Pro Scheduler", calendar_app_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15" %>
-        
+          <%= link_to "Pro Scheduler", calendar_app_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15" %>
         
         <% end %>
       
