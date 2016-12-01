@@ -3,6 +3,26 @@
 <script src="<%= javascript_path('galleria-1.4.2.js') %>"></script>
 <script type="text/javascript" src="dog_profile.js"></script>
 
+<div id="delete_dog_form">
+  <div class="valign-wrapper">
+    <div class="col s12 m8" id="delete_dog_card">
+      <div class="card white">
+        <div class="card-content grey-text center-align">
+          <span class="card-title center-align">Are you sure you want to delete your dog?</span>
+          <p>
+            Deleting your dog will erase all pictures, videos, and events of your dog on this site.
+          </p>
+          <div class="card-action">
+            <%= link_to "Delete", dog_path(@dog.id), :id => "yes-delete-link", :method => :delete %>
+            <a href="#" id = "close-link">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gray-overlay"></div>
+
 <!-- User infomation and events -->
 <div class="row container main-content">
 
@@ -26,16 +46,18 @@
         </div>
       </div>
       <% if @is_admin or (not @current_user.nil? and @current_user.id == @dog.user_id) %>
-        <%= link_to "Edit", edit_dog_path(@dog.id), :id => "edit_user_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
-        <%= link_to "Delete", dog_path(@dog.id), :id => "cancel_user_button", :class => "btn user-action-button red s br-15", :method => :delete %>
+        <%= link_to "Edit", edit_dog_path(@dog.id), :id => "edit_dog_button", :class => "btn user-action-button green accent-4 s br-15", :method => :get %>
+        <%= link_to "Delete", "#", :id => "cancel_dog_button", :class => "btn user-action-button red s br-15" %>
       <% end %>
-      <div class="speech-bubble light-blue darken-3">
-        <div class="speech-bubble-content white-text">
-          <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
-          <div class="status-text"><%= @dog.motto %></div>
+      <% if @dog.motto && @dog.motto != "" %>
+        <div class="speech-bubble light-blue darken-3">
+          <div class="speech-bubble-content white-text">
+            <div class="status-icon"><i class="fa fa-commenting-o small" aria-hidden="true">&nbsp;&nbsp;</i></div>
+            <div class="status-text"><%= @dog.motto %></div>
+          </div>
+          <div class="speech-carrot blue"></div>
         </div>
-        <div class="speech-carrot blue"></div>
-      </div>
+      <% end %>
       <ul class="collection dog-info-collection">
         <li class="collection-item">
           <div class="collection-item-content">
@@ -210,4 +232,8 @@
       </div>
     </div>
   </div>
+
 </div>
+
+
+

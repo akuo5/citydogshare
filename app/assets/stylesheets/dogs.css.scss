@@ -40,6 +40,30 @@
 	}
 }
 
+#delete_dog_form {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+}
+
+#delete_dog_form .card-action {
+	padding: 5px;
+}
+
+#delete_dog_card {
+	margin: auto;
+	padding-top: 100px;
+}
+
+.gray-overlay {
+	 height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 5;
+    background: black;
+    opacity: 0.8;
+}
 
 #favorite_star {
 	z-index: 10;
@@ -55,7 +79,6 @@
 	right: 0;
 	bottom: 0;
 }
-
 
 #dog_profile_pic {
 	height: 200px;
@@ -88,7 +111,6 @@
 #dog_profile_star {
 	color: gold;
 	position: relative;
-	bottom: 50px;
 	right: 45px;
 }
 /* END NEW.HTML */
