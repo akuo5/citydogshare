@@ -75,11 +75,11 @@ class UsersController < ApplicationController
   
   def toggle_pro
     state = params[:val] #this is the current state of the user's pro status: true or false
-    if @user.is_pro? && state == 'true'
-      @user.set_pro(false)
+    if @current_user.is_pro? and state == 'true'
+      @current_user.set_pro(false)
       # respond with false
     else
-      @user.set_pro(true)
+      @current_user.set_pro(true)
       # respond with true
       #Make sure it refreshes the page? 
     end
