@@ -12,11 +12,12 @@ Citydogshare::Application.routes.draw do
   get 'signup', to: 'sessions#signup', as: 'signup'
   
   ## User Routes ##
-  resources :users, only: [:show, :edit, :update, :destroy, :index, :toggle] 
+  resources :users, only: [:show, :edit, :update, :destroy, :index] 
   post 'users/:id/edit', to: 'users#edit'
   get 'users/:id/info', to: "users#info", as: "user_info"
   get 'users/pro', to: "users#pro", as: "pro_user"
-  get 'users/:id/toggle', to: "users#toggle", as: "toggle_pro"
+  # post 'users/:id/toggle', to: "users#toggle", as: "toggle_pro"
+  match 'users/:id/toggle', to: "users#toggle", via: :post
 
   ## Dog Routes ##
   get 'dogs/:id/info', to: "dogs#info", as: "dog_info"

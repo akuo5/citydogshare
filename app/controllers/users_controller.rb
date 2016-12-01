@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :current_user 
-  # respond_to :js, :json, :html
+  # before_filter :current_user 
+  respond_to :js, :json, :html
 
   def show
     if User.exists?(params[:id]) == false
@@ -73,8 +73,8 @@ class UsersController < ApplicationController
     @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
   end
   
-  def toggle(checked)
-    puts(checked)
+  def toggle
+    # puts(checked)
     @curr_user = User.find(params[:id])
     if @curr_user.is_pro?
       @curr_user.set_pro(false)
@@ -86,6 +86,8 @@ class UsersController < ApplicationController
     end
     # redirect_to @user
   end
+  
+  
   
   def pro
     #redirect_to (the other team's app link, with API call or link to where they can find api?)
