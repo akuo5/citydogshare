@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def toggle
     puts("HERLLLOOOOOO")
    
-    if @current_user.is_pro?
+    if @current_user.is_pro
       @current_user.set_pro(false)
       # respond with false
     else
