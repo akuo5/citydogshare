@@ -51,7 +51,7 @@
         </div>
         
         <!--Adding in the button to take to other app -->
-        <%= link_to "Pro Scheduler", pro_user_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15", :method => :post %>
+        <%= link_to "Pro Scheduler", calendar_app_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15" %>
         
         
         <% end %>

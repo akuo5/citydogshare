@@ -22,23 +22,21 @@
         $("#pro-cal-button").hide(0);
     }
     
-    // $.post(tog_url, );
+    // $.post(tog_url);
     
-       $.ajax({
-            type: "POST",
-            url: tog_url,
-            data: { var: "true"},
-            success: function (msg) {
-                alert('Success');
-                if (msg != 'success') {
-                 alert('Fail');
-                }
-            },
-            dataType: 'json',
-            error: function(response) {
-                console.log(response.status + " " + response.statusText);
-            }
-        });
+      // $.ajax({
+      //     type: "POST",
+      //     url: tog_url,
+      //     success: function (msg) {
+      //       alert('Success');
+      //       if (msg != 'success') {
+      //           alert('Fail');
+      //       }
+      //     },
+      //     error: function(response) {
+      //           console.log(response.status + " " + response.statusText);
+      //     }
+      //     });
     
   
       });
@@ -46,3 +44,4 @@
  
 })(jQuery); // end of jQuery name space
 
+;

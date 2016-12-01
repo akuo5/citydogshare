@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   end
   
   def pro
-    #redirect_to (the other team's app link, with API call or link to where they can find api?)
+    redirect_to("http://city-dog-share-calendar.herokuapp.com/")
     
   end
 
