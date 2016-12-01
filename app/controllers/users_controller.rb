@@ -75,7 +75,8 @@ class UsersController < ApplicationController
   
   def toggle_pro
     state = params[:val] #this is the current state of the user's pro status: true or false
-    if @user.is_pro? && state == true
+    console.log(state)
+    if @user.is_pro? && state == 'true'
       @user.set_pro(false)
       # respond with false
     else
