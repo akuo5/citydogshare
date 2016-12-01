@@ -20,3 +20,4 @@
 //= require moment
 //= require fullcalendar
 //= require signin
+//= require pro-user

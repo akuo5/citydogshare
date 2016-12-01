@@ -41,11 +41,17 @@ class User < ActiveRecord::Base
   
   def set_pro(flag)
     self.is_pro = flag
+    self.save
   end 
    
-   def is_pro?
-     return self.is_pro
-   end
+  def is_pro?
+    if self.is_pro
+      return true
+    else
+      self.set_pro(false)
+      return self.is_pro
+    end
+  end
   
   def to_json
     return {
