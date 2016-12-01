@@ -85,8 +85,6 @@ class UsersController < ApplicationController
       #Make sure it refreshes the page? 
     end
     # redirect_to @user
-    respond_to do |format|
-        format.js
   end
   
   def pro
