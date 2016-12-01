@@ -39,13 +39,15 @@
         $.ajax({
           type: "POST",
           url: tog_url,
-          data: false,
-          dataType: "boolean",
+          data: {val: 'false'},
           success: function (msg) {
             alert('Success');
             if (msg != 'success') {
                 alert('Fail');
             }
+          },
+           error: function(response) {
+                console.log(response.status + " " + response.statusText);
           }
         });
     }
