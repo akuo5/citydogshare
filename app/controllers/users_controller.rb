@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :current_user 
-  respond_to :js, :json, :html
+  # respond_to :js, :json, :html
 
   def show
     if User.exists?(params[:id]) == false
