@@ -129,7 +129,7 @@ end
 Given(/^I flip the toggle button for "([^"]*)" to "([^"]*)"$/) do |arg1, boolean|
   if boolean == "No"
     uncheck 'toggle'
-  elsif boolean == "Yes"
+  else
     check 'toggle'
   end
 end

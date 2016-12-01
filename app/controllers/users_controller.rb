@@ -73,8 +73,8 @@ class UsersController < ApplicationController
     @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
   end
   
-  def toggle
-    puts("HERLLLOOOOOO")
+  def toggle(checked)
+    puts(checked)
     @curr_user = User.find(params[:id])
     if @curr_user.is_pro?
       @curr_user.set_pro(false)

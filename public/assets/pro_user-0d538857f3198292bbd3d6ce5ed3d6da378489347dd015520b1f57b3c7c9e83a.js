@@ -26,19 +26,19 @@
     
     $.post(tog_url, { "val": checked? "true" : "false" });
     
-      // $.ajax({
-      //     type: "POST",
-      //     url: tog_url,
-      //     success: function (msg) {
-      //       alert('Success');
-      //       if (msg != 'success') {
-      //           alert('Fail');
-      //       }
-      //     },
-      //     error: function(response) {
-      //           console.log(response.status + " " + response.statusText);
-      //     }
-      //     });
+      $.ajax({
+          type: "POST",
+          url: tog_url,
+          success: function (msg) {
+            alert('Success');
+            if (msg != 'success') {
+                alert('Fail');
+            }
+          },
+          error: function(response) {
+                console.log(response.status + " " + response.statusText);
+          }
+          });
     
   
       });
@@ -46,3 +46,4 @@
  
 })(jQuery); // end of jQuery name space
 
+;
