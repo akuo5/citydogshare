@@ -20,7 +20,7 @@
         $.ajax({
           type: "POST",
           url: tog_url,
-          data: {val: true},
+          data: {"val": check},
           // dataType: 'JSONP',
           success: function (msg) {
             alert('Success');
@@ -39,7 +39,7 @@
         $.ajax({
           type: "POST",
           url: tog_url,
-          data: {val: false},
+          data: {"val": check},
           // dataType: 'JSONP',
           success: function (msg) {
             alert('Success');

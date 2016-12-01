@@ -73,7 +73,7 @@ class UsersController < ApplicationController
     @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
   end
   
-  def toggle_pro
+  def toggle
     puts("HERLLLOOOOOO")
     state = params[:val] #this is the current state of the user's pro status: true or false
     if @current_user.is_pro? and state == 'true'
