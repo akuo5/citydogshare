@@ -16,8 +16,7 @@ Citydogshare::Application.routes.draw do
   post 'users/:id/edit', to: 'users#edit'
   get 'users/:id/info', to: "users#info", as: "user_info"
   get 'users/pro', to: "users#pro", as: "pro_user"
-  # post 'users/:id/toggle', to: "users#toggle", as: "toggle_pro"
-  match 'users/:id/toggle', to: "users#toggle", via: :post
+  post 'users/:id/toggle', to: "users#toggle", as: "toggle_pro"
 
   ## Dog Routes ##
   get 'dogs/:id/info', to: "dogs#info", as: "dog_info"
