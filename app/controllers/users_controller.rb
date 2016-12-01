@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :current_user
+  before_filter :current_user 
+  respond_to :js, :json, :html
 
   def show
     if User.exists?(params[:id]) == false
@@ -73,19 +74,24 @@ class UsersController < ApplicationController
   end
   
   def toggle_pro
-    if @user.is_pro?
+    state = params[:val] #this is the current state of the user's pro status: true or false
+    if @user.is_pro? && state == true
       @user.set_pro(false)
+      # respond with false
     else
       @user.set_pro(true)
+      # respond with true
       #Make sure it refreshes the page? 
     end
-    redirect_to @user
   end
   
   def pro
     #redirect_to (the other team's app link, with API call or link to where they can find api?)
     
   end
+  
+  
+  
 
   private
   def user_params
