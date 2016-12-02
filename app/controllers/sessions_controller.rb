@@ -63,13 +63,18 @@ class SessionsController < ApplicationController
         redirect_to create_session_path(:user => @user)
 
     else
-      @new_user = User.create()
-      @new_user.update_credentials(params[:auth][:credentials])
-      @new_user.facebook_info_update(params[:auth])
-      redirect_to create_session_path(:user => @new_user)
+      auth_user
       # handle_failure()
     end   
-  end 
+  end
+  
+  def auth_user
+        @new_user = User.create()
+        @new_user.update_credentials(params[:auth][:credentials])
+        @new_user.facebook_info_update(params[:auth])
+        redirect_to create_session_path(:user => @new_user)
+  end
+    
   
   def signup
     if params[:user]
@@ -78,16 +83,10 @@ class SessionsController < ApplicationController
           flash[:notice] = "User already exists. Please log in"
           redirect_to root_path()
       else
-        @new_user = User.create()
-        @new_user.update_credentials(params[:auth][:credentials])
-        @new_user.facebook_info_update(params[:auth])
-        redirect_to create_session_path(:user => @new_user)
+        auth_user
       end
     else
-      @new_user = User.create()
-      @new_user.update_credentials(params[:auth][:credentials])
-      @new_user.facebook_info_update(params[:auth])
-      redirect_to create_session_path(:user => @new_user)
+      auth_user
     end
       
   end 
