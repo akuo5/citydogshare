@@ -184,6 +184,12 @@ class DogsController < ApplicationController
       end
     end  
   end
+  
+  def delete_pic
+    pic = Picture.find_by_id(params[:pic_id])
+    pic.destroy
+    redirect_to dog_path(params[:id])
+  end
 
   # A function to get the attribures in the proper format, has helper functions used directly below
   def attributes_list(dog_attributes)

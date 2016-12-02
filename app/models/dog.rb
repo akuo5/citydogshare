@@ -1,6 +1,5 @@
 class Dog < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
-
   # attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude, :video
 
   scope :has_gender, lambda {|genders| filter_gender(genders)}
@@ -69,7 +68,7 @@ class Dog < ActiveRecord::Base
   def validate_photo_size
     errors[:photo] << "should be less than 3MB" if photo and photo.size and photo.size > 3.megabytes
     pictures.each do |picture|
-      if picture.size > 3.megabytes
+      if picture.image_file_size > 3.megabytes
         errors[:pictures] << "should be less than 3MB"
         break
       end
