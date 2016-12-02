@@ -14,10 +14,6 @@
         $("#signup-form").hide();
     });
 
-    $("#close-link-2").click(function(){
-        $("#signup-form").hide();
-        $("#signup-notice").hide();
-    });
 
     //For the sign up notice
       $("#fb-signup-hold").click(function(){
@@ -37,3 +33,4 @@
  
  
 })(jQuery); // end of jQuery name space
+;

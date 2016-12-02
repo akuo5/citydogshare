@@ -1,12 +1,16 @@
 (function($){
   $(document).on('ready page:load', function(){
     
-    // if (proUser) {
-    //   $("#pro-cal-button").show();
-    //   $("#checkboxid").prop('checked', true);
-    //   $("#pro-cal-button").hide();
+    $("#pro-cal-button").hide(0);
+    
+    
+    
+    if (proUser) {
+      $("#pro-cal-button").show();
+      $("#checkboxid").prop('checked', true);
+      $("#pro-cal-button").hide();
       
-    // }
+    }
     
     $("#pro-toggle").click(function () {
       
@@ -16,13 +20,13 @@
     if(check) {
         //use ajax to change to pro user. show the button for my calendar 
         $("#pro-cal-button").show();
-        $("#checkboxid").prop('checked', true);
         
     } else {
         //use ajax to change pro to non user. make button disappear
         $("#pro-cal-button").hide();
-        $("#checkboxid").prop('checked', false);
     }
+    
+    // $.post(tog_url, );
     
        $.ajax({
             type: "POST",
@@ -46,3 +50,4 @@
  
 })(jQuery); // end of jQuery name space
 
+;

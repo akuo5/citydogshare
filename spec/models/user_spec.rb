@@ -66,4 +66,19 @@ describe User do
     @user.valid?
     @user.errors.should be_empty
   end
+  
+  
+  
+  #pro user spec
+  it 'pro should be false by default' do
+    assert_equal false, @user.is_pro?
+  end
+
+it 'should be able to switch between pro and not' do
+  @user.set_pro(false)
+  assert_equal false, @user.is_pro?
+  @user.set_pro(true)
+  assert_equal true, @user.is_pro?
+end 
+
 end

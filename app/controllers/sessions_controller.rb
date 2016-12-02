@@ -58,10 +58,15 @@ class SessionsController < ApplicationController
     #   end
     
     if params[:user]
+      if User.exists?(id: params[:user_id])
+          #check if the user already exists in database
+          flash[:notice] = "User already exists. Please log in"
+          redirect_to root_path()
+      else
         @user = User.find(params[:user])
         @user.update_credentials(params[:credentials])
         redirect_to create_session_path(:user => @user)
-
+      end 
     else
       auth_user
       # handle_failure()
@@ -75,7 +80,7 @@ class SessionsController < ApplicationController
         redirect_to create_session_path(:user => @new_user)
   end
     
-  
+ # This function may be unneeded now  
   def signup
     if params[:user]
       if User.exists?(id: params[:user_id])

@@ -53,15 +53,16 @@
           </label>
           </div>
         </div>
-        
+          <!--Adding in the button to take to other app -->
+      <!--Action items: Add in JS to make button appear when toggle is on, and button to disappear when toggle is off-->
         <!--Adding in the button to take to other app -->
-          <%= link_to "Pro Scheduler", calendar_app_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15" %>
-        
+          <% if @user.is_pro? %>
+              <%= link_to "Pro Scheduler", calendar_app_path(@current_user.id), :id => "pro-cal-button", :class => "btn user-action-button blue accent-4 s br-15" %>
+            <% end %>
+          
         <% end %>
       
-      <!--Adding in the button to take to other app -->
-      <!--Action items: Add in JS to make button appear when toggle is on, and button to disappear when toggle is off-->
-
+    
       
       <ul class="collection user-info-collection">
         <% if @user.email && @user.email != "" %>

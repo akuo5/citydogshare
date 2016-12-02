@@ -1,12 +1,12 @@
 (function($){
   $(document).on('ready page:load', function(){
     
-    // if (proUser) {
-    //   $("#pro-cal-button").show();
-    //   $("#checkboxid").prop('checked', true);
-    //   $("#pro-cal-button").hide();
+    if (proUser) {
+      $("#pro-cal-button").show();
+      $("#checkboxid").prop('checked', true);
+      $("#pro-cal-button").hide();
       
-    // }
+    }
     
     $("#pro-toggle").click(function () {
       
@@ -46,3 +46,4 @@
  
 })(jQuery); // end of jQuery name space
 
+;

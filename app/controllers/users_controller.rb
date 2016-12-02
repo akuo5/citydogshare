@@ -82,17 +82,12 @@ class UsersController < ApplicationController
   # end
   
   def toggle
-    # puts(checked)
     @curr_user = User.find(params[:id])
     if @curr_user.is_pro?
       @curr_user.set_pro(false)
-      # respond with false
     else
       @curr_user.set_pro(true)
-      # respond with true
-      #Make sure it refreshes the page? 
     end
-    
     render 'show'
   end
   
