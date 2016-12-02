@@ -21,6 +21,7 @@ Citydogshare::Application.routes.draw do
   ## Dog Routes ##
   get 'dogs/:id/info', to: "dogs#info", as: "dog_info"
   get 'dogs/info', to: "dogs#all_info", as: "dogs_info"
+  get 'dogs/:id/pictures/:pic_id', to: "dogs#delete_pic", as: "dogs_pic"
   resources :dogs
 
   ## Event Routes ##

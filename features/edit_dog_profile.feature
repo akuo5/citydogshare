@@ -16,6 +16,9 @@ Background: User and dog is in database
     | Princess | Labrador         | 1   | small (0-15)    | Female   | cats       | high    | whatever    | 1       | 37.8611110 | -122.3079169 | true  | true    |
     | Spock    | Aidi             | 3   | medium (16-40)  | Male     | dogs (all) | some    | lover       | 1       | 37.8611110 | -122.3079169 | true  | true    |
     | Bubba    | Aidi             | 3   | medium (16-40)  | Female   | dogs (all) | some    | lover       | 2       | 37.8611110 | -122.3079169 | true  | true    |
+  
+  And the following pictures exist:
+  
   And I am logged in
 
 Scenario: User edits his dog's information
@@ -55,3 +58,17 @@ Scenario: User should not be able to edit another user's dog
   And I should see "Bubba"
   And I follow the first "Bubba"
   Then I should not see "Edit"
+  
+# Scenario: User should be able to delete dog photo 
+#   Given I am on the users page for "Batman"
+#   And I follow the dog named "Princess"
+#   And I follow "Edit"
+#   And I attach the file "spec/factories/images/dog.jpg" to "images[]"
+#   And I press the first "Save Changes"
+#   When I follow the first "My Dogs"
+#   And I follow "Princess"
+#   Then I should see the image gallery "slider"
+#   Then I should see the image "dog_gallery_pic"
+#   Given I click the delete picture icon 
+#   Then I should not see the image gallery "slider"
+#   Then I should not see the image "dog_gallery_pic"

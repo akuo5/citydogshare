@@ -349,4 +349,5 @@ describe DogsController, :type => :controller do
     end
   end
 
+
 end

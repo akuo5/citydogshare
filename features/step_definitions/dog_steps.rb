@@ -172,3 +172,34 @@ And /^I have created an event for "([^"]*)" (today|3 days ago)$/ do |dog, time|
   new_event.user = User.find(1)
   new_event.save!
 end
+
+	
+# # Then /^I should see the image "(.+)"$/ do |image|
+# #     # expect(page).to have_xpath("//img[contains(@src, \"#{image}\")]")
+# #     page.should have_xpath('//img[@src=\"#{image}\"]')
+# # end
+
+
+# Then /^I should see the image gallery "(.*)"$/ do |galleryclass|
+#   # page.should have_selector(:css,  "."+galleryclass) 
+#   # page.should have_css(galleryclass, :visible => false) 
+#   page.should have_content("Photos")
+# end
+
+# Then /^I should see the image "(.*)"$/ do |imageclass|
+#   #page.should have_selector(:css,  "."+imageclass) 
+#   page.should have_css(imageclass, :visible => false) 
+# end
+
+# Given /^I click the delete picture icon$/ do 
+#   #click_link("delete_pic_button")
+#   page.first(".delete_picture_button").click
+# end
+
+# Then /^I should not see the image gallery "(.*)"$/ do |galleryclass|
+#   page.should_not have_selector('div',  galleryclass) 
+# end
+
+# Then /^I should not see the image "(.*)"$/ do |imageclass|
+#   page.should_not have_selector('div',  imageclass) 
+# end

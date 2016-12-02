@@ -1,6 +1,5 @@
 class Dog < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
-
   # attr_accessible :name, :image, :dob, :gender, :description, :motto, :fixed, :health, :comments, :contact, :availability, :mixes, :likes, :energy_level, :size, :personalities, :photo, :latitude, :longitude, :video
 
   scope :has_gender, lambda {|genders| filter_gender(genders)}

@@ -1,8 +1,10 @@
 <% content_for :page_title, "About " + @dog.name %>
 
-<script src="<%= javascript_path('galleria-1.4.2.js') %>"></script>
-<script type="text/javascript" src="dog_profile.js"></script>
+<!--<script src="<%= javascript_path('galleria-1.4.2.js') %>"></script>-->
+<%= javascript_include_tag "galleria.classic" %>
+<%= javascript_include_tag "dog_profile" %>
 
+<!-- Delete a dog confirmation -->
 <div id="delete_dog_form">
   <div class="valign-wrapper">
     <div class="col s12 m8" id="delete_dog_card">
@@ -183,13 +185,20 @@
     <div class="col l8 m7 s12">
       <div class="row ctr s">
         <% if not @pictures.empty? %>
-        <h4 id="pic-gallery-title" class="title-padding">Photos</h4>
+          <h4 id="pic-gallery-title" class="title-padding">Photos</h4>
           <div class="slider">
             <ul class="slides">
               <% unless @pictures.empty? %>
                 <% @pictures.each do |pic| %>
                   <li>
-                    <%= image_tag pic.image.url %>
+                    <% if @is_admin or (not @current_user.nil? and @current_user.id == @dog.user_id) %>
+                      <%= link_to dogs_pic_path(@dog.id, pic.id), :id => "delete_pic_button", :class => "delete_picture_button" do%>
+                        <i class="fa fa-times" aria-hidden="true" id="delete_pic_x"></i>
+                      <% end %>
+                    <% end %>
+                    <div class="dog_gallery_pic">
+                      <%= image_tag pic.image.url %>
+                    </div>
                   </li>
                 <% end %>
               <% end %>
@@ -197,7 +206,6 @@
           </div>
         <% end %>
     
-          
         <% if not @dog.video.nil? and not @dog.video == "" %>
         <h4 id="vid-gallery" class="title-padding">Videos</h4>
           <div class="slider" style="margin-top: 50px">
@@ -231,8 +239,4 @@
       </div>
     </div>
   </div>
-
 </div>
-
-
-
