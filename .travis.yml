@@ -8,7 +8,7 @@ addons:
     repo_token: f7ef38e7bed181667396dcd58860c0cef279157e3dfd8499159094418d4a2c43 bundle
       exec rake
 env:
-  - AWS_BUCKET_NAME=citydogshare-angela
+  - AWS_BUCKET_NAME=citydogshare-profile FB_APP_ID=650539935119010 FB_SECRET_KEY=da24fe256450fed8ee06f569fb9958c3
 script:
 - RAILS_ENV=test bundle exec rake db:migrate
 - bundle exec rake db:test:prepare
