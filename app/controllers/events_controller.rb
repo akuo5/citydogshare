@@ -65,22 +65,25 @@ class EventsController < ApplicationController
       flash[:notice] = "You may not edit another person's event."
       redirect_to events_path
     end
-    if @event.update_attributes(params_hash) and not params["event"]["dogs"]
-      if params["fc_update"].nil?
+    
+    if params["fc_update"].nil? #normal update via form
+      if @event.update_attributes(params_hash) and params["event"]["dogs"] and not params["event"]["dogs"].empty?
         @event.dogs.clear
         @event.dogs << params["event"]["dogs"].map { |id| Dog.where(:id => id) }
         redirect_to events_path
       else
-        refresh
-      end
-    else
-      flash[:notice] = @event.errors.messages
-      if params["fc_update"].nil?
+        flash[:notice] = @event.errors.messages
         redirect_to edit_event_path(params[:id])
+      end
+    else # update via full calendar
+      if @event.update_attributes(params_hash)
+        refresh
       else
+        flash[:notice] = @event.errors.messages
         refresh
       end
     end
+    
   end
   
   def refresh
