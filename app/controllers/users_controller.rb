@@ -82,11 +82,12 @@ class UsersController < ApplicationController
   # end
   
   def toggle
-    @curr_user = User.find(params[:id])
-    if @curr_user.is_pro?
-      @curr_user.set_pro(false)
+    @user = User.find(params[:id])
+    @starred_dogs = @current_user && @current_user.starred_dogs ? @current_user.starred_dogs : []
+    if @user.is_pro?
+      @user.set_pro(false)
     else
-      @curr_user.set_pro(true)
+      @user.set_pro(true)
     end
     render 'show'
   end
